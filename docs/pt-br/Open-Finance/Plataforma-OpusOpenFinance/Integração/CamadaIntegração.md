@@ -8,9 +8,9 @@ has_children: true
 
 # Compartilhamento de dados
 
-O perfil de participação de transmissor de dados no *Open Finance Brasil* exige que a instituição financeira seja capaz de atender a requisições de dados vindas de outras instituições participantes. Antes que uma outra instituição financeira possa realizar requisições de dados referentes aos clientes da transmissora, esse cliente ter autorizado o compartilhamento de seus dados, o que é feito através de um **consentimento de compartilhamento de dados**.
+O perfil de participação de transmissor de dados no *Open Finance Brasil* exige que a instituição financeira seja capaz de atender a requisições de dados vindas de outras instituições participantes. Antes que uma outra instituição financeira possa realizar requisições de dados referentes aos clientes da transmissora, esse cliente deve ter previamente autorizado o compartilhamento de seus dados, o que é feito através de um **consentimento de compartilhamento de dados**.
 
-Conforme já apresentado, a **Plataforma Opus Open Finance** realiza a gestão de consentimentos ativos, e também verifica a validade das requisições recebidas. Essa verificação inclui avaliar se o pedido de dados enviado pela instituição receptora - que sempre inclui um identificador de consentimento - é um consentimento ativo e também se ele autoriza o compartilhamento dos dados que estão sendo requisitados. Por exemplo, um cliente em tese poderia compartilhar seus dados cadastrais e de cartão de crédito, mas não seus dados de corrente ou de empréstimos.
+Conforme já apresentado, a **Plataforma Opus Open Finance** realiza a gestão de consentimentos ativos, e também verifica a validade das requisições recebidas. Essa verificação inclui avaliar se o pedido de dados enviado pela instituição receptora - que sempre inclui um identificador de consentimento - é um consentimento ativo e também se ele autoriza o compartilhamento dos dados que estão sendo requisitados. Por exemplo, um cliente em tese poderia compartilhar seus dados cadastrais e de cartão de crédito, mas não seus dados de conta corrente ou de empréstimos.
 
 Uma vez que a verificação foi realizada e o pedido foi validado, a plataforma realizará uma chamada à *camada de integração* para obter os dados que estão sendo requisitados. É justamente essa camada de integração, responsável pela interação com os sistemas de retaguarda da instituição transmissora, que precisa ser construída para que a plataforma possa entrar em operação.
 
@@ -30,15 +30,14 @@ Algumas das características principais da camada de integração a ser constru�
 
 - Não precisa (e nem deve) entrar no mérito da validade das requisições, uma vez que a plataforma já realizou todas as validações necessárias;
 - Deve ser capaz de atender a várias requisições simultaneamente (em  tese, não há limite para o número de requisições por segundo que deve ser atendido);
-- A plataforma define um tempo máximo de até 5 segundos para chamadas realizadas à camada de integração, isto é, o *timeout* ocorre em 5 segundos;
 - Deve oferecer tempo de resposta compatível com o nível de serviço exigido pela regulação. Os tempos de resposta máximos exigidos pelo regulatório para cada tipo de requisição podem ser encontrados [**aqui**][Tempos de Resposta];
 
-> Os tempos de resposta demandados pelo regulatório são categorizadas em termos de "*APIs com alta/média/baixa frequência de alteração*". para identificar quais são as chamadas associadas a cada uma dessas categorias consulte o [*Guia de Implementação de APIs*][Guia APIs] do *Open Finance Brasil*.
-> No tempo de resposta exigido, deve-se considerar que a plataforma reserva para si até 300 milissegundos nas atividades sob sua responsabilidade para a validação e atendimento de cada requisição.
+> Deve-se considerar que a Plataforma Opus Open Finance reservará até 40% do tempo de resposta para aa validações e atendimento de cada requisição.
 
 Apresentamos a seguir os diferentes tipos de dados envolvidos no atendimento a requisições dos vários produtos financeiros cobertos pelo escopo completo do *Open Finance Brasil*, devidamente atualizado para sua última versão. Cada seção abaixo, por sua vez, referencia uma página de documentação específica que detalha esses dados e apresenta a API da *camada de integração* que deve ser construída para integrar a **Plataforma Opus Open Finance** aos sistemas de retaguarda da instituição financeira.
 
-> Na documentação do *Open Finance Brasil* são definidas APIs referentes a **consentimento** (*consents*) e **recursos** (*resources*). No que tange ao consentimento, a plataforma realiza toda a gestão, tornando transparente esse conceito para a camada de  integração. Já o conceito de *recurso*, no universo do *Open Finance Brasil*, diz respeito a cada produto financeiro que o cliente utiliza junto a uma instituição financeira. Dessa forma, uma das requisições mais comuns realizadas pelas instituições receptoras é a consulta de todos os produtos financeiros que o cliente final mantém com a instituição financeira transmissora (desde que o consentimento cedido pelo cliente seja abrangente o suficiente). Nesse caso, a plataforma já realiza o devido tratamento, ativando a camada de integração para cada produto específico de maneira a atender adequadamente esse tipo de requisição.
+> Na documentação do *Open Finance Brasil* são definidas APIs referentes a **consentimento** (*consents*) e **recursos** (*resources*). No que tange ao consentimento, a plataforma realiza toda a gestão, tornando transparente esse conceito para a camada de  integração. Já o conceito de *recurso*, no universo do *Open Finance Brasil*, diz respeito a cada instância de produto financeiro que o cliente possui junto a uma instituição financeira. Por exemplo, se um cliente possui 3 cartões de crédito com uma instituição financeiro, isso equivale a 3 recursos distintos.
+> Dessa forma, uma das requisições mais comuns realizadas pelas instituições receptoras é a consulta de todos os produtos financeiros que o cliente final mantém com a instituição financeira transmissora (desde que o consentimento cedido pelo cliente seja abrangente o suficiente). Nesse caso, a plataforma já realiza o devido tratamento, ativando a camada de integração para cada produto específico de maneira a atender adequadamente esse tipo de requisição.
 
 ## Dados Cadastrais
 
@@ -93,7 +92,7 @@ Informações detalhadas sobre os dados necessários para este produto podem ser
 <!-- Definição de links utilizados nesta página -->
 
 [Imagem da Camada de Integração]: ./images/CamadaIntegração.png
-[Tempos de Resposta]: https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17891396/Desempenho
+[Tempos de Resposta]: https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17957025/Refer+ncia
 [Guia APIs]: https://openfinancebrasil.atlassian.net/wiki/pages/viewpageattachments.action?pageId=17378841&preview=%2F17378841%2F17378864%2F%5B23-06%5DGuia_GT_Implementa%C3%A7%C3%A3oAPIs.pdf
 [Dados-Cadastrais]: ../../../../apis/Dados-Cadastrais.html
 [Cartão-crédito]: ../../../../apis/Cartão-de-Credito.html
