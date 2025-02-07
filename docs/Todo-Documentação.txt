@@ -11,3 +11,79 @@ Dúvidas:
 1) O que é essa "  API dos endpoints de pagamentos internos, responsável pelos endpoints não regulatórios." ????
    Arquivo oas-oof-payment.yml
 2) Procurar {{..comment}}, há alguns trechos comentados que precisam ser esclarecidos/complementados.
+
+Documentação UI
+------------ --
+
+- Estrutura
+   Integração da Plataforma
+            * Colocar de maneira explícita o que cada perfil precisa fazer para integrar com a plataforma
+               ** Transmissor de Dados: UI + Sistemas de Retaguarda
+               ** Detentor de Conta: UI + Sistemas de Retaguarda
+         
+         Dados Abertos
+            * Avisar que é somente para o perfil de compartilhamento de dados
+         Dados Cadastrais e Transacionais
+            * Explicitar NOVAMENTE que há a parte de interfaces de usuário do cliente e sistemas de retaguarda
+            Sistemas de Retaguarda
+               Colocar aqui a atual documentação de "Compartilhamento de Dados"
+               API de "É nosso cliente?"
+                  * Explicar que é a mesma API necessária no Serviço de Pagamentos
+         
+         Serviço de Pagamentos
+            Sistemas de Retaguarda
+               Conectores
+                  Conector de Discovery
+                  Outros conectores
+                  API que o Pix precisa chamar (Status de Pagamento)
+               API de "É nosso cliente?"
+                  * Explicar que é a mesma API necessária no compartilhamento de dados
+         
+         Interfaces de Usuário
+            * Quando a UI é acionada?
+               ** Pedido de aceite de Consentimento
+               ** Gestão de consentimentos
+            * Guia sobre o que precisa ser implementado:
+               ** Tem Mobile Banking
+               ** Tem Web Internet Banking? Não -> Tela de Handoff
+               ** A configuração para cada caso é complicada e é feita a 4 mãos
+               ** O que a Plataforma Opus Open Finance oferece
+                  *** WebView
+                  *** Como chamar o WebView no seu mobile e/ou Internet Banking
+                  *** A configuração do WebView
+            Pedido de Aceite de Consentimento
+               Mobile Banking
+                  * Exige uma configuração
+                  * Contexto: Aceite de consentimento
+                  * Deep Link, App Link e Universal Link
+                     ** O que são (Android e iOS)
+                        *** Explicar o que são (App Link é um subcaso de Deep Link e é o o que o Open Finance usa)
+                        *** Permite acionamento de uma URI
+                        *** O aplicativo precisa se registrar (Android e iOS)
+                     ** Por que tem que usar isso?
+                        *** https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/240650317/v1.0+-+Redirecionamento+App-to-App
+                     ** O que você vai registrar: a URL de "authorization_endpoint" do Authorization Server da Plataforma Opus Open Finance
+                     ** Essa informação será obtida junto aos responsáveis pela instalação do produto (Delivery Manager da Opus)
+                     ** Exemplo: https://openbanking.seubanco.com.br/auth/auth
+                     ** Quando o aplicativo for acionado (tipicamente main(URL))
+                     ** Recomendações
+                        *** Enviar para o back do app
+                        *** De cara dar um GET na URL para não expirar (há um TTL muito estrito)
+                        *** Entrar no loop de comandos (tipicamente no backend do app)
+               Web Internet Banking
+               Tela de Handoff
+                  * A POOF oferece
+            Gestão de Consentimento
+               * É igual para Mobile Banking e Web Internet Banking
+               * Basta chamar a API de Gestão de Consentimentos
+                  ** API de Gestão de Consentimentos
+               * Lembre-se de que exige configuração
+            Configuração dos Canais Digitais
+               ** Configuração do WebView - Só usada por quem for utilizar nosso WebView
+               ** Configuração para o Mobile Banking
+               ** Configuração para o Internet Banking
+               ** Configuração para o Handoff - Apenas para quem não tem Internet Banking
+            Check-list Interfaces de Usuário
+               * Pedido de Aceite de consentimento
+               * Gestão de Consentimentos
+               * Configurações
