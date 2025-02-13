@@ -1,30 +1,30 @@
 ---
 layout: default
-title: "Payment Transaction Initiator (ITP)"
-parent: "Participation Profiles-"
+title: "Payment Initiation Service Provider"
+parent: "Participation Profiles"
 nav_order: 5
 has_children: true
 lang: "en"
 alternate_lang: "/docs/pt-br/Open-Finance/Open-Finance-Brasil/PerfisOFB/OFB-ITP/"
 ---
 
-# Payment Transaction Initiator
+# Payment Initiation Service Provider
 
-The Payment Transaction Initiator (ITP) is the Open Finance profile authorized to perform payment initiations within the ecosystem. The ITP will initiate consent journeys (for making payments) in participating Open Finance institutions that are Account Holders. This profile enables a range of new use cases, as the ITP does not need to be the custodian of the money at any point during the transaction and also does not need to be the owner of the bank account that will settle the payment.
+The Payment Initiation Service Provider (*PISP*) is the *Open Finance Brasil* profile authorized to perform payment initiations within the ecosystem. The Payment Initiation Service Provider will initiate consent journeys (for making payments) in participating *Open Finance Brasil* institutions that are Account Holders. This profile enables a range of new use cases, as the Payment Initiation Service Provider does not need to be the custodian of the money at any point during the transaction and also does not need to be the owner of the bank account that will settle the payment.
 
 ---
 
-## Payment Methods in Open Finance
+## Payment Methods in *Open Finance Brasil*
 
-Currently, the payment methods foreseen in Open Finance include:
+Currently, the payment methods foreseen in *Open Finance Brasil* include:
 
 - **Pix**
-- **Boleto*** 
-- **Debit in Account*** 
-- **TED/TEF*** 
-- **Credit Card*** 
+- **Boleto***
+- **Debit in Account***
+- **TED/TEF***
+- **Credit Card***
 
-*The items marked with an asterisk are not yet available in Open Finance and have no scheduled release date.*
+*The items marked with an asterisk are not yet available in *Open Finance Brasil* and have no scheduled release date.*
 
 ---
 
@@ -66,10 +66,10 @@ To start using the software, there are some prerequisites:
 
 3. Create the user experience so that the consent journey is possible for customers. The user experience guide provides more details about this journey.
 
-4. Complete the entire [ITP onboarding process](../PerfisOFB/OnbordingITP.html)
+4. Complete the entire [Payment Initiation Service Provider onboarding process](../PerfisOFB/OnbordingITP.html)
 
 ---
-> For ITP, there is no need to build the integration layer.
+> For the Payment Initiation Service Provider, there is no need to build an integration layer.
 ---
 > The **Opus Open Finance Platform** payment initiation module offers APIs for building applications. Descriptions of these APIs can be found [here (payments)][API-pagamentos] and [here (automatic payments)][API-pagamentos-automáticos].  
 ---

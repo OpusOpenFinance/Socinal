@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Consent Journey"
-parent: "Open Finance Brasil-"
+parent: "Open Finance Brasil"
 nav_order: 3
 lang: "en"
 alternate_lang: "/docs/pt-br/Open-Finance/Open-Finance-Brasil/JornadaConsentimento/OFB-JornadaConsentimento/"
@@ -9,9 +9,9 @@ alternate_lang: "/docs/pt-br/Open-Finance/Open-Finance-Brasil/JornadaConsentimen
 
 ## Consent Journey
 
-In Open Finance, any operation can only be performed—whether it is data sharing or making a payment—if there is consent approved by the user (client of a financial institution) who initiated the journey. Therefore, it is always necessary to perform a *consent journey* for the user to authorize the operation.
+In Open Finance, any operation can only be performed — whether it is data sharing or making a payment — if there is consent approved by the user (client of a financial institution) who initiated the journey. Therefore, it is always necessary to perform a *consent journey* for the user to authorize the operation.
 
-**Consent** is the term used to demonstrate that the user, a client of the financial institution, agrees with the operation that the **Payment Initiator** or the **Data Receiver** is requesting from the **Account Holder** or the **Data Transmitter**.
+**Consent** is the term used to demonstrate that the user, a client of the financial institution, agrees with the operation that the **Payment Initiator Service Provider** or the **Data Receiver** is requesting from the **Account Holder** or the **Data Transmitter**.
 
 ---
 
@@ -33,7 +33,7 @@ Source: Central Bank
 ![Payment Journey](./images/jornada_pgtos.png)  
 Source: Central Bank
 
-1. The user accesses the **Payment Initiator (ITP)** environment and requests the initiation of a new payment via Open Finance.
+1. The user accesses the **Payment Initiator Service Provider (PISP)** environment and requests the initiation of a new payment via Open Finance.
 2. After making the request and choosing the **Account Holder**, the user is automatically redirected to the Account Holder's environment.
 3. In the Account Holder's environment, the user authenticates using biometrics or registered credentials to access their account.
 4. After logging in, the user confirms the payment by verifying the transaction details and entering their credentials.

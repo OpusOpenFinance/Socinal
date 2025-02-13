@@ -19,10 +19,10 @@ Além disso, o ecossistema exige que as participantes contratem alguns certifica
 - **Certificado de autenticação**
 - **Certificado de Assinatura**
 
+{: .note}
 **Certificações e certificados são diferentes!**
-
-- **Certificações**: Evidências de que a implementação do Open Finance Brasil do participantes está de acordo com as especificações funcionais e de segurança.
-- **Certificados**: Gerados por uma certificadora autorizada, são utilizados para encriptar e garantir segurança na comunicação entre as participantes do Open Finance Brasil.
+**Certificações** são evidências de que a implementação do *Open Finance Brasil* do participantes está de acordo com as especificações funcionais e de segurança.
+**Certificados** são gerados por uma certificadora autorizada e utilizados para garantir a autenticidade e/ou encriptar a comunicação entre as participantes do *Open Finance Brasil*.
 
 ---
 
@@ -51,7 +51,7 @@ Um motor de conformidade de segurança garante que uma instituição atende aos 
 
 ## Certificação funcional
 
-No contexto de homologação do Open Finance Brasil, as diversas especificações de APIs devem ser implementadas pela instituição participante. Para garantir que a participante esteja com toda a jornada daquela funcionalidade nos parâmetros esperados, a governança do Open Finance Brasil disponibilizaum  motor funcional. Dentro dele são disponibilizados diversos planos de testes para que cada uma das APIs regulatórias seja testada e certificada de acordo com o grau de aderência de seu comportamento às normas regulatórias.
+No contexto de homologação do *Open Finance Brasil*, as diversas especificações de APIs devem ser implementadas pela instituição participante. Para garantir que a participante esteja com toda a jornada daquela funcionalidade nos parâmetros esperados, a governança do *Open Finance Brasil* fornece um *motor funcional* para testes. Dentro dele estão disponíveis diversos planos de testes para que cada uma das APIs regulatórias seja testada e certificada de acordo com o grau de aderência de seu comportamento às normas regulatórias.
 
 É possível acompanhar os testes publicados das instituições participantes [através desse link](https://web.conformance.directory.openbankingbrasil.org.br/plans.html?public=true).
 
@@ -93,7 +93,7 @@ Os certificados digitais são divididos em 4 tipos:
 | Autenticação        | Sim                | Sim | Sim                   | Sim                |
 | Assinatura          | Sim                | Não | Sim                   | Não                |
 
-### Autoridades certificadoras homologadas pelo Open Finance Brasil
+### Autoridades certificadoras homologadas pelo *Open Finance Brasil*
 
 - **CertiSign**
 - **Serpro**

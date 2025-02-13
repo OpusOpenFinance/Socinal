@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Participation Profiles"
-parent: "Open Finance Brasil-"
+parent: "Open Finance Brasil"
 nav_order: 2
 has_children: true
 lang: "en"
@@ -24,7 +24,7 @@ The profiles performed by financial institutions can be divided into the two exi
 ## In the Payments Ecosystem
 
 - **Account Holder** - Passive party.
-- **Payment Transaction Initiator (ITP)** - Active party.
+- **Payment Initiation Service Provider (PISP)** - Active party.
 
 ---
 
@@ -41,10 +41,10 @@ The term **TPP** (Third-Party Provider) is used to represent both active parties
 
 The roles can be understood according to the table below:
 
-| **Ecosystem**   | **Client (TPP - active party)**    | **Server (passive party)**   |
+| **Ecosystem**   | **Client (PISP - active party)**  | **Server (passive party)**  |
 |-----------------|-----------------------------------|-----------------------------|
 | **Data**        | Data Receiver                     | Data Transmitter            |
-| **Payments**    | ITP                                | Account Holder              |
+| **Payments**    | PISP                              | Account Holder              |
 
 ---
 

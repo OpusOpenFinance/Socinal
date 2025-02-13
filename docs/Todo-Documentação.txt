@@ -1,16 +1,52 @@
 Documentação Plataforma Opus Open Finance - Todo list
 =========================================   =========
 
+TODO:
+ - Alterar cores do ls (ver Raspberry)
+ - Investigar como mexer nas páginas do GitHub Pages
+ - Subir para o GitHub
+
+--------------
+
+1) Multi-idioma
 2) Forma automática de "próxima página"?
-3) Multi-idioma
-5) A API opus-commons deve ser listada na seção sobre a construção de conectores.
-6) Acrescentar o Loop-Comandos.md às paginas que explicam integração Mobile e Internet Banking (talvez handoff)
+3) A API opus-commons deve ser listada na seção sobre a construção de conectores.
 
 Dúvidas:
 
 1) O que é essa "  API dos endpoints de pagamentos internos, responsável pelos endpoints não regulatórios." ????
    Arquivo oas-oof-payment.yml
 2) Procurar {{..comment}}, há alguns trechos comentados que precisam ser esclarecidos/complementados.
+
+Tradução para Inglês
+-------- ---- ------
+1) Falta traduzir as imagens
+
+Site multi-idioma
+==== ============
+
+ - O que eu fiz?
+   1) Escondi a pasta "pt-br" em um diretório HOLD nos fontes
+   2) Gerei o site com o Jekyll para "en"
+   3) Fui no diretório _site gerado e movi o sub-diretório "en" recém gerado para o mesmo nível de "docs".
+   4) Movi o "pt-br" de volta para baixo de "/docs" nos fontes
+   5) Escondi o diretório "en" em um diretório HOLD nos fontes
+   6) Gerei o site com o Jekyll para "pt-br" 
+   7) Movi o diretório "en" gerado, que estava no mesmo nível de docs, para baixo de "_sites"
+   8) Rodei o Jekyll apenas para servir as páginas.
+
+ - A boa notícia é que o site gerado é estático. Então, fiz um  link simbólico de "_sites" para "Documentation" embaixo de "docs"
+       ln -s _sites Documentation
+   Rodei um web server bem simples. Estando no diretório "docs":
+       python3 -m http.server 4000
+
+  - Como resolver em definitivo?
+      Usar o Jekyll para gerar as páginas estáticas utilizando o método acima e colocar em um servidor na Web.
+
+  - Como usar o GitHub Pages?
+      1) Gerar dois repositórios separados, um por idioma, dane-se! (ou)
+      2) Aprender a manipular os arquivos gerados pelo Jekyll no GitHub Pages.
+
 
 Documentação UI
 ------------ --

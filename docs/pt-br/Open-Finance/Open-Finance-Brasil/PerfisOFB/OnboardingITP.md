@@ -4,7 +4,7 @@ title: "Onboarding ITP"
 parent: "ITP"
 nav_order: 1
 lang: "pt-br"
-alternate_lang: "/docs/en/Open-Finance/Open-Finance-Brasil/PerfisOFB/OFB-OnboardingITP/"
+alternate_lang: "/docs/en/Open-Finance/Open-Finance-Brasil/PerfisOFB/OnboardingITP/"
 ---
 
 ## Processo de Onboarding de um Iniciador de Transação de Pagamento (ITP)

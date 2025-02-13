@@ -1,3 +1,7 @@
+//
+// Script que carrega todos os links para sites externos de uma página e os altera para abrirem em outra aba do navegador.
+//
+
 (function () {
     document.addEventListener("DOMContentLoaded", function () {
     // Observa mudanças no DOM, para lidar com carregamento dinâmico.

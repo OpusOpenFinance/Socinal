@@ -1,0 +1,59 @@
+<header class="custom-header">
+    <div class="container">
+        <!-- Seletor de idiomas -->
+        {% include lang-switcher.html %}
+
+        <!-- Logo clicável -->
+        <div class="logo-container">
+            <a href="https://www.opus-software.com.br/o-que-fazemos/open-finance/" target="_blank">
+                <img src="{{ site.baseurl }}/assets/images/Opus-logo.png" alt="Opus Open Finance" class="logo">
+            </a>
+        </div>
+    </div>
+</header>
+
+<style>
+    .custom-header {
+        background: white !important;
+        color: blue !important;
+        padding: 15px 20px; /* Espaço ao redor do cabeçalho */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+        min-height: 80px; /* Garante que o cabeçalho tenha altura suficiente */
+    }
+
+    .container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .lang-switcher {
+        flex-grow: 1;
+        font-size: 14px;
+    }
+
+    .lang-switcher a {
+        color: blue !important; /* Links na cor azul */
+        text-decoration: none;
+        font-weight: bold;
+        margin-right: 15px;
+    }
+
+    .lang-switcher a:hover {
+        text-decoration: underline;
+    }
+
+    .logo-container {
+        display: flex;
+        align-items: center; /* Centraliza verticalmente */
+    }
+
+    .logo {
+        height: 70px; /* Define o tamanho do logo */
+        max-height: 100px; /* Evita que o logo fique muito grande */
+    }
+</style>
