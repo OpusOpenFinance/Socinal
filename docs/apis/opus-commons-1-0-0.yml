@@ -4,7 +4,10 @@ info:
   description: |
     API de rotas que são gerais para o funcionamento dos conectores de todos os produtos.
     API com a rota que verifica se dado cliente possui uma conta na instituição financeira necessária para as rotas.
-  version: 0.1.0-alpha
+  version: 1.0.0
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0'
 tags:
   - name: Common
     description: Operações necessárias para funcionamento geral dos conectores
@@ -16,9 +19,6 @@ paths:
       operationId: checkAccountHolderStatus
       summary: Verifica se documento consultado possui conta na detentora
       description: Método para verificar se a pessoa física ou jurídica mantém conta na instituição financeira
-      parameters:
-        - $ref: '#/components/parameters/x-brand-id'
-        - $ref: '#/components/parameters/x-correlation-id'
       requestBody:
         required: true
         content:
@@ -56,11 +56,32 @@ paths:
           $ref: '#/components/responses/Default'
 components:
   schemas:
+    RequestMeta:
+      type: object
+      description: Objeto que contém dados referentes ao contexto no qual o request for recebido.
+      required:
+        - correlationId
+        - brandId
+      properties:
+        correlationId:
+          type: string
+          description: UUID que identifica o correlation ID da requisição realizada. Deve ser propagado para todas as chamadas feitas entre sistemas e logado sempre que possível para facilitar o trace de erros
+          pattern: >-
+            ^(localID:)?[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          example: localID:97623ed1-4732-4bf2-8d4b-ae7aced5443b
+        brandId:
+          type: string
+          description: Identificador da marca reportada pelo participante do Open Finance
+          example: cbanco
+          minLength: 1
+          maxLength: 50
+      additionalProperties: false
     CheckAccountHolderRequest:
       type: object
       description: Payload utilizado para verificação de correntista
       required:
         - data
+        - requestMeta
       properties:
         data:
           type: object
@@ -81,6 +102,8 @@ components:
               example:
                 '11111111111111'
               pattern: ^\d{14}$
+        requestMeta:
+          $ref: '#/components/schemas/RequestMeta'
     CheckAccountHolderResponse:
       type: object
       required:
@@ -129,28 +152,6 @@ components:
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 2048
-  parameters:
-    x-brand-id:
-      name: x-brand-id
-      in: header
-      description: Identificador da marca reportada pelo participante do Open Finance
-      required: true
-      schema:
-        type: string
-        example: cbanco
-        minLength: 1
-        maxLength: 50
-    x-correlation-id: 
-      name: x-correlation-id
-      in: header
-      description: UUID que identifica o correlation ID da requisição realizada. Deve ser
-            propagado para todas as chamadas feitas entre sistemas e logado sempre
-            que possível para facilitar o trace de erros
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 97623ed1-4732-4bf2-8d4b-ae7aced5443b
   responses:
     OKResponseCheckAccountHolder:
       description: 'Verificou com sucesso se documento consultado possui conta na detentora'

@@ -22,8 +22,13 @@ Existem *endpoints* para:
 - Obter a lista de transações recentes (últimos 7 dias) de uma conta;
 - Obter os limites de uma conta.
 
+Além disso, é necessário implementar uma outra API regulatória para a verificação de conta de um cliente PF ou PJ em determinada instituição. Essa API é denominada _common_ e ela realiza a verificação se um cliente abandounou o fluxo de consentimento por não ter conta na instituição. A sua API pode ser encontrada abaixo.
+
 ## *Open API Specification* da API
 
 A documentação da API de Contas a ser construída na *camada de integração* pode ser encontrada [aqui][API-Contas].
 
+A documentação da API de Common a ser construída na *camanda de integração* pode ser encontrada [aqui][API-Common]
+
 [API-Contas]: ../swagger-ui/index.html?api=Contas
+[API-Common]: ../swagger-ui/index.html?api=Opus-Commons
