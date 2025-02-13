@@ -26,9 +26,12 @@ Além disso, é necessário implementar uma outra API regulatória para a verifi
 
 ## *Open API Specification* da API
 
-A documentação da API de Contas a ser construída na *camada de integração* pode ser encontrada [aqui][API-Contas].
+A documentação das APIs a serem construída na *camada de integração* podem ser encontradas na tabela abaixo:
 
-A documentação da API de Common a ser construída na *camanda de integração* pode ser encontrada [aqui][API-Common]
+|API            |Link               |
+|---------------|:-----------------:|
+|Contas         |[Link][API-Contas] |
+|Common         |[Link][API-Common] |
 
 [API-Contas]: ../swagger-ui/index.html?api=Contas
 [API-Common]: ../swagger-ui/index.html?api=Opus-Commons
