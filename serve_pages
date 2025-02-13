@@ -1,0 +1,6 @@
+#
+# Script para rodar o Jekyll apenas servindo páginas, sem fazer rebuild do site.
+#
+cd docs
+bundle exe jekyll serve --baseurl /Documentation --skip-initial-build --no-watch --host=0.0.0.0 --config _config.yml --trace --verbose
+

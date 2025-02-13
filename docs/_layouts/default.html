@@ -10,11 +10,11 @@ layout: table_wrappers
   <a class="skip-to-main" href="#main-content">Skip to main content</a>
   {% include icons/icons.html %}
   {% if page.nav_enabled == true %}
-    {% include components/sidebar.html %}
+    {% include components/sidebar.html page_lang=page.lang %}  <!-- Passa page.lang como parâmetro -->
   {% elsif layout.nav_enabled == true and page.nav_enabled == nil %}
-    {% include components/sidebar.html %}
+    {% include components/sidebar.html page_lang=page.lang %}  <!-- Passa page.lang como parâmetro -->
   {% elsif site.nav_enabled != false and layout.nav_enabled == nil and page.nav_enabled == nil %}
-    {% include components/sidebar.html %}
+    {% include components/sidebar.html page_lang=page.lang %}  <!-- Passa page.lang como parâmetro -->
   {% endif %}
   <div class="main" id="top">
     {% include components/header.html %}
@@ -27,7 +27,6 @@ layout: table_wrappers
           {% else %}
             {{ content }}
           {% endif %}
-
           {% if page.has_toc != false %}
             {% include components/children_nav.html %}
           {% endif %}
@@ -46,6 +45,9 @@ layout: table_wrappers
 
   <!-- Insere o script para abertura de links externos em nova aba -->
   <script src="{{ site.baseurl }}/assets/js/open-links.js"></script>
+
+  <!-- Insere o script de deteção de idioma do navegador e adequado redirecionamento -->
+  <!-- <script src="{{ site.baseurl }}/assets/js/language-redirect.js"></script> -->
 
 </body>
 </html>

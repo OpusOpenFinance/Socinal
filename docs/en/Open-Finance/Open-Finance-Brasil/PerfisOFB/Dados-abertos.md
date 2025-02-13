@@ -1,10 +1,10 @@
 ---
 layout: default
 title: "Open Data"
-parent: "Participation Profiles-"
+parent: "Participation Profiles"
 nav_order: 1
 lang: "en"
-alternate_lang: "/docs/pt-br/Open-Finance/Open-Finance-Brasil/PefisOFB/Dados-abertos/"
+alternate_lang: "/docs/pt-br/Open-Finance/Open-Finance-Brasil/PerfisOFB/Dados-abertos/"
 ---
 
 # Open Data

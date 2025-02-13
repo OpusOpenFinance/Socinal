@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Data Receiver"
-parent: "Participation Profiles-"
+parent: "Participation Profiles"
 nav_order: 4
 lang: "en"
 alternate_lang: "/docs/pt-br/Open-Finance/Open-Finance-Brasil/PerfisOFB/OFB-Receptor/"

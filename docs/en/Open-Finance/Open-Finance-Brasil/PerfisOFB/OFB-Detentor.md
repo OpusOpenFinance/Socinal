@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Account Holder"
-parent: "Participation Profiles-"
+parent: "Participation Profiles"
 nav_order: 3
 lang: "en"
 alternate_lang: "/docs/pt-br/Open-Finance/Open-Finance-Brasil/PerfisOFB/OFB-Detentor/"
@@ -9,13 +9,13 @@ alternate_lang: "/docs/pt-br/Open-Finance/Open-Finance-Brasil/PerfisOFB/OFB-Dete
 
 # Account Holder
 
-The participation profile as an **Account Holder** in *Open Finance Brasil* represents the institution that receives payment requests from a **Payment Transaction Initiator (ITP)**. This profile in the **Opus Open Finance Platform** is responsible for meeting all the regulatory requirements set by the Central Bank.
+The participation profile as an **Account Holder** in *Open Finance Brasil* represents the institution that receives payment requests from a **Payment Initiation Service Provider (PISP)**. This profile in the **Opus Open Finance Platform** is responsible for meeting all the regulatory requirements set by the Central Bank.
 
 ---
 
 ## Open Finance Ecosystem - Account Holder
 
-Account Holders are institutions where customers have checking accounts, savings accounts, and prepaid payment accounts, which can be accessed in the context of *Open Finance Brasil* to process payment initiations. The entities sending the payment requests are institutions certified as *payment transaction initiators*.
+Account Holders are institutions where customers have checking accounts, savings accounts, and prepaid payment accounts, which can be accessed in the context of *Open Finance Brasil* to process payment initiations. The entities sending the payment requests are institutions certified as *Payment Initiation Service Providers*.
 
 ---
 
@@ -24,10 +24,10 @@ Account Holders are institutions where customers have checking accounts, savings
 Currently, the payment methods foreseen in Open Finance include:
 
 - **Pix**
-- **Boleto*** 
-- **Debit in Account*** 
-- **TED/TEF*** 
-- **Credit Card*** 
+- **Boleto***
+- **Debit in Account***
+- **TED/TEF***
+- **Credit Card***
 
 *The items marked with an asterisk are not yet available in Open Finance and have no scheduled release date.*
 

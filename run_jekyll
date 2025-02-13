@@ -1,0 +1,16 @@
+#
+# Script para rodar o Jekyll localmente e servir as páginas de documentação da Plataforma Opus Open Finance.
+# O Jekyll ouve na porta 4000.
+# Rodando no WSL do Windows , o site estará acessível em "http://<IP-do-WSL>:4000/Documentation".
+# Para descobrir qual o <IP-do-WSL> faça "hostname -I".
+# O servidor ficará rodando até ser interrompido via <Control-C>
+#
+# Observe que estamos passando dois arquivos de configuração para o Jekyll. O segundo, que é usado somente
+# em desenvolvimento (_config_dev.yml) sobrescreve o primeiro.
+# Isto é necessário por causa do parâmetro "url" no primeiro arquivo, que designa o github.io como URL
+# para o GitHub Pages. Ao deixar de usá-lo (GitHub Pages) talvez isso tenha que ser alterado.
+#
+
+cd docs
+bundle exe jekyll serve --baseurl /Documentation --host=0.0.0.0 --config _config.yml --trace --verbose --watch
+

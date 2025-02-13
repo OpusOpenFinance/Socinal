@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Data Transmitter"
-parent: "Participation Profiles-"
+parent: "Participation Profiles"
 nav_order: 2
 lang: "en"
 alternate_lang: "/docs/pt-br/Open-Finance/Open-Finance-Brasil/PerfisOFB/OFB-Transmissor/"
