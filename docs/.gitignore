@@ -19,10 +19,6 @@ LICENSE
 just-the-docs-template-main
 just-the-docs-template-main.zip
 
-# Ignora o site gerado automaticamente
-_site
-
 # Ignora arquivos de trabalho auxiliares
-# Todo-Documentação
 erros.txt
-just-the-docs-template-main
+# Todo-Documentação
