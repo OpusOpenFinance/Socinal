@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Open Finance Brasil"
+title: "Open Finance Brazil"
 parent: "Opus Open Finance Platform"
 nav_order: 1
 has_children: true

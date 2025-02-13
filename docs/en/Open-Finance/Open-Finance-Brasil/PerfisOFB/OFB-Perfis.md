@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Participation Profiles"
-parent: "Open Finance Brasil"
+parent: "Open Finance Brazil"
 nav_order: 2
 has_children: true
 lang: "en"
