@@ -79,7 +79,7 @@ Os investimentos também são divididos em diferentes produtos. Abaixo tem-se um
 - [Títulos do tesouro direto](./dados-investimentos/dados-tesouro.html)
 - [Fundos de investimento](./dados-investimentos/dados-fundos.html)
 
-Informações detalhadas sobre os dados necessários para este produto podem ser encontrados [página específica para investimentos](./OOF-Investimento.md).
+Informações detalhadas sobre os dados necessários para este produto podem ser encontrados [página específica para investimentos](./OOF-Investimento.html).
 
 ## Câmbio
 
