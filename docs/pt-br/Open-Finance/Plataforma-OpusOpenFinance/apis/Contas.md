@@ -24,6 +24,6 @@ Existem *endpoints* para:
 
 ## *Open API Specification* da API
 
-A documentação da API de Contas a ser construída na *camada de integração* pode ser encontrada [aqui][API-Contas].
+A documentação da API de Contas a ser construídas na *camada de integração* pode ser encontrada [aqui][API-Contas].
 
 [API-Contas]: ../../../../swagger-ui/index.html?api=Contas

@@ -26,7 +26,7 @@ Além disso, é necessário implementar uma outra API regulatória para a verifi
 
 ## *Open API Specification* da API
 
-A documentação das APIs a serem construída na *camada de integração* podem ser encontradas na tabela abaixo:
+A documentação das APIs a serem construídas na *camada de integração* podem ser encontradas na tabela abaixo:
 
 |API            |Link               |
 |---------------|:-----------------:|
