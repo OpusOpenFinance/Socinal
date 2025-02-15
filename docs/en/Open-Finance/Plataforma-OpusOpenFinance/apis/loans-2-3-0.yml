@@ -2,14 +2,12 @@ openapi: 3.0.0
 info:
   title: API Loans - Integration Layer - OPUS Open Finance Brasil
   description: |
-    API de informações de operações de empréstimos da Camada de Integração da Instituição Transmissora com o Opus Open Finance Brasil. API que retorna informações de operações de crédito do tipo empréstimo, mantidas nas instituições transmissoras por seus clientes, incluindo dados como denominação, modalidade, número do contrato, tarifas, prazo, prestações, pagamentos(ao menos para os últimos 12 meses), amortizações, garantias, encargos e taxas de juros remuneratórios.
+    API de informações de operações de empréstimos do Open Finance Brasil – Fase 2. API que retorna informações de 
+    operações de crédito do tipo empréstimo, mantidas nas instituições transmissoras por seus clientes, 
+    incluindo dados como denominação, modalidade, número do contrato, tarifas, prazo, prestações, 
+    pagamentos(ao menos para os últimos 12 meses), amortizações, garantias, encargos e taxas de juros remuneratórios.
     Não possui segregação entre pessoa natural e pessoa jurídica.
-
-    # Orientações
-    ### Observação:
-      - No endpoint `/contracts/{contratId}/payments` a paginação ocorrerá sob os dados contidos no campo `releases` do tipo lista.   
-    <br>
-  version: 0.1.0-alpha
+  version: 1.0.0-base2.4.0
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
@@ -23,18 +21,12 @@ paths:
       summary: Conjunto de informações  de contratos de empréstimo mantidos pelo cliente na instituição transmissora e para os quais ele tenha fornecido consentimento
       description: Método para obter a lista de contratos de empréstimo mantidos pelo cliente na instituição transmissora e para os quais ele tenha fornecido consentimento
       operationId: loansGetContracts
-      parameters:
-        - $ref: '#/components/parameters/x-brand-id'
-        - $ref: '#/components/parameters/x-correlation-id'
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/pageSize'
-        - $ref: '#/components/parameters/pagination-key'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RequestWithConsent'
+              $ref: '#/components/schemas/RequestWithConsentAndRequestMetaAndPagination'
       responses:
         '200':
           $ref: '#/components/responses/OKResponseLoansContractList'
@@ -64,23 +56,19 @@ paths:
           $ref: '#/components/responses/SiteIsOverloaded'
         default:
           $ref: '#/components/responses/Default'
-  '/contracts/{contractId}':
+  /find:
     post:
       tags:
         - Loans
       summary: Obtém os dados do contrato de empréstimo identificado por contractId
       description: Método para obter os dados do contrato de empréstimo identificado por contractId mantido pelo cliente na instituição transmissora
       operationId: loansGetContractsContractId
-      parameters:
-        - $ref: '#/components/parameters/contractId'
-        - $ref: '#/components/parameters/x-brand-id'
-        - $ref: '#/components/parameters/x-correlation-id'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RequestWithConsent'
+              $ref: '#/components/schemas/RequestWithConsentAndRequestMetaAndContractId'
       responses:
         '200':
           $ref: '#/components/responses/OKResponseLoansContract'
@@ -110,26 +98,19 @@ paths:
           $ref: '#/components/responses/SiteIsOverloaded'
         default:
           $ref: '#/components/responses/Default'
-  '/contracts/{contractId}/warranties':
+  /warranties:
     post:
       tags:
         - Loans
       summary: Obtém a lista de garantias vinculadas ao contrato de empréstimo identificado por contractId
       description: Método para obter a lista de garantias vinculadas ao contrato de empréstimo identificado por contractId mantido pelo cliente na instituição transmissora. Para os produtos que não possuam garantias deve-se retornar HTTP Status 200 com o objeto “data” vazio, sem nenhum atributo interno.
       operationId: loansGetContractsContractIdWarranties
-      parameters:
-        - $ref: '#/components/parameters/contractId'
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/pageSize'
-        - $ref: '#/components/parameters/x-brand-id'
-        - $ref: '#/components/parameters/x-correlation-id'
-        - $ref: '#/components/parameters/pagination-key'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RequestWithConsent'
+              $ref: '#/components/schemas/RequestWithConsentAndRequestMetaAndPaginationAndContractId'
       responses:
         '200':
           $ref: '#/components/responses/OKResponseLoansWarranties'
@@ -159,26 +140,19 @@ paths:
           $ref: '#/components/responses/SiteIsOverloaded'
         default:
           $ref: '#/components/responses/Default'
-  '/contracts/{contractId}/scheduled-instalments':
+  /scheduled-instalments:
     post:
       tags:
         - Loans
       summary: Obtém os dados do cronograma de parcelas do contrato de empréstimo identificado por contractId
       description: Método para obter os dados do cronograma de parcelas do contrato de empréstimo identificado por contractId mantido pelo cliente na instituição transmissora
       operationId: loansGetContractsContractIdScheduledInstalments
-      parameters:
-        - $ref: '#/components/parameters/contractId'
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/pageSize'
-        - $ref: '#/components/parameters/x-brand-id'
-        - $ref: '#/components/parameters/x-correlation-id'
-        - $ref: '#/components/parameters/pagination-key'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RequestWithConsent'
+              $ref: '#/components/schemas/RequestWithConsentAndRequestMetaAndPaginationAndContractId'
       responses:
         '200':
           $ref: '#/components/responses/OKResponseLoansInstalments'
@@ -208,26 +182,19 @@ paths:
           $ref: '#/components/responses/SiteIsOverloaded'
         default:
           $ref: '#/components/responses/Default'
-  '/contracts/{contractId}/payments':
+  /payments:
     post:
       tags:
         - Loans
       summary: Obtém os dados de pagamentos do contrato de empréstimo identificado por contractId
       description: Método para obter os dados de pagamentos do contrato de empréstimo identificado por contractId mantido pelo cliente na instituição transmissora
       operationId: loansGetContractsContractIdPayments
-      parameters:
-        - $ref: '#/components/parameters/contractId'
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/pageSize'
-        - $ref: '#/components/parameters/x-brand-id'
-        - $ref: '#/components/parameters/x-correlation-id'
-        - $ref: '#/components/parameters/pagination-key'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RequestWithConsent'
+              $ref: '#/components/schemas/RequestWithConsentAndRequestMetaAndPaginationAndContractId'
       responses:
         '200':
           $ref: '#/components/responses/OKResponseLoansPayments'
@@ -591,7 +558,7 @@ components:
         productName:
           type: string
           maxLength: 140
-          pattern: '[\w\W\s]*'
+          pattern: '^(?!\s)[\w\W\s]*[^\s]$'
           example: Crédito Pessoal Consignado
           description: |
             Denominação/Identificação do nome da Modalidade da Operação de Crédito divulgado ao cliente
@@ -652,13 +619,12 @@ components:
           pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
           example: '2028-01-15'
           description: |
-            Data de vencimento Final da operação. Especificação RFC-3339.
-            Informação deve ser enviada caso ela exista.
+            Data de vencimento Final da operação. Especificação RFC-3339. Informação deve ser enviada caso ela exista.
         instalmentPeriodicity:
           $ref: '#/components/schemas/EnumContractInstalmentPeriodicity'
         instalmentPeriodicityAdditionalInfo:
           type: string
-          pattern: '[\w\W\s]*'
+          pattern: '^(?!\s)[\w\W\s]*[^\s]$'
           maxLength: 50
           example: Informações adicionais sobre periodicidade
           description: |
@@ -693,7 +659,7 @@ components:
           $ref: '#/components/schemas/EnumContractAmortizationScheduled'
         amortizationScheduledAdditionalInfo:
           type: string
-          pattern: '[\w\W\s]*'
+          pattern: '^(?!\s)[\w\W\s]*[^\s]$'
           maxLength: 200
           example: Informações complementares relativa à amortização do tipo 'OUTROS'
           description: |
@@ -712,8 +678,7 @@ components:
         interestRates:
           type: array
           description: |
-            Objeto que traz o conjunto de informações necessárias para demonstrar a composição das taxas de juros remuneratórios da Modalidade de crédito.  
-            Caso o contrato não possua taxas de juros, deve ser compartilhada uma lista vazia. Caso o contrato possua uma taxa de juros com valor 0, deve ser compartilhado um objeto com o valor 0 de forma explícita.
+            Objeto que traz o conjunto de informações necessárias para demonstrar a composição das taxas de juros remuneratórios da Modalidade de crédito. Caso o contrato não possua taxas de juros, deve ser compartilhada uma lista vazia. Caso o contrato possua uma taxa de juros com valor 0, deve ser compartilhado um objeto com o valor 0 de forma explícita.
           items:
             $ref: '#/components/schemas/LoansContractInterestRate'
           minItems: 0
@@ -741,13 +706,13 @@ components:
         feeName:
           type: string
           maxLength: 140
-          pattern: '[\w\W\s]*'
+          pattern: '^(?!\s)[\w\W\s]*[^\s]$'
           description: Denominação da Tarifa pactuada
           example: Renovação de cadastro
         feeCode:
           type: string
           maxLength: 140
-          pattern: '[\w\W\s]*'
+          pattern: '^(?!\s)[\w\W\s]*[^\s]$'
           description: Sigla identificadora da tarifa pactuada
           example: CADASTRO
         feeChargeType:
@@ -767,7 +732,7 @@ components:
           example: '100000.0400'
         feeRate:
           type: string
-          pattern: '^[01]\.\d{6}$'
+          pattern: '^\d{1}\.\d{6}$'
           format: double
           maxLength: 8
           minLength: 8
@@ -807,7 +772,7 @@ components:
 
             [Restrição] Obrigatório para complementar a informação relativa ao Tipo de taxa referencial ou indexador, quando selecionada o tipo ou subtipo OUTRO.
           maxLength: 140
-          pattern: '[\w\W\s]*'
+          pattern: '^(?!\s)[\w\W\s]*[^\s]$'
           example: Informações adicionais
         preFixedRate:
           type: string
@@ -825,12 +790,12 @@ components:
           maxLength: 9
           minLength: 8
           description: |
-            Taxa pós fixada aplicada sob o contrato da modalidade crédito. p.ex. 0.0045 .O preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%). Preencher o campo não aplicável ao contrato com zeros, seguindo o pattern (0.000000)
+            Taxa pós fixada aplicada sob o contrato da modalidade crédito. p.ex. 0.0045 .O preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%). Preencher o campo não aplicável ao contrato com zeros, seguindo o pattern (0.000000).
           example: '0.550000'
         additionalInfo:
           type: string
           maxLength: 1200
-          pattern: '[\w\W\s]*'
+          pattern: '^(?!\s)[\w\W\s]*[^\s]$'
           example: Informações adicionais
           description: |
             Texto com informações adicionais sobre a composição das taxas de juros pactuadas. 
@@ -846,7 +811,7 @@ components:
           $ref: '#/components/schemas/EnumContractFinanceChargeType'
         chargeAdditionalInfo:
           type: string
-          pattern: '[\w\W\s]*'
+          pattern: '^(?!\s)[\w\W\s]*[^\s]$'
           maxLength: 140
           example: Informações adicionais
           description: |
@@ -856,8 +821,8 @@ components:
         chargeAmount:
           type: string
           format: double
-          pattern: '^\d{1,15}\.\d{2,4}$'
-          maxLength: 20
+          pattern: '^-?\d{1,15}\.\d{2,4}$'
+          maxLength: 21
           minLength: 4
           example: '1000.0400'
           description: Valor do pagamento do encargo pago fora da parcela. Expresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais.
@@ -876,11 +841,11 @@ components:
             Campo para informações adicionais.
 
             [Restrição] Obrigatório se selecionada a opção 'OUTROS' em Tipo de encargo pactuado no contrato.
-          pattern: '[\w\W\s]*'
+          pattern: '^(?!\s)[\w\W\s]*[^\s]$'
           example: Informações adicionais sobre encargos.
         chargeRate:
           type: string
-          pattern: '^[01]\.\d{6}$'
+          pattern: '^\d{1}\.\d{6}$'
           format: double
           maxLength: 8
           minLength: 8
@@ -968,15 +933,10 @@ components:
         - ipocCode
       properties:
         contractId:
-          type: string
-          pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
-          maxLength: 100
-          minLength: 1
-          example: '92792126019929279212650822221989319252576'
-          description: 'Identifica de forma única o contrato da operação de crédito do cliente, mantendo as regras de imutabilidade dentro da instituição transmissora.'
+          $ref: '#/components/schemas/LegacyId'
         brandName:
           type: string
-          pattern: '[\w\W\s]*'
+          pattern: '^(?!\s)[\w\W\s]*[^\s]$'
           maxLength: 80
           example: Organização A
           description: 'Nome da Marca reportada pelo participante no Open Finance. Recomenda-se utilizar, sempre que possível, o mesmo nome de marca atribuído no campo do diretório Customer Friendly Server Name (Authorisation Server).'
@@ -1005,7 +965,7 @@ components:
               1. Para clientes pessoa física com CPF (tipo de cliente = 1), informar as 11 (onze) posições do CPF;
               2. Para clientes pessoa jurídica com CNPJ (tipo de cliente = 2), informar as 8 (oito) posições iniciais do CNPJ;
               3. Para os demais clientes (tipos de cliente 3, 4, 5 e 6), informar 14 (catorze) posições com complemento de zeros à esquerda se a identificação tiver tamanho inferior;
-            - **Código do contrato:** 1 (uma) até 40 (quarenta) posições, sem complemento de caracteres.
+            - **Código do contrato:** 1 (uma) até 40 (quarenta) posições, sem complemento de caracteres.          
     LoansPayments:
       type: object
       description: Conjunto de informações referentes aos pagamentos realizados de uma operação de crédito de empréstimos.
@@ -1043,24 +1003,15 @@ components:
         - paidAmount
       properties:
         paymentId:
-          type: string
-          maxLength: 100
-          minLength: 1
-          example: XlthLXpBLVowLTldW2EtekEtWjAtOVwtXXswLDk5fSQ
-          pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
-          description: Código ou identificador único prestado pela instituição para representar o pagamento individual.
+          $ref: '#/components/schemas/LegacyId'
         isOverParcelPayment:
           type: boolean
           example: true
           description: Identifica se é um pagamento pactuado (false) ou avulso (true).
         instalmentId:
-          type: string
-          maxLength: 100
-          minLength: 1
-          pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
-          example: WGx0aExYcEJMVm93TFRsZFcyRXRla0V0V2pBdE9Wd3RYWH
+          $ref: '#/components/schemas/LegacyId'
           description: |
-            Identificador de parcela, de responsabilidade de cada Instituição transmissora.
+            Identificador de parcela, de responsabilidade de cada Instituição transmissora.  
 
             [Restrição] Informação de envio obrigatório quando isOverParcelPayment tiver o valor FALSE.
         paidDate:
@@ -1081,8 +1032,8 @@ components:
         paidAmount:
           type: string
           format: double
-          pattern: '^\d{1,15}\.\d{2,4}$'
-          maxLength: 20
+          pattern: '^-?\d{1,15}\.\d{2,4}$'
+          maxLength: 21
           minLength: 4
           example: '1000.0400'
           description: |
@@ -1120,14 +1071,14 @@ components:
         feeName:
           type: string
           maxLength: 140
-          pattern: '[\w\W\s]*'
+          pattern: '^(?!\s)[\w\W\s]*[^\s]$'
           example: Reavaliação periódica do bem
           description: |
             Denominação da Tarifa pactuada.
         feeCode:
           type: string
           maxLength: 140
-          pattern: '[\w\W\s]*'
+          pattern: '^(?!\s)[\w\W\s]*[^\s]$'
           example: aval_bem
           description: |
             Sigla identificadora da tarifa pactuada.
@@ -1268,13 +1219,6 @@ components:
             $ref: '#/components/schemas/LoansWarranties'
         meta:
           $ref: '#/components/schemas/Meta'
-    RequestWithConsent:
-      type: object
-      required:
-        - consent
-      properties:
-        consent:
-          $ref: '#/components/schemas/ConsentDataSharing'
     ConsentDataSharing:
       description: Consentimento de compartilhamento de dados
       type: object
@@ -1448,12 +1392,7 @@ components:
                   - FUND
                 example: PAYMENT
               resourceLegacyId:
-                type: string
-                description: 'Identifica de forma única o recurso do cliente, mantendo as regras de imutabilidade dentro da instituição transmissora.'
-                pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
-                maxLength: 100
-                minLength: 1
-                example: '92792126019929279212650822221989319252576'
+                $ref: '#/components/schemas/LegacyId'
               authorizers:
                 deprecated: true
                 description: |
@@ -1546,65 +1485,127 @@ components:
           maxItems: 30
           example: ACCOUNTS_READ
       additionalProperties: false
-  parameters:
-    contractId:
-      name: contractId
-      in: path
-      description: Identificador do contrato para todos os tipos de operação de crédito.
-      required: true
-      schema:
-        type: string
-        pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
-        maxLength: 100
-    page:
-      name: page
-      in: query
+    RequestMeta:
+      type: object
+      description: Objeto que contém dados referentes ao contexto no qual o request for recebido.
+      required:
+        - correlationId
+        - brandId
+      properties:
+        correlationId:
+          type: string
+          description: UUID que identifica o correlation ID da requisição realizada. Deve ser propagado para todas as chamadas feitas entre sistemas e logado sempre que possível para facilitar o trace de erros
+          pattern: >-
+            ^(localID:)?[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          example: localID:97623ed1-4732-4bf2-8d4b-ae7aced5443b
+        brandId:
+          type: string
+          description: Identificador da marca reportada pelo participante do Open Finance
+          example: cbanco
+          minLength: 1
+          maxLength: 50
+      additionalProperties: false
+    RequestWithConsentAndRequestMetaAndPagination:
+      type: object
+      required:
+        - consent
+        - requestMeta
+      properties:
+        consent:
+          $ref: '#/components/schemas/ConsentDataSharing'
+        requestMeta:
+          $ref: '#/components/schemas/RequestMeta'
+        page:
+          $ref: '#/components/schemas/Page'
+        pageSize:
+          $ref: '#/components/schemas/PageSize'
+        pagination-key:
+          $ref: '#/components/schemas/PaginationKey'
+    RequestWithConsentAndRequestMetaAndContractId:
+      type: object
+      required:
+        - consent
+        - requestMeta
+        - contractId
+      properties:
+        consent:
+          $ref: '#/components/schemas/ConsentDataSharing'
+        requestMeta:
+          $ref: '#/components/schemas/RequestMeta'
+        contractId:
+          $ref: '#/components/schemas/LegacyId'
+    RequestWithConsentAndRequestMeta:
+      type: object
+      required:
+        - consent
+        - requestMeta
+      properties:
+        consent:
+          $ref: '#/components/schemas/ConsentDataSharing'
+        requestMeta:
+          $ref: '#/components/schemas/RequestMeta'
+    RequestWithConsentAndRequestMetaAndPaginationAndContractId:
+      type: object
+      required:
+        - consent
+        - requestMeta
+        - contractId
+      properties:
+        consent:
+          $ref: '#/components/schemas/ConsentDataSharing'
+        requestMeta:
+          $ref: '#/components/schemas/RequestMeta'
+        contractId:
+          $ref: '#/components/schemas/LegacyId'
+        page:
+          $ref: '#/components/schemas/Page'
+        pageSize:
+          $ref: '#/components/schemas/PageSize'
+        pagination-key:
+          $ref: '#/components/schemas/PaginationKey'
+    LegacyId:
+      description: >-
+        Array de chave e valor com a chave de identificação do recurso no sistema
+        de origem (legado), permitindo chaves compostas
+      type: array
+      items:
+        type: object
+        required:
+          - key
+          - value
+        properties:
+          key:
+            description: Nome do campo do identificador no sistema de origem
+            type: string
+            example: internalResourceId
+          value:
+            description: Valor do campo do identificador no sistema de origem
+            type: string
+            example: '1234'
+        additionalProperties: false
+      minItems: 1
+      maxItems: 10
+    PaginationKey:
+      description: >-
+        Identificador de rechamada, utilizado para evitar a contagem de chamadas
+        ao endpoint durante a paginação.
+      type: string
+      maxLength: 2048
+      pattern: '[\w\W\s]*'
+    Page:
       description: Número da página que está sendo requisitada (o valor da primeira página é 1).
-      schema:
-        type: integer
-        default: 1
-        minimum: 1
-        maximum: 2147483647
-        format: int32
-    pageSize:
-      name: page-size
-      in: query
+      type: integer
+      default: 1
+      minimum: 1
+      maximum: 2147483647
+      format: int32
+    PageSize:
       description: Quantidade total de registros por páginas.
-      schema:
-        type: integer
-        default: 25
-        minimum: 1
-        format: int32
-        maximum: 1000
-    pagination-key:
-      name: pagination-key
-      in: query
-      description: 'Identificador de rechamada, utilizado para evitar a contagem de chamadas ao endpoint durante a paginação.'
-      schema:
-        type: string
-        maxLength: 2048
-        pattern: '[\w\W\s]*'
-    x-brand-id:
-      name: x-brand-id
-      in: header
-      description: Identificador da marca reportada pelo participante do Open Finance
-      required: true
-      schema:
-        type: string
-        example: cbanco
-        minLength: 1
-        maxLength: 50
-    x-correlation-id:
-      name: x-correlation-id
-      in: header
-      description: UUID que identifica o correlation ID da requisição realizada. Deve ser
-            propagado para todas as chamadas feitas entre sistemas e logado sempre
-            que possível para facilitar o trace de erros
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 97623ed1-4732-4bf2-8d4b-ae7aced5443b
+      type: integer
+      default: 25
+      minimum: 1
+      format: int32
+      maximum: 1000
   responses:
     OKResponseLoansContractList:
       description: Dados dos contratos de empréstimos obtidos com sucesso.

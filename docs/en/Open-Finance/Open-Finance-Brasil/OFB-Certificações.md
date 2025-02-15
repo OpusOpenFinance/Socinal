@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Certifications and Certificates"
-parent: "Open Finance Brasil"
+parent: "Open Finance Brazil"
 nav_order: 4
 lang: "en"
 alternate_lang: "/docs/pt-br/Open-Finance/Open-Finance-Brasil/OFB-Certificações/"

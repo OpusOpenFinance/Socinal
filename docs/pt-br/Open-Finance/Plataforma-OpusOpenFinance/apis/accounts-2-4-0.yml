@@ -85,7 +85,7 @@ info:
             
             - Por exemplo, para situações de cobrança de tarifa avulsa nas quais existe acordo negocial ou insuficiência de saldo.
     
-  version: 0.1.0-alpha
+  version: 1.0.0-base2.4.1
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
@@ -100,15 +100,12 @@ paths:
       summary: Obtém uma lista de recursos representando todas as contas disponíveis para o cliente escolher consentir.
       operationId: discoverAccounts
       description: Método para obter a lista de contas depósito à vista, poupança e pagamento pré-pagas mantidas pelo cliente na instituição transmissora e para as quais ele possa fornecer consentimento.
-      parameters:
-        - $ref: '#/components/parameters/x-brand-id'
-        - $ref: '#/components/parameters/x-correlation-id'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RequestWithConsent'
+              $ref: '#/components/schemas/RequestWithConsentAndRequestMeta'
       responses:
         '200':
           $ref: '#/components/responses/OKResponseAccountDiscovery'
@@ -145,19 +142,12 @@ paths:
       summary: Obtém a lista de contas consentidas pelo cliente.
       operationId: accountsGetAccounts
       description: 'Método para obter a lista de contas depósito à vista, poupança e pagamento pré-pagas mantidas pelo cliente na instituição transmissora e para as quais ele tenha fornecido consentimento.'
-      parameters:
-        - $ref: '#/components/parameters/x-brand-id'
-        - $ref: '#/components/parameters/x-correlation-id'
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/pageSize'
-        - $ref: '#/components/parameters/accountType'
-        - $ref: '#/components/parameters/pagination-key'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RequestWithConsent'
+              $ref: '#/components/schemas/RequestWithConsentAndRequestMetaAndPagination'
       responses:
         '200':
           $ref: '#/components/responses/OKResponseAccountList'
@@ -187,23 +177,19 @@ paths:
           $ref: '#/components/responses/SiteIsOverloaded'
         default:
           $ref: '#/components/responses/Default'
-  '/accounts/{accountId}':
+  /find:
     post:
       tags:
         - Accounts
       summary: Obtém os dados de identificação da conta identificada por accountId.
       description: 'Método para obter os dados de identificação da conta de depósito à vista, poupança ou pagamento pré-paga identificada por accountId mantida pelo cliente na instituição transmissora.'
       operationId: accountsGetAccountsAccountId
-      parameters:
-        - $ref: '#/components/parameters/x-brand-id'
-        - $ref: '#/components/parameters/x-correlation-id'
-        - $ref: '#/components/parameters/accountId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RequestWithConsent'
+              $ref: '#/components/schemas/RequestWithConsentAndRequestMetaAndAccountId'
       responses:
         '200':
           $ref: '#/components/responses/OKResponseAccountIdentification'
@@ -233,23 +219,19 @@ paths:
           $ref: '#/components/responses/SiteIsOverloaded'
         default:
           $ref: '#/components/responses/Default'
-  '/accounts/{accountId}/balances':
+  /balances:
     post:
       tags:
         - Accounts
       summary: Obtém os saldos da conta identificada por accountId.
       operationId: accountsGetAccountsAccountIdBalances
       description: 'Método para obter os saldos da conta de depósito à vista, poupança ou pagamento pré-paga identificada por accountId mantida pelo cliente na instituição transmissora.'
-      parameters:
-        - $ref: '#/components/parameters/x-brand-id'
-        - $ref: '#/components/parameters/x-correlation-id'
-        - $ref: '#/components/parameters/accountId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RequestWithConsent'
+              $ref: '#/components/schemas/RequestWithConsentAndRequestMetaAndAccountId'
       responses:
         '200':
           $ref: '#/components/responses/OKResponseAccountBalances'
@@ -279,29 +261,19 @@ paths:
           $ref: '#/components/responses/SiteIsOverloaded'
         default:
           $ref: '#/components/responses/Default'
-  '/accounts/{accountId}/transactions':
+  /transactions:
     post:
       tags:
         - Accounts
       summary: Obtém a lista de transações da conta identificada por accountId.
       operationId: accountsGetAccountsAccountIdTransactions
       description: Método para obter a lista de transações da conta de depósito à vista, poupança ou pagamento pré-paga identificada por accountId mantida pelo cliente na instituição transmissora. É permitida uma consulta máxima que se estenda em 12 meses no passado mais 12 meses no futuro.
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-        - $ref: '#/components/parameters/x-brand-id'
-        - $ref: '#/components/parameters/x-correlation-id'
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/pageSize'
-        - $ref: '#/components/parameters/fromBookingDate'
-        - $ref: '#/components/parameters/toBookingDate'
-        - $ref: '#/components/parameters/creditDebitIndicator'
-        - $ref: '#/components/parameters/pagination-key'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RequestWithConsent'
+              $ref: '#/components/schemas/RequestTransactions'
       responses:
         '200':
           $ref: '#/components/responses/OKResponseAccountTransactions'
@@ -331,29 +303,19 @@ paths:
           $ref: '#/components/responses/SiteIsOverloaded'
         default:
           $ref: '#/components/responses/Default'
-  '/accounts/{accountId}/transactions-current':
+  /transactions-current:
     post:
       tags:
         - Accounts
       summary: Obtém a lista de transações recentes (últimos 7 dias) da conta identificada por accountId.
       operationId: accountsGetAccountsAccountIdTransactionsCurrent
       description: Método para obter a lista de transações da conta de depósito à vista, poupança ou pagamento pré-paga identificada por accountId mantida pelo cliente na instituição transmissora. É permitida uma consulta máxima que se estenda em 7 dias no passado mais 12 meses no futuro.
-      parameters:
-        - $ref: '#/components/parameters/accountId'
-        - $ref: '#/components/parameters/x-brand-id'
-        - $ref: '#/components/parameters/x-correlation-id'
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/pageSize'
-        - $ref: '#/components/parameters/fromBookingDateMaxLimited'
-        - $ref: '#/components/parameters/toBookingDateMaxLimited'
-        - $ref: '#/components/parameters/creditDebitIndicator'
-        - $ref: '#/components/parameters/pagination-key'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RequestWithConsent'
+              $ref: '#/components/schemas/RequestTransactionsCurrent'
       responses:
         '200':
           $ref: '#/components/responses/OKResponseAccountTransactions'
@@ -383,23 +345,19 @@ paths:
           $ref: '#/components/responses/SiteIsOverloaded'
         default:
           $ref: '#/components/responses/Default'
-  '/accounts/{accountId}/overdraft-limits':
+  /overdraft-limits:
     post:
       tags:
         - Accounts
       summary: Obtém os limites da conta identificada por accountId.
       operationId: accountsGetAccountsAccountIdOverdraftLimits
       description: Método para obter os limites da conta de depósito à vista, poupança ou pagamento pré-paga identificada por accountId mantida pelo cliente na instituição transmissora. Para as instituições financeiras transmissoras que possuam contas sem limites associados devem retornar HTTP Status 200 com o objeto “data” vazio, sem nenhum atributo interno.
-      parameters:
-        - $ref: '#/components/parameters/x-brand-id'
-        - $ref: '#/components/parameters/x-correlation-id'
-        - $ref: '#/components/parameters/accountId'
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RequestWithConsent'
+              $ref: '#/components/schemas/RequestWithConsentAndRequestMetaAndAccountId'
       responses:
         '200':
           $ref: '#/components/responses/OKResponseAccountOverdraftLimits'
@@ -639,12 +597,7 @@ components:
           maxLength: 1
           example: '4'
         accountId:
-          type: string
-          description: 'Identifica de forma única  a conta do cliente, mantendo as regras de imutabilidade dentro da instituição transmissora.'
-          pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
-          maxLength: 100
-          minLength: 1
-          example: '92792126019929279212650822221989319252576'
+          $ref: '#/components/schemas/LegacyId'
     AccountIdentificationData:
       type: object
       description: |
@@ -721,15 +674,7 @@ components:
         - transactionDateTime
       properties:
         transactionId:
-          type: string
-          description: |
-            Código ou identificador único prestado pela instituição que mantém a conta para representar a transação individual. 
-            O ideal é que o `transactionId` seja imutável. 
-            No entanto, o `transactionId` deve obedecer, no mínimo, as regras de imutabilidade propostas conforme tabela “Data de imutabilidade por tipo de transação” presente nas orientações desta API.
-          maxLength: 100
-          minLength: 1
-          pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
-          example: TXpRMU9UQTROMWhZV2xSU1FUazJSMDl
+          $ref: '#/components/schemas/LegacyId'
         completedAuthorisedPaymentType:
           $ref: '#/components/schemas/EnumCompletedAuthorisedPaymentIndicator'
         creditDebitType:
@@ -980,12 +925,7 @@ components:
                   - FUND
                 example: PAYMENT
               resourceLegacyId:
-                type: string
-                description: 'Identifica de forma única o recurso do cliente, mantendo as regras de imutabilidade dentro da instituição transmissora.'
-                pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
-                maxLength: 100
-                minLength: 1
-                example: '92792126019929279212650822221989319252576'
+                $ref: '#/components/schemas/LegacyId'
               authorizers:
                 deprecated: true
                 description: |
@@ -1178,13 +1118,117 @@ components:
           format: int32
           description: Número total de páginas no resultado
           example: 1
-    RequestWithConsent:
+    RequestMeta:
+      type: object
+      description: Objeto que contém dados referentes ao contexto no qual o request for recebido.
+      required:
+        - correlationId
+        - brandId
+      properties:
+        correlationId:
+          type: string
+          description: UUID que identifica o correlation ID da requisição realizada. Deve ser propagado para todas as chamadas feitas entre sistemas e logado sempre que possível para facilitar o trace de erros
+          pattern: >-
+            ^(localID:)?[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+          example: localID:97623ed1-4732-4bf2-8d4b-ae7aced5443b
+        brandId:
+          type: string
+          description: Identificador da marca reportada pelo participante do Open Finance
+          example: cbanco
+          minLength: 1
+          maxLength: 50
+      additionalProperties: false
+    RequestWithConsentAndRequestMeta:
       type: object
       required:
         - consent
+        - requestMeta
       properties:
         consent:
           $ref: '#/components/schemas/ConsentDataSharing'
+        requestMeta:
+          $ref: '#/components/schemas/RequestMeta'
+    RequestWithConsentAndRequestMetaAndPagination:
+      type: object
+      required:
+        - consent
+        - requestMeta
+      properties:
+        consent:
+          $ref: '#/components/schemas/ConsentDataSharing'
+        requestMeta:
+          $ref: '#/components/schemas/RequestMeta'
+        page:
+          $ref: '#/components/schemas/Page'
+        pageSize:
+          $ref: '#/components/schemas/PageSize'
+        accountType:
+          $ref: '#/components/schemas/EnumAccountType'
+        pagination-key:
+          $ref: '#/components/schemas/PaginationKey'
+    RequestWithConsentAndRequestMetaAndAccountId:
+      type: object
+      required:
+        - consent
+        - requestMeta
+        - accountId
+      properties:
+        consent:
+          $ref: '#/components/schemas/ConsentDataSharing'
+        requestMeta:
+          $ref: '#/components/schemas/RequestMeta'
+        accountId:
+          $ref: '#/components/schemas/LegacyId'
+    RequestTransactions:
+      type: object
+      required:
+        - consent
+        - requestMeta
+        - accountId
+      properties:
+        consent:
+          $ref: '#/components/schemas/ConsentDataSharing'
+        requestMeta:
+          $ref: '#/components/schemas/RequestMeta'
+        accountId:
+          $ref: '#/components/schemas/LegacyId'
+        page:
+          $ref: '#/components/schemas/Page'
+        pageSize:
+          $ref: '#/components/schemas/PageSize'
+        fromBookingDate:
+          $ref: '#/components/schemas/FromBookingDate'
+        toBookingDate:
+          $ref: '#/components/schemas/ToBookingDate'
+        creditDebitIndicator:
+          $ref: '#/components/schemas/EnumCreditDebitIndicator'
+        pagination-key:
+          $ref: '#/components/schemas/PaginationKey'
+    RequestTransactionsCurrent:
+      type: object
+      required:
+        - consent
+        - requestMeta
+        - accountId
+      properties:
+        consent:
+          $ref: '#/components/schemas/ConsentDataSharing'
+        requestMeta:
+          $ref: '#/components/schemas/RequestMeta'
+        accountId:
+          $ref: '#/components/schemas/LegacyId'
+        page:
+          $ref: '#/components/schemas/Page'
+        pageSize:
+          $ref: '#/components/schemas/PageSize'
+        fromBookingDate:
+          $ref: '#/components/schemas/FromBookingDateMaxLimited'
+        toBookingDate:
+          $ref: '#/components/schemas/ToBookingDateMaxLimited'
+        creditDebitIndicator:
+          $ref: '#/components/schemas/EnumCreditDebitIndicator'
+        pagination-key:
+          $ref: '#/components/schemas/PaginationKey'
     ResponseAccountDiscovery:
       type: object
       required:
@@ -1224,12 +1268,7 @@ components:
                         - key
                         - value
                   resourceLegacyId:
-                    type: string
-                    description: 'Identifica de forma única o recurso do cliente, mantendo as regras de imutabilidade dentro da instituição transmissora.'
-                    pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
-                    maxLength: 100
-                    minLength: 1
-                    example: '92792126019929279212650822221989319252576'
+                    $ref: '#/components/schemas/LegacyId'
                   resourceBalanceCurrency:
                     description: |
                       Moeda do saldo do recurso. Opcional para apresentação na seleção do
@@ -1359,134 +1398,87 @@ components:
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 2048
-  parameters:
-    accountId:
-      name: accountId
-      in: path
-      description: 'Identificador da conta de depósito à vista, de poupança ou de pagamento pré-paga.'
-      required: true
-      schema:
-        type: string
-        pattern: '^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$'
-        maxLength: 100
-    accountType:
-      name: accountType
-      description: 'Tipos de contas. Modalidades tradicionais previstas pela Resolução 4.753, não contemplando contas vinculadas, conta de domiciliados no exterior, contas em moedas estrangeiras e conta correspondente moeda eletrônica. Vide Enum.'
-      required: false
-      in: query
-      schema:
-        $ref: '#/components/schemas/EnumAccountType'
-    x-brand-id:
-      name: x-brand-id
-      in: header
-      description: Identificador da marca reportada pelo participante do Open Finance
-      required: true
-      schema:
-        type: string
-        example: cbanco
-        minLength: 1
-        maxLength: 50
-    x-correlation-id:
-      name: x-correlation-id
-      in: header
-      description: |
-                UUID que identifica o correlation ID da requisição realizada. Deve ser
-                propagado para todas as chamadas feitas entre sistemas e logado sempre
-                que possível para facilitar o trace de erros
-      required: true
-      schema:
-        type: string
-        format: uuid
-        example: 97623ed1-4732-4bf2-8d4b-ae7aced5443b
-    creditDebitIndicator:
-      name: creditDebitIndicator
-      description: Indicador do tipo de lançamento
-      required: false
-      in: query
-      schema:
-        $ref: '#/components/schemas/EnumCreditDebitIndicator'
-    fromBookingDate:
-      name: fromBookingDate
+    LegacyId:
+      description: >-
+        Array de chave e valor com a chave de identificação do recurso no sistema
+        de origem (legado), permitindo chaves compostas
+      type: array
+      items:
+        type: object
+        required:
+          - key
+          - value
+        properties:
+          key:
+            description: Nome do campo do identificador no sistema de origem
+            type: string
+            example: internalResourceId
+          value:
+            description: Valor do campo do identificador no sistema de origem
+            type: string
+            example: '1234'
+        additionalProperties: false
+      minItems: 1
+      maxItems: 10
+    FromBookingDate:
       description: |
         Data inicial de filtragem.
       
         [Restrição] Deve obrigatoriamente ser enviado caso o campo toBookingDate seja informado. Caso não seja informado, deve ser assumido o dia atual.
-      required: false
-      in: query
-      schema:
-        type: string
-        maxLength: 10
-        format: date
-        example: '2021-05-21'
-    fromBookingDateMaxLimited:
-      in: query
-      name: fromBookingDate
+      type: string
+      maxLength: 10
+      format: date
+      example: '2021-05-21'
+    FromBookingDateMaxLimited:
       description: |
         Data inicial de filtragem. O período máximo utilizado no filtro é de 7 dias inclusive (D-6).   
 
         [Restrição] Deve obrigatoriamente ser enviado caso o campo toBookingDate seja informado. 
         Caso não seja informado, deve ser assumido o dia atual.
-      required: false
-      schema:
-        type: string
-        maxLength: 10
-        format: date
-        example: '2021-05-21'
-    toBookingDateMaxLimited:
-      in: query
-      name: toBookingDate
+      type: string
+      maxLength: 10
+      format: date
+      example: '2021-05-21'
+    ToBookingDateMaxLimited:
       description: |
         Data final de filtragem. O período máximo utilizado no filtro é de 7 dias inclusive (D-6).   
 
         [Restrição] Deve obrigatoriamente ser enviado caso o campo fromBookingDate seja informado. 
         Caso não seja informado, deve ser assumido o dia atual.
-      required: false
-      schema:
-        type: string
-        maxLength: 10
-        format: date
-        example: '2021-05-21'
-    pagination-key:
-      name: pagination-key
-      in: query
-      description: 'Identificador de rechamada, utilizado para evitar a contagem de chamadas ao endpoint durante a paginação.'
-      schema:
-        type: string
-        maxLength: 2048
-        pattern: '[\w\W\s]*'
-    page:
-      name: page
-      in: query
+      type: string
+      maxLength: 10
+      format: date
+      example: '2021-05-21'
+    PaginationKey:
+      description: >-
+        Identificador de rechamada, utilizado para evitar a contagem de chamadas
+        ao endpoint durante a paginação.
+      type: string
+      maxLength: 2048
+      pattern: '[\w\W\s]*'
+    Page:
       description: Número da página que está sendo requisitada (o valor da primeira página é 1).
-      schema:
-        type: integer
-        default: 1
-        minimum: 1
-        maximum: 2147483647
-        format: int32
-    pageSize:
-      name: page-size
-      in: query
+      type: integer
+      default: 1
+      minimum: 1
+      maximum: 2147483647
+      format: int32
+    PageSize:
       description: Quantidade total de registros por páginas.
-      schema:
-        type: integer
-        default: 25
-        minimum: 1
-        format: int32
-        maximum: 1000
-    toBookingDate:
-      name: toBookingDate
+      type: integer
+      default: 25
+      minimum: 1
+      format: int32
+      maximum: 1000
+    ToBookingDate:
       description:
         Data final de filtragem.
 
         [Restrição] Deve obrigatoriamente ser enviado caso o campo fromBookingDate seja informado. Caso não seja informado, deve ser assumido o dia atual.
-      required: false
-      in: query
-      schema:
-        type: string
-        maxLength: 10
-        format: date
-        example: '2021-05-21'
+      type: string
+      maxLength: 10
+      format: date
+      example: '2021-05-21'
   responses:
     OKResponseAccountDiscovery:
       description: Dados de identificação das contas obtidos com sucesso.

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Non-Functional Requirements"
-parent: "Open Finance Brasil"
+parent: "Open Finance Brazil"
 nav_order: 6
 lang: "en"
 alternate_lang: "/docs/pt-br/Open-Finance/Open-Finance-Brasil/OFB-RequisitosNF/"

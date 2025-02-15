@@ -34,6 +34,13 @@ Todas as APIs compartilham algumas características importantes definidas pelo r
 
 Contratos cancelados, que tenham ido para perda ou portados, se tiverem sido compartilhados anteriormente, deverão ser sinalizados com *status UNAVAILABLE*.
 
-O detalhamento das APIs de cada modalidade de operação de crédito pode ser encontrado em sua página específica nesta documentação.
+O detalhamento das APIs de cada modalidade de operação de crédito pode ser encontrado na tabela abaixo:
+
+|API                             |Link                     |
+|--------------------------------|:-----------------------:|
+|Empréstimo                      |[Link](../../../../apis/Empréstimo.html)|
+|Financiamento                   |[Link](../../../../apis/Financiamento.html) |
+|Direitos creditórios descontados|[Link](../../../../apis/DireitosCreditórios.html)     |
+|Adiantamento a depositantes     |[Link](../../../../apis/Adiantamento.html)            |
 
 [Tabela-Crédito-OFB]: https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/320176146/Orienta+es+-+DC+Opera+es+de+cr+dito#Tabela-com-as-modalidades-e-submodalidades-das-APIs-de-opera%C3%A7%C3%B5es-de-cr%C3%A9dito

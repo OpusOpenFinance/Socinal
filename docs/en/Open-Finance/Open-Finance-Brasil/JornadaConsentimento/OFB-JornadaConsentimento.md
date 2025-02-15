@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Consent Journey"
-parent: "Open Finance Brasil"
+parent: "Open Finance Brazil"
 nav_order: 3
 lang: "en"
 alternate_lang: "/docs/pt-br/Open-Finance/Open-Finance-Brasil/JornadaConsentimento/OFB-JornadaConsentimento/"
