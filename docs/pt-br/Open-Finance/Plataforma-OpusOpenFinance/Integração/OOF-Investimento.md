@@ -27,16 +27,19 @@ Na documentação oficial do *Open Finance Brasil* há uma tabela que resume os 
 Todas as APIs compartilham algumas características importantes definidas pelo regulatório:
 
 **Tempestividade dos dados para APIs de investimento:**
+
 - Até uma hora para as APIs Renda Fixa Bancária, Renda Fixa Crédito, Títulos do Tesouro Direto e Fundos de Investimento
 - Para a API Renda Variável, devido a frequente alteração dos preços e a dinâmica de funcionamento do produto (ordens de compra e venda), serão expostas a posição e movimentações do fechamento do dia anterior (d-1).
 
 **Recursos que devem ser incluídos no compartilhamento:**
+
 - Investimentos ativos em um período de até 12 meses anterior ao inicio da vigência do consentimento
 - Investimentos que venceram, foram resgatados ou tiveram sua titularidade ou custódia transferida em um período de até 12 meses anterior ao inicio da vigência do consentimento
 - Investimento contratados durante o período de vigência do consentimento
 - Investimentos que venceram, foram resgatados ou tiveram sua titularidade ou custódia transferida durante o período de vigência do consentimento
 
 **Recursos que não devem ser incluídos no compartilhamento:**
+
 - Investimentos que venceram ou foram resgatados em um período maior que 12 meses anterior ao inicio da vigência do consentimento
 - Investimentos que pertencem a clientes que estão sob algum tipo de bloqueio conforme políticas internas das instituições
 - Investimentos com aplicação e resgate automático

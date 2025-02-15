@@ -1,0 +1,2073 @@
+openapi: 3.0.0
+info:
+  title: API Credit-cards-accounts - Integration Layer - OPUS Open Finance Brasil
+  description: |
+    Integration layer API for post-paid payment accounts between the Transmitting Institution and Opus Open Finance Brasil.
+    This API returns information about post-paid payment accounts held by customers at transmitting institutions, including data such as name, product, brand, credit limits, information on payment transactions made, and invoices.
+
+    It does not distinguish between individuals and legal entities.
+
+    # Guidelines
+
+    ## Immutability date by transaction type
+    The credit card transaction identifier is mandatory in Open Finance Brasil.  According to the transaction type, a unique, stable, and immutable identifier must be sent, as shown in the table below.
+    ```
+      |-------------------|-------------------------|-----------------------|
+      | Transaction Type  | Mandatory Date          | Immutability Date     |
+      |-------------------|-------------------------|-----------------------|
+      | PAYMENT           | D0                      | Closed Invoice        |
+      |-------------------|-------------------------|-----------------------|
+      | FEE               | D0                      | Closed Invoice        |
+      |-------------------|-------------------------|-----------------------|
+      | CREDIT_OPERATIONS | D0                      | Closed Invoice        |
+      |-------------------|-------------------------|-----------------------|
+      | REFUND            | D0                      | Closed Invoice        |
+      |-------------------|-------------------------|-----------------------|
+      | CASHBACK          | D0                      | Closed Invoice        |
+      |-------------------|-------------------------|-----------------------|
+      | OTHERS            | D0                      | Closed Invoice        |
+      |-------------------|-------------------------|-----------------------|
+      ```
+  version: 0.1.0-alpha
+tags:
+  - name: Credit Card
+    description: Operations for listing Credit Card information
+paths:
+  /account-discovery:
+    post:
+      tags:
+        - Credit Card
+      summary: 'Gets a list of resources representing all post-paid payment accounts available for the customer to choose to consent.'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestWithConsent'
+      operationId: 'discoverCreditCardAccounts'
+      description: 'Method to obtain the list of post-paid payment accounts held by the customer at the transmitting institution and for which they can provide consent.'
+      parameters:
+        - $ref: '#/components/parameters/x-brand-id'
+        - $ref: '#/components/parameters/x-correlation-id'
+      responses:
+        '200':
+          $ref: '#/components/responses/OKResponseCreditCardAccountDiscovery'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '423':
+          $ref: '#/components/responses/Locked'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+        '529':
+          $ref: '#/components/responses/SiteIsOverloaded'
+        default:
+          $ref: '#/components/responses/Default'
+  /accounts:
+    post:
+      tags:
+        - Credit Card
+      summary: Set of information of post-paid payment accounts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestWithConsent'
+      operationId: creditCardsGetAccounts
+      description: Method to obtain the list of post-paid payment accounts held by the customer at the transmitting institution and for which they have provided consent.
+      parameters:
+        - $ref: '#/components/parameters/x-brand-id'
+        - $ref: '#/components/parameters/x-correlation-id'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/pagination-key'
+      responses:
+        '200':
+          $ref: '#/components/responses/OKResponseCreditCardAccountsList'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '423':
+          $ref: '#/components/responses/Locked'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+        '529':
+          $ref: '#/components/responses/SiteIsOverloaded'
+        default:
+          $ref: '#/components/responses/Default'
+  '/accounts/{creditCardAccountId}':
+    post:
+      tags:
+        - Credit Card
+      summary: Gets the identification data of the account identified by creditCardAccountId.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestWithConsent'
+      operationId: creditCardsGetAccountsCreditCardAccountId
+      description: Method to obtain the identification data of the post-paid payment account identified by creditCardAccountId held by the customer at the transmitting institution.
+      parameters:
+        - $ref: '#/components/parameters/x-brand-id'
+        - $ref: '#/components/parameters/x-correlation-id'
+        - $ref: '#/components/parameters/creditCardAccountId'
+      responses:
+        '200':
+          $ref: '#/components/responses/OKResponseCreditCardAccountsIdentification'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '423':
+          $ref: '#/components/responses/Locked'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+        '529':
+          $ref: '#/components/responses/SiteIsOverloaded'
+        default:
+          $ref: '#/components/responses/Default'
+  '/accounts/{creditCardAccountId}/bills':
+    post:
+      tags:
+        - Credit Card
+      summary: Gets the list of bills for the account identified by creditCardAccountId.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestWithConsent'
+      description: |
+        Method to obtain the list of bills for the post-paid payment account identified by creditCardAccountId held by the customer at the transmitting institution.
+        Only a closed bill should be reported.
+        Any payment should be counted towards the last closed bill.
+      operationId: creditCardsGetAccountsCreditCardAccountIdBills
+      parameters:
+        - $ref: '#/components/parameters/x-brand-id'
+        - $ref: '#/components/parameters/x-correlation-id'
+        - $ref: '#/components/parameters/creditCardAccountId'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/pagination-key'
+        - $ref: '#/components/parameters/fromDueDate'
+        - $ref: '#/components/parameters/toDueDate'
+      responses:
+        '200':
+          $ref: '#/components/responses/OKResponseCreditCardAccountsBills'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '423':
+          $ref: '#/components/responses/Locked'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+        '529':
+          $ref: '#/components/responses/SiteIsOverloaded'
+        default:
+          $ref: '#/components/responses/Default'
+  '/accounts/{creditCardAccountId}/bills/{billId}/transactions':
+    post:
+      tags:
+        - Credit Card
+      summary: Gets the list of transactions for the account identified by creditCardAccountId and billId.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestWithConsent'
+      operationId: creditCardsGetAccountsCreditCardAccountIdBillsBillIdTransactions
+      description: |
+        Method to obtain the list of transactions for the post-paid payment account identified by creditCardAccountId and billId held by the customer at the transmitting institution.
+        The list to be returned refers to transactions after reconciliation.
+      parameters:
+        - $ref: '#/components/parameters/x-brand-id'
+        - $ref: '#/components/parameters/x-correlation-id'
+        - $ref: '#/components/parameters/creditCardAccountId'
+        - $ref: '#/components/parameters/billId'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/pagination-key'
+        - $ref: '#/components/parameters/fromTransactionDate'
+        - $ref: '#/components/parameters/toTransactionDate'
+        - $ref: '#/components/parameters/creditCardTransactionType'
+        - $ref: '#/components/parameters/creditCardPayeeMCC'
+      responses:
+        '200':
+          $ref: '#/components/responses/OKResponseCreditCardAccountsBillsTransactions'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '423':
+          $ref: '#/components/responses/Locked'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+        '529':
+          $ref: '#/components/responses/SiteIsOverloaded'
+        default:
+          $ref: '#/components/responses/Default'
+  '/accounts/{creditCardAccountId}/limits':
+    post:
+      tags:
+        - Credit Card
+      summary: Gets the limits of the account identified by creditCardAccountId.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestWithConsent'
+      operationId: creditCardsGetAccountsCreditCardAccountIdLimits
+      description: Method to obtain the limits of the post-paid payment account identified by creditCardAccountId held by the customer at the transmitting institution.
+      parameters:
+        - $ref: '#/components/parameters/x-brand-id'
+        - $ref: '#/components/parameters/x-correlation-id'
+        - $ref: '#/components/parameters/creditCardAccountId'
+      responses:
+        '200':
+          $ref: '#/components/responses/OKResponseCreditCardAccountsLimits'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '423':
+          $ref: '#/components/responses/Locked'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+        '529':
+          $ref: '#/components/responses/SiteIsOverloaded'
+        default:
+          $ref: '#/components/responses/Default'
+  '/accounts/{creditCardAccountId}/transactions':
+    post:
+      tags:
+        - Credit Card
+      summary: Gets the list of transactions for the account identified by creditCardAccountId.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestWithConsent'
+      operationId: creditCardsGetAccountsCreditCardAccountIdTransactions
+      description: |
+        Method to obtain the historical transaction list (last 12 months, or a subset of this period) of the post-paid payment account identified by creditCardAccountId held by the customer at the transmitting institution.
+        The list to be returned refers to transactions after reconciliation.
+      parameters:
+        - $ref: '#/components/parameters/x-brand-id'
+        - $ref: '#/components/parameters/x-correlation-id'
+        - $ref: '#/components/parameters/creditCardAccountId'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/pagination-key'
+        - $ref: '#/components/parameters/fromTransactionDate'
+        - $ref: '#/components/parameters/toTransactionDate'
+        - $ref: '#/components/parameters/creditCardTransactionType'
+        - $ref: '#/components/parameters/creditCardPayeeMCC'
+      responses:
+        '200':
+          $ref: '#/components/responses/OKResponseCreditCardAccountsTransactions'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '423':
+          $ref: '#/components/responses/Locked'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+        '529':
+          $ref: '#/components/responses/SiteIsOverloaded'
+        default:
+          $ref: '#/components/responses/Default'
+  '/accounts/{creditCardAccountId}/transactions-current':
+    post:
+      tags:
+        - Credit Card
+      summary: Gets the list of recent transactions (last 7 days) for the account identified by creditCardAccountId.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestWithConsent'
+      operationId: creditCardsGetAccountsCreditCardAccountIdTransactionsCurrent
+      description: |
+        Method to obtain the list of recent transactions (last 7 days) of the post-paid payment account identified by creditCardAccountId held by the customer at the transmitting institution.
+        The list to be returned refers to transactions after reconciliation.
+      parameters:
+        - $ref: '#/components/parameters/x-brand-id'
+        - $ref: '#/components/parameters/x-correlation-id'
+        - $ref: '#/components/parameters/creditCardAccountId'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/pagination-key'
+        - $ref: '#/components/parameters/fromTransactionDateMaxLimited'
+        - $ref: '#/components/parameters/toTransactionDateMaxLimited'
+        - $ref: '#/components/parameters/creditCardTransactionType'
+        - $ref: '#/components/parameters/creditCardPayeeMCC'
+      responses:
+        '200':
+          $ref: '#/components/responses/OKResponseCreditCardAccountsTransactions'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '423':
+          $ref: '#/components/responses/Locked'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+        '529':
+          $ref: '#/components/responses/SiteIsOverloaded'
+        default:
+          $ref: '#/components/responses/Default'
+components:
+  schemas:
+    CreditCardAccountsTransactionAmount:
+      type: object
+      description: |
+        Original transaction amount. Expressed as a monetary value with a minimum of 2 decimal places and a maximum of 4 decimal places. It should always be filled with the original transaction value regardless of nationality, without converting it.
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: string
+          format: double
+          pattern: '^\d{1,15}\.\d{2,4}$'
+          maxLength: 20
+          minLength: 4
+          example: '1000.0400'
+          description: Value related to the object.
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          maxLength: 3
+          description: 'Currency referring to the monetary value, following the ISO-4217 model.'
+          example: BRL
+    CreditCardAccountsTransactionBrazilianAmount:
+      type: object
+      description: |
+        Transaction amount expressed as a monetary value with a minimum of 2 decimal places and a maximum of 4 decimal places, in Brazilian currency. It should be the amount converted to BRL (in case of an international purchase) or the same value as amount (in case of a domestic purchase).
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: string
+          format: double
+          pattern: '^\d{1,15}\.\d{2,4}$'
+          maxLength: 20
+          minLength: 4
+          example: '1000.0400'
+          description: Value related to the object.
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          maxLength: 3
+          description: 'Currency referring to the monetary value, following the ISO-4217 model.'
+          example: BRL
+    CreditCardsAccountsIdentificationData:
+      type: object
+      description: Set of information regarding the identification of the post-paid payment account.
+      required:
+        - name
+        - productType
+        - creditCardNetwork
+        - paymentMethod
+      properties:
+        name:
+          type: string
+          pattern: '[\w\W\s]*'
+          description: |
+            Name/Identification of the post-paid payment account (card). According to CIRCULAR No. 3,680, BCB, 2013: 'post-paid payment account: intended for the execution of payment transactions that do not depend on the prior provision of funds'.
+          maxLength: 50
+          example: University Card
+        productType:
+          $ref: '#/components/schemas/EnumCreditCardAccountsProductType'
+        productAdditionalInfo:
+          type: string
+          pattern: '[\w\W\s]*'
+          description: Additional information if Card type is 'OTHERS'
+          maxLength: 50
+          example: GOLD_INTERNATIONAL
+        creditCardNetwork:
+          $ref: '#/components/schemas/EnumCreditCardAccountNetwork'
+        networkAdditionalInfo:
+          type: string
+          pattern: '[\w\W\s]*'
+          description: Free text to specify the card network category marked as 'OTHERS'.
+          maxLength: 50
+          example: AURA CARD
+        paymentMethod:
+          type: array
+          description: |
+            List of cards (e.g., virtual/additional/primary) associated with the consented card account, as available to the user in the proprietary channels.
+          items:
+            $ref: '#/components/schemas/CreditCardsAccountPaymentMethod'
+          minItems: 1
+    CreditCardAccountsBillsData:
+      type: object
+      description: Set of information regarding the list of bills associated with the post-paid payment account
+      required:
+        - billId
+        - dueDate
+        - billTotalAmount
+        - billMinimumAmount
+        - isInstalment
+        - payments
+      properties:
+        billId:
+          description: Information that identifies the bill
+          type: string
+          maxLength: 100
+          minLength: 1
+          pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
+          example: 3459087XXZTR
+        dueDate:
+          description: 'Due date of the Bill, which appears for payment by the customer'
+          type: string
+          format: date
+          maxLength: 10
+          pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+          example: '2021-05-21'
+        billTotalAmount:
+          $ref: '#/components/schemas/CreditCardsBillTotalAmount'
+        billMinimumAmount:
+          $ref: '#/components/schemas/CreditCardAccountsBillMinimumAmount'
+        isInstalment:
+          type: boolean
+          description: Indicates whether the bill allows installment payments (true) or not (false).
+          example: false
+        financeCharges:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditCardAccountsBillsFinanceCharge'
+          minItems: 1
+          description: List of charges charged on the bill
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditCardAccountsBillsPayment'
+          minItems: 0
+          description: List that shows the values related to the payments of the post-paid payment account bill
+    CreditCardAccountsBillsFinanceCharge:
+      type: object
+      required:
+        - type
+        - amount
+        - currency
+      properties:
+        type:
+          $ref: '#/components/schemas/EnumCreditCardAccountsFinanceChargeType'
+        additionalInfo:
+          type: string
+          maxLength: 140
+          pattern: '[\w\W\s]*'
+          example: Additional Information
+          description: 'Free field, mandatory if the charge type ''OTHERS'' is selected'
+        amount:
+          type: string
+          format: double
+          maxLength: 20
+          minLength: 4
+          pattern: '^\d{1,15}\.\d{2,4}$'
+          example: '100000.0400'
+          description: Amount charged for the charge. Expressed as a monetary value with a minimum of 2 decimal places and a maximum of 4 decimal places.
+        currency:
+          type: string
+          maxLength: 3
+          pattern: '^(\w{3}){1}$'
+          example: BRL
+          description: |
+            Currency referring to the amount charged for the charge, according to the ISO-4217 model. e.g. 'BRL'
+            All reported balances are represented with the current currency of Brazil.
+    CreditCardAccountsBillsPayment:
+      type: object
+      required:
+        - valueType
+        - paymentDate
+        - paymentMode
+        - amount
+        - currency
+      properties:
+        valueType:
+          $ref: '#/components/schemas/EnumCreditCardAccountsBillingValueType'
+        paymentDate:
+          description: Effective date when the bill payment was made
+          type: string
+          format: date
+          maxLength: 10
+          pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+          example: '2021-05-21'
+        paymentMode:
+          $ref: '#/components/schemas/EnumCreditCardAccountsPaymentMode'
+        amount:
+          type: string
+          format: double
+          pattern: '^\d{1,15}\.\d{2,4}$'
+          maxLength: 20
+          minLength: 4
+          example: '1000.0400'
+          description: |
+            Payment amount according to valueType.
+            Expressed as a monetary value with a minimum of 2 decimal places and a maximum of 4 decimal places.
+            The field cannot assume a negative value because it is a payment.
+        currency:
+          type: string
+          pattern: '^(\w{3}){1}$'
+          maxLength: 3
+          description: |
+            Currency referring to the bill payment amount, according to the ISO-4217 model. e.g. 'BRL' All reported values are represented with the current currency of Brazil
+          example: BRL
+    CreditCardAccountsData:
+      type: object
+      description: Set of information of post-paid payment accounts
+      required:
+        - brandName
+        - companyCnpj
+        - name
+        - productType
+        - creditCardNetwork
+        - creditCardAccountId
+      properties:
+        creditCardAccountId:
+          type: string
+          description: 'Uniquely identifies the customer''s post-paid payment account, maintaining immutability rules within the transmitting institution.'
+          maxLength: 100
+          minLength: 1
+          pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
+          example: XXZTR3459087
+        brandName:
+          type: string
+          description: 'Brand name reported by the participant in Open Finance. It is recommended to use, whenever possible, the same brand name assigned in the Customer Friendly Server Name (Authorization Server) directory field.'
+          pattern: '[\w\W\s]*'
+          maxLength: 80
+          example: Organization A
+        companyCnpj:
+          type: string
+          description: 'Full CNPJ number of the institution responsible for the Registration - the CNPJ corresponds to the registration number in the Legal Entity Registry. It should only have the CNPJ numbers, without a mask'
+          pattern: '^\d{14}$'
+          maxLength: 14
+          example: '21128159000166'
+        name:
+          type: string
+          description: 'Name/Identification of the post-paid payment account (card). According to CIRCULAR No. 3,680, BCB, 2013: ''post-paid payment account: intended for the execution of payment transactions that do not depend on the prior provision of funds'''
+          pattern: '[\w\W\s]*'
+          maxLength: 50
+          example: University Card
+        productType:
+          $ref: '#/components/schemas/EnumCreditCardAccountsProductType'
+        productAdditionalInfo:
+          type: string
+          description: Additional information if Card type is 'OTHERS'
+          pattern: '[\w\W\s]*'
+          maxLength: 50
+        creditCardNetwork:
+          $ref: '#/components/schemas/EnumCreditCardAccountNetwork'
+        networkAdditionalInfo:
+          type: string
+          description: Free text to specify the card network category marked as 'OTHERS'
+          pattern: '[\w\W\s]*'
+          maxLength: 50
+          example: AURA CARD
+    CreditCardAccountsLimitsData:
+      type: object
+      description: Set of information regarding the limits of the post-paid payment account.
+      required:
+        - creditLineLimitType
+        - consolidationType
+        - identificationNumber
+        - isLimitFlexible
+        - usedAmount
+      properties:
+        creditLineLimitType:
+          $ref: '#/components/schemas/EnumCreditCardAccountsLineLimitType'
+        consolidationType:
+          $ref: '#/components/schemas/EnumCreditCardAccountsConsolidationType'
+        identificationNumber:
+          type: string
+          description: |
+            Card identification number: corresponds to the last 4 digits of the card for individuals, or fill in with an identifier for legal entities, with the characteristics defined for IDs in Open Finance.
+          maxLength: 100
+          minLength: 1
+          pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
+          example: '4453'
+        lineName:
+          type: string
+          enum:
+            - CREDITO_A_VISTA  /* Spot Credit */
+            - CREDITO_PARCELADO /* Installment Credit */
+            - SAQUE_CREDITO_BRASIL /* Credit Cash Withdrawal Brazil */
+            - SAQUE_CREDITO_EXTERIOR /* Credit Cash Withdrawal Abroad */
+            - EMPRESTIMO_CARTAO_CONSIGNADO /* Consigned Card Loan */
+            - OUTROS /* Others */
+          example: CREDITO_A_VISTA
+        lineNameAdditionalInfo:
+          type: string
+          maxLength: 50
+          pattern: '[\w\W\s]*'
+          example: Additional and complementary information.
+          description: Mandatory field if 'OTHERS' is selected in lineName.
+        isLimitFlexible:
+          type: boolean
+          description: True = Indicates that the card account has a flexible or "unlimited" total limit. False = Indicates that the card account has a predetermined limit displayed on the channel for the customer.
+          example: true
+        limitAmount:
+          $ref: '#/components/schemas/CreditCardsLimitAmount'
+        usedAmount:
+          $ref: '#/components/schemas/CreditCardsUsedAmount'
+        availableAmount:
+          $ref: '#/components/schemas/CreditCardsAvailableAmount'
+        customizedLimitAmount:
+          type: object
+          description: |
+            Total amount of the limit customized by the customer in the institution's electronic channels. This object is mandatory in cases where the institution allows the customer to change their limit.
+          required:
+            - amount
+            - currency
+          properties:
+            amount:
+              type: string
+              format: double
+              pattern: '^\d{1,15}\.\d{2,4}$'
+              maxLength: 20
+              minLength: 4
+              example: '1000.0400'
+              description: |
+                Total amount of the reported limit expressed as a monetary value with a minimum of 2 decimal places and a maximum of 4 decimal places.
+            currency:
+              type: string
+              pattern: '^[A-Z]{3}$'
+              maxLength: 3
+              description: |
+                Currency referring to the reported limit, according to the ISO-4217 model. e.g. 'BRL.' All reported limits are represented with the current currency of Brazil.
+              example: BRL
+    CreditCardsAccountPaymentMethod:
+      type: object
+      description: Set of information related to the Payment Methods of the Post-paid Payment Account
+      required:
+        - identificationNumber
+        - isMultipleCreditCard
+      properties:
+        identificationNumber:
+          type: string
+          description: |
+            Card identification number: corresponds to the last 4 digits of the card for natural persons, or fill in with an identifier for legal entities, with the characteristics defined for IDs in
+          maxLength: 100
+          minLength: 1
+          pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
+          example: '4453'
+        isMultipleCreditCard:
+          type: boolean
+          description: |
+            Indicates whether the credit card associated with the post-paid payment account is multiple or not. Multiple cards have both credit and debit functions, and the card owner must, at the time of use, inform whether the payment is in the credit function (which leads to a future payment, through a credit card bill) or in the debit function.
+          example: true
+    CreditCardsLimitAmount:
+      type: object
+      description: |
+        Total amount of the granted limit.
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: string
+          format: double
+          pattern: '^\d{1,15}\.\d{2,4}$'
+          maxLength: 20
+          minLength: 4
+          example: '1000.0400'
+          description: |
+            Total amount of the reported limit expressed as a monetary value with a minimum of 2 decimal places and a maximum of 4 decimal places.
+
+            [Restriction] The field is mandatory if isLimitFlexible is equal to false.
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          maxLength: 3
+          description: |
+            Currency referring to the reported limit, according to the ISO-4217 model. e.g. 'BRL.'
+            All reported limits are represented with the current currency of Brazil.
+
+            [Restriction] The field is mandatory if isLimitFlexible is equal to false.
+          example: BRL
+        limitAmountReason:
+          type: string
+          pattern: '[\w\W\s]*'
+          maxLength: 200
+          description: |
+            Reason why the total amount of the reported limit is equal to zero.
+
+            [Restriction] Mandatory field when limitAmount is equal to 0.00.
+          example: The customer's profile has been reviewed and the limit needed to be reset to zero
+    CreditCardsUsedAmount:
+      type: object
+      description: Used amount of the reported limit
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: string
+          format: double
+          pattern: '^-?\d{1,15}\.\d{2,4}$'
+          maxLength: 21
+          minLength: 4
+          example: '1000.0400'
+          description: Used amount of the reported limit expressed as a monetary value with a minimum of 2 decimal places and a maximum of 4 decimal places.
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          maxLength: 3
+          description: |
+            Currency referring to the reported limit, according to the ISO-4217 model. e.g. 'BRL.'
+            All reported balances are represented with the current currency of Brazil.
+          example: BRL
+    CreditCardsAvailableAmount:
+      type: object
+      description: |
+        Available amount of the reported limit.
+      properties:
+        amount:
+          type: string
+          format: double
+          pattern: '^-?\d{1,15}\.\d{2,4}$'
+          maxLength: 21
+          minLength: 4
+          example: '1000.0400'
+          description: |
+            Available amount of the reported limit expressed as a monetary value with a minimum of 2 decimal places and a maximum of 4 decimal places.
+
+            [Restriction] The field is mandatory if isLimitFlexible is equal to false.
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          maxLength: 3
+          description: |
+            Currency referring to the reported limit, according to the ISO-4217 model. e.g. 'BRL.'
+            All reported balances are represented with the current currency of Brazil.
+
+            [Restriction] The field is mandatory if isLimitFlexible is equal to false.
+          example: BRL
+    CreditCardsBillTotalAmount:
+      type: object
+      required:
+        - amount
+        - currency
+      description: |
+        Total bill amount.
+        The field must assume a positive value for a debit balance and a negative value for a credit balance.
+      properties:
+        amount:
+          type: string
+          format: double
+          pattern: '^-?\d{1,15}\.\d{2,4}$'
+          maxLength: 21
+          minLength: 4
+          example: '1000.0400'
+          description: Total bill amount. Expressed as a monetary value with a minimum of 2 decimal places and a maximum of 4 decimal places.
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          maxLength: 3
+          description: 'Currency referring to the monetary value, following the ISO-4217 model.'
+          example: BRL
+    CreditCardAccountsBillMinimumAmount:
+      type: object
+      required:
+        - amount
+        - currency
+      description: |
+       Minimum payment amount of the bill
+      properties:
+        amount:
+          type: string
+          format: double
+          pattern: '^\d{1,15}\.\d{2,4}$'
+          maxLength: 20
+          minLength: 4
+          example: '1000.0400'
+          description: Minimum payment amount of the bill
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          maxLength: 3
+          description: 'Currency referring to the monetary value, following the ISO-4217 model.'
+          example: BRL
+    CreditCardAccountsBillsTransactions:
+      type: object
+      description: List that shows the values related to the balances of the total credit limit of the post-paid payment account
+      required:
+        - transactionId
+        - identificationNumber
+        - transactionName
+        - creditDebitType
+        - transactionType
+        - brazilianAmount
+        - amount
+        - transactionDateTime
+        - billPostDate
+      properties:
+        transactionId:
+          type: string
+          maxLength: 100
+          minLength: 1
+          pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
+          example: TXpRMU9UQTROMWhZV2xSU1FUazJSMDl
+          description: |
+            Code or unique identifier provided by the institution that maintains the account to represent the individual transaction.
+            It is expected that the `transactionId` is unique, immutable, and stable.
+        identificationNumber:
+          type: string
+          maxLength: 100
+          minLength: 1
+          pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
+          example: '4453'
+          description: |
+            Card identification number: corresponds to the last 4 digits of the card for individuals, or fill in with an identifier for legal entities, with the characteristics defined for IDs in Open Finance.
+        transactionName:
+          type: string
+          maxLength: 200
+          pattern: '[\w\W\s]*'
+          example: PGTO
+          description: Literal used by the financial institution to identify the transaction. The information presented must be the same used in the institution's electronic channels (statement and bill).
+        billId:
+          type: string
+          maxLength: 100
+          minLength: 1
+          pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
+          example: MTU0OTU1NjI2NTk4OTRmc2ZhZDRmc2Q1NmZkM
+          description: Information that identifies the bill where the reported transaction is included.
+        creditDebitType:
+          $ref: '#/components/schemas/EnumCreditDebitIndicator'
+        transactionType:
+          $ref: '#/components/schemas/EnumCreditCardTransactionType'
+        transactionalAdditionalInfo:
+          type: string
+          maxLength: 140
+          pattern: '^\S[\s\S]*$'
+          description: 'Free field, mandatory when the transaction type "OTHERS" is selected'
+        paymentType:
+          $ref: '#/components/schemas/EnumCreditCardAccountsPaymentType'
+        feeType:
+          $ref: '#/components/schemas/EnumCreditCardAccountFee'
+        feeTypeAdditionalInfo:
+          type: string
+          pattern: '^\S[\s\S]*$'
+          maxLength: 140
+          description: 'Free field, mandatory when the fee type "OTHER" is selected'
+        otherCreditsType:
+          $ref: '#/components/schemas/EnumCreditCardAccountsOtherCreditType'
+        otherCreditsAdditionalInfo:
+          type: string
+          maxLength: 50
+          pattern: '^\S[\s\S]*$'
+          description: |
+            Free field for filling in additional data for other types of credit contracted on the card.
+
+            [Restriction] Mandatory when "OTHERS" is selected in the other credit types field.
+        chargeIdentificator:
+          type: number
+          format: integer
+          description: |
+            Number of the installment being reported.
+
+            [Restriction] Mandatory if Payment Type (paymentType) selected is 'INSTALLMENT'.
+          minimum: 1
+          maximum: 999
+          example: 12
+        chargeNumber:
+          type: number
+          format: integer
+          maximum: 999
+          example: 12
+          description: |
+            Number of installments.
+
+            [Restriction] The field must be filled in when there are installments related to the transaction.
+        brazilianAmount:
+          $ref: '#/components/schemas/CreditCardAccountsTransactionBrazilianAmount'
+        amount:
+          $ref: '#/components/schemas/CreditCardAccountsTransactionAmount'
+        transactionDateTime:
+          type: string
+          format: date-time
+          maxLength: 24
+          pattern: '(^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)\.(?:[0-9]){3}Z$)'
+          example: '2016-01-29T12:29:03.374Z'
+          description: |
+            Date and time of the transaction available to customers on the institution's digital channels. At this time, it is mandatory to fill in with real data with date, hour, and minute precision, even if the institution does not display it to the customer at this level of granularity, in some situations. Thus, seconds and milliseconds can be filled with zero (0), for example: 2024-01-29T11:15:00.000Z.
+        billPostDate:
+          type: string
+          format: date
+          maxLength: 20
+          pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+          example: '2021-05-21'
+          description: Date the transaction was entered on the bill
+        payeeMCC:
+          type: number
+          format: integer
+          maximum: 2147483647
+          example: 5137
+          description: |
+            The MCC or the Merchant Category Code. MCCs are grouped according to their similarities. The MCC is used to classify the business by the type of goods or services provided. MCCs are assigned by merchant type (for example, one for hotels, one for office supply stores, etc.) or by merchant name (for example, 3000 for United Airlines).
+    CreditCardAccountsTransaction:
+      type: object
+      description: List that shows the values related to the balances of the total credit limit of the post-paid payment account
+      required:
+        - transactionId
+        - identificationNumber
+        - transactionName
+        - creditDebitType
+        - transactionType
+        - brazilianAmount
+        - amount
+        - transactionDateTime
+        - billPostDate
+      properties:
+        transactionId:
+          type: string
+          maxLength: 100
+          minLength: 1
+          pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
+          example: TXpRMU9UQTROMWhZV2xSU1FUazJSMDl
+          description: |
+            Code or unique identifier provided by the institution that maintains the account to represent the individual transaction.
+            Ideally, the `transactionId` should be immutable.
+            However, for cases where the transaction is still in processing, it is expected that the intermediate `transactionId` is stable, changing only when the transaction undergoes a change in its state.
+            For processed transactions, it is expected that the `transactionId` and other transaction data are immutable.
+            The `transactionId` must comply, at a minimum, with the immutability rules proposed according to the "Immutability date by transaction type" table present in the guidelines of this API.
+        identificationNumber:
+          type: string
+          maxLength: 100
+          minLength: 1
+          pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
+          example: '4453'
+          description: |
+            Card identification number: corresponds to the last 4 digits of the card for individuals, or fill in with an identifier for legal entities, with the characteristics defined for IDs in Open Finance.
+        transactionName:
+          type: string
+          maxLength: 200
+          pattern: '[\w\W\s]*'
+          example: PGTO
+          description: Literal used by the financial institution to identify the transaction. The information presented must be the same used in the institution's electronic channels (statement and bill).
+        billId:
+          type: string
+          maxLength: 100
+          minLength: 1
+          pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
+          example: MTU0OTU1NjI2NTk4OTRmc2ZhZDRmc2Q1NmZkM
+          description: Information that identifies the bill where the reported transaction is included. Fill in only for cases of transactions on a closed bill, that is, this field is not expected in cases of transactions on an open bill.
+        creditDebitType:
+          $ref: '#/components/schemas/EnumCreditDebitIndicator'
+        transactionType:
+          $ref: '#/components/schemas/EnumCreditCardTransactionType'
+        transactionalAdditionalInfo:
+          type: string
+          maxLength: 140
+          pattern: '^\S[\s\S]*$'
+          description: 'Free field, mandatory when the transaction type "OTHERS" is selected'
+        paymentType:
+          $ref: '#/components/schemas/EnumCreditCardAccountsPaymentType'
+        feeType:
+          $ref: '#/components/schemas/EnumCreditCardAccountFee'
+        feeTypeAdditionalInfo:
+          type: string
+          pattern: '^\S[\s\S]*$'
+          maxLength: 140
+          description: 'Free field, mandatory when the fee type "OTHER" is selected'
+        otherCreditsType:
+          $ref: '#/components/schemas/EnumCreditCardAccountsOtherCreditType'
+        otherCreditsAdditionalInfo:
+          type: string
+          maxLength: 50
+          pattern: '^\S[\s\S]*$'
+          description: |
+            Free field for filling in additional data for other types of credit contracted on the card.
+
+            [Restriction] Mandatory when "OTHERS" is selected in the other credit types field.
+        chargeIdentificator:
+          type: number
+          format: integer
+          description: |
+            Number of the installment being reported.
+
+            [Restriction] Mandatory if Payment Type (paymentType) selected is 'INSTALLMENT'.
+          minimum: 1
+          maximum: 999
+          example: 12
+        chargeNumber:
+          type: number
+          format: integer
+          maximum: 999
+          example: 12
+          description: |
+            Number of installments.
+
+            [Restriction] The field must be filled in when there are installments related to the transaction.
+        brazilianAmount:
+          $ref: '#/components/schemas/CreditCardAccountsTransactionBrazilianAmount'
+        amount:
+          $ref: '#/components/schemas/CreditCardAccountsTransactionAmount'
+        transactionDateTime:
+          type: string
+          format: date-time
+          maxLength: 24
+          pattern: '(^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)\.(?:[0-9]){3}Z$)'
+          example: '2016-01-29T12:29:03.374Z'
+          description: |
+            Date and time of the transaction available to customers on the institution's digital channels. At this time, it is mandatory to fill in with real data with date, hour, and minute precision, even if the institution does not display it to the customer at this level of granularity, in some situations. Thus, seconds and milliseconds can be filled with zero (0), for example: 2024-01-29T11:15:00.000Z.
+        billPostDate:
+          type: string
+          format: date
+          maxLength: 20
+          pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+          example: '2021-05-21'
+          description: |
+            Date the transaction was entered on the bill. Fill the field with the dummy date: 0001-01-01, only for cases where there is no date of insertion on the bill yet.
+        payeeMCC:
+          type: number
+          format: integer
+          maximum: 2147483647
+          example: 5137
+          description: |
+            The MCC or the Merchant Category Code. MCCs are grouped according to their similarities. The MCC is used to classify the business by the type of goods or services provided. MCCs are assigned by merchant type (for example, one for hotels, one for office supply stores, etc.) or by merchant name (for example, 3000 for United Airlines).
+    EnumCreditCardAccountFee:
+      type: string
+      description: |
+        Provides the types of Fees: (See Enum) Annual fee, Cash withdrawal in Brazil, Cash withdrawal abroad, Emergency credit assessment, Second copy issuance, Bill payment fee, SMS, OTHER.
+
+        [Restriction] Mandatory if Transaction Type selected is 'FEE'.
+      enum:
+        - ANUIDADE /* Annual Fee */
+        - SAQUE_CARTAO_BRASIL /* Cash Withdrawal Brazil */
+        - SAQUE_CARTAO_EXTERIOR /* Cash Withdrawal Abroad */
+        - AVALIACAO_EMERGENCIAL_CREDITO /* Emergency Credit Assessment */
+        - EMISSAO_SEGUNDA_VIA /* Second Copy Issuance */
+        - TARIFA_PAGAMENTO_CONTAS /* Bill Payment Fee */
+        - SMS
+        - OUTRA /* Other */
+      example: ANUIDADE
+    EnumCreditCardAccountsBillingValueType:
+      type: string
+      description: |
+        Provides the types of values related to the payments of the post-paid payment account bill: (See Enum)
+         - Bill payment amount with installment
+         - Bill payment amount made
+         - Other amount paid on the bill
+
+         VALOR_PAGAMENTO_FATURA_PARCELADO: When the payment corresponds to the triggering event for opening the bill installment plan
+
+         VALOR_PAGAMENTO_FATURA_REALIZADO: When the payment corresponds to the total bill amount
+
+         OUTRO_VALOR_PAGO_FATURA: Other cases
+      enum:
+        - VALOR_PAGAMENTO_FATURA_PARCELADO /* Installment Bill Payment Amount */
+        - VALOR_PAGAMENTO_FATURA_REALIZADO /* Bill Payment Amount Made */
+        - OUTRO_VALOR_PAGO_FATURA /* Other Amount Paid on Bill */
+    EnumCreditCardAccountsConsolidationType:
+      type: string
+      description: |
+        Indicator that allows informing whether the limit amount is consolidated or individual.
+
+        CONSOLIDADO: used when the card account limit is shared among all payment methods (paymentMethod) linked to the account.
+
+        INDIVIDUAL: Used when each payment method (paymentMethod) has its own segregated limit.
+      enum:
+        - CONSOLIDADO /* Consolidated */
+        - INDIVIDUAL /* Individual */
+      example: CONSOLIDADO
+    EnumCreditCardAccountsFinanceChargeType:
+      type: string
+      description: |
+        Provides the names of the Charges that
+        apply to the post-paid payment account bill. (See Enum)
+        - Remuneratory interest for late payment of the bill
+        - Fine for late payment of the bill
+        - Default interest for late payment of the bill
+        - IOF (Tax on Financial Operations)
+        - Others
+      enum:
+        - JUROS_REMUNERATORIOS_ATRASO_PAGAMENTO_FATURA /* Remuneratory Interest for Late Payment of Bill */
+        - MULTA_ATRASO_PAGAMENTO_FATURA /* Fine for Late Payment of Bill */
+        - JUROS_MORA_ATRASO_PAGAMENTO_FATURA /* Default Interest for Late Payment of Bill */
+        - IOF /* IOF (Tax on Financial Operations) */
+        - OUTROS /* Others */
+    EnumCreditCardAccountsLineLimitType:
+      type: string
+      description: |
+        Limit type indicator
+
+        LIMITE_CREDITO_TOTAL: Total credit limit applied to the card account.
+
+        LIMITE_CREDITO_MODALIDADE_OPERACAO: Credit limit by modality of this card account (observe lineName and list the applicable ones of the institution).
+      enum:
+        - LIMITE_CREDITO_TOTAL /* Total Credit Limit */
+        - LIMITE_CREDITO_MODALIDADE_OPERACAO /* Credit Limit by Operation Modality */
+      example: LIMITE_CREDITO_TOTAL
+    EnumCreditCardAccountNetwork:
+      type: string
+      description: |
+        Category of Credit Card Networks (Payment arrangement institutor).
+        The network is the holder of all rights and duties of using the brand stamped on the card, including the networks belonging to the issuers.
+      enum:
+        - VISA
+        - MASTERCARD
+        - AMERICAN_EXPRESS
+        - DINERS_CLUB
+        - HIPERCARD
+        - BANDEIRA_PROPRIA /* Own Brand */
+        - CHEQUE_ELETRONICO /* Electronic Check */
+        - ELO
+        - OUTRAS /* Others */
+      example: VISA
+    EnumCreditCardAccountsOtherCreditType:
+      type: string
+      description: |
+        Provides other types of credit contracted on the card.
+
+        [Restriction] Mandatory if the transaction type selected is 'CREDIT_OPERATIONS_CONTRACTED_CARD'.
+      enum:
+        - CREDITO_ROTATIVO /* Revolving Credit */
+        - PARCELAMENTO_FATURA /* Bill Installment */
+        - EMPRESTIMO /* Loan */
+        - OUTROS /* Others */
+      example: CREDITO_ROTATIVO
+    EnumCreditCardAccountsPaymentMode:
+      type: string
+      description: |
+       Provides the forms of payment made: (See Enum)
+        - Debit from checking account
+        - Bank slip
+        - Payroll deduction
+        - PIX (Brazilian Instant Payment System)
+      enum:
+        - DEBITO_CONTA_CORRENTE /* Debit from Checking Account */
+        - BOLETO_BANCARIO /* Bank Slip */
+        - AVERBACAO_FOLHA /* Payroll Deduction */
+        - PIX  /* PIX (Brazilian Instant Payment System) */
+    EnumCreditCardAccountsPaymentType:
+      type: string
+      description: |
+        Provides the payment types.
+
+        [Restriction] Mandatory if Transaction Type selected is 'PAYMENT'.
+      enum:
+        - A_VISTA /* Spot */
+        - A_PRAZO /* Installment */
+      example: A_VISTA
+    EnumCreditCardAccountsProductType:
+      type: string
+      description: 'Category assigned to a payment card, under a certain name, which adds a set of advantages, differentiating it according to the cardholder''s profile.'
+      enum:
+        - CLASSIC_NACIONAL /* Classic National */
+        - CLASSIC_INTERNACIONAL /* Classic International */
+        - GOLD
+        - PLATINUM
+        - INFINITE
+        - ELECTRON
+        - STANDARD_NACIONAL /* Standard National */
+        - STANDARD_INTERNACIONAL /* Standard International */
+        - ELETRONIC
+        - BLACK
+        - REDESHOP
+        - MAESTRO_MASTERCARD_MAESTRO
+        - GREEN
+        - BLUE
+        - BLUEBOX
+        - PROFISSIONAL_LIBERAL /* Liberal Professional */
+        - CHEQUE_ELETRONICO /* Electronic Check */
+        - CORPORATIVO /* Corporate */
+        - EMPRESARIAL /* Business */
+        - COMPRAS /* Purchases */
+        - BASICO_NACIONAL /* Basic National */
+        - BASICO_INTERNACIONAL /* Basic International */
+        - NANQUIM
+        - GRAFITE
+        - MAIS
+        - OUTROS /* Others */
+      example: OUTROS
+    EnumCreditCardTransactionType:
+      type: string
+      description: Provides the Transaction types
+      enum:
+        - PAGAMENTO /* Payment */
+        - TARIFA /* Fee */
+        - OPERACOES_CREDITO_CONTRATADAS_CARTAO /* Credit Operations Contracted Card */
+        - ESTORNO /* Refund */
+        - CASHBACK
+        - OUTROS /* Others */
+      example: CASHBACK
+    EnumCreditDebitIndicator:
+      type: string
+      description: |
+        Indicator of the type of entry:
+        Debit (in the statement) In a bank statement, debits, marked with the letter "D" next to the recorded value, inform the outflows of money in the checking account.
+        Credit (in the statement) In a bank statement, credits, marked with the letter "C" next to the recorded value, inform the inflows of money in the checking account.
+      enum:
+        - CREDITO /* Credit */
+        - DEBITO /* Debit */
+      example: DEBITO
+    Meta:
+      type: object
+      description: Meta information regarding the requested API.
+      required:
+        - totalRecords
+        - totalPages
+      properties:
+        totalRecords:
+          type: integer
+          format: int32
+          description: Total number of records in the result
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          description: Total number of pages in the result
+          example: 1
+    RequestWithConsent:
+      type: object
+      required:
+        - consent
+      properties:
+        consent:
+          $ref: '#/components/schemas/ConsentDataSharing'
+    ResponseCreditCardAccountsList:
+      type: object
+      required:
+        - data
+        - meta
+      properties:
+        data:
+          type: array
+          description: Set of information of post-paid payment account
+          items:
+            $ref: '#/components/schemas/CreditCardAccountsData'
+          minItems: 0
+        meta:
+          $ref: '#/components/schemas/Meta'
+    ResponseCreditCardAccountsBills:
+      type: object
+      required:
+        - data
+        - meta
+      properties:
+        data:
+          type: array
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/CreditCardAccountsBillsData'
+        meta:
+          $ref: '#/components/schemas/Meta'
+    ResponseCreditCardAccountsIdentification:
+      type: object
+      required:
+        - data
+        - meta
+      properties:
+        data:
+          $ref: '#/components/schemas/CreditCardsAccountsIdentificationData'
+        meta:
+          $ref: '#/components/schemas/Meta'
+    ResponseCreditCardAccountsLimits:
+      type: object
+      required:
+        - data
+        - meta
+      properties:
+        data:
+          type: array
+          description: |
+            [Restriction] The empty list should be interpreted as the absence of information.
+
+            Scenario of limit with zero value, must have an explicit record informing the value as zero.
+
+            Scenario of "card without limit", that is, cards in which the use of the limit is unlimited, must be informed in an explicit record with isLimitFlexible as true.
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/CreditCardAccountsLimitsData'
+        meta:
+          $ref: '#/components/schemas/Meta'
+    ResponseCreditCardAccountsTransactions:
+      type: object
+      required:
+        - data
+        - meta
+      properties:
+        data:
+          type: array
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/CreditCardAccountsTransaction'
+    ResponseError:
+      type: object
+      required:
+        - errors
+      properties:
+        errors:
+          type: array
+          minItems: 1
+          maxItems: 13
+          items:
+            type: object
+            required:
+              - code
+              - title
+              - detail
+            properties:
+              code:
+                description: Specific error code of the endpoint
+                type: string
+                pattern: '[\w\W\s]*'
+                maxLength: 255
+              title:
+                description: Human-readable title of this specific error
+                type: string
+                pattern: '[\w\W\s]*'
+                maxLength: 255
+              detail:
+                description: Human-readable description of this specific error
+                type: string
+                pattern: '[\w\W\s]*'
+                maxLength: 2048
+    ConsentDataSharing:
+      type: object
+      required:
+        - brandId
+        - creationDateTime
+        - tpp
+        - externalId
+        - loggedUser
+        - permissions
+      properties:
+        authExtraData:
+          type: array
+          description: Array of key and value with additional data from the authorizer. These data can be used as resource filters.
+          items:
+            type: object
+            required:
+              - key
+              - value
+            properties:
+              key:
+                type: string
+                example:
+                  agencia
+              value:
+                type: string
+                example:
+                  '0011'
+        consentOwner:
+          deprecated: true
+          type: array
+          description: '[Deprecated] Array of key and value with identification data referring to the consent owner.'
+          items:
+            type: object
+            required:
+              - key
+              - value
+            properties:
+              key:
+                type: string
+                example:
+                  agencia
+              value:
+                type: string
+                example:
+                  '0011'
+        brandId:
+          type: string
+          description: Identifier of the brand reported by the Open Finance participant
+          example:
+            cbanco
+          minLength: 1
+          maxLength: 50
+        creationDateTime:
+          description: Date and time the consent was created. A string with date and time as specified in RFC-3339, always using UTC timezone (UTC time format).
+          type: string
+          pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+          example:
+            '2021-05-21T08:30:00Z'
+          maxLength: 20
+        tpp:
+          type: object
+          description: Details of the TPP (Third Party Provider) that requested the consent
+          additionalProperties: false
+          required:
+            - name
+          properties:
+            name:
+              type: string
+              description: Name of the TPP that requested the consent
+              example:
+                GuiaBolsa
+              maxLength: 100
+        externalId:
+          type: string
+          description: Consent identifier used outside the Opus Open Finance platform
+          example:
+            urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf
+          maxLength: 100
+        loggedUser:
+          type: object
+          description: User (natural person) who is logged in to the Data Transmitting institution.
+          additionalProperties: false
+          required:
+            - document
+          properties:
+            document:
+              type: object
+              description: Official user identification document.
+              additionalProperties: false
+              required:
+                - identification
+                - rel
+              properties:
+                identification:
+                  type: string
+                  maxLength: 11
+                  description: Official user identification document number.
+                  example:
+                    '11111111111'
+                  pattern: ^\d{11}$
+                rel:
+                  type: string
+                  maxLength: 3
+                  description: Type of official user identification document.
+                  example:
+                    CPF
+                  pattern: ^[A-Z]{3}$
+        businessDocumentType:
+          type: object
+          description: |
+            User (legal entity) who is logged in to the institution
+            Data Transmitter.
+
+            [Restriction] Mandatory if the user logged in to the institution
+            Data Transmitter is a CNPJ (legal entity).
+          additionalProperties: false
+          required:
+            - document
+          properties:
+            document:
+              type: object
+              description: Official identification document of the legal entity holder.
+              additionalProperties: false
+              required:
+                - identification
+                - rel
+              properties:
+                identification:
+                  type: string
+                  maxLength: 14
+                  description: Official identification document number of the legal entity holder.
+                  example:
+                    '11111111111111'
+                  pattern: ^\d{14}$
+                rel:
+                  type: string
+                  maxLength: 4
+                  description: Type of official identification document of the legal entity holder.
+                  example:
+                    CNPJ
+                  pattern: ^[A-Z]{4}$
+        resources:
+          description: List of resources allowed by the customer
+          type: array
+          items:
+            type: object
+            description: Resources selected by the customer
+            required:
+              - type
+              - resourceLegacyId
+            properties:
+              type:
+                description: Resource type
+                type: string
+                enum:
+                  - ACCOUNT
+                  - CREDIT_CARD_ACCOUNT
+                  - LOAN
+                  - FINANCING
+                  - UNARRANGED_ACCOUNT_OVERDRAFT
+                  - INVOICE_FINANCING
+                  - PAYMENT
+                  - BANK_FIXED_INCOME
+                  - CREDIT_FIXED_INCOME
+                  - VARIABLE_INCOME
+                  - TREASURE_TITLE
+                  - FUND
+                example:
+                  PAYMENT
+              resourceLegacyId:
+                type: string
+                description: 'Uniquely identifies the customer''s resource, maintaining immutability rules within the transmitting institution.'
+                maxLength: 100
+                minLength: 1
+                pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
+                example: XXZTR3459087
+              authorizers:
+                deprecated: true
+                description: '[Deprecated] List of authorizers for the resource for multiple approval cases. If the resource is selected, all authorizers must accept the consent that the resource is part of'
+                type: array
+                items:
+                  type: object
+                  required:
+                    - cpf
+                    - name
+                  properties:
+                    cpf:
+                      description: Authorizer's CPF (Brazilian individual taxpayer registry number)
+                      type: string
+                      minLength: 11
+                      maxLength: 11
+                      pattern: ^\d{11}$
+                      example:
+                        '11111111111'
+                    name:
+                      description: Authorizer's name
+                      type: string
+                      example:
+                        Marco Antonio de Brito
+                minItems: 1
+              hasMultipleAuthorisers:
+                deprecated: true
+                type: boolean
+                example:
+                  'false'
+            additionalProperties: false
+          maxItems: 1000
+        expirationDateTime:
+          description: Permission expiration date and time. Mandatory, reflects the consent validity limit date. A string with date and time as specified in RFC-3339, always using UTC timezone (UTC time format).
+          type: string
+          maxLength: 20
+          pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+          example:
+            '2021-05-21T08:30:00Z'
+        permissions:
+          type: array
+          items:
+            description: Only for data sharing consents. Specifies the types of permissions to access APIs within the scope of Open Finance Brasil - Phase 2, according to the consent blocks provided by the user and necessary to access each API endpoint.
+            type: string
+            enum:
+              - ACCOUNTS_READ
+              - ACCOUNTS_BALANCES_READ
+              - ACCOUNTS_TRANSACTIONS_READ
+              - ACCOUNTS_OVERDRAFT_LIMITS_READ
+              - CREDIT_CARDS_ACCOUNTS_READ
+              - CREDIT_CARDS_ACCOUNTS_BILLS_READ
+              - CREDIT_CARDS_ACCOUNTS_BILLS_TRANSACTIONS_READ
+              - CREDIT_CARDS_ACCOUNTS_LIMITS_READ
+              - CREDIT_CARDS_ACCOUNTS_TRANSACTIONS_READ
+              - CUSTOMERS_PERSONAL_IDENTIFICATIONS_READ
+              - CUSTOMERS_PERSONAL_ADITTIONALINFO_READ
+              - CUSTOMERS_BUSINESS_IDENTIFICATIONS_READ
+              - CUSTOMERS_BUSINESS_ADITTIONALINFO_READ
+              - FINANCINGS_READ
+              - FINANCINGS_SCHEDULED_INSTALMENTS_READ
+              - FINANCINGS_PAYMENTS_READ
+              - FINANCINGS_WARRANTIES_READ
+              - INVOICE_FINANCINGS_READ
+              - INVOICE_FINANCINGS_SCHEDULED_INSTALMENTS_READ
+              - INVOICE_FINANCINGS_PAYMENTS_READ
+              - INVOICE_FINANCINGS_WARRANTIES_READ
+              - LOANS_READ
+              - LOANS_SCHEDULED_INSTALMENTS_READ
+              - LOANS_PAYMENTS_READ
+              - LOANS_WARRANTIES_READ
+              - UNARRANGED_ACCOUNTS_OVERDRAFT_READ
+              - UNARRANGED_ACCOUNTS_OVERDRAFT_SCHEDULED_INSTALMENTS_READ
+              - UNARRANGED_ACCOUNTS_OVERDRAFT_PAYMENTS_READ
+              - UNARRANGED_ACCOUNTS_OVERDRAFT_WARRANTIES_READ
+              - BANK_FIXED_INCOMES_READ
+              - CREDIT_FIXED_INCOMES_READ
+              - FUNDS_READ
+              - VARIABLE_INCOMES_READ
+              - TREASURE_TITLES_READ
+              - EXCHANGES_READ
+              - RESOURCES_READ
+          minItems: 1
+          maxItems: 30
+          example:
+            ACCOUNTS_READ
+      additionalProperties: false
+    ResponseCreditCardAccountDiscovery:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          description: Object containing the list of resources (post-paid accounts) available for the customer to consent
+          required:
+            - resources
+          properties:
+            resources:
+              description: List of resources related to the discovery
+              type: array
+              items:
+                type: object
+                required:
+                  - resourceName
+                  - resourceLegacyId
+                  - authorizers
+                properties:
+                  resourceName:
+                    description: 'Array of key and value with the resource name. This data can be used for presentation on the consent screen.'
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          description: Key of the caption of the resource name
+                          type: string
+                          example: 'resourceName'
+                        value:
+                          description: Value of the caption of the resource name
+                          type: string
+                          example: 'Checking Account 1234'
+                      required:
+                        - key
+                        - value
+                  resourceLegacyId:
+                    type: string
+                    description: 'Uniquely identifies the customer''s resource, maintaining immutability rules within the transmitting institution.'
+                    maxLength: 100
+                    minLength: 1
+                    pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
+                    example: XXZTR3459087
+                  resourceBalanceCurrency:
+                    description: Resource balance currency. Optional for presentation when selecting the resource in the payment consent.
+                    type: string
+                  resourceBalanceAmount:
+                    description: Resource balance amount. Optional for presentation when selecting the resource in the payment consent.
+                    type: number
+                  authorizers:
+                    description: '[Deprecated] List of authorizers for the resource for multiple approval cases. This field will be discontinued in future versions. As the current version requires this field, it must be filled in with at least the name and CPF of the loggedUser.'
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        cpf:
+                          description: Authorizer's CPF (Brazilian individual taxpayer registry number)
+                          type: string
+                          minLength: 11
+                          maxLength: 11
+                          pattern: ^\d{11}$
+                        name:
+                          description: Authorizer's name
+                          type: string
+                      required:
+                        - cpf
+                        - name
+                    minItems: 1
+                  defaultSelected:
+                    description: 'Indicates whether the resource should be selected by default on the consent screen. Default value: false'
+                    type: boolean
+  parameters:
+    billId:
+      name: billId
+      in: path
+      description: Bill identifier.
+      required: true
+      schema:
+        type: string
+        pattern: '^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$'
+        maxLength: 100
+    x-brand-id:
+      name: x-brand-id
+      in: header
+      description: Identifier of the brand reported by the Open Finance participant
+      required: true
+      schema:
+        type: string
+        example: cbanco
+        minLength: 1
+        maxLength: 50
+    x-correlation-id:
+      name: x-correlation-id
+      in: header
+      description: UUID that identifies the correlation ID of the request made. It must be
+            propagated to all calls made between systems and logged whenever
+            possible to facilitate error tracing
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 97623ed1-4732-4bf2-8d4b-ae7aced5443b
+    creditCardAccountId:
+      name: creditCardAccountId
+      in: path
+      description: 'Uniquely identifies the customer''s post-paid payment account, maintaining immutability rules within the transmitting institution'
+      required: true
+      schema:
+        type: string
+        pattern: '^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$'
+        maxLength: 100
+    creditCardPayeeMCC:
+      name: payeeMCC
+      description: 'MCC is the Merchant Category Code. MCCs are grouped according to their similarities'
+      required: false
+      in: query
+      schema:
+        type: number
+        maximum: 9999
+        example: 8299
+        format: int32
+    creditCardTransactionType:
+      name: transactionType
+      description: Provides the Transaction types
+      required: false
+      in: query
+      schema:
+        $ref: '#/components/schemas/EnumCreditCardTransactionType'
+    fromDueDate:
+      name: fromDueDate
+      description: Initial filtering date.
+      required: false
+      in: query
+      schema:
+        type: string
+        maxLength: 10
+        format: date
+        example: '2021-05-21'
+    fromTransactionDate:
+      name: fromTransactionDate
+      description: |
+        Initial filtering date.
+
+        [Restriction] Must be sent if the toTransactionDate field is informed. If it is not informed, the current day must be assumed.
+      required: false
+      in: query
+      schema:
+        type: string
+        maxLength: 10
+        format: date
+        example: '2021-05-21'
+    fromTransactionDateMaxLimited:
+      name: fromTransactionDate
+      description: |
+        Initial filtering date. The maximum period used in the filter is 7 days inclusive (D-6).
+
+        [Restriction] Must be sent if the toTransactionDate field is informed. If it is not informed, the current day must be assumed.
+      required: false
+      in: query
+      schema:
+        type: string
+        maxLength: 10
+        format: date
+        example: '2021-05-21'
+    page:
+      name: page
+      in: query
+      description: Number of the page being requested (the value of the first page is 1).
+      schema:
+        type: integer
+        default: 1
+        minimum: 1
+        maximum: 2147483647
+        format: int32
+    pageSize:
+      name: page-size
+      in: query
+      description: Total number of records per page.
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        format: int32
+        maximum: 1000
+    pagination-key:
+      name: pagination-key
+      in: query
+      description: 'Re-call identifier, used to avoid counting calls to the endpoint during pagination.'
+      schema:
+        type: string
+        maxLength: 2048
+        pattern: '[\w\W\s]*'
+    toDueDate:
+      name: toDueDate
+      description: Final filtering date.
+      required: false
+      in: query
+      schema:
+        type: string
+        maxLength: 10
+        format: date
+        example: '2021-05-21'
+    toTransactionDate:
+      name: toTransactionDate
+      description: |
+        Final filtering date.
+
+        [Restriction] Must be sent if the fromTransactionDate field is informed. If it is not informed, the current day must be assumed.
+      required: false
+      in: query
+      schema:
+        type: string
+        maxLength: 10
+        format: date
+        example: '2021-05-21'
+    toTransactionDateMaxLimited:
+      name: toTransactionDate
+      description: |
+        Final filtering date. The maximum period used in the filter is 7 days inclusive (D-6).
+
+        [Restriction] Must be sent if the fromTransactionDate field is informed. If it is not informed, the current day must be assumed.
+      required: false
+      in: query
+      schema:
+        type: string
+        maxLength: 10
+        format: date
+        example: '2021-05-21'
+  responses:
+    OKResponseCreditCardAccountsList:
+      description: Set of information of post-paid payment accounts
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseCreditCardAccountsList'
+    OKResponseCreditCardAccountsIdentification:
+      description: Account identification data identified by creditCardAccountId obtained successfully.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseCreditCardAccountsIdentification'
+    OKResponseCreditCardAccountsBills:
+      description: Data referring to the list of bills for the account identified by creditCardAccountId obtained successfully.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseCreditCardAccountsBills'
+    OKResponseCreditCardAccountsLimits:
+      description: Data of the limits of the account identified by creditCardAccountId obtained successfully.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseCreditCardAccountsLimits'
+    OKResponseCreditCardAccountsTransactions:
+      description: Data of the list of transactions for the identified account obtained successfully.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseCreditCardAccountsTransactions'
+    OKResponseCreditCardAccountsBillsTransactions:
+      description: Data of the list of transactions for the identified account obtained successfully.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+              - meta
+            properties:
+              data:
+                type: array
+                minItems: 0
+                items:
+                  $ref: '#/components/schemas/CreditCardAccountsBillsTransactions'
+              meta:
+                $ref: '#/components/schemas/Meta'
+    OKResponseCreditCardAccountDiscovery:
+      description: Listing of discovered account information
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseCreditCardAccountDiscovery'
+    BadRequest:
+      description: 'The request was malformed, omitting mandatory attributes, either in the payload or through attributes in the URL.'
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    Forbidden:
+      description: The token has an incorrect scope or a security policy has been violated
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    InternalServerError:
+      description: An error occurred in the API gateway or microservice
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    GatewayTimeout:
+      description: GATEWAY TIMEOUT - The request was not served within the established timeout
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    Locked:
+      description: Locked
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    MethodNotAllowed:
+      description: The consumer tried to access the resource with an unsupported method
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    NotAcceptable:
+      description: The request contained an Accept header different from the allowed media types or a character set different from UTF-8
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    NotFound:
+      description: The requested resource does not exist or has not been implemented
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    TooManyRequests:
+      description: 'The operation was refused because too many requests were made within a certain period or the global limit of concurrent requests was reached'
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    UnprocessableEntity:
+      description: 'The syntax of the request is correct, but it was not possible to process the instructions present.'
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    Unauthorized:
+      description: Missing/invalid authentication header or invalid token
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    SiteIsOverloaded:
+      description: 'The site is overloaded and the operation was refused, as the maximum global TPS limit has been reached at this time.'
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    Default:
+      description: Unexpected error.
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'

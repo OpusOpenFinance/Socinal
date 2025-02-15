@@ -76,5 +76,5 @@ To start using the software, there are some prerequisites:
 > To review the user experience guide, [click here][GuiaUX]
 
 [GuiaUX]: https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17378535/Guia+de+Experi+ncia+do+Usu+ri
-[API-pagamentos]: ../../../../swagger-ui/index.html?api=OAS-ITP-pagamentos
-[API-pagamentos-automáticos]: ../../../../swagger-ui/index.html?api=OAS-ITP-pagamentos-automaticos
+[API-pagamentos]: ../../../../swagger-ui/index.html?en-api=OAS-ITP-pagamentos
+[API-pagamentos-automáticos]: ../../../../swagger-ui/index.html?en-api=OAS-ITP-pagamentos-automaticos

@@ -1,0 +1,1605 @@
+openapi: 3.0.0
+info:
+  title: API Accounts - Integration Layer - OPUS Open Finance Brasil
+  description: |
+    API for demand deposit accounts, savings accounts, and prepaid accounts of the Integration Layer of the Transmitting Institution with Opus Open Finance Brasil.
+    API that returns information on demand deposit accounts, savings accounts, and prepaid payment accounts held at transmitting institutions by their customers,
+    including account identification data, balances, limits, and transactions.
+    There is no segregation between individuals and legal entities.
+
+    # Guidelines
+
+    ## Immutability Date by Transaction Type
+    The transaction identifier for accounts is mandatory in Open Finance Brasil. According to the type of transaction, a unique, stable, and immutable identifier must be sent in D0 or D+1, according to the table below.
+    ```
+    |---------------------------------------|-------------------------|-----------------------|
+    | Transaction Type                      | Obligation Date         | Immutability Date     |
+    |---------------------------------------|-------------------------|-----------------------|
+    | TED                                   | DO                      | DO                    |
+    |---------------------------------------|-------------------------|-----------------------|
+    | PIX                                   | DO                      | DO                    |
+    |---------------------------------------|-------------------------|-----------------------|
+    | SAME INSTITUTION TRANSFER (TEF)       | DO                      | DO                    |
+    |---------------------------------------|-------------------------|-----------------------|
+    | MISCELLANEOUS SERVICE FEE             | DO                      | DO                    |
+    |---------------------------------------|-------------------------|-----------------------|
+    | PAYROLL                               | DO                      | DO                    |
+    |---------------------------------------|-------------------------|-----------------------|
+    | DOC                                   | DO                      | D+1                   |
+    |---------------------------------------|-------------------------|-----------------------|
+    | BOLETO                                | DO                      | D+1                   |
+    |---------------------------------------|-------------------------|-----------------------|
+    | COLLECTION AGREEMENT                  | DO                      | D+1                   |
+    |---------------------------------------|-------------------------|-----------------------|
+    | SERVICE FEE PACKAGE                   | DO                      | D+1                   |
+    |---------------------------------------|-------------------------|-----------------------|
+    | DEPOSIT                               | DO                      | D+1                   |
+    |---------------------------------------|-------------------------|-----------------------|
+    | WITHDRAWAL                            | DO                      | D+1                   |
+    |---------------------------------------|-------------------------|-----------------------|
+    | CARD                                  | DO                      | D+1                   |
+    |---------------------------------------|-------------------------|-----------------------|
+    | SPECIAL CHECK INTEREST CHARGES        | DO                      | D+1                   |
+    |---------------------------------------|-------------------------|-----------------------|
+    | FINANCIAL APPLICATION YIELD           | DO                      | D+1                   |
+    |---------------------------------------|-------------------------|-----------------------|
+    | SALARY PORTABILITY                    | DO                      | D+1                   |
+    |---------------------------------------|-------------------------|-----------------------|
+    | FINANCIAL APPLICATION REDEMPTION      | DO                      | D+1                   |
+    |---------------------------------------|-------------------------|-----------------------|
+    | CREDIT OPERATION                      | DO                      | D+1                   |
+    |---------------------------------------|-------------------------|-----------------------|
+    | OTHERS                                | DO                      | D+1                   |
+    |---------------------------------------|-------------------------|-----------------------|
+    ```
+
+    ## Immutability Rules
+
+    For transactions that may have their identifier changed, according to delimited rules, the following behaviors must be followed:
+
+    - The "provisional" identifier shared in D0 must be changed to the definitive identifier in D+1:
+
+        - It is important to consider that financial institutions have different ways of treating holidays when processing transactions. Some consider only national holidays and others consider regional holidays.
+
+        - For transactions in D+1 with status TRANSACAO_EFETIVADA, it is understood that D+1 refers to business days.
+
+    - The provisional identifier and the definitive identifier must not be shared at the same time, that is, after the transaction status changes to TRANSACAO_EFETIVADA, only the transaction with the definitive identifier must be exposed.
+
+    - The date and value of the transaction can be changed when the status changes to TRANSACAO_EFETIVADA, according to the internal processes existing in the institutions. For example: Redemptions of investments without liquidity, and Purchase and Sale of shares.
+
+    - The property of unique, stable, and immutable transaction identifier becomes effective from the moment the transaction status becomes TRANSACAO_EFETIVADA. However:
+
+        - The same identifier should not exist between transactions in different statuses. For example, it is not possible to have the identifier 123 being used at the same time for transactions in the status TRANSACAO_PROCESSANDO and TRANSACAO_EFETIVADA, even if the values and dates are different.
+
+    - Specifically in the cases of transactions in the status LANCAMENTO_FUTURO, the date of the transactionDateTime field must be sent with the day/month/year information scheduled for the transaction processing and the other date/time precision fields can be sent as 0 (00:00:00.000).
+
+    - The transaction identifier can only be repeated for transactions in status TRANSACAO_PROCESSANDO and LANCAMENTO_FUTURO. That is, an institution can use, for example, the identifier 9999999 to identify all transactions that have yet to be confirmed (status TRANSACAO_PROCESSANDO).
+
+    - For transactions that cannot have their identifier changed, according to delimited rules, there are mapped exceptions:
+
+        - There are situations, mainly for Corporate clients, in which the transactions are launched individually (multiple transactions) in D0 and in D+1 are consolidated into a single launch. We can also have the opposite scenario, in which the transaction is launched in a consolidated way in D0 and in D+1 "opened" in multiple individual launches. It is important that there is no duplication of information in the exhibition, that is, the individual transactions and the consolidated transaction are not exposed at the same time.
+
+            - For example, for boleto, pix or payroll transactions, in D0 individual launches are made with individual TransactionIds, and in D+1 a single launch is made with a new transactionID.
+            - Obs: Pix is the Brazilian Instant Payment. Boleto is a Brazilian payment slip. 
+
+        - There are exception situations in which a launch with a stable identifier in D0 can be eliminated in D+1.
+
+            - For example, for situations of charging a single fee in which there is a negotiated agreement or insufficient balance.
+
+  version: 0.1.0-alpha
+  license:
+    name: Apache 2.0
+    url: 'https://www.apache.org/licenses/LICENSE-2.0'
+tags:
+  - name: Accounts
+    description: Operations for listing Customer Account information
+paths:
+  /account-discovery:
+    post:
+      tags:
+        - Accounts
+      summary: Gets a list of resources representing all accounts available for the customer to choose to consent to.
+      operationId: discoverAccounts
+      description: Method to get the list of demand deposit, savings and prepaid payment accounts maintained by the customer at the transmitting institution and for which they can provide consent.
+      parameters:
+        - $ref: '#/components/parameters/x-brand-id'
+        - $ref: '#/components/parameters/x-correlation-id'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestWithConsent'
+      responses:
+        '200':
+          $ref: '#/components/responses/OKResponseAccountDiscovery'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '423':
+          $ref: '#/components/responses/Locked'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+        '529':
+          $ref: '#/components/responses/SiteIsOverloaded'
+        default:
+          $ref: '#/components/responses/Default'
+  /accounts:
+    post:
+      tags:
+        - Accounts
+      summary: Gets the list of accounts consented to by the customer.
+      operationId: accountsGetAccounts
+      description: 'Method to get the list of demand deposit, savings and prepaid payment accounts maintained by the customer at the transmitting institution and for which they have provided consent.'
+      parameters:
+        - $ref: '#/components/parameters/x-brand-id'
+        - $ref: '#/components/parameters/x-correlation-id'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/accountType'
+        - $ref: '#/components/parameters/pagination-key'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestWithConsent'
+      responses:
+        '200':
+          $ref: '#/components/responses/OKResponseAccountList'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '423':
+          $ref: '#/components/responses/Locked'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+        '529':
+          $ref: '#/components/responses/SiteIsOverloaded'
+        default:
+          $ref: '#/components/responses/Default'
+  '/accounts/{accountId}':
+    post:
+      tags:
+        - Accounts
+      summary: Gets the identification data of the account identified by accountId.
+      description: 'Method to get the identification data of the demand deposit, savings or prepaid payment account identified by accountId maintained by the customer at the transmitting institution.'
+      operationId: accountsGetAccountsAccountId
+      parameters:
+        - $ref: '#/components/parameters/x-brand-id'
+        - $ref: '#/components/parameters/x-correlation-id'
+        - $ref: '#/components/parameters/accountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestWithConsent'
+      responses:
+        '200':
+          $ref: '#/components/responses/OKResponseAccountIdentification'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '423':
+          $ref: '#/components/responses/Locked'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+        '529':
+          $ref: '#/components/responses/SiteIsOverloaded'
+        default:
+          $ref: '#/components/responses/Default'
+  '/accounts/{accountId}/balances':
+    post:
+      tags:
+        - Accounts
+      summary: Gets the balances of the account identified by accountId.
+      operationId: accountsGetAccountsAccountIdBalances
+      description: 'Method to get the balances of the demand deposit, savings or prepaid payment account identified by accountId maintained by the customer at the transmitting institution.'
+      parameters:
+        - $ref: '#/components/parameters/x-brand-id'
+        - $ref: '#/components/parameters/x-correlation-id'
+        - $ref: '#/components/parameters/accountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestWithConsent'
+      responses:
+        '200':
+          $ref: '#/components/responses/OKResponseAccountBalances'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '423':
+          $ref: '#/components/responses/Locked'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+        '529':
+          $ref: '#/components/responses/SiteIsOverloaded'
+        default:
+          $ref: '#/components/responses/Default'
+  '/accounts/{accountId}/transactions':
+    post:
+      tags:
+        - Accounts
+      summary: Gets the list of transactions for the account identified by accountId.
+      operationId: accountsGetAccountsAccountIdTransactions
+      description: Method to get the list of transactions for the demand deposit, savings or prepaid payment account identified by accountId maintained by the customer at the transmitting institution. A maximum query extending 12 months into the past plus 12 months into the future is allowed.
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/x-brand-id'
+        - $ref: '#/components/parameters/x-correlation-id'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/fromBookingDate'
+        - $ref: '#/components/parameters/toBookingDate'
+        - $ref: '#/components/parameters/creditDebitIndicator'
+        - $ref: '#/components/parameters/pagination-key'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestWithConsent'
+      responses:
+        '200':
+          $ref: '#/components/responses/OKResponseAccountTransactions'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '423':
+          $ref: '#/components/responses/Locked'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+        '529':
+          $ref: '#/components/responses/SiteIsOverloaded'
+        default:
+          $ref: '#/components/responses/Default'
+  '/accounts/{accountId}/transactions-current':
+    post:
+      tags:
+        - Accounts
+      summary: Gets the list of recent transactions (last 7 days) for the account identified by accountId.
+      operationId: accountsGetAccountsAccountIdTransactionsCurrent
+      description: Method to get the list of transactions for the demand deposit, savings or prepaid payment account identified by accountId maintained by the customer at the transmitting institution. A maximum query extending 7 days into the past plus 12 months into the future is allowed.
+      parameters:
+        - $ref: '#/components/parameters/accountId'
+        - $ref: '#/components/parameters/x-brand-id'
+        - $ref: '#/components/parameters/x-correlation-id'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/pageSize'
+        - $ref: '#/components/parameters/fromBookingDateMaxLimited'
+        - $ref: '#/components/parameters/toBookingDateMaxLimited'
+        - $ref: '#/components/parameters/creditDebitIndicator'
+        - $ref: '#/components/parameters/pagination-key'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestWithConsent'
+      responses:
+        '200':
+          $ref: '#/components/responses/OKResponseAccountTransactions'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '423':
+          $ref: '#/components/responses/Locked'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+        '529':
+          $ref: '#/components/responses/SiteIsOverloaded'
+        default:
+          $ref: '#/components/responses/Default'
+  '/accounts/{accountId}/overdraft-limits':
+    post:
+      tags:
+        - Accounts
+      summary: Gets the limits of the account identified by accountId.
+      operationId: accountsGetAccountsAccountIdOverdraftLimits
+      description: Method to get the limits of the demand deposit, savings or prepaid payment account identified by accountId maintained by the customer at the transmitting institution. For transmitting financial institutions that have accounts without associated limits, they must return HTTP Status 200 with the “data” object empty, without any internal attributes.
+      parameters:
+        - $ref: '#/components/parameters/x-brand-id'
+        - $ref: '#/components/parameters/x-correlation-id'
+        - $ref: '#/components/parameters/accountId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestWithConsent'
+      responses:
+        '200':
+          $ref: '#/components/responses/OKResponseAccountOverdraftLimits'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/NotFound'
+        '405':
+          $ref: '#/components/responses/MethodNotAllowed'
+        '406':
+          $ref: '#/components/responses/NotAcceptable'
+        '422':
+          $ref: '#/components/responses/UnprocessableEntity'
+        '423':
+          $ref: '#/components/responses/Locked'
+        '429':
+          $ref: '#/components/responses/TooManyRequests'
+        '500':
+          $ref: '#/components/responses/InternalServerError'
+        '504':
+          $ref: '#/components/responses/GatewayTimeout'
+        '529':
+          $ref: '#/components/responses/SiteIsOverloaded'
+        default:
+          $ref: '#/components/responses/Default'
+components:
+  schemas:
+    AccountBalancesDataAutomaticallyInvestedAmount:
+      type: object
+      description: Available balance with automatic investment - corresponds to the sum of the available balance plus the amount obtained from the automatic investment. Expressed in monetary value with a minimum of 2 and a maximum of 4 decimal places.
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: string
+          format: double
+          pattern: '^-?\d{1,15}\.\d{2,4}$'
+          maxLength: 21
+          minLength: 4
+          example: '1000.0400'
+          description: Value related to the object.
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          maxLength: 3
+          description: 'Currency referring to the monetary value, following the ISO-4217 model.'
+          example: BRL
+    AccountOverdraftLimitsDataOverdraftContractedLimit:
+      type: object
+      description: Value of the contracted special check limit.
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: string
+          format: double
+          pattern: '^\d{1,15}\.\d{2,4}$'
+          maxLength: 20
+          minLength: 4
+          example: '1000.0400'
+          description: Value related to the object.
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          maxLength: 3
+          description: 'Currency referring to the monetary value, following the ISO-4217 model.'
+          example: BRL
+    AccountOverdraftLimitsDataOverdraftUsedLimit:
+      type: object
+      description: Total used value of the special check limit and the depositor advance.
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: string
+          format: double
+          pattern: '^\d{1,15}\.\d{2,4}$'
+          maxLength: 20
+          minLength: 4
+          example: '1000.0400'
+          description: Value related to the object.
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          maxLength: 3
+          description: 'Currency referring to the monetary value, following the ISO-4217 model.'
+          example: BRL
+    AccountOverdraftLimitsDataUnarrangedOverdraftAmount:
+      type: object
+      description: Value of operation contracted on an emergency basis to cover debit balance in demand deposit accounts and excess over the agreed special check limit.
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: string
+          format: double
+          pattern: '^\d{1,15}\.\d{2,4}$'
+          maxLength: 20
+          minLength: 4
+          example: '1000.0400'
+          description: Value related to the object.
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          maxLength: 3
+          description: 'Currency referring to the monetary value, following the ISO-4217 model.'
+          example: BRL
+    AccountBalancesDataBlockedAmount:
+      type: object
+      description: 'Blocked balance, not available for immediate use, due to blocking reasons presented to the customer in the electronic channels. Expressed in monetary value with a minimum of 2 and a maximum of 4 decimal places.'
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: string
+          format: double
+          pattern: '^\d{1,15}\.\d{2,4}$'
+          maxLength: 20
+          minLength: 4
+          example: '1000.0400'
+          description: Value related to the object.
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          maxLength: 3
+          description: 'Currency referring to the monetary value, following the ISO-4217 model.'
+          example: BRL
+    AccountBalancesDataAvailableAmount:
+      type: object
+      description: 'Balance available for immediate use. In the case of a demand deposit account, without considering special check and investments linked to the account. Expressed in monetary value with a minimum of 2 and a maximum of 4 decimal places.'
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: string
+          format: double
+          pattern: '^-?\d{1,15}\.\d{2,4}$'
+          maxLength: 21
+          minLength: 4
+          example: '1000.0400'
+          description: Value related to the object.
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          maxLength: 3
+          description: 'Currency referring to the monetary value, following the ISO-4217 model.'
+          example: BRL
+    AccountBalancesData:
+      type: object
+      description: |
+        Set of information from accounts of: demand deposit, savings and prepaid payment
+      required:
+        - availableAmount
+        - blockedAmount
+        - automaticallyInvestedAmount
+        - updateDateTime
+      properties:
+        availableAmount:
+          $ref: '#/components/schemas/AccountBalancesDataAvailableAmount'
+        blockedAmount:
+          $ref: '#/components/schemas/AccountBalancesDataBlockedAmount'
+        automaticallyInvestedAmount:
+          $ref: '#/components/schemas/AccountBalancesDataAutomaticallyInvestedAmount'
+        updateDateTime:
+          type: string
+          format: date-time
+          maxLength: 20
+          pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$'
+          example: '2021-05-21T08:30:00Z'
+          description: |
+            Date and time of the last balance update. It is expected that the institution informs the last time it captured the balance for sharing in Open Finance. Thus, it is possible that:
+            - If the institution captures data synchronously this information is from a few moments;
+            - If the institution captures data asynchronously this information is from hours or days in the past;
+            - When there is no date specifically linked to the block, the date and time of update of the entire registry is assumed.
+
+            In any case, it is necessary to continue respecting the maximum timeliness of the Accounts API.
+    AccountData:
+      type: object
+      required:
+        - brandName
+        - companyCnpj
+        - type
+        - compeCode
+        - number
+        - checkDigit
+        - accountId
+      properties:
+        brandName:
+          type: string
+          description: 'Brand Name reported by the participant in Open Finance. It is recommended to use, whenever possible, the same brand name assigned in the Customer Friendly Server Name (Authorization Server) directory field.'
+          maxLength: 80
+          pattern: '[\w\W\s]*'
+          example: Organização A
+        companyCnpj:
+          type: string
+          maxLength: 14
+          pattern: '^\d{14}$'
+          description: 'Full CNPJ number of the institution responsible for the Registration - the CNPJ corresponds to the registration number in the Cadastro de Pessoa Jurídica. Only the CNPJ numbers should be used, without masking'
+          example: '21128159000166'
+        type:
+          $ref: '#/components/schemas/EnumAccountType'
+        compeCode:
+          type: string
+          description: 'Identifier code assigned by the Central Bank of Brazil to institutions participating in the STR (Reserve Transfer System). The Compe (Check and Other Paper Compensation System) is a system that identifies and processes bank compensations. It is represented by a three-digit code that serves as a bank identifier, so each banking institution has an exclusive number'
+          pattern: '^\d{3}$'
+          maxLength: 3
+          example: '001'
+        branchCode:
+          type: string
+          description: |
+            Code of the Agency that holds the account. (Agency is the branch intended to serve customers, the general public and members of credit cooperatives, in the exercise of the institution's activities, and may not be mobile or transient)
+
+            [Restriction] Must be filled in when the "type" field is different from CONTA_PAGAMENTO_PRE_PAGA.
+          pattern: '^\d{4}$'
+          maxLength: 4
+          example: '6272'
+        number:
+          type: string
+          description: Account number
+          pattern: '^\d{8,20}$'
+          maxLength: 20
+          example: '94088392'
+        checkDigit:
+          type: string
+          description: Account digit
+          pattern: '[\w\W\s]*'
+          maxLength: 1
+          example: '4'
+        accountId:
+          type: string
+          description: 'Uniquely identifies the customer account, maintaining the immutability rules within the transmitting institution.'
+          pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
+          maxLength: 100
+          minLength: 1
+          example: '92792126019929279212650822221989319252576'
+    AccountIdentificationData:
+      type: object
+      description: |
+        Set of attributes that characterize the accounts of: demand deposit, savings and prepaid payment
+      required:
+        - compeCode
+        - number
+        - checkDigit
+        - type
+        - subtype
+        - currency
+      properties:
+        compeCode:
+          type: string
+          maxLength: 3
+          pattern: '^\d{3}$'
+          description: 'Identifier code assigned by the Central Bank of Brazil to institutions participating in the STR (Reserve Transfer System). The number-code replaced the old COMPE code. All STR participants, except for Financial Market Infrastructures (IMF) and the National Treasury Secretariat, have a number-code regardless of whether they participate in the Check Clearinghouse (Compe).'
+          example: '001'
+        branchCode:
+          type: string
+          maxLength: 4
+          pattern: '^\d{4}$'
+          description: |
+            Code of the Agency that holds the account. (Agency is the branch intended to serve customers, the general public and members of credit cooperatives, in the exercise of the institution's activities, and may not be mobile or transient)
+
+            [Restriction] Must be filled in when the "type" field is different from prepaid account.
+          example: '6272'
+        number:
+          type: string
+          maxLength: 20
+          pattern: '^\d{8,20}$'
+          description: |
+            Account number
+          example: '24550245'
+        checkDigit:
+          type: string
+          maxLength: 1
+          pattern: '[\w\W\s]*'
+          description: |
+            Account digit
+          example: '4'
+        type:
+          $ref: '#/components/schemas/EnumAccountType'
+        subtype:
+          $ref: '#/components/schemas/EnumAccountSubType'
+        currency:
+          type: string
+          pattern: '^(\w{3}){1}$'
+          maxLength: 3
+          description: |
+            Currency referring to the value of the transaction, according to ISO-4217 model. e.g. 'BRL'
+            All balances informed are represented with the current currency of Brazil
+          example: BRL
+    AccountOverdraftLimitsData:
+      type: object
+      description: |
+        Set of information from the Account of: demand deposit
+      properties:
+        overdraftContractedLimit:
+          $ref: '#/components/schemas/AccountOverdraftLimitsDataOverdraftContractedLimit'
+        overdraftUsedLimit:
+          $ref: '#/components/schemas/AccountOverdraftLimitsDataOverdraftUsedLimit'
+        unarrangedOverdraftAmount:
+          $ref: '#/components/schemas/AccountOverdraftLimitsDataUnarrangedOverdraftAmount'
+    AccountTransactionsData:
+      type: object
+      required:
+        - transactionId
+        - completedAuthorisedPaymentType
+        - creditDebitType
+        - transactionName
+        - type
+        - transactionAmount
+        - transactionDateTime
+      properties:
+        transactionId:
+          type: string
+          description: |
+            Unique code or identifier provided by the institution that maintains the account to represent the individual transaction.
+            Ideally, the `transactionId` should be immutable.
+            However, the `transactionId` must obey, at a minimum, the immutability rules proposed according to the "Immutability Date by Transaction Type" table present in the guidelines of this API.
+          maxLength: 100
+          minLength: 1
+          pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
+          example: TXpRMU9UQTROMWhZV2xSU1FUazJSMDl
+        completedAuthorizedPaymentType:
+          $ref: '#/components/schemas/EnumCompletedAuthorisedPaymentIndicator'
+        creditDebitType:
+          $ref: '#/components/schemas/EnumCreditDebitIndicator'
+        transactionName:
+          type: string
+          maxLength: 200
+          pattern: '[\w\W\s]*'
+          description: "Literal used in the financial institution to identify the transaction. The information presented needs to be the same as that used in the institution's electronic channels (statement). In cases where the transaction description is presented with multiple lines, all lines must be sent (concatenated) in this attribute, and it is not mandatory to concatenate the information already sent in other attributes (e.g. value, date) of the same endpoint."
+          example: TRANSFCWAR5TXHCX5I9IDBHML8082N8NEO30M6LNNG7ANAYIJYRM00ZBZPU8
+        type:
+          $ref: '#/components/schemas/EnumTransactionTypes'
+        transactionAmount:
+          $ref: '#/components/schemas/AccountTransactionsDataAmount'
+        transactionDateTime:
+          type: string
+          maxLength: 24
+          pattern: '(^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)\.(?:[0-9]){3}Z$)'
+          description: |
+            Original date and time of the transaction.
+          example: '2016-01-29T12:29:03.374Z'
+        partieCnpjCpf:
+          type: string
+          maxLength: 14
+          pattern: '^\d{11}$|^\d{14}$'
+          description: |
+            Identification of the person involved in the transaction: payer or receiver (Fill in with CPF or CNPJ, without formatting). With BCB IN No. 371, from 05/02/23, sending counterparty identification information became mandatory for payment transactions.
+
+            [Restriction] When “type” is filled in with the value FOLHA_PAGAMENTO and the transmitter is responsible for salary payment (payroll bank), the partieCnpjCpf informed must be from the related employer.
+          example: '43908445778'
+        partiePersonType:
+          $ref: '#/components/schemas/EnumPartiePersonType'
+        partieCompeCode:
+          type: string
+          maxLength: 3
+          pattern: '^\d{3}$'
+          description: 'Identifier code assigned by the Central Bank of Brazil to institutions participating in the STR (Reserve Transfer System) referring to the person involved in the transaction. The number-code replaced the old COMPE code. All STR participants, except for Financial Market Infrastructures (IMF) and the National Treasury Secretariat, have a number-code regardless of whether they participate in the Check Clearinghouse (Compe).'
+          example: '001'
+        partieBranchCode:
+          type: string
+          maxLength: 4
+          pattern: '^\d{4}$'
+          description: 'Code of the Agency that holds the account of the person involved in the transaction. (Agency is the branch intended to serve customers, the general public and members of credit cooperatives, in the exercise of the institution''s activities, and may not be mobile or transient)'
+          example: '6272'
+        partieNumber:
+          type: string
+          maxLength: 20
+          pattern: '^\d{8,20}$'
+          description: Account number of the person involved in the transaction
+          example: '67890854360'
+        partieCheckDigit:
+          type: string
+          maxLength: 1
+          pattern: '[\w\W\s]*'
+          description: Account digit of the person involved in the transaction
+          example: '4'
+    AccountTransactionsDataAmount:
+      type: object
+      description: Transaction amount. Expressed in monetary value with a minimum of 2 and a maximum of 4 decimal places.
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: string
+          format: double
+          pattern: '^\d{1,15}\.\d{2,4}$'
+          maxLength: 20
+          minLength: 4
+          example: '1000.0400'
+          description: Value related to the object.
+        currency:
+          type: string
+          pattern: '^[A-Z]{3}$'
+          maxLength: 3
+          description: 'Currency referring to the monetary value, following the ISO-4217 model.'
+          example: BRL
+    ConsentDataSharing:
+      description: Data sharing consent
+      type: object
+      required:
+        - brandId
+        - creationDateTime
+        - tpp
+        - externalId
+        - loggedUser
+        - permissions
+      properties:
+        authExtraData:
+          type: array
+          description: |
+            Array of key and value with additional data from the authorizer. These
+            data can be used as resource filters.
+          items:
+            type: object
+            required:
+              - key
+              - value
+            properties:
+              key:
+                type: string
+                example: agencia
+              value:
+                type: string
+                example: '0011'
+        consentOwner:
+          deprecated: true
+          type: array
+          description: |
+            [Deprecated] Array of key and value with the identification data
+            referring to the consent owner.
+          items:
+            type: object
+            required:
+              - key
+              - value
+            properties:
+              key:
+                type: string
+                example: agencia
+              value:
+                type: string
+                example: '0011'
+        brandId:
+          type: string
+          description: Identifier of the brand reported by the participant of Open Finance
+          example: cbanco
+          minLength: 1
+          maxLength: 50
+        creationDateTime:
+          description: |
+            Date and time the consent was created. A string with date and
+            time according to RFC-3339 specification, always with the use of
+            UTC timezone (UTC time format).
+          type: string
+          pattern: |
+            ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+          example: '2021-05-21T08:30:00Z'
+          maxLength: 20
+        tpp:
+          type: object
+          description: Details of the TPP (Third Party Provider) that requested the consent
+          additionalProperties: false
+          required:
+            - name
+          properties:
+            name:
+              type: string
+              description: Name of the TPP that requested the consent
+              example: GuiaBolsa
+              maxLength: 100
+        externalId:
+          type: string
+          description: Identifier of the consent used outside the Opus Open Finance platform
+          example: urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf
+          maxLength: 100
+        loggedUser:
+          type: object
+          description: |
+            User (natural person) who is logged in to the Data Transmitting
+            Institution.
+          additionalProperties: false
+          required:
+            - document
+          properties:
+            document:
+              type: object
+              description: Official identification document of the user.
+              additionalProperties: false
+              required:
+                - identification
+                - rel
+              properties:
+                identification:
+                  type: string
+                  maxLength: 11
+                  description: Number of the user's official identification document.
+                  example: '11111111111'
+                  pattern: ^\d{11}$
+                rel:
+                  type: string
+                  maxLength: 3
+                  description: Type of the user's official identification document.
+                  example: CPF
+                  pattern: ^[A-Z]{3}$
+        businessDocumentType:
+          type: object
+          description: |
+            User (legal entity) who is logged in to the Data
+            Transmitting Institution.
+
+            [Restriction] Mandatory to fill in if the user logged in to the Data
+            Transmitting Institution is a CNPJ (legal entity).
+          additionalProperties: false
+          required:
+            - document
+          properties:
+            document:
+              type: object
+              description: Official identification document of the legal entity holder.
+              additionalProperties: false
+              required:
+                - identification
+                - rel
+              properties:
+                identification:
+                  type: string
+                  maxLength: 14
+                  description: |
+                    Number of the official identification document of the legal
+                    entity holder.
+                  example: '11111111111111'
+                  pattern: ^\d{14}$
+                rel:
+                  type: string
+                  maxLength: 4
+                  description: |
+                    Type of the official identification document of the legal
+                    entity holder.
+                  example: CNPJ
+                  pattern: ^[A-Z]{4}$
+        resources:
+          description: |
+            List of resources allowed by the customer
+          type: array
+          items:
+            type: object
+            description: Resources selected by the customer
+            required:
+              - type
+              - resourceLegacyId
+            properties:
+              type:
+                description: Type of resource
+                type: string
+                enum:
+                  - ACCOUNT
+                  - CREDIT_CARD_ACCOUNT
+                  - LOAN
+                  - FINANCING
+                  - UNARRANGED_ACCOUNT_OVERDRAFT
+                  - INVOICE_FINANCING
+                  - PAYMENT
+                  - BANK_FIXED_INCOME
+                  - CREDIT_FIXED_INCOME
+                  - VARIABLE_INCOME
+                  - TREASURE_TITLE
+                  - FUND
+                example: PAYMENT
+              resourceLegacyId:
+                type: string
+                description: 'Uniquely identifies the customer''s resource, maintaining the immutability rules within the transmitting institution.'
+                pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
+                maxLength: 100
+                minLength: 1
+                example: '92792126019929279212650822221989319252576'
+              authorizers:
+                deprecated: true
+                description: |
+                  [Deprecated] List of authorizers for the resource for cases of
+                  multiple signature. If the resource is selected, all
+                  authorizers must accept the consent that the resource is part of
+                type: array
+                items:
+                  type: object
+                  required:
+                    - cpf
+                    - name
+                  properties:
+                    cpf:
+                      description: Authorizer CPF
+                      type: string
+                      minLength: 11
+                      maxLength: 11
+                      pattern: ^\d{11}$
+                      example: '11111111111'
+                    name:
+                      description: Authorizer name
+                      type: string
+                      example: Marco Antonio de Brito
+                minItems: 1
+              hasMultipleAuthorisers:
+                deprecated: true
+                type: boolean
+                example: 'false'
+            additionalProperties: false
+          maxItems: 1000
+        expirationDateTime:
+          description: |
+            Date and time of permission expiration. Mandatory to fill in,
+            reflects the limit date of consent validity. A string with
+            date and time according to RFC-3339 specification, always with the use
+            of UTC timezone (UTC time format).
+          type: string
+          maxLength: 20
+          pattern: |
+            ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+          example: '2021-05-21T08:30:00Z'
+        permissions:
+          type: array
+          items:
+            description: |
+              Only for data sharing consents. Specifies
+              the types of permissions to access the APIs within the scope of Open Finance
+              Brazil - Phase 2, according to the consent blocks provided
+              by the user and necessary to access each endpoint of the APIs.
+            type: string
+            enum:
+              - ACCOUNTS_READ
+              - ACCOUNTS_BALANCES_READ
+              - ACCOUNTS_TRANSACTIONS_READ
+              - ACCOUNTS_OVERDRAFT_LIMITS_READ
+              - CREDIT_CARDS_ACCOUNTS_READ
+              - CREDIT_CARDS_ACCOUNTS_BILLS_READ
+              - CREDIT_CARDS_ACCOUNTS_BILLS_TRANSACTIONS_READ
+              - CREDIT_CARDS_ACCOUNTS_LIMITS_READ
+              - CREDIT_CARDS_ACCOUNTS_TRANSACTIONS_READ
+              - CUSTOMERS_PERSONAL_IDENTIFICATIONS_READ
+              - CUSTOMERS_PERSONAL_ADITTIONALINFO_READ
+              - CUSTOMERS_BUSINESS_IDENTIFICATIONS_READ
+              - CUSTOMERS_BUSINESS_ADITTIONALINFO_READ
+              - FINANCINGS_READ
+              - FINANCINGS_SCHEDULED_INSTALMENTS_READ
+              - FINANCINGS_PAYMENTS_READ
+              - FINANCINGS_WARRANTIES_READ
+              - INVOICE_FINANCINGS_READ
+              - INVOICE_FINANCINGS_SCHEDULED_INSTALMENTS_READ
+              - INVOICE_FINANCINGS_PAYMENTS_READ
+              - INVOICE_FINANCINGS_WARRANTIES_READ
+              - LOANS_READ
+              - LOANS_SCHEDULED_INSTALMENTS_READ
+              - LOANS_PAYMENTS_READ
+              - LOANS_WARRANTIES_READ
+              - UNARRANGED_ACCOUNTS_OVERDRAFT_READ
+              - UNARRANGED_ACCOUNTS_OVERDRAFT_SCHEDULED_INSTALMENTS_READ
+              - UNARRANGED_ACCOUNTS_OVERDRAFT_PAYMENTS_READ
+              - UNARRANGED_ACCOUNTS_OVERDRAFT_WARRANTIES_READ
+              - BANK_FIXED_INCOMES_READ
+              - CREDIT_FIXED_INCOMES_READ
+              - FUNDS_READ
+              - VARIABLE_INCOMES_READ
+              - TREASURE_TITLES_READ
+              - EXCHANGES_READ
+              - RESOURCES_READ
+          minItems: 1
+          maxItems: 30
+          example: ACCOUNTS_READ
+      additionalProperties: false
+    EnumAccountSubType:
+      type: string
+      enum:
+        - INDIVIDUAL         /* Individual */
+        - CONJUNTA_SIMPLES   /* Simple Joint */
+        - CONJUNTA_SOLIDARIA /* Joint and Several */
+      description: |
+        Account subtype (see Enum):
+        Individual account - has a single holder
+        Simple joint account - where financial transactions can only be carried out with the authorization of ALL account holders.
+        Joint and several account - is the modality in which holders can carry out transactions independently, that is, without the need for authorization from other holders
+      example: INDIVIDUAL
+    EnumAccountType:
+      type: string
+      enum:
+        - CONTA_DEPOSITO_A_VISTA   /* Demand Deposit Account */
+        - CONTA_POUPANCA           /* Savings Account */
+        - CONTA_PAGAMENTO_PRE_PAGA /* Prepaid Payment Account */
+      description: |
+        Types of accounts. Traditional modalities provided for by Resolution 4.753, not including linked accounts, accounts of residents abroad, accounts in foreign currencies and corresponding electronic currency accounts. See Enum
+        Demand deposit account or Checking account - is the most common type. In it, the money is at your disposal to be withdrawn at any time. This account does not generate income for the depositor
+        Savings account - was created to encourage people to save. Money that remains in the account for thirty days starts to generate income, with income tax exemption for those who declare. That is, the money “grows” (yields) while it is kept in the account. Each deposit will have income from month to month, always on the day of the month in which the money was deposited
+        Prepaid payment account: according to CIRCULAR Nº 3,680, BCB of 2013, it is the 'intended for the execution of payment transactions in electronic currency carried out based on funds denominated in reais previously contributed'
+      example: CONTA_DEPOSITO_A_VISTA
+    EnumCompletedAuthorisedPaymentIndicator:
+      type: string
+      description: |
+        Transaction indicator:
+          - Transaction completed: the transaction reaches this status when the `transactionId` becomes immutable;
+          - Future launch: the transaction will be completed in the future, that is, the `transactionId` may change;
+          - Transaction processing: the transaction is in processing, that is, the `transactionId` may change.
+      enum:
+        - TRANSACAO_EFETIVADA      /* Transaction completed */
+        - LANCAMENTO_FUTURO        /* Future launch */
+        - TRANSACAO_PROCESSANDO    /* Transaction processing */
+      example: TRANSACAO_EFETIVADA
+    EnumCreditDebitIndicator:
+      type: string
+      description: |
+        Indicator of the type of launch:
+        Debit (in the statement) In a bank statement, debits, marked with the letter “D” next to the registered value, inform the outflows of money in the current account.
+        Credit (in the statement) In a bank statement, credits, marked with the letter “C” next to the registered value, inform the inflows of money in the current account.
+      enum:
+        - CREDITO  /* Credit */
+        - DEBITO   /* Debit  */
+      example: DEBITO
+    EnumPartiePersonType:
+      type: string
+      enum:
+        - PESSOA_NATURAL  /* Natural Person */
+        - PESSOA_JURIDICA /* Legal Entity */
+      example: PESSOA_NATURAL
+      description: |
+        Identification of the Type of Person of the person involved in the transaction.
+        Natural Person - Inform CPF in the “partieCnpjCpf” field.
+        Legal Person - Inform CNPJ in the “partieCnpjCpf” field.
+    EnumTransactionTypes:
+      type: string
+      description: |
+        The field must classify the transaction into one of the described types.
+        The transmitter must classify the available transactions by associating them with one of the items in the Enum listed in this field.
+        The OUTROS option should only be used for cases in which the shared transaction cannot in fact be classified as one of the items in this Enum.
+        For example, in the case of receiving alimony.
+      enum:
+        - TED /* Wire Transfer */
+        - DOC /* Credit Order */
+        - PIX /* PIX Instant Payment */
+        - TRANSFERENCIA_MESMA_INSTITUICAO /* Same Institution Transfer */
+        - BOLETO /* Boleto, a Brazilian payment slip */
+        - CONVENIO_ARRECADACAO /* Collection Agreement */
+        - PACOTE_TARIFA_SERVICOS /* Service Fee Package */
+        - TARIFA_SERVICOS_AVULSOS /* Miscellaneous Service Fee */
+        - FOLHA_PAGAMENTO /* Payroll */
+        - DEPOSITO /* Deposit */
+        - SAQUE /* Withdrawal */
+        - CARTAO /* Card */
+        - ENCARGOS_JUROS_CHEQUE_ESPECIAL /* Special Check Interest Charges */
+        - RENDIMENTO_APLIC_FINANCEIRA /* Financial Application Yield */
+        - PORTABILIDADE_SALARIO /* Salary Portability */
+        - RESGATE_APLIC_FINANCEIRA /* Financial Application Redemption */
+        - OPERACAO_CREDITO /* Credit Operation */
+        - OUTROS /* Others *
+      example: PIX
+    Meta:
+      type: object
+      description: Meta information regarding the requested API.
+      required:
+        - totalRecords
+        - totalPages
+      properties:
+        totalRecords:
+          type: integer
+          format: int32
+          description: Total number of records in the result
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          description: Total number of pages in the result
+          example: 1
+    RequestWithConsent:
+      type: object
+      required:
+        - consent
+      properties:
+        consent:
+          $ref: '#/components/schemas/ConsentDataSharing'
+    ResponseAccountDiscovery:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: object
+          description: |
+            Object containing the list of resources (accounts) available for the customer
+            to consent
+          required:
+            - resources
+          properties:
+            resources:
+              description: List of resources related to discovery
+              type: array
+              items:
+                type: object
+                properties:
+                  resourceName:
+                    description: |
+                      Array of key and value with the name of the resource. This data can
+                      be used for presentation on the consent screen.
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        key:
+                          description: Key of the caption of the resource name
+                          type: string
+                          example: 'resourceName'
+                        value:
+                          description: Value of the caption of the resource name
+                          type: string
+                          example: 'Conta Corrente 1234'
+                      required:
+                        - key
+                        - value
+                  resourceLegacyId:
+                    type: string
+                    description: 'Uniquely identifies the customer''s resource, maintaining the immutability rules within the transmitting institution.'
+                    pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$'
+                    maxLength: 100
+                    minLength: 1
+                    example: '92792126019929279212650822221989319252576'
+                  resourceBalanceCurrency:
+                    description: |
+                      Resource balance currency. Optional for presentation when selecting the
+                      resource in the payment consent.
+                    type: string
+                  resourceBalanceAmount:
+                    description: |
+                      Resource balance amount. Optional for presentation when selecting the
+                      resource in the payment consent.
+                    type: number
+                  authorizers:
+                    description: |
+                      [Deprecated] List of authorizers for the resource for cases of
+                      multiple signature. This field will be discontinued in future versions.
+                      As the current version requires this field, it must be filled in with
+                      at least the name and CPF of the logguedUser.
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        cpf:
+                          description: Authorizer CPF
+                          type: string
+                          minLength: 11
+                          maxLength: 11
+                          pattern: ^\d{11}$
+                        name:
+                          description: Authorizer name
+                          type: string
+                      required:
+                        - cpf
+                        - name
+                    minItems: 1
+                  defaultSelected:
+                    description: |
+                      Indicates whether the resource should be selected by default on the
+                      consent screen. Default value: false
+                    type: boolean
+                required:
+                  - resourceName
+                  - resourceLegacyId
+                  - authorizers
+    ResponseAccountList:
+      type: object
+      required:
+        - data
+        - meta
+      properties:
+        data:
+          type: array
+          description: 'List of demand deposit, savings and prepaid payment accounts maintained by the customer at the transmitting institution and for which they have provided consent'
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/AccountData'
+        meta:
+          $ref: '#/components/schemas/Meta'
+    ResponseAccountBalances:
+      type: object
+      required:
+        - data
+        - meta
+      properties:
+        data:
+          $ref: '#/components/schemas/AccountBalancesData'
+        meta:
+          $ref: '#/components/schemas/Meta'
+    ResponseAccountIdentification:
+      type: object
+      required:
+        - data
+        - meta
+      properties:
+        data:
+          $ref: '#/components/schemas/AccountIdentificationData'
+        meta:
+          $ref: '#/components/schemas/Meta'
+    ResponseAccountOverdraftLimits:
+      type: object
+      required:
+        - data
+        - meta
+      properties:
+        data:
+          $ref: '#/components/schemas/AccountOverdraftLimitsData'
+        meta:
+          $ref: '#/components/schemas/Meta'
+    ResponseAccountTransactions:
+      type: object
+      required:
+        - data
+      properties:
+        data:
+          type: array
+          description: |
+            List of launches referring to transactions carried out and future launches for the accounts of: demand deposit, savings and prepaid payment
+          minItems: 0
+          items:
+            $ref: '#/components/schemas/AccountTransactionsData'
+    ResponseError:
+      type: object
+      required:
+        - errors
+      properties:
+        errors:
+          type: array
+          minItems: 1
+          maxItems: 13
+          items:
+            type: object
+            required:
+              - code
+              - title
+              - detail
+            properties:
+              code:
+                description: Specific error code for the endpoint
+                type: string
+                pattern: '[\w\W\s]*'
+                maxLength: 255
+              title:
+                description: Human-readable title of this specific error
+                type: string
+                pattern: '[\w\W\s]*'
+                maxLength: 255
+              detail:
+                description: Human-readable description of this specific error
+                type: string
+                pattern: '[\w\W\s]*'
+                maxLength: 2048
+  parameters:
+    accountId:
+      name: accountId
+      in: path
+      description: 'Identifier of the demand deposit, savings or prepaid payment account.'
+      required: true
+      schema:
+        type: string
+        pattern: '^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$'
+        maxLength: 100
+    accountType:
+      name: accountType
+      description: 'Types of accounts. Traditional modalities provided for by Resolution 4.753, not including linked accounts, accounts of residents abroad, accounts in foreign currencies and corresponding electronic currency accounts. See Enum.'
+      required: false
+      in: query
+      schema:
+        $ref: '#/components/schemas/EnumAccountType'
+    x-brand-id:
+      name: x-brand-id
+      in: header
+      description: Identifier of the brand reported by the participant of Open Finance
+      required: true
+      schema:
+        type: string
+        example: cbanco
+        minLength: 1
+        maxLength: 50
+    x-correlation-id:
+      name: x-correlation-id
+      in: header
+      description: |
+                UUID that identifies the correlation ID of the request made. It must be
+                propagated to all calls made between systems and logged whenever
+                possible to facilitate error tracing
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 97623ed1-4732-4bf2-8d4b-ae7aced5443b
+    creditDebitIndicator:
+      name: creditDebitIndicator
+      description: Indicator of the type of launch
+      required: false
+      in: query
+      schema:
+        $ref: '#/components/schemas/EnumCreditDebitIndicator'
+    fromBookingDate:
+      name: fromBookingDate
+      description: |
+        Initial filtering date.
+
+        [Restriction] It must be mandatorily sent if the toBookingDate field is informed. If it is not informed, the current day must be assumed.
+      required: false
+      in: query
+      schema:
+        type: string
+        maxLength: 10
+        format: date
+        example: '2021-05-21'
+    fromBookingDateMaxLimited:
+      in: query
+      name: fromBookingDate
+      description: |
+        Initial filtering date. The maximum period used in the filter is 7 days inclusive (D-6).
+
+        [Restriction] It must be mandatorily sent if the toBookingDate field is informed.
+        If it is not informed, the current day must be assumed.
+      required: false
+      schema:
+        type: string
+        maxLength: 10
+        format: date
+        example: '2021-05-21'
+    toBookingDateMaxLimited:
+      in: query
+      name: toBookingDate
+      description: |
+        Final filtering date. The maximum period used in the filter is 7 days inclusive (D-6).
+
+        [Restriction] It must be mandatorily sent if the fromBookingDate field is informed.
+        If it is not informed, the current day must be assumed.
+      required: false
+      schema:
+        type: string
+        maxLength: 10
+        format: date
+        example: '2021-05-21'
+    pagination-key:
+      name: pagination-key
+      in: query
+      description: 'Re-call identifier, used to avoid counting calls to the endpoint during pagination.'
+      schema:
+        type: string
+        maxLength: 2048
+        pattern: '[\w\W\s]*'
+    page:
+      name: page
+      in: query
+      description: Page number being requested (the value of the first page is 1).
+      schema:
+        type: integer
+        default: 1
+        minimum: 1
+        maximum: 2147483647
+        format: int32
+    pageSize:
+      name: page-size
+      in: query
+      description: Total number of records per page.
+      schema:
+        type: integer
+        default: 25
+        minimum: 1
+        format: int32
+        maximum: 1000
+    toBookingDate:
+      name: toBookingDate
+      description:
+        Final filtering date.
+
+        [Restriction] It must be mandatorily sent if the fromBookingDate field is informed. If it is not informed, the current day must be assumed.
+      required: false
+      in: query
+      schema:
+        type: string
+        maxLength: 10
+        format: date
+        example: '2021-05-21'
+  responses:
+    OKResponseAccountDiscovery:
+      description: Account identification data obtained successfully.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseAccountDiscovery'
+    OKResponseAccountList:
+      description: Account identification data obtained successfully.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseAccountList'
+    OKResponseAccountIdentification:
+      description: Account identification data identified by accountId obtained successfully.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseAccountIdentification'
+    OKResponseAccountBalances:
+      description: Data related to the balances of the account identified by accountId obtained successfully.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseAccountBalances'
+    OKResponseAccountTransactions:
+      description: Data from the list of transactions for the account identified by accountId obtained successfully.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseAccountTransactions'
+    OKResponseAccountOverdraftLimits:
+      description: Limit data for the account identified by accountId obtained successfully.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ResponseAccountOverdraftLimits'
+    BadRequest:
+      description: 'The request was malformed, omitting mandatory attributes, either in the payload or through attributes in the URL.'
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    Forbidden:
+      description: The token has an incorrect scope or a security policy was violated
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    GatewayTimeout:
+      description: GATEWAY TIMEOUT - The request was not answered within the established time limit
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    InternalServerError:
+      description: An error occurred in the API gateway or in the microservice
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    Locked:
+      description: Locked
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    MethodNotAllowed:
+      description: The consumer tried to access the resource with an unsupported method
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    NotAcceptable:
+      description: The request contained an Accept header different from the allowed media types or a character set other than UTF-8
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    NotFound:
+      description: The requested resource does not exist or has not been implemented
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    TooManyRequests:
+      description: 'The operation was refused because too many requests were made within a certain period or the global limit of concurrent requests was reached'
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    Unauthorized:
+      description: Missing/invalid authentication header or invalid token
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    UnprocessableEntity:
+      description: 'The request syntax is correct, but it was not possible to process the instructions present.'
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    SiteIsOverloaded:
+      description: 'The site is overloaded and the operation was refused, as the maximum global TPS limit has been reached at this time.'
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    Default:
+      description: Unexpected error.
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'

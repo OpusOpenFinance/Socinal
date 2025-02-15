@@ -85,4 +85,4 @@ To start using the software, there are some prerequisites:
 
 [SequenceDiagram]: ../../Plataforma-OpusOpenFinance/Receptor_de_Dados/images/consent-sequence.png
 [GuiaUX]: https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17378535/Guia+de+Experi+ncia+do+Usu+ri
-[API-Receiver]: ../../../../swagger-ui/index.html?api=OAS-Receptor
+[API-Receiver]: ../../../../swagger-ui/index.html?en-api=OAS-Receptor

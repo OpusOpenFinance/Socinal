@@ -7,11 +7,11 @@ nav_order: 3
 
 ## Pagamentos
 
-A integração com o pilar de pagamentos do _Open Finance Brasil_ é necessária apenas para o perfil de Detentor de Conta. Essa integração permite que o produto Opus direcione uma requisição para os sistemas de retaguarda necessários para o fluxo do pagamento. O fluxo de pagamento, em alto nível, se divide em dois, o **consentimento** e a **liquidação do pagamento** e ambos tem suas integrações necessárias. A integração com o produto funciona através de uma camada que chamamos de _conectores_. 
+A integração com o pilar de pagamentos do _Open Finance Brasil_ é necessária apenas para o perfil de Detentor de Conta. Essa integração permite que o produto Opus direcione uma requisição para os sistemas de retaguarda necessários para o fluxo do pagamento. O fluxo de pagamento, em alto nível, se divide em dois, o **consentimento** e a **liquidação do pagamento** e ambos tem suas integrações necessárias. A integração com o produto funciona através de uma camada que chamamos de _conectores_.
 
 ## Integração
 
-A imagem abaixo esquematiza como o funcionamento do conector. Quando uma instituição participante do *Open Finance Brasil* envia uma requisição de pagamento, a **Plataforma Opus Open Finance** a recebe e realiza todas as validações necessárias, incluindo a verificação do consentimento associado ao pagamento. Uma vez que a requisição seja considerada válida, a plataforma realizará uma chamada ao conector para efetivar o pagamento (no exemplo, acionando o serviço Pix da instituição). 
+A imagem abaixo esquematiza como o funcionamento do conector. Quando uma instituição participante do _Open Finance Brasil_ envia uma requisição de pagamento, a **Plataforma Opus Open Finance** a recebe e realiza todas as validações necessárias, incluindo a verificação do consentimento associado ao pagamento. Uma vez que a requisição seja considerada válida, a plataforma realizará uma chamada ao conector para efetivar o pagamento (no exemplo, acionando o serviço Pix da instituição).
 
 ![Conector](./images/Conector.png)
 
@@ -50,7 +50,7 @@ Os schemas podem ser encontrados aqui:
 
 ### Cancelar um pagamento agendado
 
-A rota `PATCH pix payment` realiza o cancelamento de um pix agendado. Segundo a regulação, participantes do Open Finance devem ter seus sistemas de pix agendado em produção. Esse concetor será chamada apenas se o usuário correntista utilizar a área de gestão do consentimento para cancelar um pagamento agendado, isto é, o consentimento já deve ter sido autorizado e o pagamento agendado.
+A rota `PATCH pix payment` realiza o cancelamento de um pix agendado. Segundo a regulação, participantes do Open Finance devem ter seus sistemas de pix agendado em produção. Esse conector será chamada apenas se o usuário correntista utilizar a área de gestão do consentimento para cancelar um pagamento agendado, isto é, o consentimento já deve ter sido autorizado e o pagamento agendado.
 
 Os schemas podem ser encontrados aqui:
 
@@ -67,7 +67,7 @@ Os schemas podem ser encontrados aqui:
 
 ### Validar um pagamento
 
-A rota `GET validate payment data` realiza uma série de validações durante a etapa do consentimento do correntista, para, caso a validação encontre algum erro, o consentimento não será iniciado. Esse conector faz parte de uma etapa regulatória e define algumas validações como: 
+A rota `GET validate payment data` realiza uma série de validações durante a etapa do consentimento do correntista, para, caso a validação encontre algum erro, o consentimento não será iniciado. Esse conector faz parte de uma etapa regulatória e define algumas validações como:
 
 - Valor do pagamento não deve exceder o limite transacional (geralmente 999999999.99);
 Se tiver QR Code estático:
@@ -92,7 +92,7 @@ Os schemas podem ser encontrados aqui:
 
 ### Recuperar contas do correntista
 
-A rota `GET discovery` recupera as informações de conta do usuário correntista que está fazendo a iniciação de pagamento. Isso ocorre durante a etapa do consentimento, na qual o correntista terá a possibilidade de alterar a conta da insituição que será feito o débito do valor do pagamento. 
+A rota `GET discovery` recupera as informações de conta do usuário correntista que está fazendo a iniciação de pagamento. Isso ocorre durante a etapa do consentimento, na qual o correntista terá a possibilidade de alterar a conta da instituição que será feito o débito do valor do pagamento.
 
 Os schemas podem ser encontrados aqui:
 

@@ -5,19 +5,21 @@ parent: "Integração da Plataforma"
 nav_order: 1
 ---
 
-# Introdução 
+# Introdução
 
-O perfil de dados abertos, ou fase 1 + 4A, corresponde aos dados públicos que as intituições participantes do Open Finance devem divulgar ao ecossistema. Para saber mais informações sobre o perfil de dados abertos, [veja aqui](../../Open-Finance-Brasil/PerfisOFB/Dados-abertos.html). 
+O perfil de dados abertos, ou fase 1 + 4A, corresponde aos dados públicos que as instituições participantes do Open Finance devem divulgar ao ecossistema. Para saber mais informações sobre o perfil de dados abertos, [veja aqui][Perfis-Open-Finance-Brasil].
 O perfil de dados abertos também exige uma integração com o produto, entretanto funciona de maneira muito mais simples. A proposta do perfil de dados abertos é ter informações não sigilosas do participante divulgadas publicamente. Para tal, não se faz necessário uma integração super sofisticada.
 
 ## Integração
 
-A integração do perfil de dados abertos não exige conexão com os sistemas de retaguarda do cliente. O que nós sugerimos é a construção de um arquivo json estático ou dinâmico para integrar ao produto. A integração é feita a partir da camada dos conetores e, portanto, cada uma das APIs regulatórias de dados abertos terá seu conector correspondente. Dessa forma, é necessário escrever um json para cada uma das APIs disponíveis. Claro, apenas os produtos que as instituições oferecem.
+A integração do perfil de dados abertos não exige conexão com os sistemas de retaguarda do cliente. O que nós sugerimos é a construção de um arquivo JSON estático ou dinâmico para integrar ao produto. A integração é feita a partir da camada dos conetores e, portanto, cada uma das APIs regulatórias de dados abertos terá seu conector correspondente. Dessa forma, é necessário escrever um JSON para cada uma das APIs disponíveis. Claro, apenas os produtos que as instituições oferecem.
 
 ## APIs de dados abertos
 
 ### Canais de atendimento
-A API de canais de atendimento disponibiliza quais as informações dos canais de atendimento da insituição, como:
+
+A API de canais de atendimento disponibiliza quais as informações dos canais de atendimento da instituição, como:
+
 1. Agências físicas
 2. Canais de atendimento eletrônico
 3. Canais de atendimento telefônico
@@ -25,7 +27,9 @@ A API de canais de atendimento disponibiliza quais as informações dos canais d
 5. Terminais de autoatendimento
 
 ### Produtos
+
 As APIs de produtos são referentes aos produtos que a instituição oferece, elas podem ser:
+
 1. Contas
 2. Empréstimos
 3. Financiamentos
@@ -35,13 +39,13 @@ As APIs de produtos são referentes aos produtos que a instituição oferece, el
 7. Investimento
 8. Seguros
 9. Credenciamento
-10. Titulos de capitalização
+10. Títulos de capitalização
 11. Previdência
 12. Câmbio
 
-## Arquivo Json para integração
+## Arquivo JSON para integração
 
-Como explicado no tópico integração, a integração é feita através do conector que pega os dados de um json estático ou dinâmico. Para construir esse arquivo, basta se apoiar nos campos de "response" esperados nas especificações da tabela abaixo. Uma vez que o arquivo foi construído e respeita todos os modelos dos produtos oferecidos pela instituição, é necessário construir o conector e plugá-lo ao produto. Tabela de especificações:
+Como explicado no tópico integração, a integração é feita através do conector que pega os dados de um JSON estático ou dinâmico. Para construir esse arquivo, basta se apoiar nos campos de "response" esperados nas especificações da tabela abaixo. Uma vez que o arquivo foi construído e respeita todos os modelos dos produtos oferecidos pela instituição, é necessário construir o conector e plugá-lo ao produto. Tabela de especificações:
 
 |API                               |Link Open API          |
 |----------------------------------|:---------------------:|
@@ -73,4 +77,4 @@ Como explicado no tópico integração, a integração é feita através do cone
 [Pension]: ../../../../swagger-ui/index.html?api=open-data-pension
 [Unarranged]: ../../../../swagger-ui/index.html?api=open-data-unarranged
 
-
+[Perfis-Open-Finance-Brasil]: ../../Open-Finance-Brasil/PerfisOFB/Dados-abertos.html

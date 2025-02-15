@@ -13,7 +13,7 @@ Quando um pedido de criação de consentimento vindo de outra instituição fina
 Para garantir que o canais digitais de atendimento estejam preparados, é necessário:
 
 1. Construir as telas da jornada de experiência do usuário de acordo com os canais de autenticação existentes na instituições, tipicamente Aplicativo móvel e/ou Internet Banking. As jornadas implementadas devem respeitar o [Guia de Experiência do Usuário][GuiaUX] do *OPen Finance Brasil*.
-3. Realizar a integração das telas com o Opus Open Finance.
+2. Realizar a integração das telas com o Opus Open Finance.
 
 ## Canais digitais de atendimento
 

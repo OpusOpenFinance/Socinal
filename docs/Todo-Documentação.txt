@@ -2,9 +2,7 @@ Documentação Plataforma Opus Open Finance - Todo list
 =========================================   =========
 
 TODO:
- - Alterar cores do ls (ver Raspberry)
  - Investigar como mexer nas páginas do GitHub Pages
- - Subir para o GitHub
 
 --------------
 

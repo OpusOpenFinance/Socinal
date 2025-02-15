@@ -13,7 +13,7 @@ Em linhas gerais, existem *endpoints* para:
 
 - Obter os registros de operações dos fundos de investimento mantidos pelo cliente;
 - Obter os registros de identificação dos fundos de investimento;
-- Obter os registros de posição nos fundos de investimeto;
+- Obter os registros de posição nos fundos de investimento;
 - Obter os registros de histórico de transações dos últimos 12 meses;
 - Obter os registros de histórico dos últimos sete dias.
 
