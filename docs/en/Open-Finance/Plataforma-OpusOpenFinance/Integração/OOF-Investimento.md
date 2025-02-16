@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "Investimentos"
-parent: "Compartilhamento de Dados"
+title: "Investments"
+parent: "Data Sharing"
 nav_order: 5
 has_children: true
 ---

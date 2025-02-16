@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "API de Dados Cadastrais"
-parent: "Compartilhamento de Dados"
+title: "Customers API"
+parent: "Data Sharing"
 nav_order: 1
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "API de Fundos de Investimento"
-parent: "Investimentos"
+title: "Funds API"
+parent: "Investments"
 nav_order: 4
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "Deploy da Plataforma"
-parent: "implantação da Plataforma Opus Open Finance"
+title: "Platform Deploy"
+parent: "Platform Implementation"
 nav_order: 6
 ---
 

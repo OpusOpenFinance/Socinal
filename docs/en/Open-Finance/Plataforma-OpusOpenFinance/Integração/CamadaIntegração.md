@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "Compartilhamento de Dados"
-parent: "Integração da Plataforma"
+title: "Data Sharing"
+parent: "Platform Integration"
 nav_order: 2
 has_children: true
 ---

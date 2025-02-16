@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "API de Cartão de Crédito"
-parent: "Compartilhamento de Dados"
+title: "Credit Cards API"
+parent: "Data Sharing"
 nav_order: 2
 ---
 

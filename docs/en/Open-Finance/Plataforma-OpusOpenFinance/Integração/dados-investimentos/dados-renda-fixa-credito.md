@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "API de Renda Fixa de Crédito"
-parent: "Investimentos"
+title: "Credit Fixed Income API"
+parent: "Investments"
 nav_order: 2
 ---
 

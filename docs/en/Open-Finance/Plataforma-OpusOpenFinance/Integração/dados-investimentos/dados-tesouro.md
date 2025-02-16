@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "API de Títulos do Tesouro Direto"
+title: "Treasure Titles API"
 parent: "Investimentos"
 nav_order: 5
 ---

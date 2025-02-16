@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "API de Câmbio"
-parent: "Compartilhamento de Dados"
+title: "Exchanges API"
+parent: "Data Sharing"
 nav_order: 6
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "API de Direitos Creditórios"
-parent: "Operações de Crédito"
+title: "Invoice Financing API"
+parent: "Credit Operations"
 nav_order: 4
 ---
 

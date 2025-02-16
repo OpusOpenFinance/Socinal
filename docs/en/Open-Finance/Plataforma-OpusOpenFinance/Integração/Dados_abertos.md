@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "Dados Abertos"
-parent: "Integração da Plataforma"
+title: "Open Data"
+parent: "Platform Integration"
 nav_order: 1
 ---
 

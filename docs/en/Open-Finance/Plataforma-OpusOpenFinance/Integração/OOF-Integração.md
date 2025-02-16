@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "Integração da Plataforma"
-parent: "Opus Open Finance"
+title: "Platform Integration"
+parent: "Opus Open Finance Brazil"
 nav_order: 8
 has_children: true
 ---

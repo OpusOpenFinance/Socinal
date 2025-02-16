@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "API de Contas"
-parent: "Compartilhamento de Dados"
+title: "Accounts API"
+parent: "Data Sharing"
 nav_order: 3
 ---
 

@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "API de Empréstimos"
-parent: "Operações de Crédito"
+title: "Loans API"
+parent: "Credit Operations"
 nav_order: 1
 ---
 

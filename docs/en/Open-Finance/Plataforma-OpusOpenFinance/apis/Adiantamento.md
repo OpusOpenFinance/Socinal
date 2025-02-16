@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "API de Adiantamento a Depositantes"
-parent: "Operações de Crédito"
+title: "Account Overdraft API"
+parent: "Credit Operations"
 nav_order: 3
 ---
 

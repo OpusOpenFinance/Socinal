@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Handoff"
-parent: "App e Web"
+parent: "App and Web"
 nav_order: 3
 ---
 

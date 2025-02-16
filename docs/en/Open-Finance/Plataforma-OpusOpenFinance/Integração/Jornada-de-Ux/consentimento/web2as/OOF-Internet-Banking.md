@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Internet Banking"
-parent: "App e Web"
+parent: "App and Web"
 nav_order: 2
 ---
 

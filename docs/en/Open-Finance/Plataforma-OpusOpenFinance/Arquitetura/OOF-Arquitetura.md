@@ -1,12 +1,12 @@
 ---
 layout: default
-title: Arquitetura da Plataforma
-parent: "Opus Open Finance"
+title: Platform Architecture
+parent: "Opus Open Finance Brazil"
 nav_order: 1
 ---
 # Visão Geral da Arquitetura
 
-A arquitetura da solução é baseada em **microsserviços**, projetada para suportar escalabilidade horizontal automática, e implementada em contêineres (**Docker**) rodando em um ambiente de execução clusterizado Kubernetes.
+A arquitetura da solução é baseada em **microsserviços**, projetada para suportar escalabilidade horizontal automática, e implementada em contêineres (**Docker**) rodando em um ambiente de execução *clusterizado* Kubernetes.
 
 A plataforma é oferecida em três modalidades:
 
@@ -34,7 +34,7 @@ Para sua execução a plataforma necessita dos seguintes componentes:
 - Fila de mensagens
   - Diferentes mecanismos de fila têm sido usados pelos nossos clientes, incluindo SQS/SNS, GCP Pub/Sub e Kafka;
   - A plataforma utiliza um componente de abstração que suporta os principais mecanismos de filas de mensagens do mercado.
-- Sistema gerenciador de logs distribuidos
+- Sistema gerenciador de logs distribuídos
   - A solução padrão empacotada com a plataforma é o *Grafana Loki*, mas outras soluções têm sido usadas por nossos clientes como *Datadog* e *Elastic Stack*;
 
   A plataforma embute ainda um API Gateway que é empacotado junto com o produto e que pode funcionar atrás do produto padrão utilizado pelo cliente, se for o caso.

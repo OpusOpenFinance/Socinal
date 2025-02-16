@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "API de Renda Fixa Bancária"
-parent: "Investimentos"
+title: "Bank Fixed Income API"
+parent: "Investments"
 nav_order: 1
 ---
 

@@ -643,8 +643,7 @@ components:
         creationDateTime:
           description: |
             Data e hora em que o consentimento foi criado. Uma string com data e
-            hora conforme especificação RFC-3339, sempre com a utilização de
-            timezone UTC (UTC time format).
+            hora conforme especificação RFC-3339, sempre com a utilização de timezone UTC (UTC time format).
           type: string
           pattern: |
             ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
@@ -670,8 +669,7 @@ components:
         loggedUser:
           type: object
           description: |
-            Usuário (pessoa natural) que encontra-se logado na instituição
-            Transmissora de Dados.
+            Usuário (pessoa natural) que encontra-se logado na instituição Transmissora de Dados.
           additionalProperties: false
           required:
             - document
@@ -699,8 +697,7 @@ components:
         businessDocumentType:
           type: object
           description: |
-            Usuário (pessoa jurídica) que encontra-se logado na instituição
-            Transmissora de Dados.
+            Usuário (pessoa jurídica) que encontra-se logado na instituição Transmissora de Dados.
             [Restrição] Preenchimento obrigatório se usuário logado na instituição
             Transmissora de Dados for um CNPJ (pessoa jurídica).
           additionalProperties: false

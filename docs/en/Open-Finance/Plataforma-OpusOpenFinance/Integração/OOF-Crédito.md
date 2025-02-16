@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "Operações de Crédito"
-parent: "Compartilhamento de Dados"
+title: "Credit Operations"
+parent: "Data Sharing"
 nav_order: 4
 has_children: true
 ---

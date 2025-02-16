@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "API de Renda Variável"
-parent: "Investimentos"
+title: "Variable Income API"
+parent: "Investments"
 nav_order: 3
 ---
 

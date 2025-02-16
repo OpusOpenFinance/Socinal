@@ -6,9 +6,9 @@ TODO:
 
 --------------
 
-1) Multi-idioma
-2) Forma automática de "próxima página"?
-3) A API opus-commons deve ser listada na seção sobre a construção de conectores.
+0) Tem algum erro na API de Dados Cadastrais (customers) em inglês!!!
+1) Forma automática de "próxima página"?
+2) A API opus-commons deve ser listada na seção sobre a construção de conectores.
 
 Dúvidas:
 

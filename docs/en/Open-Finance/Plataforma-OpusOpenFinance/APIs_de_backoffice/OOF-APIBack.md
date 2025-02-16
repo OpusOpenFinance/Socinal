@@ -1,7 +1,7 @@
 ---
 layout: default
-title: "APIs de Gestão de Consentimentos"
-parent: "Opus Open Finance"
+title: "Consent Management APIs"
+parent: "Opus Open Finance Brazil"
 nav_order: 6
 ---
 
@@ -23,4 +23,4 @@ A API de Gestão de Consentimentos torna possível a aplicações da instituiç�
 
 As definições da API em formato Open API Specification podem ser encontradas [aqui][API-backoffice].
 
-[API-backoffice]: ../../../../swagger-ui/index.html?en-api=OAS-back-dados
+[API-backoffice]: ../../../../swagger-ui/index.html?api=en-OAS-back-dados

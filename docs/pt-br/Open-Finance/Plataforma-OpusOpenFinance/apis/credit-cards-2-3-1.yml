@@ -1554,16 +1554,14 @@ components:
                   type: string
                   maxLength: 14
                   description: |
-                    Número do documento de identificação oficial do titular pessoa
-                    jurídica.
+                    Número do documento de identificação oficial do titular pessoa jurídica.
                   example: '11111111111111'
                   pattern: ^\d{14}$
                 rel:
                   type: string
                   maxLength: 4
                   description: |
-                    Tipo do documento de identificação oficial do titular pessoa
-                    jurídica.
+                    Tipo do documento de identificação oficial do titular pessoa jurídica.
                   example: CNPJ
                   pattern: ^[A-Z]{4}$
         resources:
@@ -1932,8 +1930,7 @@ components:
       example: '2021-05-21'
     PaginationKey:
       description: >-
-        Identificador de rechamada, utilizado para evitar a contagem de chamadas
-        ao endpoint durante a paginação.
+        Identificador de rechamada, utilizado para evitar a contagem de chamadas ao endpoint durante a paginação.
       type: string
       maxLength: 2048
       pattern: '[\w\W\s]*'
