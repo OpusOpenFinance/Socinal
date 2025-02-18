@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Platform Deployment"
-parent: "Opus Open Finance Platform Deployment"
+parent: "Platform Implementation"
 nav_order: 6
 lang: "en"
 alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Implantação/OOF-Deploy/"

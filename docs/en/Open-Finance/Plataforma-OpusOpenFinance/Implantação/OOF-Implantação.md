@@ -1,8 +1,9 @@
 ---
 layout: default
 title: "Platform Implementation"
-parent: "Opus Open Finance"
+parent: "Opus Open Finance Brazil"
 nav_order: 7
+has_children: true
 lang: "en"
 alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Implantação/OOF-Implantação/"
 ---

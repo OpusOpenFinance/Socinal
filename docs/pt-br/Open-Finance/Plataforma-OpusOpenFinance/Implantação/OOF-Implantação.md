@@ -3,6 +3,7 @@ layout: default
 title: "Implantação da Plataforma"
 parent: "Opus Open Finance"
 nav_order: 7
+has_children: true
 lang: "pt-br"
 alternate_lang: "/docs/en/Open-Finance/Plataforma-OpusOpenFinance/Implantação/OOF-Implantação/"
 ---
