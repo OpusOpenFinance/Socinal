@@ -65,18 +65,18 @@ As explained in the integration section, the integration is done through the con
 |Pension                            |[Link][Pension]        |
 |Foreign Exchange                   |[Link][Exchanges]      |
 
-[Acquiring]: ../../../../swagger-ui/index.html?api=open-data-acquiring
-[Accounts]: ../../../../swagger-ui/index.html?api=open-data-accounts
-[Capitalization]: ../../../../swagger-ui/index.html?api=open-data-capitalization
-[Channels]: ../../../../swagger-ui/index.html?api=open-data-channels
-[Credit]: ../../../../swagger-ui/index.html?api=open-data-credit-cards
-[Exchanges]: ../../../../swagger-ui/index.html?api=open-data-exchanges
-[Financings]: ../../../../swagger-ui/index.html?api=open-data-financings
-[Insurance]: ../../../../swagger-ui/index.html?api=open-data-insurance
-[Investments]: ../../../../swagger-ui/index.html?api=open-data-investments
-[Inv-financings]: ../../../../swagger-ui/index.html?api=open-data-invoice-financings
-[Loans]: ../../../../swagger-ui/index.html?api=open-data-loans
-[Pension]: ../../../../swagger-ui/index.html?api=open-data-pension
-[Unarranged]: ../../../../swagger-ui/index.html?api=open-data-unarranged
+[Acquiring]: ../../../../swagger-ui/index.html?api=en-open-data-acquiring
+[Accounts]: ../../../../swagger-ui/index.html?api=en-open-data-accounts
+[Capitalization]: ../../../../swagger-ui/index.html?api=en-open-data-capitalization
+[Channels]: ../../../../swagger-ui/index.html?api=en-open-data-channels
+[Credit]: ../../../../swagger-ui/index.html?api=en-open-data-credit-cards
+[Exchanges]: ../../../../swagger-ui/index.html?api=en-open-data-exchanges
+[Financings]: ../../../../swagger-ui/index.html?api=en-open-data-financings
+[Insurance]: ../../../../swagger-ui/index.html?api=en-open-data-insurance
+[Investments]: ../../../../swagger-ui/index.html?api=en-open-data-investments
+[Inv-financings]: ../../../../swagger-ui/index.html?api=en-open-data-invoice-financings
+[Loans]: ../../../../swagger-ui/index.html?api=en-open-data-loans
+[Pension]: ../../../../swagger-ui/index.html?api=en-open-data-pension
+[Unarranged]: ../../../../swagger-ui/index.html?api=en-open-data-unarranged
 
 [Perfis-Open-Finance-Brasil]: ../../Open-Finance-Brasil/PerfisOFB/Dados-abertos.html

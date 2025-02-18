@@ -92,7 +92,7 @@ info:
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 tags:
   - name: Accounts
-    description: Operações para listagem das informações da Conta do Cliente /* Operations for listing Customer Account Information */
+    description: Operations for listing Customer Account Information 
 paths:
   /account-discovery:
     post:

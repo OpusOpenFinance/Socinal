@@ -2149,8 +2149,7 @@ components:
       type: object
       properties:
         externalId:
-          description: 
-            O consentId é o identificador único do consentimento e deve ser um URN - Uniform Resource Name
+          description: O consentId é o identificador único do consentimento e deve ser um URN - Uniform Resource Name
           type: string
           example: urn:amazingbank:899dd8b2-34d1-4c75-b8de-f0ffa51ca720
         personDocumentType:

@@ -2,23 +2,23 @@ openapi: 3.0.0
 info:
   title: API Opus Commons - Integration Layer - Opus Open Finance Brasil
   description: |
-    API de rotas que são gerais para o funcionamento dos conectores de todos os produtos.
-    API com a rota que verifica se dado cliente possui uma conta na instituição financeira necessária para as rotas.
-  version: 1.0.0
-  license:
-    name: Apache 2.0
-    url: 'https://www.apache.org/licenses/LICENSE-2.0'
+    API of routes that are general for the operation of connectors for all products.
+    API with the route that verifies if a given customer has an account at the financial institution required for the routes.
+  version: 0.1.0-alpha
 tags:
   - name: Common
-    description: Operações necessárias para funcionamento geral dos conectores
+    description: Necessary operations for general operation of connectors
 paths:
   /check-account-holder:
     post:
       tags:
         - Common
       operationId: checkAccountHolderStatus
-      summary: Verifica se documento consultado possui conta na detentora
-      description: Método para verificar se a pessoa física ou jurídica mantém conta na instituição financeira
+      summary: Checks if consulted document has account at the holder
+      description: Method to verify if the individual or legal entity maintains an account at the financial institution
+      parameters:
+        - $ref: '#/components/parameters/x-brand-id'
+        - $ref: '#/components/parameters/x-correlation-id'
       requestBody:
         required: true
         content:
@@ -56,32 +56,11 @@ paths:
           $ref: '#/components/responses/Default'
 components:
   schemas:
-    RequestMeta:
-      type: object
-      description: Objeto que contém dados referentes ao contexto no qual o request for recebido.
-      required:
-        - correlationId
-        - brandId
-      properties:
-        correlationId:
-          type: string
-          description: UUID que identifica o correlation ID da requisição realizada. Deve ser propagado para todas as chamadas feitas entre sistemas e logado sempre que possível para facilitar o trace de erros
-          pattern: >-
-            ^(localID:)?[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
-          example: localID:97623ed1-4732-4bf2-8d4b-ae7aced5443b
-        brandId:
-          type: string
-          description: Identificador da marca reportada pelo participante do Open Finance
-          example: cbanco
-          minLength: 1
-          maxLength: 50
-      additionalProperties: false
     CheckAccountHolderRequest:
       type: object
-      description: Payload utilizado para verificação de correntista
+      description: Payload used for account holder verification
       required:
         - data
-        - requestMeta
       properties:
         data:
           type: object
@@ -91,19 +70,17 @@ components:
             loggedUserDocument:
               type: string
               maxLength: 11
-              description: Número do CPF do usuário.
+              description: User's CPF number.
               example:
                 '11111111111'
               pattern: ^\d{11}$
             businessEntityDocument:
               type: string
               maxLength: 14
-              description: Número do CNPJ da empresa.
+              description: Company's CNPJ number.
               example:
                 '11111111111111'
               pattern: ^\d{14}$
-        requestMeta:
-          $ref: '#/components/schemas/RequestMeta'
     CheckAccountHolderResponse:
       type: object
       required:
@@ -111,13 +88,13 @@ components:
       properties:
         data:
           type: object
-          description: Verifica se documento consultado possui conta na detentora
+          description: Checks if consulted document has account at the holder
           required:
             - isAccountHolder
           properties:
             isAccountHolder:
               type: boolean
-              description: Indica se documento consultado possui conta na detentora
+              description: Indicates whether the consulted document has an account at the holder
               example: 'true'
           additionalProperties: false
       additionalProperties: false
@@ -138,47 +115,69 @@ components:
               - detail
             properties:
               code:
-                description: Código de erro específico do endpoint
+                description: Endpoint specific error code
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 255
               title:
-                description: Título legível por humanos deste erro específico
+                description: Human-readable title for this specific error
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 255
               detail:
-                description: Descrição legível por humanos deste erro específico
+                description: Human-readable description of this specific error
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 2048
+  parameters:
+    x-brand-id:
+      name: x-brand-id
+      in: header
+      description: Brand identifier reported by the Open Finance participant
+      required: true
+      schema:
+        type: string
+        example: cbanco
+        minLength: 1
+        maxLength: 50
+    x-correlation-id:
+      name: x-correlation-id
+      in: header
+      description: UUID that identifies the correlation ID of the request made. It must be
+            propagated to all calls made between systems and logged whenever
+            possible to facilitate error tracing
+      required: true
+      schema:
+        type: string
+        format: uuid
+        example: 97623ed1-4732-4bf2-8d4b-ae7aced5443b
   responses:
     OKResponseCheckAccountHolder:
-      description: 'Verificou com sucesso se documento consultado possui conta na detentora'
+      description: 'Successfully verified if consulted document has account at the holder'
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/CheckAccountHolderResponse'
     BadRequest:
-      description: 'A requisição foi malformada, omitindo atributos obrigatórios, seja no payload ou através de atributos na URL.'
+      description: 'The request was malformed, omitting mandatory attributes, either in the payload or through URL attributes.'
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     Forbidden:
-      description: O token tem escopo incorreto ou uma política de segurança foi violada
+      description: The token has incorrect scope or a security policy has been violated
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     GatewayTimeout:
-      description: GATEWAY TIMEOUT - A requisição não foi atendida dentro do tempo limite estabelecido
+      description: GATEWAY TIMEOUT - The request was not answered within the established timeout
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     InternalServerError:
-      description: Ocorreu um erro no gateway da API ou no microsserviço
+      description: An error occurred in the API gateway or microservice
       content:
         application/json; charset=utf-8:
           schema:
@@ -190,49 +189,49 @@ components:
           schema:
             $ref: '#/components/schemas/ResponseError'
     MethodNotAllowed:
-      description: O consumidor tentou acessar o recurso com um método não suportado
+      description: The consumer tried to access the resource with an unsupported method
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     NotAcceptable:
-      description: A solicitação continha um cabeçalho Accept diferente dos tipos de mídia permitidos ou um conjunto de caracteres diferente de UTF-8
+      description: The request contained an Accept header different from the allowed media types or a character set other than UTF-8
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     NotFound:
-      description: O recurso solicitado não existe ou não foi implementado
+      description: The requested resource does not exist or has not been implemented
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     TooManyRequests:
-      description: 'A operação foi recusada, pois muitas solicitações foram feitas dentro de um determinado período ou o limite global de requisições concorrentes foi atingido'
+      description: 'The operation was refused because too many requests were made within a certain period or the global limit of concurrent requests was reached'
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     Unauthorized:
-      description: Cabeçalho de autenticação ausente/inválido ou token inválido
+      description: Missing/invalid authentication header or invalid token
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     UnprocessableEntity:
-      description: 'A sintaxe da requisição esta correta, mas não foi possível processar as instruções presentes.'
+      description: 'The request syntax is correct, but it was not possible to process the instructions present.'
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     Default:
-      description: Erro inesperado.
+      description: Unexpected error.
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     SiteIsOverloaded:
-      description: 'O site está sobrecarregado e a operação foi recusada, pois foi atingido o limite máximo de TPS global, neste momento.'
+      description: 'The site is overloaded and the operation was refused because the global TPS maximum limit was reached at this moment.'
       content:
         application/json; charset=utf-8:
           schema:
