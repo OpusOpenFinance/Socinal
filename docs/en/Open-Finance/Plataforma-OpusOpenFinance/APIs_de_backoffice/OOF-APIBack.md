@@ -3,24 +3,26 @@ layout: default
 title: "Consent Management APIs"
 parent: "Opus Open Finance Brazil"
 nav_order: 6
+lang: "en"
+alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/APIs_de_backoffice/OOF-APIBack/"
 ---
 
-# APIs de Gestão de Consentimento
+# Consent Management APIs
 
-Os consentimentos (tanto de compartilhamento de dados quanto de pagamentos) exercem um papel central em todo o modelo de funcionamento do *Open Finance Brasil*,  garantindo que todas as transações e operações dentro do ecossistema sejam realizadas com a devida permissão explícita do cliente final.
+Consent (both data sharing and payment) plays a central role in the entire operational model of *Open Finance Brasil*, ensuring that all transactions and operations within the ecosystem are carried out with the explicit permission of the end customer.
 
-A **Plataforma Opus Open Finance** realiza a gestão completa dos consentimentos e os armazena de forma segura em sua base de dados interna, inclusive garantido que eventuais dados pessoais sensíveis associados a esses consentimentos sejam sempre encriptados quando em repouso.
+The **Opus Open Finance Platform** fully manages the consents and stores them securely in its internal database, ensuring that any sensitive personal data associated with these consents is always encrypted while at rest.
 
-Os consentimentos só podem ser criados (e revogados) através de ação direta do cliente final, seja quando ele autoriza a realização de um pagamento ou quando fornece um consentimento de compartilhamento de dados com um participante devidamente autorizado do *Open Finance Brasil*.
+Consents can only be created (and revoked) through direct action from the end customer, whether when they authorize a payment or provide consent for data sharing with a duly authorized participant of *Open Finance Brasil*.
 
-Ao mesmo tempo, a criação ou revogação de um consentimento é resultado da interação segura entre participantes do ecossistema e regulada por protocolos de segurança bastante estritos. Toda e qualquer requisição recebida pela plataforma só pode ser realizada se houver um consentimento ativo e que possua as permissões adequadas para a realização da operação.
+At the same time, the creation or revocation of a consent is the result of secure interaction between ecosystem participants and regulated by strict security protocols. Any request received by the platform can only be processed if there is an active consent with the appropriate permissions for performing the operation.
 
-Dessa forma, toda a criação e gestão do tempo de vida e revogação de consentimentos é de reponsabilidade exclusiva da plataforma.
+Thus, the entire creation, lifecycle management, and revocation of consents is the exclusive responsibility of the platform.
 
-A API de Gestão de Consentimentos torna possível a aplicações da instituição financeira extrair informações sobre os consentimentos (ativos ou não) referentes aos pagamentos realizados e aos compartilhamentos de dados cedidos por seus clientes.
+The Consent Management API allows financial institution applications to extract information about the consents (whether active or not) related to payments made and data shared by their customers.
 
 ## *Open API Specification*
 
-As definições da API em formato Open API Specification podem ser encontradas [aqui][API-backoffice].
+The definitions of the API in Open API Specification format can be found [here][API-backoffice].
 
-[API-backoffice]: ../../../../swagger-ui/index.html?api=en-OAS-back-dados
+[API-backoffice]: ../../../../swagger-ui/index.html?api=OAS-back-dados

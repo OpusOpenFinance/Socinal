@@ -1,24 +1,26 @@
 ---
 layout: default
-title: "Treasure Titles API"
-parent: "Investimentos"
+title: "Direct Treasury Titles API"
+parent: "Investments"
 nav_order: 5
+lang: "en"
+alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Integração/dados-investimentos/dados-tesouro/"
 ---
 
-# API de Títulos do Tesouro Direto
+# Direct Treasury Titles API
 
-API da *camada de integração* que retorna dados de títulos do tesouro direto mantidos pelo cliente na instituição Transmissora de Dados.
+Integration layer API that returns data on direct treasury titles held by the client at the Data Transmitting Institution.
 
-Em linhas gerais, existem *endpoints* para:
+In general, there are *endpoints* for:
 
-- Obter os registros de operações dos títulos do tesouro direto mantidos pelo cliente;
-- Obter os registros de identificação dos títulos do tesouro direto;
-- Obter os registros de posição nos títulos do tesouro direto;
-- Obter os registros de histórico de transações dos últimos 12 meses;
-- Obter os registros de histórico dos últimos sete dias.
+- Retrieving records of operations of the direct treasury titles held by the client;
+- Retrieving the identification records of the direct treasury titles;
+- Retrieving the position records in the direct treasury titles;
+- Retrieving transaction history records for the last 12 months;
+- Retrieving history records for the last seven days.
 
-## *Open API Specification* da API
+## *Open API Specification* of the API
 
-A documentação da API de títulos do tesouro direto a ser construída na *camada de integração* pode ser encontrada [aqui][API-Tesouro-Direto]
+The documentation for the direct treasury titles API to be built in the integration layer can be found [here][API-Treasure-Direct]
 
-[API-Tesouro-Direto]: ../../../../../swagger-ui/index.html?api=en-data-treasure-titles
+[API-Treasure-Direct]: ../../../../../swagger-ui/index.html?api=data-treasure-titles

@@ -1,8 +1,10 @@
 ---
 layout: default
 title: "Deploy da Plataforma"
-parent: "implantação da Plataforma Opus Open Finance"
+parent: "Implantação da Plataforma"
 nav_order: 6
+lang: "pt-br"
+alternate_lang: "/docs/en/Open-Finance/Plataforma-OpusOpenFinance/Implantação/OOF-Deploy/"
 ---
 
 ## Infraestrutura Core do Opus Open Finance

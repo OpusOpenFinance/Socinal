@@ -3,6 +3,8 @@ layout: default
 title: "Pagamentos"
 parent: "Integração da Plataforma"
 nav_order: 3
+lang: "pt-br"
+alternate_lang: "/docs/en/Open-Finance/Plataforma-OpusOpenFinance/Integração/Conectores-Pagto/"
 ---
 
 ## Pagamentos

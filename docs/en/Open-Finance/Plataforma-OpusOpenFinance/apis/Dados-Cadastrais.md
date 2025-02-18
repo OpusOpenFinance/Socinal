@@ -1,29 +1,31 @@
 ---
 layout: default
-title: "Customers API"
+title: "Personal Data API"
 parent: "Data Sharing"
 nav_order: 1
+lang: "en"
+alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/Dados-Cadastrais/"
 ---
 
-# API de Dados cadastrais
+# Personal Data API
 
-API da *camada de integração* que retorna dados cadastrais de clientes e seus representantes, incluindo dados de identificação, de qualificação financeira, informações sobre representantes cadastrados e sobre o relacionamento financeiro do cliente com a instituição financeira transmissora de dados.
+The *integration layer* API that returns personal data for clients and their representatives, including identification data, financial qualification information, details about registered representatives, and the financial relationship between the client and the transmitting financial institution.
 
-Essa API separa pessoa natural de pessoa jurídica, estabelecendo *endpoints* distintos para cada tipo.
+This API separates individual clients from legal entities, providing distinct *endpoints* for each type.
 
-Antes de qualquer *endpoint* ser acionado, a plataforma já verificou a autenticidade da origem da chamada e a validade, data de expiração, permissões e escopo do consentimento enviado pelo receptor, garantindo que se trata de uma requisição autorizada.
+Before any *endpoint* is triggered, the platform has already verified the authenticity of the request's origin, the validity, expiration date, permissions, and scope of the consent sent by the receiver, ensuring that the request is authorized.
 
-Em linhas gerais, existem *endpoints* para:
+In general, there are *endpoints* for:
 
-- Obter os registros de identificação de pessoa natural;
-- Obter os registros de qualificação de pessoa natural;
-- Obter os registros de relacionamento com a instituição financeira e de representantes da pessoa natural
-- Obter os registros de identificação de pessoa jurídica;
-- Obter os registros de qualificação de pessoa jurídica;
-- Obter os registros de relacionamento com a instituição financeira e de representantes da pessoa jurídica
+- Retrieving identification records for individuals;
+- Retrieving qualification records for individuals;
+- Retrieving relationship records with the financial institution and representatives of the individual;
+- Retrieving identification records for legal entities;
+- Retrieving qualification records for legal entities;
+- Retrieving relationship records with the financial institution and representatives of the legal entity.
 
-## *Open API Specification* da API
+## *Open API Specification* of the API
 
-A documentação da API de Dados Cadastrais a ser construída na *camada de integração* pode ser encontrada [aqui][API-Dados-cadastrais]
+The documentation for the Personal Data API to be built in the *integration layer* can be found [here][API-Dados-cadastrais].
 
-[API-Dados-cadastrais]: ../../../../swagger-ui/index.html?api=en-Dados-cadastrais
+[API-Dados-cadastrais]: ../../../../swagger-ui/index.html?api=Dados-cadastrais

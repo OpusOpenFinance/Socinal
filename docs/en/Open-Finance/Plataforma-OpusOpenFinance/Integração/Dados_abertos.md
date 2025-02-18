@@ -3,65 +3,67 @@ layout: default
 title: "Open Data"
 parent: "Platform Integration"
 nav_order: 1
+lang: "en"
+alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Integração/Dados_abertos/"
 ---
 
-# Introdução
+# Introduction
 
-O perfil de dados abertos, ou fase 1 + 4A, corresponde aos dados públicos que as instituições participantes do Open Finance devem divulgar ao ecossistema. Para saber mais informações sobre o perfil de dados abertos, [veja aqui][OOF-Dados-Abertos].
-O perfil de dados abertos também exige uma integração com o produto, entretanto funciona de maneira muito mais simples. A proposta do perfil de dados abertos é ter informações não sigilosas do participante divulgadas publicamente. Para tal, não se faz necessário uma integração super sofisticada.
+The open data profile, or phase 1 + 4A, refers to the public data that participating institutions in Open Finance must disclose to the ecosystem. For more information on the open data profile, [see here][Perfis-Open-Finance-Brasil].
+The open data profile also requires integration with the product, but it is much simpler. The purpose of the open data profile is to have non-sensitive information from the participant publicly disclosed. To achieve this, a highly sophisticated integration is not necessary.
 
-## Integração
+## Integration
 
-A integração do perfil de dados abertos não exige conexão com os sistemas de retaguarda do cliente. O que nós sugerimos é a construção de um arquivo JSON estático ou dinâmico para integrar ao produto. A integração é feita a partir da camada dos conetores e, portanto, cada uma das APIs regulatórias de dados abertos terá seu conector correspondente. Dessa forma, é necessário escrever um JSON para cada uma das APIs disponíveis. Claro, apenas os produtos que as instituições oferecem.
+The integration of the open data profile does not require connection to the client’s back-end systems. What we suggest is building a static or dynamic JSON file to integrate with the product. The integration is done through the connector layer, so each of the regulatory open data APIs will have its corresponding connector. Therefore, it is necessary to write a JSON for each of the available APIs. Of course, only the products that the institutions offer.
 
-## APIs de dados abertos
+## Open Data APIs
 
-### Canais de atendimento
+### Service Channels
 
-A API de canais de atendimento disponibiliza quais as informações dos canais de atendimento da instituição, como:
+The service channels API provides information about the institution's service channels, such as:
 
-1. Agências físicas
-2. Canais de atendimento eletrônico
-3. Canais de atendimento telefônico
-4. Correspondentes bancários da IF
-5. Terminais de autoatendimento
+1. Physical branches
+2. Electronic service channels
+3. Telephone service channels
+4. Correspondent bank agents
+5. Self-service terminals
 
-### Produtos
+### Products
 
-As APIs de produtos são referentes aos produtos que a instituição oferece, elas podem ser:
+The product APIs refer to the products offered by the institution, and they may include:
 
-1. Contas
-2. Empréstimos
-3. Financiamentos
-4. Direitos creditórios descontados (antecipação de recebíveis)
-5. Adiantamento a depositantes (cheque especial)
-6. Cartão de crédito
-7. Investimento
-8. Seguros
-9. Credenciamento
-10. Títulos de capitalização
-11. Previdência
-12. Câmbio
+1. Accounts
+2. Loans
+3. Financing
+4. Discounted receivables (receivables advance)
+5. Advances to depositors (overdraft)
+6. Credit cards
+7. Investments
+8. Insurance
+9. Acquiring
+10. Capitalization bonds
+11. Pension
+12. Foreign exchange
 
-## Arquivo JSON para integração
+## JSON File for Integration
 
-Como explicado no tópico integração, a integração é feita através do conector que pega os dados de um arquivo em formato JSON estático ou dinâmico. Para construir esse arquivo, basta se apoiar nos campos de "response" esperados nas especificações da tabela abaixo. Uma vez que o arquivo foi construído e respeita todos os modelos dos produtos oferecidos pela instituição, é necessário construir o conector e plugá-lo ao produto. Tabela de especificações:
+As explained in the integration section, the integration is done through the connector that takes data from a static or dynamic JSON. To build this file, simply follow the "response" fields expected in the specifications in the table below. Once the file is built and follows all the models of the products offered by the institution, the connector must be built and plugged into the product. Specifications table:
 
 |API                               |Link Open API          |
 |----------------------------------|:---------------------:|
-|Canais de atendimento             |[Link][Channels]       |
-|Contas                            |[Link][Accounts]       |
-|Empréstimos                       |[Link][Loans]          |
-|Financiamentos                    |[Link][Financings]     |
-|Direitos Creditórios descontados  |[Link][Unarranged]     |
-|Adiantamento a depositantes       |[Link][Inv-financings] |
-|Cartão de crédito                 |[Link][Credit]         |
-|Investimentos                     |[Link][Investments]    |
-|Seguros                           |[Link][Insurance]      |
-|Credenciamento                    |[Link][Acquiring]      |
-|Títulos de capitalização          |[Link][Capitalization] |
-|Previdência                       |[Link][Pension]        |
-|Câmbio                            |[Link][Exchanges]      |
+|Service Channels                  |[Link][Channels]       |
+|Accounts                           |[Link][Accounts]       |
+|Loans                              |[Link][Loans]          |
+|Financing                          |[Link][Financings]     |
+|Discounted Receivables            |[Link][Unarranged]     |
+|Advances to Depositors            |[Link][Inv-financings] |
+|Credit Cards                       |[Link][Credit]         |
+|Investments                        |[Link][Investments]    |
+|Insurance                          |[Link][Insurance]      |
+|Acquiring                          |[Link][Acquiring]      |
+|Capitalization Bonds              |[Link][Capitalization] |
+|Pension                            |[Link][Pension]        |
+|Foreign Exchange                   |[Link][Exchanges]      |
 
 [Acquiring]: ../../../../swagger-ui/index.html?api=en-open-data-acquiring
 [Accounts]: ../../../../swagger-ui/index.html?api=en-open-data-accounts
@@ -77,4 +79,4 @@ Como explicado no tópico integração, a integração é feita através do cone
 [Pension]: ../../../../swagger-ui/index.html?api=en-open-data-pension
 [Unarranged]: ../../../../swagger-ui/index.html?api=en-open-data-unarranged
 
-[OOF-Dados-Abertos]: ../../Open-Finance-Brasil/PerfisOFB/Dados-abertos.html
+[Perfis-Open-Finance-Brasil]: ../../Open-Finance-Brasil/PerfisOFB/Dados-abertos.html

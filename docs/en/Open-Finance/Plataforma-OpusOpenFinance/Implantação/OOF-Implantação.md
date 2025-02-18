@@ -3,91 +3,95 @@ layout: default
 title: "Platform Implementation"
 parent: "Opus Open Finance Brazil"
 nav_order: 7
----
-## Introdução
-
-O processo de implantação da **Plataforma Opus Open Finance** segue uma sequência de etapas bem definida que incluem desde a correta configuração dos ambientes de execução necessários até a efetiva entrada em produção. A equipe da Opus acompanha todos os passos da implantação, que serão apresentados abaixo, de maneira a garantir o sucesso de cada etapa.
-
-Durante a implantação, um **Delivery Manager** do time da Opus é designado para gerenciar o processo de ponta a ponta, mantendo o contato contínuo com o cliente. Após a implantação, a Opus e o cliente deverão definir quem serão os pontos focais para o dia a dia do relacionamento tanto para acompanhar a operação e o devido cumprimento dos SLAs regulatórios quanto para avaliar e implementar novas exigências regulatórias.
-
-Um ponto importante a ressaltar é que as etapas mais trabalhosas do processo de implantação são aquelas relacionadas à integração da **Plataforma Opus Open Finance** aos sistemas de retaguarda e canais de atendimento (aplicativo móvel e Web Internet Banking) da instituição financeira. Tais etapas exigem o desenvolvimento de novos artefatos de software e a adaptação das aplicações de atendimento aos clientes. Na documentação existem seções específicas que detalham as etapas de integração necessárias para cada perfil de participação da instituição financeira no *Open Finance Brasil*.
-
+has_children: true
+lang: "en"
+alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Implantação/OOF-Implantação/"
 ---
 
-## Roadmap de Implantação
+## Introduction
+
+The deployment process for the **Opus Open Finance Platform** follows a well-defined sequence of steps, ranging from the proper configuration of the necessary execution environments to the actual production launch. The Opus team oversees all deployment steps, which are presented below, ensuring the success of each stage.
+
+During deployment, an **Opus Delivery Manager** is assigned to manage the end-to-end process, maintaining continuous contact with the client. After deployment, Opus and the client will define the focal points for the day-to-day relationship, both for monitoring operations and ensuring compliance with regulatory SLAs, as well as evaluating and implementing new regulatory requirements.
+
+It is important to highlight that the most labor-intensive stages of the deployment process are those related to integrating the **Opus Open Finance Platform** with the back-end systems and customer service channels (mobile app and Web Internet Banking) of the financial institution. These stages require the development of new software artifacts and the adaptation of customer service applications. The documentation includes specific sections that detail the necessary integration steps for each profile of the financial institution's participation in *Open Finance Brasil*.
+
+---
+
+## Deployment Roadmap
 
 ![Roadmap](./images/implantação.png)
 
 ### 1. **Kickoff**
 
-- Apresentação do plano de projeto com detalhamento de atividades e cronograma.
-- Definição da equipe necessária para cada etapa do processo.
-- Introdução à equipe de implantação.
+- Presentation of the project plan with detailed activities and schedule.
+- Definition of the team required for each step of the process.
+- Introduction to the deployment team.
 
 ---
 
-### 2. **Configuração dos Ambientes**
+### 2. **Environment Setup**
 
-- Provisionamento dos ambientes:
-  - Desenvolvimento
-  - Homologação
-  - Produção
-- Configuração da **Plataforma Opus Open Finance** nos ambientes.
-- Configuração do *sandbox* do diretório de participantes do Open Finance Brasil, que é o ambiente seguro de testes do ecossistema voltado para a realização de testes de integração.
-
----
-
-### 3. **Certificação OpenID**
-
-- Execução de testes para validação do ambiente de homologação.
-- Preparação das evidências para envio à OpenID ([certificações RP e OP](../../Open-Finance-Brasil/OFB-Certificações.html)).
-- Efetuação do pagamento da taxa de certificação.
-- Publicação da instituição no [site oficial da OpenID][Site-OpenID].
+- Provisioning of environments:
+  - Development
+  - Staging
+  - Production
+- Configuration of the **Opus Open Finance Platform** in the environments.
+- Configuration of the *sandbox* for the Open Finance Brasil participant directory, which is the secure testing environment for the ecosystem aimed at integration testing.
 
 ---
 
-### 4. **Integração das Telas**
+### 3. **OpenID Certification**
 
-- Construção das telas da [jornada de consentimento](../../Open-Finance-Brasil/JornadaConsentimento/OFB-JornadaConsentimento.html):
-  - Para web, aplicativo e handoff (caso necessário).
-  - De acordo com o <a href=https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17378535/Guia+de+Experi+ncia+do+Usu+rio target=_blank>guia de experiência do usuário</a> do *Open Finance Brasil*.
-- Execução de testes da jornada de consentimento.
-- Integração completa da jornada nos canais da instituição.
-
----
-
-### 5. **Layer de Integração**
-
-- Integração dos sistemas de retaguarda da instituição ao produto, de acordo com o [perfil de participação da instituição financeira](../../Open-Finance-Brasil/PerfisOFB/OFB-Perfis.html). Tipicamente, [envolve a construção do *layer de integração*](../Integração/OOF-Integração.html) adaptado aos sistemas de retaguarda da instituição.
-- **Nota:** Normalmente, não é necessário adaptar os sistemas de retaguarda em si, mas mapear a forma de extração das informações referentes a cada produto financeiro oferecido pela instituição (no caso do perfil transmissor de dados), ou a forma de realizar pagamentos e consultar o resultado dessas operações (no caso do perfil detentor de conta). A camada de integração funciona justamente como um adaptador entre os formatos internos dos sistemas de retaguarda e aqueles exigidos pelo *Open Finance Brasil*.
+- Execution of tests for validation of the staging environment.
+- Preparation of evidence for submission to OpenID ([RP and OP certifications](../../Open-Finance-Brasil/OFB-Certificações.html)).
+- Payment of the certification fee.
+- Publication of the institution on the [official OpenID website][Site-OpenID].
 
 ---
 
-### 6. **Migração**
+### 4. **Screen Integration**
 
-- Migração de consentimentos e DCRs para a nova base do produto.
-- Necessária apenas para instituições que já participam do Open Finance com outra solução ou tecnologia própria.
-
----
-
-### 7. **Configurações Finais**
-
-- Testes da jornada completa com layer de integração e telas prontas.
-- Execução de testes funcionais.
-- Configuração do diretório de participantes de produção.
+- Development of the [consent journey screens](../../Open-Finance-Brasil/JornadaConsentimento/OFB-JornadaConsentimento.html):
+  - For web, app, and handoff (if necessary).
+  - According to the <a href=https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17378535/Guia+de+Experi+ncia+do+Usu+rio target=_blank>Open Finance Brasil user experience guide</a>.
+- Execution of tests for the consent journey.
+- Full integration of the journey in the institution’s channels.
 
 ---
 
-### 8. **Certificados Digitais**
+### 5. **Integration Layer**
 
-- Aquisição dos [certificados digitais](../../Open-Finance-Brasil/OFB-Certificações.html).
-- Cadastro dos certificados no diretório.
+- Integration of the institution’s back-end systems with the product, according to the [financial institution’s participation profile](../../Open-Finance-Brasil/PerfisOFB/OFB-Perfis.html). Typically, [this involves building the *integration layer*](../Integração/OOF-Integração.html) adapted to the institution’s back-end systems.
+- **Note:** Usually, it is not necessary to adapt the back-end systems themselves, but to map how information is extracted for each financial product offered by the institution (in the case of the data transmitter profile), or how to process payments and check the results of these operations (in the case of the account holder profile). The integration layer acts as an adapter between the internal formats of the back-end systems and those required by *Open Finance Brasil*.
+
+---
+
+### 6. **Migration**
+
+- Migration of consents and DCRs to the new product database.
+- Necessary only for institutions already participating in Open Finance with another solution or proprietary technology.
+
+---
+
+### 7. **Final Configurations**
+
+- Full journey testing with the integration layer and screens ready.
+- Execution of functional tests.
+- Configuration of the production participant directory.
+
+---
+
+### 8. **Digital Certificates**
+
+- Acquisition of [digital certificates](../../Open-Finance-Brasil/OFB-Certificações.html).
+- Registration of certificates in the directory.
 
 ---
 
 ### 9. **Go-Live**
 
-- Início do monitoramento da solução.
-- Envio de relatórios regulatórios.
+- Start of solution monitoring.
+- Submission of regulatory reports.
 
 [Site-OpenID]: https://openid.net/certification/#FAPI_OPs

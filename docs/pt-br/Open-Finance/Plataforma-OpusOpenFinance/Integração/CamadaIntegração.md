@@ -4,6 +4,8 @@ title: "Compartilhamento de Dados"
 parent: "Integração da Plataforma"
 nav_order: 2
 has_children: true
+lang: "pt-br"
+alternate_lang: "/docs/en/Open-Finance/Plataforma-OpusOpenFinance/Integração/CamadaIntegração/"
 ---
 
 # Compartilhamento de dados

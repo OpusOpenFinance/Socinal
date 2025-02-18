@@ -4,36 +4,45 @@ title: "Credit Operations"
 parent: "Data Sharing"
 nav_order: 4
 has_children: true
+lang: "en"
+alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Integração/OOF-Crédito/"
 ---
 
-# Operações de Crédito
+# Credit Operations
 
-Todas as modalidades de operações de crédito são passíveis de compartilhamento de dados no escopo do *Open Finance Brasil*.
+All types of credit operations are eligible for data sharing within the scope of *Open Finance Brasil*.
 
-O consentimento para compartilhamento de dados efetuado pelo cliente é realizado por agrupamento de produtos. Isso significa que, se o cliente conceder um consentimento de compartilhamento de dados para "*Operações de Crédito*" todas as modalidades estarão incluídas.
+The consent for data sharing granted by the customer is done by grouping products. This means that if the customer grants data sharing consent for "Credit Operations", all modalities will be included.
 
-As diferentes modalidades de operações de crédito são:
+The different types of credit operations are:
 
-- Empréstimos
-- Financiamentos
-- Adiantamento a depositantes
-- Direitos creditórios Descontados
+- Loans
+- Financing
+- Advances to depositors
+- Discounted receivables
 
-Dado que cada uma dessas modalidades possui suas próprias características, a *camada de integração* deve implementar quatro APIs distintas, considerando seus diferentes tipos de dados.
+Since each of these modalities has its own characteristics, the *integration layer* must implement four distinct APIs, considering their different types of data.
 
-Na documentação oficial do *Open Finance Brasil* há uma tabela que resume as operações de crédito associadas a cada modalidade, bem como a API que deve se responsabilizar por ela, e que pode ser visualizada [aqui][Tabela-Crédito-OFB].
+The official documentation of *Open Finance Brasil* has a table summarizing the credit operations associated with each modality, as well as the API that should be responsible for it, which can be viewed [here][Tabela-Crédito-OFB].
 
-Todas as APIs compartilham algumas características importantes definidas pelo regulatório:
+All APIs share some important characteristics defined by the regulator:
 
-- Todas as operações de crédito dos últimos 12 meses são escopo de exposição no *Open Finance Brasil*, salvas as exceções apresentadas nos itens subsequentes abaixo;
-- Operações de crédito liquidadas há mais de 12 meses em relação à data de consulta pela instituição receptora não estarão mais disponíveis (há um *status* de retorno nas APIs, *UNAVAILABLE*, para sinalizar eventuais consultas específicas a operações que excederam esse limite de prazo);
-- Casos de uso em que um cliente final efetue um consentimento para a qual um dos contratos exija a aprovação de múltiplas alçadas (*PENDING_AUTHORISATION*) e outro(s) contrato(s) esteja(m) disponível para consulta (*AVAILABLE*), o comportamento esperado é que cada contrato tenha seu *status* representado de forma independente, disponibilizando imediatamente os contratos já aprovados.
-- Operações de credito canceladas não são escopo de exposição.
-- Operações de crédito que tenham ido para perda não são escopo de exposição no Open Finance;
-- Operações de crédito que portadas para outra instituição deixam de ser escopo de exposição.
+- All credit operations in the last 12 months are within the scope of exposure in *Open Finance Brasil*, except for the exceptions presented in the items below;
+- Credit operations that were settled more than 12 months ago from the consultation date by the receiving institution will no longer be available (there is a *status* return in the APIs, *UNAVAILABLE*, to signal any specific queries for operations that exceeded this time limit);
+- In use cases where a final customer grants consent for a contract that requires approval from multiple authorities (*PENDING_AUTHORISATION*) and other contracts are available for consultation (*AVAILABLE*), the expected behavior is that each contract has its *status* represented independently, immediately making the approved contracts available.
+- Canceled credit operations are not within the scope of exposure.
+- Credit operations that have gone into default are not within the scope of exposure in Open Finance;
+- Credit operations that have been transferred to another institution are no longer within the scope of exposure.
 
-Contratos cancelados, que tenham ido para perda ou portados, se tiverem sido compartilhados anteriormente, deverão ser sinalizados com *status UNAVAILABLE*.
+Canceled contracts, those that have gone into default, or those that have been transferred, if they were shared previously, should be marked with *status UNAVAILABLE*.
 
-O detalhamento das APIs de cada modalidade de operação de crédito pode ser encontrado em sua página específica nesta documentação.
+The details of the APIs for each credit operation modality can be found in the table below:
+
+|API                             |Link                     |
+|--------------------------------|:-----------------------:|
+|Loan                            |[Link](../../../../apis/Empréstimo.html)|
+|Financing                       |[Link](../../../../apis/Financiamento.html)|
+|Discounted Receivables          |[Link](../../../../apis/DireitosCreditórios.html)|
+|Advances to Deposit Holders     |[Link](../../../../apis/Adiantamento.html)|
 
 [Tabela-Crédito-OFB]: https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/320176146/Orienta+es+-+DC+Opera+es+de+cr+dito#Tabela-com-as-modalidades-e-submodalidades-das-APIs-de-opera%C3%A7%C3%B5es-de-cr%C3%A9dito

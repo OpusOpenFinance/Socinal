@@ -3,6 +3,8 @@ layout: default
 title: "APIs de Gestão de Consentimentos"
 parent: "Opus Open Finance"
 nav_order: 6
+lang: "pt-br"
+alternate_lang: "/docs/en/Open-Finance/Plataforma-OpusOpenFinance/APIs_de_backoffice/OOF-APIBack/"
 ---
 
 # APIs de Gestão de Consentimento
