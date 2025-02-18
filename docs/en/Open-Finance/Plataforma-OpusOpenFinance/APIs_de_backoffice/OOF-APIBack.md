@@ -25,4 +25,4 @@ The Consent Management API allows financial institution applications to extract 
 
 The definitions of the API in Open API Specification format can be found [here][API-backoffice].
 
-[API-backoffice]: ../../../../swagger-ui/index.html?api=OAS-back-dados
+[API-backoffice]: ../../../../swagger-ui/index.html?api=en-OAS-back-dados

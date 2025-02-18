@@ -23,4 +23,4 @@ In general, there are *endpoints* for:
 
 The documentation for the variable income API to be built in the integration layer can be found [here][API-Variable-Income]
 
-[API-Variable-Income]: ../../../../../swagger-ui/index.html?api=data-variable-incomes
+[API-Variable-Income]: ../../../../../swagger-ui/index.html?api=en-data-variable-incomes

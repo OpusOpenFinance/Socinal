@@ -28,4 +28,4 @@ There are endpoints for:
 
 The documentation for the Credit Card API to be built in the *integration layer* can be found [here][API-Cartão-de-crédito].
 
-[API-Cartão-de-crédito]: ../../../../swagger-ui/index.html?api=Cartão-de-crédito
+[API-Cartão-de-crédito]: ../../../../swagger-ui/index.html?api=en-Cartão-de-crédito

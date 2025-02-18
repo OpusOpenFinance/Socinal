@@ -28,4 +28,4 @@ In general, there are *endpoints* for:
 
 The documentation for the Personal Data API to be built in the *integration layer* can be found [here][API-Dados-cadastrais].
 
-[API-Dados-cadastrais]: ../../../../swagger-ui/index.html?api=Dados-cadastrais
+[API-Dados-cadastrais]: ../../../../swagger-ui/index.html?api=en-Dados-cadastrais

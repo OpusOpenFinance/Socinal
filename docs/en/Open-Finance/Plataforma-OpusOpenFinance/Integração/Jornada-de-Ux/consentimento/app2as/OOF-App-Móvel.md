@@ -69,4 +69,4 @@ Several scenarios are mocked and triggered through the respective initial URLs:
 
 To run the mock, simply import the JSON into the *Mockoon* tool and start the "Opus Open Finance Authorization Server Apps API" environment server.
 
-[API-Mobile]: ../../../../../../../swagger-ui/index.html?api=Mobile
+[API-Mobile]: ../../../../../../../swagger-ui/index.html?api=en-Mobile

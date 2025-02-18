@@ -33,4 +33,4 @@ There are endpoints for:
 
 The documentation for the Foreign Exchange API to be built in the *integration layer* can be found [here][API-Câmbio].
 
-[API-Câmbio]: ../../../../swagger-ui/index.html?api=Câmbio
+[API-Câmbio]: ../../../../swagger-ui/index.html?api=en-Câmbio

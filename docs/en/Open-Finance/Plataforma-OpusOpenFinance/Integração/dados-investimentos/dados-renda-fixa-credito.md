@@ -23,4 +23,4 @@ In general, there are *endpoints* for:
 
 The documentation for the credit fixed income API to be built in the integration layer can be found [here][API-Credit-Fixed-Income]
 
-[API-Credit-Fixed-Income]: ../../../../../swagger-ui/index.html?api=data-credit-fixed-incomes
+[API-Credit-Fixed-Income]: ../../../../../swagger-ui/index.html?api=en-data-credit-fixed-incomes
