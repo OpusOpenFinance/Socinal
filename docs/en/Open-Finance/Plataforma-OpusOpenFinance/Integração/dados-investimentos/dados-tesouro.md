@@ -23,4 +23,4 @@ In general, there are *endpoints* for:
 
 The documentation for the direct treasury titles API to be built in the integration layer can be found [here][API-Treasure-Direct]
 
-[API-Treasure-Direct]: ../../../../../swagger-ui/index.html?api=data-treasure-titles
+[API-Treasure-Direct]: ../../../../../swagger-ui/index.html?api=en-data-treasure-titles

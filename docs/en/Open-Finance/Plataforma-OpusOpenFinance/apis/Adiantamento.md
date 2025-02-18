@@ -27,5 +27,4 @@ There are endpoints for:
 
 The documentation for the Credit Operations API to be built in the *integration layer* can be found [here][API-Adiantamento].
 
-[API-Adiantamento]: ../../../../swagger-ui/index.html?api=Adiantamento
-
+[API-Adiantamento]: ../../../../swagger-ui/index.html?api=en-Adiantamento

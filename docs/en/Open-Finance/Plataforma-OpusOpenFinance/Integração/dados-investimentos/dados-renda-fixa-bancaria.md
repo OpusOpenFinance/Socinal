@@ -23,4 +23,4 @@ In general, there are *endpoints* for:
 
 The documentation for the bank fixed income API to be built in the integration layer can be found [here][API-Bank-Fixed-Income]
 
-[API-Bank-Fixed-Income]: ../../../../../swagger-ui/index.html?api=data-bank-fixed-incomes
+[API-Bank-Fixed-Income]: ../../../../../swagger-ui/index.html?api=en-data-bank-fixed-incomes

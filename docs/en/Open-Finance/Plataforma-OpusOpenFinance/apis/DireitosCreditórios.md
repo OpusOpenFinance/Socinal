@@ -27,5 +27,4 @@ There are *endpoints* for:
 
 The documentation for the Credit Operations API to be built in the *integration layer* can be found [here][API-Direitos-Creditórios].
 
-[API-Direitos-Creditórios]: ../../../../swagger-ui/index.html?api=Direitos-Creditórios
-
+[API-Direitos-Creditórios]: ../../../../swagger-ui/index.html?api=en-Direitos-Creditórios

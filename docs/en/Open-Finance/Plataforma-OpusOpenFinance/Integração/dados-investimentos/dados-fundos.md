@@ -23,4 +23,4 @@ In general, there are *endpoints* for:
 
 The documentation for the investment funds API to be built in the integration layer can be found [here][API-Investment-Funds]
 
-[API-Investment-Funds]: ../../../../../swagger-ui/index.html?api=data-funds
+[API-Investment-Funds]: ../../../../../swagger-ui/index.html?api=en-data-funds

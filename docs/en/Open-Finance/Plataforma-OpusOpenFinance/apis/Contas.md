@@ -28,4 +28,4 @@ There are endpoints for:
 
 The documentation for the Accounts API to be built in the *integration layer* can be found [here][API-Contas].
 
-[API-Contas]: ../../../../swagger-ui/index.html?api=Contas
+[API-Contas]: ../../../../swagger-ui/index.html?api=en-Contas
