@@ -1,34 +1,36 @@
 ---
 layout: default
-title: "Exchanges API"
+title: "Foreign Exchange API"
 parent: "Data Sharing"
 nav_order: 6
+lang: "en"
+alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/Câmbio/"
 ---
 
-# Operações de Câmbio
+# Foreign Exchange Operations
 
-API da *camada de integração* que retorna informações de operações de Câmbio realizadas nas instituições transmissoras por seus clientes, incluindo dados como informações da operação contratada, valor da operação em moeda nacional e moeda estrangeira, classificação da operação, forma de entrega, VET e, quando aplicável, valor a liquidar. Também serão compartilhados os eventos de alteração da operação, caso existam, com as informações modificadas.
+The *integration layer* API that returns information on Foreign Exchange operations conducted by transmitting institutions for their clients, including data such as contracted operation details, operation value in both local and foreign currencies, operation classification, delivery method, VET, and, when applicable, value to be settled. Changes to the operation will also be shared, if any, with the modified information.
 
-São escopo de compartilhamento as operações negociadas no mercado primário, pronto (inclusive espécie, cartão pré pago, cartão de débito) e futuro (inclusive ACC, ACE ou trava cambial).
+The scope of sharing includes operations negotiated in the primary market, spot (including species, prepaid cards, debit cards), and forward (including ACC, ACE, or foreign exchange hedge).
 
-Devem ser compartilhadas as operações contratadas e disponibilizadas nos canais eletrônicos da instituição, mesmo nas situações nas quais a operação ainda não tenha sido registrada junto ao Banco Central. Caso o evento de contratação seja anulado no Sistema de Câmbio, o que significa que a operação foi anulada, então esta operação deixa de ser escopo de exposição. Caso o registro aconteça a operação deve ser complementada com o número de operação registrado e os eventos ocorridos.
+Operations contracted and made available in the institution's electronic channels should be shared, even in cases where the operation has not yet been registered with the Central Bank. If the contracting event is canceled in the Foreign Exchange System, meaning the operation was voided, the operation is no longer within the scope of exposure. Once the registration occurs, the operation must be complemented with the registered operation number and any events that took place.
 
-Eventos de vinculação de operações não são escopo de exposição.
+Events related to the linking of operations are not within the scope of exposure.
 
-A exposição se dará por cada operação de câmbio contratada pelo cliente
+The exposure will be provided for each foreign exchange operation contracted by the client.
 
-Essa API não faz separação entre pessoa natural e pessoa jurídica.
+This API does not separate between individual and corporate clients.
 
-Antes de qualquer *endpoint* ser acionado, a plataforma já verificou a autenticidade da origem da chamada e a validade, data de expiração, permissões e escopo do consentimento enviado pelo receptor, garantindo que se trata de uma requisição autorizada.
+Before any *endpoint* is triggered, the platform has already verified the authenticity of the request's origin, the validity, expiration date, permissions, and scope of the consent sent by the receiver, ensuring that the request is authorized.
 
-Existem *endpoints* para:
+There are endpoints for:
 
-- Obter a lista de operações de câmbio mantidas pelo cliente na instituição transmissora;
-- Obter dados de uma operação de câmbio;
-- Obter dados de eventos de uma operação de câmbio.
+- Retrieving the list of foreign exchange operations held by the client at the transmitting institution;
+- Retrieving data of a foreign exchange operation;
+- Retrieving data on events related to a foreign exchange operation.
 
-## *Open API Specification* da API
+## *Open API Specification* of the API
 
-A documentação da API de Câmbio a ser construída na *camada de integração* pode ser encontrada [aqui][API-Câmbio].
+The documentation for the Foreign Exchange API to be built in the *integration layer* can be found [here][API-Câmbio].
 
-[API-Câmbio]: ../../../../swagger-ui/index.html?api=en-Câmbio
+[API-Câmbio]: ../../../../swagger-ui/index.html?api=Câmbio

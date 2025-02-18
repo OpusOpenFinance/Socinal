@@ -1,45 +1,47 @@
 ---
 layout: default
-title: "App and Web"
+title: "Mobile App and Web"
 parent: "Platform Integration"
 nav_order: 4
 has_children: true
+lang: "en"
+alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Integração/Jornada-de-Ux/App-e-Web/"
 ---
 
-## Introdução
+## Introduction
 
-Quando um pedido de criação de consentimento vindo de outra instituição financeira é recebido pela plataforma - seja um consentimento para compartilhamento de dados ou para a realização de um pagamento - a plataforma aciona indiretamente o aplicativo móvel do cliente final ou o Internet Banking Web, e esses artefatos devem estar preparados para tratar esse acionamento.
+When a consent creation request from another financial institution is received by the platform—whether for data sharing consent or for making a payment—the platform indirectly triggers the end customer’s mobile app or Internet Banking Web, and these artifacts must be prepared to handle this trigger.
 
-Para garantir que o canais digitais de atendimento estejam preparados, é necessário:
+To ensure that the digital service channels are prepared, it is necessary to:
 
-1. Construir as telas da jornada de experiência do usuário de acordo com os canais de autenticação existentes na instituições, tipicamente Aplicativo móvel e/ou Internet Banking. As jornadas implementadas devem respeitar o [Guia de Experiência do Usuário][GuiaUX] do *OPen Finance Brasil*.
-2. Realizar a integração das telas com o Opus Open Finance.
+1. Build the user experience journey screens according to the existing authentication channels in the institutions, typically Mobile App and/or Internet Banking. The implemented journeys must adhere to the [User Experience Guide][GuiaUX] of *Open Finance Brasil*.
+2. Integrate the screens with Opus Open Finance.
 
-## Canais digitais de atendimento
+## Digital Service Channels
 
-Os seguintes canais digitais de atendimento são previstas pelo *Open Finance Brasil*:
+The following digital service channels are provided by *Open Finance Brasil*:
 
-- Aplicativo mobile
+- Mobile App
 - Internet Banking
-- Tela de *Handoff*
+- *Handoff* Screen
 
-> Quando a instituição financeira não oferece um canal Web para seu cliente (e o pedido de criação de consentimento veio através da Web), deve ser exibida uma tela de *Handoff*. A **Plataforma Opus Open Finance** inclui uma tela padrão de *Handoff* que pode ser utilizada pela instituição financeira, se for o caso.
+> When the financial institution does not offer a Web channel for its customer (and the consent creation request came via the Web), a *Handoff* screen must be displayed. The **Opus Open Finance Platform** includes a standard *Handoff* screen that can be used by the financial institution, if applicable.
 
-## Requisitos de UX
+## UX Requirements
 
-A jornada de experiência do usuário deve respeitar uma série de requisitos regulatórios, de maneira similar a como funciona o Pix hoje em dia. Existem duas frentes que precisam ser construídas para a jornada de UX.
+The user experience journey must comply with a series of regulatory requirements, similar to how Pix works today. There are two aspects that need to be built for the UX journey.
 
-### Jornada de consentimento
+### Consent Journey
 
-A [jornada de consentimento][JornadaConsentimento] representa a etapa em que o cliente final autoriza o consentimento. A jornada é muito semelhante tanto para compartilhamento de dados quanto para pagamentos, mas há particularidades que precisam ser implementadas. Mais uma vez, os detalhes são encontrados no [Guia de experiência do usuário][GuiaUX].
+The [consent journey][JornadaConsentimento] represents the stage where the end customer authorizes the consent. The journey is very similar for both data sharing and payments, but there are specificities that need to be implemented. Again, the details can be found in the [User Experience Guide][GuiaUX].
 
-### Gestão do consentimento
+### Consent Management
 
-A gestão do consentimento representa a funcionalidade que permite ao cliente  final acessar seus consentimentos de compartilhamento de dados ou pagamentos. Essa gestão permite a visualização do histórico completo de consentimentos e o poder de revogar/estender um consentimento.
+Consent management refers to the functionality that allows the end customer to access their data sharing or payment consents. This management allows the full consent history to be viewed and gives the power to revoke/extend a consent.
 
-## Integração com a Plataforma Opus Open Finance
+## Integration with Opus Open Finance Platform
 
-Em paralelo à construção das telas do aplicativo móvel e/ou Internet Banking, é necessário também integrar esses artefatos à plataforma. As próximas páginas desta documentação detalham essa integração, bem como o funcionamento da tela de *Handoff*, caso a instituição financeira não ofereça um canal de autoatendimento via Web.
+In parallel to building the mobile app and/or Internet Banking screens, it is also necessary to integrate these artifacts with the platform. The next pages of this documentation detail this integration, as well as the operation of the *Handoff* screen, in case the financial institution does not offer a self-service Web channel.
 
 [GuiaUX]: https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17378535/Guia+de+Experi+ncia+do+Usu+ri
 [JornadaConsentimento]: ../../../Open-Finance-Brasil/JornadaConsentimento/OFB-JornadaConsentimento.html

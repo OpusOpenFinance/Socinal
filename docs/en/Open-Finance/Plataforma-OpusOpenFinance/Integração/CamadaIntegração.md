@@ -4,98 +4,100 @@ title: "Data Sharing"
 parent: "Platform Integration"
 nav_order: 2
 has_children: true
+lang: "en"
+alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Integração/CamadaIntegração/"
 ---
 
-# Compartilhamento de dados
+# Data Sharing
 
-O perfil de participação de transmissor de dados no *Open Finance Brasil* exige que a instituição financeira seja capaz de atender a requisições de dados vindas de outras instituições participantes. Antes que uma outra instituição financeira possa realizar requisições de dados referentes aos clientes da transmissora, esse cliente deve ter previamente autorizado o compartilhamento de seus dados, o que é feito através de um **consentimento de compartilhamento de dados**.
+The data transmitter participation profile in *Open Finance Brasil* requires the financial institution to be able to respond to data requests from other participating institutions. Before another financial institution can make data requests related to the transmitting institution’s customers, the customer must have previously authorized the sharing of their data through a **data sharing consent**.
 
-Conforme já apresentado, a **Plataforma Opus Open Finance** realiza a gestão de consentimentos ativos, e também verifica a validade das requisições recebidas. Essa verificação inclui avaliar se o pedido de dados enviado pela instituição receptora - que sempre inclui um identificador de consentimento - é um consentimento ativo e também se ele autoriza o compartilhamento dos dados que estão sendo requisitados. Por exemplo, um cliente em tese poderia compartilhar seus dados cadastrais e de cartão de crédito, mas não seus dados de conta corrente ou de empréstimos.
+As previously mentioned, the **Opus Open Finance Platform** manages active consents and also verifies the validity of received requests. This verification includes assessing whether the data request sent by the receiving institution—which always includes a consent identifier—is an active consent and whether it allows the sharing of the requested data. For example, a customer could share their personal data and credit card information, but not their checking account or loan data.
 
-Uma vez que a verificação foi realizada e o pedido foi validado, a plataforma realizará uma chamada à *camada de integração* para obter os dados que estão sendo requisitados. É justamente essa camada de integração, responsável pela interação com os sistemas de retaguarda da instituição transmissora, que precisa ser construída para que a plataforma possa entrar em operação.
+Once the verification is completed and the request is validated, the platform will call the *integration layer* to obtain the requested data. It is precisely this integration layer, responsible for interacting with the transmitting institution’s back-end systems, that needs to be built for the platform to operate.
 
-Para realizar essa integração e manter uma clara divisão de responsabilidades, a plataforma define um conjunto de APIs REST que são ativadas por ela para atender requisições associadas a cada produto financeiro oferecido pela instituição. As APIs são divididas pelos diferentes produtos financeiros cobertos pelo escopo do *Open Finance Brasil*.
+To perform this integration and maintain a clear division of responsibilities, the platform defines a set of REST APIs that are activated to handle requests associated with each financial product offered by the institution. The APIs are divided by the different financial products covered by the scope of *Open Finance Brasil*.
 
-A figura abaixo apresenta o esquema geral do modelo.
-
----
-
-![Imagem da Camada de Integração][Imagem da Camada de Integração]
+The diagram below shows the general scheme of the model.
 
 ---
 
-Vale ressaltar que a instituição não necessariamente oferece todos os produtos previstos pelo escopo completo do *Open Finance Brasil* e, portanto, ela só precisará implementar o subconjunto de APIs associado aos produtos que ela oferece.
+![Integration Layer Diagram][Imagem da Camada de Integração]
 
-Algumas das características principais da camada de integração a ser construída são:
+---
 
-- Não precisa (e nem deve) entrar no mérito da validade das requisições, uma vez que a plataforma já realizou todas as validações necessárias;
-- Deve ser capaz de atender a várias requisições simultaneamente (em  tese, não há limite para o número de requisições por segundo que deve ser atendido);
-- Deve oferecer tempo de resposta compatível com o nível de serviço exigido pela regulação. Os tempos de resposta máximos exigidos pelo regulatório para cada tipo de requisição podem ser encontrados [**aqui**][Tempos de Resposta];
+It is important to note that the institution does not necessarily offer all the products included in the full scope of *Open Finance Brasil*, so it will only need to implement the subset of APIs associated with the products it offers.
 
-> Deve-se considerar que a Plataforma Opus Open Finance reservará até 40% do tempo de resposta para aa validações e atendimento de cada requisição.
+Some of the key characteristics of the integration layer to be built are:
 
-Apresentamos a seguir os diferentes tipos de dados envolvidos no atendimento a requisições dos vários produtos financeiros cobertos pelo escopo completo do *Open Finance Brasil*, devidamente atualizado para sua última versão. Cada seção abaixo, por sua vez, referencia uma página de documentação específica que detalha esses dados e apresenta a API da *camada de integração* que deve ser construída para integrar a **Plataforma Opus Open Finance** aos sistemas de retaguarda da instituição financeira.
+- It does not need (and should not) address the validity of the requests, as the platform has already performed all necessary validations;
+- It must be able to handle multiple requests simultaneously (theoretically, there is no limit to the number of requests per second that must be handled);
+- It must offer response times compatible with the service level required by regulations. The maximum response times required by regulation for each type of request can be found [**here**][Tempos de Resposta];
 
-> Na documentação do *Open Finance Brasil* são definidas APIs referentes a **consentimento** (*consents*) e **recursos** (*resources*). No que tange ao consentimento, a plataforma realiza toda a gestão, tornando transparente esse conceito para a camada de  integração. Já o conceito de *recurso*, no universo do *Open Finance Brasil*, diz respeito a cada instância de produto financeiro que o cliente possui junto a uma instituição financeira. Por exemplo, se um cliente possui 3 cartões de crédito com uma instituição financeiro, isso equivale a 3 recursos distintos.
-> Dessa forma, uma das requisições mais comuns realizadas pelas instituições receptoras é a consulta de todos os produtos financeiros que o cliente final mantém com a instituição financeira transmissora (desde que o consentimento cedido pelo cliente seja abrangente o suficiente). Nesse caso, a plataforma já realiza o devido tratamento, ativando a camada de integração para cada produto específico de maneira a atender adequadamente esse tipo de requisição.
+> It should be considered that the Opus Open Finance Platform will reserve up to 40% of the response time for the validation and handling of each request.
 
-## Dados Cadastrais
+We now present the different types of data involved in handling requests from the various financial products covered by the full scope of *Open Finance Brasil*, properly updated to its latest version. Each section below, in turn, references a specific documentation page that details this data and presents the *integration layer* API that must be built to integrate the **Opus Open Finance Platform** with the financial institution’s back-end systems.
 
-Dados cadastrais de clientes e de seus representantes, incluindo dados de identificação, de qualificação financeira, informações sobre representantes cadastrados e sobre o relacionamento financeiro do cliente com a instituição transmissora dos dados.
-Possui separação entre pessoa natural e pessoa jurídica.
+> In the *Open Finance Brasil* documentation, APIs related to **consent** (*consents*) and **resources** (*resources*) are defined. Regarding consent, the platform handles all management, making this concept transparent to the integration layer. The concept of *resource*, in the context of *Open Finance Brasil*, refers to each instance of a financial product the customer holds with a financial institution. For example, if a customer has 3 credit cards with a financial institution, this corresponds to 3 distinct resources.
+> Thus, one of the most common requests made by receiving institutions is to query all the financial products the end customer holds with the transmitting financial institution (provided the consent granted by the customer is broad enough). In this case, the platform already handles the necessary processing, activating the integration layer for each specific product to adequately handle such requests.
 
-Informações detalhadas sobre os *endpoints* e dados necessários para atender esse tipo de requisição podem ser encontrados na [página específica para dados cadastrais][Dados-Cadastrais].
+## Customer Data
 
-## Cartão de Crédito
+Customer and representative identification data, financial qualification information, registered representative details, and the financial relationship between the customer and the data-transmitting institution.
+There is a separation between individual and corporate entities.
 
-Informações de contas de pagamento pós-paga mantidas nas instituições transmissoras por seus clientes, incluindo dados como denominação, produto, bandeira, limites de crédito, informações sobre transações de pagamento efetuadas e faturas. Não possui separação entre pessoa natural e pessoa jurídica.
+Detailed information on the *endpoints* and data required to handle this type of request can be found on the [customer data page][Dados-Cadastrais].
 
-Informações detalhadas sobre os *endpoints* e dados necessários para atender esse tipo de requisição podem ser encontrados na [página específica para cartão de crédito][Cartão-crédito].
+## Credit Card
 
-## Contas
+Information on post-paid payment accounts held at transmitting institutions by their customers, including data such as account name, product, brand, credit limits, payment transaction details, and invoices. There is no distinction between individual and corporate entities.
 
-Informações de contas de depósito à vista, contas de poupança e contas de pagamento pré-pagas mantidas nas instituições transmissoras por seus clientes, incluindo dados de identificação da conta, saldos, limites e transações. Não possui segregação entre pessoa natural e pessoa jurídica.
+Detailed information on the *endpoints* and data required to handle this type of request can be found on the [credit card page][Cartão-crédito].
 
-Informações detalhadas sobre os *endpoints* e dados necessários para atender esse tipo de requisição podem ser encontrados na [página específica para contas][Contas]
+## Accounts
 
-## Operações de crédito
+Information on checking accounts, savings accounts, and prepaid payment accounts held at transmitting institutions by their customers, including account identification data, balances, limits, and transactions. There is no distinction between individual and corporate entities.
 
-No caso de operações de crédito o cliente efetua o compartilhamento por agrupamento de produtos ou seja, todas as modalidades de operações de crédito são compartilhadas no escopo do *Open Finance Brasil*. Abaixo temos uma listagem das operações:
+Detailed information on the *endpoints* and data required to handle this type of request can be found on the [accounts page][Contas].
 
-- Empréstimos
-- Financiamentos
-- Adiantamento a depositantes
-- Direitos creditórios Descontados
+## Credit Operations
 
-Informações detalhadas sobre os dados necessários para cada uma dessas operações podem ser encontrados na [página específica para operações de crédito][Crédito].
+In the case of credit operations, the customer shares data by product grouping, meaning all types of credit operations are shared within the scope of *Open Finance Brasil*. Below is a list of the operations:
 
-## Investimentos
+- Loans
+- Financing
+- Advances to depositors
+- Discounted receivables
 
-Os investimentos também são divididos em diferentes produtos. Abaixo tem-se uma lista dos produtos possíveis de investimento assim como o link leva ao documento detalhado sobre os dados do produto em questão:
+Detailed information on the data required for each of these operations can be found on the [credit operations page][Crédito].
 
-- [Renda fixa bancária](./dados-investimentos/dados-renda-fixa-bancaria.html)
-- [Renda fixa crédito](./dados-investimentos/dados-renda-fixa-credito.html)
-- [Renda variável](./dados-investimentos/dados-renda-variavel.html)
-- [Títulos do tesouro direto](./dados-investimentos/dados-tesouro.html)
-- [Fundos de investimento](./dados-investimentos/dados-fundos.html)
+## Investments
 
-Informações detalhadas sobre os dados necessários para este produto podem ser encontrados [página específica para investimentos](./OOF-Investimento.md).
+Investments are also divided into different products. Below is a list of possible investment products, along with links to detailed documents on the product data:
 
-## Câmbio
+- [Fixed income banking](./dados-investimentos/dados-renda-fixa-bancaria.html)
+- [Fixed income credit](./dados-investimentos/dados-renda-fixa-credito.html)
+- [Variable income](./dados-investimentos/dados-renda-variavel.html)
+- [Treasury bonds](./dados-investimentos/dados-tesouro.html)
+- [Investment funds](./dados-investimentos/dados-fundos.html)
 
-Informações de operações de Câmbio realizadas nas instituições transmissoras por seus clientes, incluindo dados como informações da operação contratada, valor da operação em moeda nacional e moeda estrangeira, classificação da operação, forma de entrega, VET e, quando aplicável, valor a liquidar. Também serão compartilhados os eventos de alteração da operação, caso existam, com as informações modificadas. Não separa pessoa natural e pessoa jurídica.
+Detailed information on the data required for this product can be found on the [investments page](./OOF-Investimento.html).
 
-Informações detalhadas sobre os dados necessários para este produto podem ser encontrados na [página específica para câmbio][Câmbio].
+## Foreign Exchange
+
+Information on foreign exchange operations carried out at transmitting institutions by their customers, including data such as the contracted operation details, the operation value in local and foreign currency, operation classification, delivery method, VET, and, when applicable, the settlement value. Any operation changes, if they exist, along with modified details, will also be shared. There is no distinction between individual and corporate entities.
+
+Detailed information on the data required for this product can be found on the [foreign exchange page][Câmbio].
 
 <!-- **gambia**: [API-Commons](../../../../swagger-ui/index.html?api=Opus-Commons) -->
 
-<!-- Definição de links utilizados nesta página -->
+<!-- Links used on this page -->
 
 [Imagem da Camada de Integração]: ./images/CamadaIntegração.png
 [Tempos de Resposta]: https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17957025/Refer+ncia
 <!-- [Guia APIs]: https://openfinancebrasil.atlassian.net/wiki/pages/viewpageattachments.action?pageId=17378841&preview=%2F17378841%2F17378864%2F%5B23-06%5DGuia_GT_Implementa%C3%A7%C3%A3oAPIs.pdf -->
-[Dados-Cadastrais]: ../apis/Dados-Cadastrais.html
-[Cartão-crédito]: ../apis/Cartão-de-Credito.html
-[Contas]: ../apis/Contas.html
+[Dados-Cadastrais]: ../../../../apis/Dados-Cadastrais.html
+[Cartão-crédito]: ../../../../apis/Cartão-de-Credito.html
+[Contas]: ../../../../apis/Contas.html
 [Crédito]: ./OOF-Crédito.html
-[Câmbio]: ../apis/Câmbio.html
+[Câmbio]: ../../../../apis/Câmbio.html

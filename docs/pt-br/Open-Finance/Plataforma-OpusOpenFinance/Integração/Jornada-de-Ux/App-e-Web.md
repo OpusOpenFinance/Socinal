@@ -4,6 +4,8 @@ title: "App e Web"
 parent: "Integração da Plataforma"
 nav_order: 4
 has_children: true
+lang: "pt-br"
+alternate_lang: "/docs/en/Open-Finance/Plataforma-OpusOpenFinance/Integração/Jornada-de-Ux/App-e-Web/"
 ---
 
 ## Introdução

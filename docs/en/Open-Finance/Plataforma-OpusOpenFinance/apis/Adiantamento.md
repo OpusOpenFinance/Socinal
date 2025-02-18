@@ -1,28 +1,31 @@
 ---
 layout: default
-title: "Account Overdraft API"
+title: "Advance to Depositors API"
 parent: "Credit Operations"
 nav_order: 3
+lang: "en"
+alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/Adiantamento"
 ---
 
-# Adiantamento a Depositantes
+# Advance to Depositors
 
-API da *camada de integração* que retorna informações de operações de credito do tipo *adiantamento a depositantes*, mantidas nas instituições transmissoras por seus clientes, incluindo dados como denominação, modalidade, número do contrato, tarifas, prazo, prestações, pagamentos (ao menos para os últimos 12 meses), amortizações, garantias, encargos e taxas de juros remuneratórios.
+The *integration layer* API that returns information on credit operations of the *advance to depositors* type, maintained by transmitting institutions for their clients, including data such as denomination, modality, contract number, fees, term, installments, payments (at least for the last 12 months), amortizations, guarantees, charges, and remunerative interest rates.
 
-Essa API não faz separação entre pessoa natural e pessoa jurídica.
+This API does not separate between individual and corporate clients.
 
-Antes de qualquer *endpoint* da *camada de integração* ser acionado, a plataforma já verificou a autenticidade da origem da chamada e a validade, data de expiração, permissões e escopo do consentimento enviado pelo receptor, garantindo que se trata de uma requisição autorizada.
+Before any *integration layer* endpoint is triggered, the platform has already verified the authenticity of the request's origin, the validity, expiration date, permissions, and scope of the consent sent by the receiver, ensuring that the request is authorized.
 
-Existem *endpoints* para:
+There are endpoints for:
 
-- Obter a lista de contratos de adiantamento a depositantes consentidos pelo cliente;
-- Obter os dados de um contrato de adiantamento a depositantes;
-- Obter os dados do cronograma de parcelas de um contrato de adiantamento a depositantes;
-- Obter a lista de garantias vinculadas a um contrato de adiantamento a depositantes;
-- Obter os dados de pagamento de um contrato de adiantamento a depositantes.
+- Obtaining the list of advance to depositors contracts consented by the client;
+- Retrieving the data of an advance to depositors contract;
+- Retrieving the installment schedule of an advance to depositors contract;
+- Retrieving the list of guarantees linked to an advance to depositors contract;
+- Retrieving the payment data of an advance to depositors contract.
 
-## *Open API Specification* da API
+## *Open API Specification* of the API
 
-A documentação da API de Operações de Crédito a ser construída na *camada de integração* pode ser encontrada [aqui][API-Adiantamento].
+The documentation for the Credit Operations API to be built in the *integration layer* can be found [here][API-Adiantamento].
 
-[API-Adiantamento]: ../../../../swagger-ui/index.html?api=en-Adiantamento
+[API-Adiantamento]: ../../../../swagger-ui/index.html?api=Adiantamento
+

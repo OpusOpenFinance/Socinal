@@ -3,7 +3,10 @@ layout: default
 title: "Implantação da Plataforma"
 parent: "Opus Open Finance"
 nav_order: 7
+lang: "pt-br"
+alternate_lang: "/docs/en/Open-Finance/Plataforma-OpusOpenFinance/Implantação/OOF-Implantação/"
 ---
+
 ## Introdução
 
 O processo de implantação da **Plataforma Opus Open Finance** segue uma sequência de etapas bem definida que incluem desde a correta configuração dos ambientes de execução necessários até a efetiva entrada em produção. A equipe da Opus acompanha todos os passos da implantação, que serão apresentados abaixo, de maneira a garantir o sucesso de cada etapa.

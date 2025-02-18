@@ -4,37 +4,39 @@ title: "Platform Integration"
 parent: "Opus Open Finance Brazil"
 nav_order: 8
 has_children: true
+lang: "en"
+alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Integração/OOF-Integração/"
 ---
 
-# Integração da Plataforma na instituição financeira
+# Platform Integration in the Financial Institution
 
-A **Plataforma Opus Open Finance** realiza a *interface* entre instituições financeiras e o ecossistema *Open Finance Brasil*, realizando todas as atividades inerentes a essa *interface* como a implementação das APIs regulatórias, a criação e gestão de consentimentos e a validação de cada chamada recebida de outras instituições financeiras. A plataforma funciona como uma camada que abstrai os aspectos específicos do ecossistema de Open Finance, e interage com os sistemas da instituição financeira para o atendimento aos requisitos das normas regulatórias.
+The **Opus Open Finance Platform** acts as the *interface* between financial institutions and the *Open Finance Brasil* ecosystem, handling all activities inherent to this *interface*, such as implementing regulatory APIs, creating and managing consents, and validating each call received from other financial institutions. The platform functions as a layer that abstracts the specific aspects of the Open Finance ecosystem, interacting with the financial institution's systems to meet regulatory requirements.
 
-Para o atendimento às operações implementadas no escopo do *Open Finance Brasil*, a plataforma interage com componentes de software da instituição financeira cliente em dois momentos distintos:
+For operations implemented within the scope of *Open Finance Brasil*, the platform interacts with the financial institution's software components at two distinct moments:
 
-- Na criação de um consentimento;
-- No atendimento de requisições vindas de outras instituições financeiras.
+- When creating a consent;
+- When handling requests coming from other financial institutions.
 
-## Integração para criação de um consentimento
+## Integration for Consent Creation
 
-A criação de um consentimento exige interação com o cliente final da instituição financeira. Na verdade, o mesmo vale para a remoção de consentimentos. Dessa forma, é necessário integrar os sistemas que implementam os principais canais digitais de atendimento - tipicamente o aplicativo móvel e o Internet Banking Web - à plataforma. A forma de integração dos canais de atendimento à plataforma é detalhada [aqui][Integração app-web].
+The creation of a consent requires interaction with the end customer of the financial institution. In fact, the same applies to the removal of consents. Therefore, it is necessary to integrate the systems that implement the institution’s main digital service channels—typically the mobile app and Internet Banking Web—with the platform. The integration of service channels with the platform is detailed [here][Integração app-web].
 
-## Integração aos sistemas de retaguarda para atendimento de requisições
+## Integration with Back-End Systems for Handling Requests
 
-As requisições, por sua vez, são feitas através de chamadas à API regulatória realizadas pela instituição que está demandando serviços, que podem ser pedidos de envio de dados de clientes - no caso de compartilhamento de dados - ou de efetivação de pagamentos. Para atendê-las, a plataforma realiza todas as validações necessárias para garantir que se tratam de requisições válidas e que estão de acordo com os consentimentos associados a elas. A cada chamada, após fazer as validações, a plataforma aciona os sistemas de retaguarda da instituição financeira para efetivar o atendimento à requisição. Esse acionamento e realizado através de uma *camada de integração* (ou *integration layer*).
+Requests are made through calls to the regulatory API by the institution requesting services, which may be requests for customer data— in the case of data sharing—or requests for payment execution. To handle these, the platform performs all necessary validations to ensure they are valid requests and comply with the associated consents. After validating each call, the platform triggers the financial institution's back-end systems to fulfill the request. This trigger is performed through an *integration layer*.
 
-A abordagem de concentrar a integração entre a plataforma e os sistemas de retaguarda da instituição financeira em uma camada distinta proporciona isolamento funcional entre os componentes, garantindo que a solução mantenha uma mesma base de implementação para todos os clientes que a utilizam. As características específicas dos sistemas de retaguarda cada instituição financeira ficam contidas nessa camada. Naturalmente, há um incentivo econômico para isso: o custo de manutenção evolutiva da plataforma é rateado entre todos os clientes que utilizam a plataforma.
+The approach of concentrating the integration between the platform and the financial institution’s back-end systems in a separate layer provides functional isolation between components, ensuring that the solution maintains the same implementation base for all clients using it. The specific characteristics of each financial institution's back-end systems are contained within this layer. Naturally, there is an economic incentive for this: the cost of the platform’s evolutionary maintenance is shared among all clients using the platform.
 
-Em linhas gerais, as requisições do *Open Finance Brasil* estão divididos em duas categorias distintas:
+In general, *Open Finance Brasil* requests are divided into two distinct categories:
 
-- Consultas a Dados de clientes
-- Realização de pagamentos
+- Customer data queries
+- Payment execution
 
-Dadas as características específicas de cada categoria de requisições, a plataforma utiliza modelos de integração diferentes para cada uma. Em ambos os casos **é necessária a construção de artefatos de software** que realizarão a interação entre a plataforma e os sistemas de retaguarda da instituição financeira.
+Given the specific characteristics of each category of requests, the platform uses different integration models for each. In both cases, **software artifacts must be built** to facilitate the interaction between the platform and the financial institution’s back-end systems.
 
-No caso da integração de dados, necessária para o [perfil *transmissor de dados*][Transmissor], o detalhamento do modelo de integração pode ser encontrado [**neste link**][Camada de integração].
+In the case of data integration, required for the [*data transmitter* profile][Transmissor], the detailed integration model can be found [**in this link**][Camada de integração].
 
-No caso de pagamentos, necessário para o [perfil *detentor de contas*][Detentor], o detalhamento do modelo de integração pode ser encontrado [**nesse  link**][Conectores de Pagamento].
+In the case of payments, required for the [*account holder* profile][Detentor], the detailed integration model can be found [**in this link**][Conectores de Pagamento].
 
 [Camada de Integração]: ./CamadaIntegração.html
 [Conectores de Pagamento]: ./Conectores-Pagto.html

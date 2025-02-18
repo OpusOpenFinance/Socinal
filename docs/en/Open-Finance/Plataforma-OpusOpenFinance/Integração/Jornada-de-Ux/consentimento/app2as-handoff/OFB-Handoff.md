@@ -1,66 +1,67 @@
 ---
 layout: default
 title: "Handoff"
-parent: "App and Web"
+parent: "Mobile App and Web"
 nav_order: 3
+lang: "en"
+alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Integração/Jornada-de-Ux/consentimento/app2as-handoff/OFB-Handoff/"
 ---
 
-# *Hybrid-flow* com *Handoff*
+# *Hybrid-flow* with *Handoff*
 
-Instituições que possuem autenticação de usuários apenas em aplicativos mobile precisam suportar o fluxo *Hybrid-flow* com *Handoff* para permitir consentimentos iniciados em dispositivos que não suportam a execução dos aplicativos, tipicamente um desktop ou um laptop.
+Institutions that authenticate users only through mobile apps need to support the *Hybrid-flow* with *Handoff* to allow consents initiated on devices that do not support app execution, typically a desktop or a laptop.
 
-O Authorization Server (AS) do Opus Open Finance suporta o fluxo de *handoff* e possui uma biblioteca *Javascript* que permite à instituição customizar completamente a página web que será exibida para o cliente.
+The Opus Open Finance Authorization Server (AS) supports the *handoff* flow and provides a *Javascript* library that allows the institution to fully customize the webpage that will be displayed to the client.
 
-A biblioteca de *handoff* foi feita para a instituição obter todas as informações relativas ao fluxo de *handoff* de um consentimento, desde os dados para exibição do QR até os eventos relativos ao fluxo.
+The *handoff* library was created to allow the institution to obtain all the information related to the *handoff* consent flow, from the data to display the QR code to the events related to the flow.
 
-O Authorization Server do Opus Opus Finance hospeda a biblioteca na URL `https://as.instituicao.com.br/auth/handoff/v1/oob-handoff.js` e deve ser referenciada diretamente ao invés de ser copiada e referenciada em outro servidor web.
+The Opus Open Finance Authorization Server hosts the library at the URL `https://as.instituicao.com.br/auth/handoff/v1/oob-handoff.js` and it should be referenced directly instead of being copied and hosted on another web server.
 
-## Fluxo do Opus Opus Finance com *Handoff*
+## Opus Open Finance Flow with *Handoff*
 
-O chamador (instituição receptor de dados ou iniciador de transação de pagamento) desconhece se a instalação de Open Finance que ele está chamando utiliza ou não *handoff* e isso de fato não é de sua responsabilidade. O fluxo OIDC iniciado por ele acaba redirecionando o navegador do cliente para o Authorization Server do Opus Open Finance e esse, por usa vez, redireciona o navegador para a página de exibição do *handoff* feita pela instituição.
+The caller (the data-receiving institution or the payment transaction initiator) is unaware if the Open Finance installation they are calling uses *handoff*, and this is not their responsibility. The OIDC flow initiated by them redirects the client's browser to the Opus Open Finance Authorization Server, which in turn redirects the browser to the *handoff* page created by the institution.
 
-O Authorization Server possui uma configuração que define o *template* da URL de *handoff* feita pela instituição. Desta forma o identificador da intenção de consentimento que será tratado pela página de *handoff* pode ser mesclado na URL da forma que a
-instituição desejar.
+The Authorization Server has a configuration that defines the *handoff* URL template created by the institution. This way, the consent intent identifier that will be processed by the *handoff* page can be embedded in the URL in any way the institution desires.
 
-A mescla permite a instituição receber o identificador através da `query-string`, `fragment` ou `url`, como exibido na tabela abaixo:
+The embedding allows the institution to receive the identifier through the `query-string`, `fragment`, or `url`, as shown in the table below:
 
-| Formato      | URL Exemplo                                                         |
-| ------------ | ------------------------------------------------------------------- |
-| Query string | `https://ev.instituicao.com.br/handoff.html?codigo=<IDENTIFICADOR>` |
-| Fragment     | `https://ev.instituicao.com.br/handoff.html#<IDENTIFICADOR>`        |
-| URL          | `https://ev.instituicao.com.br/<IDENTIFICADOR>/handoff.html`        |
+| Format       | Example URL                                                        |
+| ------------ | ------------------------------------------------------------------ |
+| Query string | `https://ev.instituicao.com.br/handoff.html?codigo=<IDENTIFIER>`   |
+| Fragment     | `https://ev.instituicao.com.br/handoff.html#<IDENTIFIER>`          |
+| URL          | `https://ev.instituicao.com.br/<IDENTIFIER>/handoff.html`          |
 
-A página de *handoff* deverá obter o identificador e utilizá-lo durante a inicialização da biblioteca como veremos mais abaixo. O exemplo fornecido na documentação trafega o identificador através do `fragment` da URL e deve ser o formato utilizado se possível. Ele também remove o identificador do histórico de navegação, evitando qualquer confusão por parte do cliente em tentar utilizar uma URL antiga de consentimento.
+The *handoff* page must obtain the identifier and use it when initializing the library as shown below. The example provided in the documentation passes the identifier through the `fragment` of the URL, and it should be the preferred format if possible. It also removes the identifier from the browser history, preventing any confusion when the client tries to use an old consent URL.
 
-A página também deve apontar para a instalação do Authorization Server (endereço público) ao iniciar a biblioteca através da configuração **oobAsPublicUrl** conforme instrução abaixo.
+The page must also point to the Authorization Server installation (public address) when initializing the library through the configuration **oobAsPublicUrl** as shown below.
 
-## Como usar a biblioteca
+## How to use the library
 
-Após importar a biblioteca na página HTML a variável `oobHandoff` conterá o ponto de entrada da biblioteca, é necessário iniciá-la através do método `init` passando o identificador recebido durante o redirect do Authorization Server e os tratadores dos eventos que serão disparados.
+After importing the library into the HTML page, the variable `oobHandoff` will contain the entry point to the library, and it must be initialized through the `init` method by passing the identifier received during the Authorization Server redirect and the event handlers that will be triggered.
 
 ```Javascript
 oobHandoff.init({
-    oobStartCode: '<IDENTIFICADOR>',
+    oobStartCode: '<IDENTIFIER>',
     oobAsPublicUrl: '<OOB_AS_PUBLIC_URL>',
     onHandoffReady: function(handoffReady) {
-        // Texto para QR e código alternativo para digitação prontos
+        // Text for QR and alternative code for typing ready
     },
     onHandoffQRRead: function() {
-        // Usuário realizou a leitura do QR ou digitou o código alternativo
+        // User has read the QR or entered the alternative code
     },
     onHandoffTimedOut: function(handoffError) {
-        // Tempo para conclusão do consentimento expirado
+        // Timeout for completing the consent expired
     },
     onHandoffCompleted: function(handoffCompleted) {
-        // Consentimento concluído com sucesso
+        // Consent completed successfully
     },
     onHandoffError: function(handoffError) {
-        // Ocorreu um erro durante o consentimento
+        // An error occurred during consent
     }
 });
 ```
 
-Os parâmetros dos eventos contêm informações necessárias para cada momento. Os objetos estão detalhados abaixo.
+The event parameters contain necessary information for each moment. The objects are detailed below.
 
 ### handoffReady
 
@@ -76,17 +77,18 @@ Schema:
 }
 ```
 
-| Propriedade      | Descrição                                                                                                                            |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| `qrCode`         | Valor para gerar QR-code a ser exibido para usuário                                                                                  |
-| `timeoutSeconds` | Tempo total disponível para conclusão do consentimento                                                                               |
-| `typeCode`       | Código alternativo para o cliente digitar em caso de falha de leitura do QR-Code. Presente apenas se habilitado na instalação        |
-| `tppName`        | Nome da instituição iniciadora de pagamento                                                                                          |
-| `tppLogoUrl`     | Logomarca da instituição iniciadora de pagamento                                                                                     |
+| Property        | Description                                                                                                          |
+| --------------- | -------------------------------------------------------------------------------------------------------------------- |
+| `qrCode`        | Value to generate the QR code to be displayed to the user                                                           |
+| `timeoutSeconds`| Total time available for completing the consent                                                                     |
+| `typeCode`      | Alternative code for the client to enter in case of QR-Code reading failure. Only present if enabled in installation |
+| `tppName`       | Name of the initiating payment institution                                                                            |
+| `tppLogoUrl`    | Logo URL of the initiating payment institution                                                                       |
 
 ### handoffCompleted
 
-Schema baseado no `completedCommand` da interface APP2AS:
+Schema based on the `completedCommand` from the APP2AS interface:
+
 
 ```json
 {
@@ -102,15 +104,16 @@ Schema baseado no `completedCommand` da interface APP2AS:
 }
 ```
 
-| Propriedade                            | Descrição                                                             |
-| -------------------------------------- | --------------------------------------------------------------------- |
-| `tpp.name`                             | Nome da instituição chamadora (TPP) para exibição na tela de retorno  |
-| `tpp.logoUrl`                          | URL com o logotipo do TPP para exibição na tela de retorno            |
-| `completedCommand.redirect.redirectTo` | URL para redirecionamento após exibição da tela de retorno ao usuário |
+| Property                             | Description                                                               |
+| ------------------------------------ | ------------------------------------------------------------------------- |
+| `tpp.name`                           | Name of the calling institution (TPP) to be displayed on the return screen |
+| `tpp.logoUrl`                        | URL with the TPP logo to be displayed on the return screen                |
+| `completedCommand.redirect.redirectTo`| URL for redirection after displaying the return screen to the user        |
 
 ### handoffError
 
-Schema baseado no `errorCommand` da interface APP2AS:
+Schema based on the `errorCommand` from the APP2AS interface:
+
 
 ```json
 {
@@ -128,51 +131,53 @@ Schema baseado no `errorCommand` da interface APP2AS:
 }
 ```
 
-| Propriedade                        | Descrição                                                                                                                                                                                                                                  |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `tpp.name`                         | Nome do TPP para exibição na tela de retorno.                                                                                                                                                                                              |
-| `tpp.logoUrl`                      | URL com o logotipo do TPP para exibição na tela de retorno                                                                                                                                                                                 |
-| `errorCommand.type`                | Tipo do erro. Mesmo `enum` do APP2AS: `CPF_MISMATCH`, `CNPJ_MISMATCH`, `EXPIRED_CONSENT`, `RESOURCE_MUST_CONTAIN_ID`, `GENERIC_ERROR`, `OIDC_ERROR`, `DISCOVERY_ERROR`, `RESOURCE_MUST_CONTAIN_ID_SELECTABLE_PRODUCTS`, `DISCOVERY_TIMEOUT`, `INVALID_STATUS_CONFIRMATION`, `INVALID_ENROLLMENT_INFORMATION` |
-| `errorCommand.message`             | Mensagem de erro para exibir ao usuário na tela de retorno                                                                                                                                                                                 |
-| `errorCommand.redirect.redirectTo` | URL para redirecionamento após exibição da tela de retorno ao usuário                                                                                                                                                                      |
+| Property                            | Description                                                                                                                                                                                                                                  |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tpp.name`                          | Name of the TPP to be displayed on the return screen.                                                                                                                                                                                          |
+| `tpp.logoUrl`                       | URL with the TPP logo to be displayed on the return screen                                                                                                                                                                                     |
+| `errorCommand.type`                 | Type of error. Same `enum` from APP2AS: `CPF_MISMATCH`, `CNPJ_MISMATCH`, `EXPIRED_CONSENT`, `RESOURCE_MUST_CONTAIN_ID`, `GENERIC_ERROR`, `OIDC_ERROR`, `DISCOVERY_ERROR`, `RESOURCE_MUST_CONTAIN_ID_SELECTABLE_PRODUCTS`, `DISCOVERY_TIMEOUT`, `INVALID_STATUS_CONFIRMATION`, `INVALID_ENROLLMENT_INFORMATION` |
+| `errorCommand.message`              | Error message to be displayed to the user on the return screen                                                                                                                                                                               |
+| `errorCommand.redirect.redirectTo`  | URL for redirection after displaying the return screen to the user                                                                                                                                                                            |
 
-As informações `tpp.name`, `tpp.logoUrl`, `errorCommand.message` e `errorCommand.redirect.redirectTo` podem não estar presentes no retorno.
+The information `tpp.name`, `tpp.logoUrl`, `errorCommand.message`, and `errorCommand.redirect.redirectTo` may not be present in the response.
 
-## Cancelamento
+## Cancellation
 
-A tela de *handoff* reage passivamente aos eventos ocorridos no fluxo.  Em qualquer momento, o usuário pode abortar ativamente o fluxo de *handoff*. Para isso, é necessário disponibilizar um botão de "Cancelar" na tela.
+The *handoff* screen reacts passively to events occurring in the flow. At any time, the user can actively abort the *handoff* flow. To do this, a "Cancel" button must be available on the screen.
 
-Para efetuar o cancelamento do fluxo é necessário realizar uma requisição para a api `https://as.instituicao.com.br/auth/handoff/v1/<oobStartCode>/abort`, sendo o **oobStartCode** o mesmo código usado para iniciar a biblioteca.
+To cancel the flow, a request must be made to the API `https://as.instituicao.com.br/auth/handoff/v1/<oobStartCode>/abort`, where **oobStartCode** is the same code used to start the library.
 
-Após o cancelamento, a tela deve direcionar o usuário de volta à instituição chamadora e o app deve informar ao usuário (ex.: com uma mensagem de erro), interrompendo o fluxo de *handoff*.
+After cancellation, the screen should redirect the user back to the calling institution, and the app should inform the user (e.g., with an error message), interrupting the *handoff* flow.
 
-## Exemplo
+## Example
 
-Uma aplicação funcional de exemplo está disponível. Há uma página de exemplo de *handoff* com o tratamento de todos os eventos do fluxo. Essa página de exemplo é a que a instituição deve fazer, hospedar e configurar a URL na instalação do **Plataforma Opus Open Finance**.
+A functional example application is available. There is an example *handoff* page that handles all the flow events. This example page is the one that the institution should create, host, and configure the URL for in the **Plataforma Opus Open Finance** installation.
 
-A aplicação de exemplo está utilizando a versão *mockada* da biblioteca que simula 3 cenários distintos através dos identificadores listados na tabela abaixo.
+The example application is using the *mocked* version of the library, which simulates 3 different scenarios through the identifiers listed in the table below.
 
-| Identificador            | Cenário                                        |
-| ------------------------ | ---------------------------------------------- |
-| L3YxL21vY2svc3VjY2Vzcw== | Consentimento efetuado com sucesso             |
-| L3YxL21vY2svY3BmLWVycm9y | Erro de CPF_MISMATCH                           |
-| L3YxL21vY2svdGltZW91dA== | Tempo esgotado para conclusão do consentimento |
+| Identifier             | Scenario                                      |
+| ---------------------- | --------------------------------------------- |
+| L3YxL21vY2svc3VjY2Vzcw== | Consent successfully completed                |
+| L3YxL21vY2svY3BmLWVycm9y | CPF_MISMATCH error                           |
+| L3YxL21vY2svdGltZW91dA== | Timeout for consent completion                |
 
-É possível executar a aplicação de exemplo hospedando o diretório `src` em algum servidor web. Para executar localmente sugerimos utilizar o pacote [`http-server`](https://www.npmjs.com/package/http-server) do [Node.js](https://nodejs.org/en/download/):
+You can run the example application by hosting the `src` directory on a web server. To run it locally, we suggest using the package [`http-server`](https://www.npmjs.com/package/http-server) from [Node.js](https://nodejs.org/en/download/):
 
 ```bash
 cd /src
 npx http-server -p 3030 --cors -c-1
+
 ```
 
-É possível iniciar os cenários mockados através das seguintes URLs:
+It is possible to start the mocked scenarios using the following URLs:
 
-| Cenário      | URL                                                       |
-| ------------ | --------------------------------------------------------- |
-| Sucesso      | <http://lvh.me:3030/sample.html#L3YxL21vY2svc3VjY2Vzcw==> |
-| CPF_MISMATCH | <http://lvh.me:3030/sample.html#L3YxL21vY2svY3BmLWVycm9y> |
-| Timeout      | <http://lvh.me:3030/sample.html#L3YxL21vY2svdGltZW91dA==> |
+| Scenario    | URL                                                       |
+| ----------- | --------------------------------------------------------- |
+| Success     | <http://lvh.me:3030/sample.html#L3YxL21vY2svc3VjY2Vzcw==> |
+| CPF_MISMATCH| <http://lvh.me:3030/sample.html#L3YxL21vY2svY3BmLWVycm9y> |
+| Timeout     | <http://lvh.me:3030/sample.html#L3YxL21vY2svdGltZW91dA==> |
 
-## Página de *handoff* customizável
+## Customizable *handoff* Page
 
-Se a instituição preferir não implementar a própria página de *handoff*, é possível utilizar a solução fornecida pelo Opus Open Finance: uma página completa que configura as principais características estéticas e de conteúdo para se adaptar ao estilo da instituição.
+If the institution prefers not to implement its own *handoff* page, it is possible to use the solution provided by Opus Open Finance: a complete page that configures the main aesthetic and content characteristics to adapt to the institution's style.
+

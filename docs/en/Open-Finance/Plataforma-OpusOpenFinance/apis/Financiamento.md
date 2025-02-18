@@ -3,26 +3,28 @@ layout: default
 title: "Financing API"
 parent: "Credit Operations"
 nav_order: 2
+lang: "en"
+alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/Financiamento/"
 ---
 
-# Financiamento
+# Financing
 
-API da *camada de integração* que retorna informações de operações de credito do tipo *financiamento*, mantidas nas instituições transmissoras por seus clientes, incluindo dados como denominação, modalidade, número do contrato, tarifas, prazo, prestações, pagamentos (ao menos para os últimos 12 meses), amortizações, garantias, encargos e taxas de juros remuneratórios.
+The *integration layer* API that returns information on credit operations of the *financing* type, maintained by transmitting institutions for their clients, including data such as denomination, modality, contract number, fees, term, installments, payments (at least for the last 12 months), amortizations, guarantees, charges, and interest rates.
 
-Essa API não faz separação entre pessoa natural e pessoa jurídica.
+This API does not separate between individuals and legal entities.
 
-Antes de qualquer *endpoint* da *camada de integração* ser acionado, a plataforma já verificou a autenticidade da origem da chamada e a validade, data de expiração, permissões e escopo do consentimento enviado pelo receptor, garantindo que se trata de uma requisição autorizada.
+Before any *endpoint* of the *integration layer* is triggered, the platform has already verified the authenticity of the request's origin and the validity, expiration date, permissions, and scope of the consent sent by the receiver, ensuring that the request is authorized.
 
-Existem *endpoints* para:
+There are *endpoints* for:
 
-- Obter o conjunto de informações de contratos de financiamento mantidos pelo cliente na instituição transmissora;
-- Obter os dados de um contrato de financiamento;
-- Obter os dados do cronograma de parcelas de um contrato de financiamento;
-- Obter a lista de garantias vinculadas a um contrato de financiamento;
-- Obter os dados de pagamento de um contrato de financiamento.
+- Retrieving the set of financing contract information maintained by the client at the transmitting institution;
+- Retrieving the details of a financing contract;
+- Retrieving the installment schedule of a financing contract;
+- Retrieving the list of guarantees linked to a financing contract;
+- Retrieving the payment details of a financing contract.
 
-## *Open API Specification* da API
+## *Open API Specification* of the API
 
-A documentação da API de Operações de Crédito a ser construída na *camada de integração* pode ser encontrada [aqui][API-Financiamento].
+The documentation for the Credit Operations API to be built in the *integration layer* can be found [here][API-Financiamento].
 
-[API-Financiamento]: ../../../../swagger-ui/index.html?api=en-Financiamento
+[API-Financiamento]: ../../../../swagger-ui/index.html?api=Financiamento
