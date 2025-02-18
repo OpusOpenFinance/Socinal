@@ -4,54 +4,56 @@ title: "Investments"
 parent: "Data Sharing"
 nav_order: 5
 has_children: true
+lang: "en"
+alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Integração/OOF-Investimento/"
 ---
 
-# Investimentos
+# Investments
 
-Todas as modalidades de investimento são passíveis de compartilhamento de dados no escopo do *Open Finance Brasil*.
+All types of investments are eligible for data sharing within the scope of *Open Finance Brasil*.
 
-O consentimento para compartilhamento de dados efetuado pelo cliente é realizado por agrupamento de produtos. Isso significa que, se o cliente conceder um consentimento de compartilhamento de dados para "*Investimentos*" todas as modalidades estarão incluídas.
+The consent for data sharing granted by the customer is done by grouping products. This means that if the customer grants data sharing consent for "Investments", all modalities will be included.
 
-As diferentes modalidades de investimento são:
+The different types of investments are:
 
-- Renda fixa bancária
-- Renda fixa crédito
-- Renda variável
-- Fundos de investimento
-- Títulos do tesouro direto
+- Bank fixed income
+- Credit fixed income
+- Variable income
+- Investment funds
+- Treasury bonds
 
-Dado que cada uma dessas modalidades possui suas próprias características, a *camada de integração* deve implementar cinco APIs distintas, considerando seus diferentes tipos de dados.
+Since each of these modalities has its own characteristics, the *integration layer* must implement five distinct APIs, considering their different data types.
 
-Na documentação oficial do *Open Finance Brasil* há uma tabela que resume os investimentos associadas a cada modalidade, bem como a API que deve se responsabilizar por ela, e que pode ser visualizada [aqui][Tabela-Investimento-OFB].
+The official documentation of *Open Finance Brasil* has a table summarizing the investments associated with each modality, as well as the API that should be responsible for it, which can be viewed [here][Tabela-Investimento-OFB].
 
-Todas as APIs compartilham algumas características importantes definidas pelo regulatório:
+All APIs share some important characteristics defined by the regulator:
 
-**Tempestividade dos dados para APIs de investimento:**
+**Timeliness of data for investment APIs:**
 
-- Até uma hora para as APIs Renda Fixa Bancária, Renda Fixa Crédito, Títulos do Tesouro Direto e Fundos de Investimento
-- Para a API Renda Variável, devido a frequente alteração dos preços e a dinâmica de funcionamento do produto (ordens de compra e venda), serão expostas a posição e movimentações do fechamento do dia anterior (d-1).
+- Up to one hour for the Bank Fixed Income, Credit Fixed Income, Treasury Bonds, and Investment Funds APIs
+- For the Variable Income API, due to the frequent changes in prices and the dynamics of product operation (buy and sell orders), the position and movements at the close of the previous day (d-1) will be exposed.
 
-**Recursos que devem ser incluídos no compartilhamento:**
+**Resources that must be included in the sharing:**
 
-- Investimentos ativos em um período de até 12 meses anterior ao inicio da vigência do consentimento
-- Investimentos que venceram, foram resgatados ou tiveram sua titularidade ou custódia transferida em um período de até 12 meses anterior ao inicio da vigência do consentimento
-- Investimento contratados durante o período de vigência do consentimento
-- Investimentos que venceram, foram resgatados ou tiveram sua titularidade ou custódia transferida durante o período de vigência do consentimento
+- Active investments in a period of up to 12 months before the start of the consent’s validity
+- Investments that matured, were redeemed, or had their ownership or custody transferred within a period of up to 12 months before the start of the consent’s validity
+- Investments contracted during the consent validity period
+- Investments that matured, were redeemed, or had their ownership or custody transferred during the consent validity period
 
-**Recursos que não devem ser incluídos no compartilhamento:**
+**Resources that should not be included in the sharing:**
 
-- Investimentos que venceram ou foram resgatados em um período maior que 12 meses anterior ao inicio da vigência do consentimento
-- Investimentos que pertencem a clientes que estão sob algum tipo de bloqueio conforme políticas internas das instituições
-- Investimentos com aplicação e resgate automático
+- Investments that matured or were redeemed more than 12 months before the start of the consent’s validity
+- Investments belonging to customers who are under any type of internal institutional blocking policies
+- Investments with automatic investment and redemption
 
-Abaixo você encontra o link para cada uma das APIs de Investimento:
+Below you will find the link for each of the Investment APIs:
 
 |API                        |Link                     |
 |---------------------------|:-----------------------:|
-|Renda fixa bancária        |[Link](./dados-investimentos/dados-renda-fixa-bancaria.html)|
-|Renda fixa crédito         |[Link](./dados-investimentos/dados-renda-fixa-credito.html) |
-|Renda variável             |[Link](./dados-investimentos/dados-renda-variavel.html)     |
-|Títulos do tesouro direto  |[Link](./dados-investimentos/dados-tesouro.html)            |
-|Fundos de investimento     |[Link](./dados-investimentos/dados-fundos.html)             |
+|Bank fixed income          |[Link](./dados-investimentos/dados-renda-fixa-bancaria.html)|
+|Credit fixed income        |[Link](./dados-investimentos/dados-renda-fixa-credito.html)|
+|Variable income            |[Link](./dados-investimentos/dados-renda-variavel.html)|
+|Treasury bonds             |[Link](./dados-investimentos/dados-tesouro.html)|
+|Investment funds           |[Link](./dados-investimentos/dados-fundos.html)|
 
 [Tabela-Investimento-OFB]: https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/102957060/Orienta+es+-+DC+Investimentos

@@ -1,24 +1,26 @@
 ---
 layout: default
-title: "Funds API"
+title: "Investment Funds API"
 parent: "Investments"
 nav_order: 4
+lang: "en"
+alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Integração/dados-investimentos/dados-fundos/"
 ---
 
-# API de Fundos de Investimento
+# Investment Funds API
 
-API da *camada de integração* que retorna dados de fundos de investimento mantidos pelo cliente na instituição Transmissora de Dados.
+Integration layer API that returns data on investment funds held by the client at the Data Transmitting Institution.
 
-Em linhas gerais, existem *endpoints* para:
+In general, there are *endpoints* for:
 
-- Obter os registros de operações dos fundos de investimento mantidos pelo cliente;
-- Obter os registros de identificação dos fundos de investimento;
-- Obter os registros de posição nos fundos de investimento;
-- Obter os registros de histórico de transações dos últimos 12 meses;
-- Obter os registros de histórico dos últimos sete dias.
+- Retrieving records of operations of the investment funds held by the client;
+- Retrieving the identification records of the investment funds;
+- Retrieving the position records in the investment funds;
+- Retrieving transaction history records for the last 12 months;
+- Retrieving history records for the last seven days.
 
-## *Open API Specification* da API
+## *Open API Specification* of the API
 
-A documentação da API de fundos de investimento a ser construída na *camada de integração* pode ser encontrada [aqui][API-Fundos-de-Investimento]
+The documentation for the investment funds API to be built in the integration layer can be found [here][API-Investment-Funds]
 
-[API-Fundos-de-Investimento]: ../../../../../swagger-ui/index.html?api=en-data-fund
+[API-Investment-Funds]: ../../../../../swagger-ui/index.html?api=data-funds

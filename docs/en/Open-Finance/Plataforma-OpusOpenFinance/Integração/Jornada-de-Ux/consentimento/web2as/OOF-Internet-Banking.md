@@ -1,54 +1,54 @@
 ---
 layout: default
 title: "Internet Banking"
-parent: "App and Web"
+parent: "Mobile App and Web"
 nav_order: 2
+lang: "en"
+alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Integração/Jornada-de-Ux/consentimento/web2as/OOF-Internet-Banking/"
 ---
 
 # Internet Banking
 
-Caso a instituição necessite, ela pode autenticar seus clientes através de sua própria página de login no *Internet Banking*. Uma vez realizado o login, a instituição pode optar por utilizar as telas de geração de consentimento padrão do Opus Open Banking ou então suas próprias telas customizadas.
+If the institution requires it, it can authenticate its customers through its own login page on *Internet Banking*. Once the login is completed, the institution can choose to use the standard consent generation screens provided by Opus Open Banking or use its own custom screens.
 
-## Iniciando o fluxo de login web customizado
+## Starting the Custom Web Login Flow
 
-O início do fluxo ocorre a partir da chamada do primeiro `GET` à URL de autenticação junto ao Authorization Server da **Plataforma Opus Open Finance**. A URL apresenta o seguinte padrão: (`https://<EV-FQDN-open-banking>/auth/auth`).
+The flow starts with the first `GET` request to the authentication URL at the Authorization Server of the **Opus Open Finance Platform**. The URL follows this pattern: (`https://<EV-FQDN-open-banking>/auth/auth`).
 
-Após receber esse `GET`, o Authorization Server então redireciona o browser do usuário para a URL do sistema responsável pela autenticação da instituição. Essa URL é configurável dentro do Authorization Server.
+After receiving this `GET`, the Authorization Server redirects the user’s browser to the institution's system responsible for authentication. This URL is configurable within the Authorization Server.
 
-Tal configuração define o *template* da URL de autenticação customizada da instituição, desta forma o identificador inicial do fluxo de autenticação que será tratado pela página de login pode ser mesclado na URL da forma que a instituição desejar.
+This configuration defines the *template* for the institution’s custom authentication URL. Therefore, the initial identifier of the authentication flow that will be handled by the login page can be merged into the URL in any way the institution desires.
 
-A mescla permite a instituição receber o identificador através da `query-string`, `fragment` ou `url`, como exibido na tabela abaixo:
+The merge allows the institution to receive the identifier through the `query-string`, `fragment`, or `url`, as shown in the table below:
 
-| Formato      | URL Exemplo                                            |
-| ------------ | ------------------------------------------------------ |
-| Query string | `https://ev.instituicao.com.br?codigo=<IDENTIFICADOR>` |
-| Fragment     | `https://ev.instituicao.com.br#<IDENTIFICADOR>`        |
-| URL          | `https://ev.instituicao.com.br/<IDENTIFICADOR>`        |
+| Format       | Example URL                                           |
+| ------------ | ----------------------------------------------------- |
+| Query string | `https://ev.instituicao.com.br?codigo=<IDENTIFIER>`   |
+| Fragment     | `https://ev.instituicao.com.br#<IDENTIFIER>`          |
+| URL          | `https://ev.instituicao.com.br/<IDENTIFIER>`          |
 
- O exemplo fornecido na documentação utiliza o formato **Fragment** que é o mais recomendado dentre as opções existentes, pois ele também remove o identificador do histórico de navegação, evitando qualquer confusão por parte do cliente (por exemplo ao tentar utilizar uma URL antiga de consentimento).
+The example provided in the documentation uses the **Fragment** format, which is the most recommended of the existing options. This format also removes the identifier from the navigation history, avoiding any confusion on the client’s part (e.g., when attempting to use an old consent URL).
 
-Se essa configuração estiver definida o Authorization Server entenderá que se trata de um fluxo de autenticação web customizado e retornará então para a aplicação de autorização da instituição um endereço para redirecionamento contendo a identificação do `command` de autenticação criado para início do fluxo.
+If this configuration is defined, the Authorization Server will understand that this is a custom web authentication flow and will return to the institution's authorization application a redirection URL containing the `command` identifier created for the start of the flow.
 
-A comunicação entre o aplicativo web da instituição e o Authorization Server acontecerá através de `command`s dentro de um loop de eventos. A definição deste loop de eventos será detalhada no momento de iniciar o projeto de integração do aplicativo móvel com a plataforma da Opus.
+Communication between the institution's web application and the Authorization Server will happen through `commands` within an event loop. The definition of this event loop will be detailed when starting the integration project of the mobile application with the Opus platform.
 
-## Utilizando o fluxo de geração de consentimento customizado
+## Using the Custom Consent Generation Flow
 
-A instituição pode escolher entre utilizar as telas de geração de consentimento padrão fornecidas junto do Opus Open Finance, ou ainda optar por utilizar suas próprias telas de geração de consentimento.
+The institution can choose between using the standard consent generation screens provided by Opus Open Finance or opting to use its own custom consent generation screens.
 
-Há uma configuração no Authorization Server que permite definir qual será a escolha da instituição.
+There is a setting in the Authorization Server that allows defining the institution’s choice.
 
-Caso a instituição opte por utilizar suas próprias telas de geração de consentimento, a parte do fluxo relativa à escolha dos recursos e aprovação/recusa do consentimento, bem como a tela final responsável por realizar a transição da geração do consentimento de volta para a instituição financeira que realizou a requisição, ficará por conta da própria instituição, que deverá se comunicar via API com o Authorization Server para informar os recursos selecionados, bem como a aprovação/recusa do consentimento em questão.
+If the institution chooses to use its own consent generation screens, the part of the flow related to selecting resources and approving/denying consent, as well as the final screen responsible for transitioning the consent generation back to the financial institution that made the request, will be handled by the institution itself. It must communicate via API with the Authorization Server to inform the selected resources and the approval/denial of the consent in question.
 
 ## Open API Specification
 
-As definições da API REST disponibilizado pelo Authorization Server podem ser consultadas [aqui][API-Mobile]
+The definitions of the REST API provided by the Authorization Server can be consulted [here][API-Mobile].
 
+## Sequence Diagram
 
-## Diagrama de sequência
+The following sequence diagram illustrates the interaction between the institution's web application and the Authorization Server, covering the authentication step followed by the consent generation flow, both for the use of standard screens and custom screens.
 
-O diagrama de sequência a seguir ilustra o funcionamento entre o aplicativo web da instituição e o Authorization Server, englobando a etapa de autenticação seguida do fluxo de geração de consentimento, tanto para a configuração de uso das telas padrão como uso das
-telas customizadas.
+![Sequence Diagram](images/sequencia-web2as.svg)
 
-![Diagrama de sequência](images/sequencia-web2as.svg)
-
-[API-Mobile]: ../../../../../../../swagger-ui/index.html?api=en-Mobile
+[API-Mobile]: ../../../../../../../swagger-ui/index.html?api=Mobile

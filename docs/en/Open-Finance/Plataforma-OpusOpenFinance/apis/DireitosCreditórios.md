@@ -1,28 +1,31 @@
 ---
 layout: default
-title: "Invoice Financing API"
+title: "Receivables Discount API"
 parent: "Credit Operations"
 nav_order: 4
+lang: "en"
+alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/DireitosCreditórios/"
 ---
 
-# Direitos Creditórios Descontados
+# Discounted Receivables
 
-API da *camada de integração* que retorna informações de operações de credito do tipo *antecipação de recebíveis*, mantidas nas instituições transmissoras por seus clientes, incluindo dados como denominação, modalidade, número do contrato, tarifas, prazo, prestações, pagamentos (ao menos para os últimos 12 meses), amortizações, garantias, encargos e taxas de juros remuneratórios.
+The *integration layer* API that returns information on credit operations of the *receivables discounting* type, maintained by transmitting institutions for their clients, including data such as denomination, modality, contract number, fees, term, installments, payments (at least for the last 12 months), amortizations, guarantees, charges, and interest rates.
 
-Essa API não faz separação entre pessoa natural e pessoa jurídica.
+This API does not separate between individuals and legal entities.
 
-Antes de qualquer *endpoint* da *camada de integração* ser acionado, a plataforma já verificou a autenticidade da origem da chamada e a validade, data de expiração, permissões e escopo do consentimento enviado pelo receptor, garantindo que se trata de uma requisição autorizada.
+Before any *endpoint* of the *integration layer* is triggered, the platform has already verified the authenticity of the request's origin and the validity, expiration date, permissions, and scope of the consent sent by the receiver, ensuring that the request is authorized.
 
-Existem *endpoints* para:
+There are *endpoints* for:
 
-- Obter a lista de contratos de antecipação de recebíveis consentidos pelo cliente;
-- Obter os dados de um contrato de antecipação de recebíveis;
-- Obter os dados do cronograma de parcelas de um contrato de antecipação de recebíveis;
-- Obter a lista de garantias vinculadas a um contrato de antecipação de recebíveis;
-- Obter os dados de pagamento de um contrato de antecipação de recebíveis.
+- Retrieving the list of receivables discounting contracts consented by the client;
+- Retrieving the details of a receivables discounting contract;
+- Retrieving the installment schedule of a receivables discounting contract;
+- Retrieving the list of guarantees linked to a receivables discounting contract;
+- Retrieving the payment details of a receivables discounting contract.
 
-## *Open API Specification* da API
+## *Open API Specification* of the API
 
-A documentação da API de Operações de Crédito a ser construída na *camada de integração* pode ser encontrada [aqui][API-Direitos-Creditórios].
+The documentation for the Credit Operations API to be built in the *integration layer* can be found [here][API-Direitos-Creditórios].
 
-[API-Direitos-Creditórios]: ../../../../swagger-ui/index.html?api=en-Direitos-Creditórios
+[API-Direitos-Creditórios]: ../../../../swagger-ui/index.html?api=Direitos-Creditórios
+

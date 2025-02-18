@@ -3,22 +3,24 @@ layout: default
 title: "Variable Income API"
 parent: "Investments"
 nav_order: 3
+lang: "en"
+alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Integração/dados-investimentos/dados-renda-variavel/"
 ---
 
-# API de Renda Variável
+# Variable Income API
 
-API da *camada de integração* que retorna dados de renda variável mantidos pelo cliente na instituição Transmissora de Dados.
+Integration layer API that returns data on variable income held by the client at the Data Transmitting Institution.
 
-Em linhas gerais, existem *endpoints* para:
+In general, there are *endpoints* for:
 
-- Obter os registros de operações dos papéis de renda variável mantidos pelo cliente;
-- Obter os registros de identificação dos papéis de renda variável;
-- Obter os registros de posição nos papéis de renda variável;
-- Obter os registros de histórico de transações dos últimos 12 meses;
-- Obter os registros de histórico dos últimos sete dias.
+- Retrieving records of operations of the variable income securities held by the client;
+- Retrieving the identification records of the variable income securities;
+- Retrieving the position records in the variable income securities;
+- Retrieving transaction history records for the last 12 months;
+- Retrieving history records for the last seven days.
 
-## *Open API Specification* da API
+## *Open API Specification* of the API
 
-A documentação da API de renda variável a ser construída na *camada de integração* pode ser encontrada [aqui][API-Renda-Variável]
+The documentation for the variable income API to be built in the integration layer can be found [here][API-Variable-Income]
 
-[API-Renda-Variável]: ../../../../../swagger-ui/index.html?api=en-data-variable-incomes
+[API-Variable-Income]: ../../../../../swagger-ui/index.html?api=data-variable-incomes

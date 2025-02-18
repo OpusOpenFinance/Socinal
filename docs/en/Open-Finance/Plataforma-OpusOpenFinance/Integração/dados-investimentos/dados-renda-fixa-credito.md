@@ -3,22 +3,24 @@ layout: default
 title: "Credit Fixed Income API"
 parent: "Investments"
 nav_order: 2
+lang: "en"
+alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Integração/dados-investimentos/dados-renda-fixa-credito/"
 ---
 
-# API de Renda Fixa de Crédito
+# Credit Fixed Income API
 
-API da *camada de integração* que retorna dados de renda fixa de crédito mantidos pelo cliente na instituição Transmissora de Dados.
+Integration layer API that returns data on credit fixed income held by the client at the Data Transmitting Institution.
 
-Em linhas gerais, existem *endpoints* para:
+In general, there are *endpoints* for:
 
-- Obter os registros de operações dos papéis de renda fixa de crédito mantidos pelo cliente;
-- Obter os registros de identificação dos papéis de renda fixa de crédito;
-- Obter os registros de posição nos papéis de renda fixa de crédito;
-- Obter os registros de histórico de transações dos últimos 12 meses;
-- Obter os registros de histórico dos últimos sete dias.
+- Retrieving records of operations of the credit fixed income securities held by the client;
+- Retrieving the identification records of the credit fixed income securities;
+- Retrieving the position records in the credit fixed income securities;
+- Retrieving transaction history records for the last 12 months;
+- Retrieving history records for the last seven days.
 
-## *Open API Specification* da API
+## *Open API Specification* of the API
 
-A documentação da API de renda fixa de crédito a ser construída na *camada de integração* pode ser encontrada [aqui][API-Renda-Fixa-Credito]
+The documentation for the credit fixed income API to be built in the integration layer can be found [here][API-Credit-Fixed-Income]
 
-[API-Renda-Fixa-Credito]: ../../../../../swagger-ui/index.html?api=en-data-credit-fixed-incomes
+[API-Credit-Fixed-Income]: ../../../../../swagger-ui/index.html?api=data-credit-fixed-incomes

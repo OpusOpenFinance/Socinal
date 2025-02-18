@@ -3,6 +3,8 @@ layout: default
 title: "API de Financiamento"
 parent: "Operações de Crédito"
 nav_order: 2
+lang: "pt-br"
+alternate_lang: "/docs/en/Open-Finance/Plataforma-OpusOpenFinance/apis/Financiamento/"
 ---
 
 # Financiamento

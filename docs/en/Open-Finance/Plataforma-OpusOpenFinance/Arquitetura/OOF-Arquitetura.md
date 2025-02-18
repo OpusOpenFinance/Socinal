@@ -1,67 +1,70 @@
 ---
 layout: default
 title: Platform Architecture
-parent: "Opus Open Finance Brazil"
+parent: "Opus Open Finance"
 nav_order: 1
+lang: "en"
+alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Arquitetura/OOF-Arquitetura/"
 ---
-# Visão Geral da Arquitetura
 
-A arquitetura da solução é baseada em **microsserviços**, projetada para suportar escalabilidade horizontal automática, e implementada em contêineres (**Docker**) rodando em um ambiente de execução *clusterizado* Kubernetes.
+# Architecture Overview
 
-A plataforma é oferecida em três modalidades:
+The solution architecture is based on **microservices**, designed to support automatic horizontal scalability, and implemented in **Docker** containers running in a Kubernetes cluster environment.
 
-- Na nuvem do cliente, com ambiente administrado pelo time do cliente;
-- Na nuvem do cliente, como uma subconta, com o ambiente sendo administrado pelo time da Opus Software;
-- Em modelo de Software as a Service (SaaS)
+The platform is offered in three modes:
 
-A solução tem sido utilizada sucesso pelos clientes nos seguintes ambientes:
+- In the client's cloud, with the environment managed by the client's team;
+- In the client's cloud, as a subaccount, with the environment managed by the Opus Software team;
+- In a Software as a Service (SaaS) model.
 
-- **Ambientes Kubernetes como serviços gerenciados**:
+The solution has been successfully used by clients in the following environments:
+
+- **Kubernetes environments as managed services**:
   - Google GKE
   - AWS AKS
   - Azure EKS
-- **Clusters Kubernetes on-premise gerenciados manualmente**
+- **On-premise Kubernetes clusters manually managed**
 
 ---
 
-![Arquitetura geral](./images/visão_geral.png)
+![General Architecture](./images/visão_geral.png)
 
-## Componentes e Ferramentas
+## Components and Tools
 
-Para sua execução a plataforma necessita dos seguintes componentes:
+For execution, the platform requires the following components:
 
-- Banco de dados *PostgreSQL* (tipicamente utilizado como serviço gerenciado)
-- Fila de mensagens
-  - Diferentes mecanismos de fila têm sido usados pelos nossos clientes, incluindo SQS/SNS, GCP Pub/Sub e Kafka;
-  - A plataforma utiliza um componente de abstração que suporta os principais mecanismos de filas de mensagens do mercado.
-- Sistema gerenciador de logs distribuídos
-  - A solução padrão empacotada com a plataforma é o *Grafana Loki*, mas outras soluções têm sido usadas por nossos clientes como *Datadog* e *Elastic Stack*;
+- **PostgreSQL database** (typically used as a managed service)
+- **Message Queue**
+  - Different message queue mechanisms have been used by our clients, including SQS/SNS, GCP Pub/Sub, and Kafka;
+  - The platform uses an abstraction component that supports the major message queue mechanisms in the market.
+- **Distributed Log Management System**
+  - The standard solution packaged with the platform is **Grafana Loki**, but other solutions have been successfully used by our clients, such as **Datadog** and **Elastic Stack**;
 
-  A plataforma embute ainda um API Gateway que é empacotado junto com o produto e que pode funcionar atrás do produto padrão utilizado pelo cliente, se for o caso.
+  The platform also embeds an **API Gateway** that is packaged along with the product and can function behind the client's standard product, if necessary.
 
-  A solução demanda também um *Web Application Firewall* (*WAF*) fornecido pelo cliente e que deve suportar o protocolo *Mutual TLS* (*mTLS*).
+  The solution also requires a **Web Application Firewall (WAF)** provided by the client, which must support the **Mutual TLS (mTLS)** protocol.
 
-  Finalmente, em ambientes gerenciados pelo time da Opus utilizamos a combinação *Prometheus/Grafana* para visibilidade e monitoramento da solução em execução. Outras soluções como *Dynatrace* têm sido utilizadas com sucesso por nossos clientes.
+  Finally, in environments managed by the Opus team, we use the **Prometheus/Grafana** combination for visibility and monitoring of the running solution. Other solutions like **Dynatrace** have been successfully used by our clients.
 
 ---
 
-## Escalabilidade horizontal
+## Horizontal Scalability
 
-A arquitetura baseada em microsserviços adotada pela solução, executando em contêineres gerenciados pelo Kubernetes, é ideal para lidar com a demanda variável do ecossistema do Open Finance Brasil, pois permite escalabilidade horizontal de forma eficiente. Cada microsserviço pode ser dimensionado independentemente, garantindo que apenas os componentes necessários recebam mais recursos em momentos de alta demanda. O Kubernetes facilita esse processo ao monitorar automaticamente o uso de recursos e escalar instâncias de execução conforme necessário, mantendo a disponibilidade e o desempenho do sistema sem desperdício de recursos.
+The microservices-based architecture adopted by the solution, running in containers managed by Kubernetes, is ideal for handling the variable demand of the *Open Finance Brasil* ecosystem because it allows efficient horizontal scalability. Each microservice can be scaled independently, ensuring that only the necessary components receive more resources during high demand periods. Kubernetes facilitates this process by automatically monitoring resource usage and scaling execution instances as needed, maintaining system availability and performance without wasting resources.
 
-![Arquitetura voltada para escalabilidade](./images/arquitetura_pods.png)
+![Scalability-focused Architecture](./images/arquitetura_pods.png)
 
-## Infraestrutura e configuração
+## Infrastructure and Configuration
 
-- **Configuração de Autoscaling**:
-  - Todos os módulos do sistema suportam autoscaling, permitindo ao Kubernetes ajustar o número de instâncias com base no uso de CPU e memória.
+- **Autoscaling Configuration**:
+  - All system modules support autoscaling, allowing Kubernetes to adjust the number of instances based on CPU and memory usage.
 
-- **Distribuição e Gerenciamento**:
-  - Utiliza **Helm charts** para:
-    - Definição
-    - Instalação
-    - Upgrade da aplicação
-    - Seleção de recursos para execução no cluster
+- **Distribution and Management**:
+  - Uses **Helm charts** for:
+    - Definition
+    - Installation
+    - Application upgrades
+    - Resource selection for execution in the cluster
 
-- **Scripts Terraform**:
-  - Disponibilizados para instalação e configuração dos componentes de infraestrutura.
+- **Terraform Scripts**:
+  - Provided for the installation and configuration of infrastructure components.

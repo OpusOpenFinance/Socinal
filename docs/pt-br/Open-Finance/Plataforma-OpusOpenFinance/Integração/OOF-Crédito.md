@@ -4,6 +4,8 @@ title: "Operações de Crédito"
 parent: "Compartilhamento de Dados"
 nav_order: 4
 has_children: true
+lang: "pt-br"
+alternate_lang: "/docs/en/Open-Finance/Plataforma-OpusOpenFinance/Integração/OOF-Crédito/"
 ---
 
 # Operações de Crédito
