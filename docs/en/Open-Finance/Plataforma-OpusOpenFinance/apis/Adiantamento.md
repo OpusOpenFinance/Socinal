@@ -1,15 +1,18 @@
 ---
 layout: default
-title: "Advance to Depositors API"
+title: "Unarranged Accounts Overdraft API"
 parent: "Credit Operations"
 nav_order: 3
 lang: "en"
 alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/Adiantamento"
 ---
 
-# Advance to Depositors
+# Unarranged Accounts Overdraft
 
-The *integration layer* API that returns information on credit operations of the *advance to depositors* type, maintained by transmitting institutions for their clients, including data such as denomination, modality, contract number, fees, term, installments, payments (at least for the last 12 months), amortizations, guarantees, charges, and remunerative interest rates.
+The *integration layer* API that returns information on credit operations of the *arranged overdraft* type, maintained by transmitting institutions for their clients, including data such as denomination, modality, contract number, fees, term, installments, payments (at least for the last 12 months), amortizations, guarantees, charges, and remunerative interest rates.
+
+{: .note}
+Although the API is named "***Unarranged*** *Accounts Overdraft*," it actually refers to a concept known in Brazil as "*cheque especial*" ("*special check/cheque*"), which is equivalent to the "***arranged overdraft***" available in many financial markets worldwide. In other words, the customer makes a withdrawal or payment through their checking account while having a negative balance, up to a pre-approved limit previously agreed upon with the financial institution.
 
 This API does not separate between individual and corporate clients.
 

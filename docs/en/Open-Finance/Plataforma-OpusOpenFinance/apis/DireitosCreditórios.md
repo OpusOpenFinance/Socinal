@@ -1,15 +1,15 @@
 ---
 layout: default
-title: "Receivables Discount API"
+title: "Invoice Financing API"
 parent: "Credit Operations"
 nav_order: 4
 lang: "en"
 alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/DireitosCreditórios/"
 ---
 
-# Discounted Receivables
+# Invoice Financing
 
-The *integration layer* API that returns information on credit operations of the *receivables discounting* type, maintained by transmitting institutions for their clients, including data such as denomination, modality, contract number, fees, term, installments, payments (at least for the last 12 months), amortizations, guarantees, charges, and interest rates.
+This *integration layer* API returns information on credit operations of the *invoice financing* type or, more generally, *receivables discounting*, carried out by transmitting institutions for its clients. The returned information includes data such as denomination, modality, contract number, fees, term, installments, payments (at least for the last 12 months), amortizations, guarantees, charges, and interest rates.
 
 This API does not separate between individuals and legal entities.
 

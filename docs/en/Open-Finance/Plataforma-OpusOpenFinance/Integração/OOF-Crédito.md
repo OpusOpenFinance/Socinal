@@ -40,9 +40,9 @@ The details of the APIs for each credit operation modality can be found in the t
 
 |API                             |Link                     |
 |--------------------------------|:-----------------------:|
-|Loan                            |[Link](../../../../apis/Empréstimo.html)|
+|Loans                           |[Link](../../../../apis/Empréstimo.html)|
 |Financing                       |[Link](../../../../apis/Financiamento.html)|
-|Discounted Receivables          |[Link](../../../../apis/DireitosCreditórios.html)|
-|Advances to Deposit Holders     |[Link](../../../../apis/Adiantamento.html)|
+|Invoice Financing               |[Link](../../../../apis/DireitosCreditórios.html)|
+|Unarranged Accounts Overdraft   |[Link](../../../../apis/Adiantamento.html)|
 
 [Tabela-Crédito-OFB]: https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/320176146/Orienta+es+-+DC+Opera+es+de+cr+dito#Tabela-com-as-modalidades-e-submodalidades-das-APIs-de-opera%C3%A7%C3%B5es-de-cr%C3%A9dito

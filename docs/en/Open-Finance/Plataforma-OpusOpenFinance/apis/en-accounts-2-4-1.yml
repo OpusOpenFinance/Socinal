@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: API Accounts - Integration Layer - OPUS Open Finance Brasil
+  title: Accounts API - Integration Layer - OPUS Open Finance Brasil
   description: |
     API for demand deposit accounts, savings accounts and prepaid accounts of the Integration Layer of the Transmitting Institution with Opus Open Finance Brasil.
     API that returns account information for demand deposit accounts, savings accounts and prepaid payment accounts maintained at transmitting institutions by their customers,

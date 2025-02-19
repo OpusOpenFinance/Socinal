@@ -10,7 +10,7 @@ alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Integraçã
 
 # Data Sharing
 
-The data transmitter participation profile in *Open Finance Brasil* requires the financial institution to be able to respond to data requests from other participating institutions. Before another financial institution can make data requests related to the transmitting institution’s customers, the customer must have previously authorized the sharing of their data through a **data sharing consent**.
+The *data transmitter* participation profile in *Open Finance Brasil* requires the financial institution to be able to respond to data requests from other participating institutions. Before another financial institution can make data requests related to the transmitting institution’s customers, the customer must have previously authorized the sharing of their data through a **data sharing consent**.
 
 As previously mentioned, the **Opus Open Finance Platform** manages active consents and also verifies the validity of received requests. This verification includes assessing whether the data request sent by the receiving institution—which always includes a consent identifier—is an active consent and whether it allows the sharing of the requested data. For example, a customer could share their personal data and credit card information, but not their checking account or loan data.
 

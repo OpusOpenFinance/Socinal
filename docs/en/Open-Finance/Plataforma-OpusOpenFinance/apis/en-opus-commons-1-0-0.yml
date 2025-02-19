@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: API Opus Commons - Integration Layer - Opus Open Finance Brasil
+  title: Opus Commons API - Integration Layer - Opus Open Finance Brasil
   description: |
     API of routes that are general for the operation of connectors for all products.
     API with the route that verifies if a given customer has an account at the financial institution required for the routes.

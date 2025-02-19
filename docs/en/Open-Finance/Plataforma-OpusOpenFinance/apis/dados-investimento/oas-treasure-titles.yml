@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: API Treasure Titles - Integration Layer - OPUS Open Finance Brasil
+  title: API Treasure Bonds - Integration Layer - OPUS Open Finance Brasil
   description: |
     API de informações de operações de Títulos do Tesouro Direto Open Finance Brasil – Fase 4. 
     API que retorna informações de operações de investimento do tipo Títulos do Tesouro Direto mantidas nas 

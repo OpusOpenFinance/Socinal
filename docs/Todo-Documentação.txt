@@ -6,7 +6,8 @@ TODO:
 
 --------------
 
-0) Tem algum erro na API de Dados Cadastrais (customers) em inglês!!!
+0) Faltar traduzir Câmbio
+1,5) A versão atual da custumers API é mais nova... A comparação está aberta no editor.
 1) Forma automática de "próxima página"?
 2) A API opus-commons deve ser listada na seção sobre a construção de conectores.
 

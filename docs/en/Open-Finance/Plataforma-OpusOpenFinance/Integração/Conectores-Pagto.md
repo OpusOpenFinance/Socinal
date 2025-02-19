@@ -9,7 +9,7 @@ alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Integraçã
 
 ## Payments
 
-Integration with the payments pillar of _Open Finance Brasil_ is only required for the Account Holder profile. This integration allows the Opus product to direct a request to the necessary back-end systems for the payment flow. The payment flow, at a high level, is divided into two parts: **consent** and **payment settlement**, and both require their necessary integrations. The integration with the product works through a layer we call *connectors*.
+Integration with the payments pillar of _Open Finance Brasil_ is only required for the Account Holder profile. This integration allows the Opus product to direct a request to the necessary back-end systems for the payment flow. The payment flow, at a high level, is divided into two parts: **consent** and **payment settlement**, and both require their necessary integrations. The integration with the product works through a layer we call _connectors_.
 
 ## Integration
 

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Personal Data API"
+title: "Customers"
 parent: "Data Sharing"
 nav_order: 1
 lang: "en"
@@ -9,7 +9,7 @@ alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/Dados-
 
 # Personal Data API
 
-The *integration layer* API that returns personal data for clients and their representatives, including identification data, financial qualification information, details about registered representatives, and the financial relationship between the client and the transmitting financial institution.
+The *integration layer* API that returns *customers data* for clients and their representatives, including identification data, financial qualification information, details about registered representatives, and the financial relationship between the client and the transmitting financial institution.
 
 This API separates individual clients from legal entities, providing distinct *endpoints* for each type.
 

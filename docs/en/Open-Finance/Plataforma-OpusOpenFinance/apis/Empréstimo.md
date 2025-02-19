@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "Loan API"
+title: "Loans API"
 parent: "Credit Operations"
 nav_order: 1
 lang: "en"

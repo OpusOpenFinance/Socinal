@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: API Customers - Integration Layer - OPUS Open Finance Brasil
+  title: Customers API - Integration Layer - OPUS Open Finance Brasil
   description: |
     Customer registration data API of the Integration Layer of the Transmitting Institution with Opus Open Finance Brasil.
     API that returns customer registration data and their representatives, including identification data, financial qualification, information about registered representatives and about the customer's financial relationship with the data transmitting institution.
