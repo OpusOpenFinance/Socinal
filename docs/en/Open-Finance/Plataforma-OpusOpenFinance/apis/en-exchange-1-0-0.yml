@@ -1,6 +1,6 @@
 ﻿openapi: 3.0.0
 info:
-  title: API Exchanges - Open Finance Brasil
+  title: API Exchange - Open Finance Brasil
   description: |
     Open Finance Brasil Exchange Operations API – Phase 4.
     API that returns information on Exchange Operations carried out in transmitting institutions by their clients, including data such as information on the contracted operation, operation value in national and foreign currency, operation classification, delivery method, VET and, when applicable, amount to be settled.

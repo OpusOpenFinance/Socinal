@@ -9,7 +9,7 @@ alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/Câmbi
 
 # Foreign Exchange Operations
 
-The *integration layer* API that returns information on Foreign Exchange operations conducted by transmitting institutions for their clients, including data such as contracted operation details, operation value in both local and foreign currencies, operation classification, delivery method, VET, and, when applicable, value to be settled. Changes to the operation will also be shared, if any, with the modified information.
+The *integration layer* API that returns information on *Foreign Exchange* operations conducted by transmitting institutions for their clients, including data such as contracted operation details, operation value in both local and foreign currencies, operation classification, delivery method, VET, and, when applicable, value to be settled. Changes to the operation will also be shared, if any, with the modified information.
 
 The scope of sharing includes operations negotiated in the primary market, spot (including species, prepaid cards, debit cards), and forward (including ACC, ACE, or foreign exchange hedge).
 
@@ -33,4 +33,4 @@ There are endpoints for:
 
 The documentation for the Foreign Exchange API to be built in the *integration layer* can be found [here][API-Câmbio].
 
-[API-Câmbio]: ../../../../swagger-ui/index.html?api=Câmbio
+[API-Câmbio]: ../../../../swagger-ui/index.html?api=en-Câmbio

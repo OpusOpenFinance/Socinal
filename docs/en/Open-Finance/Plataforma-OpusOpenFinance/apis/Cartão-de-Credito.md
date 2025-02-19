@@ -1,15 +1,15 @@
 ---
 layout: default
-title: "Credit Card API"
+title: "Credit Cards API"
 parent: "Data Sharing"
 nav_order: 2
 lang: "en"
 alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/Cartão-de-Credito/"
 ---
 
-# Credit Card API
+# Credit Cards API
 
-The *integration layer* API that returns information about postpaid payment accounts held by transmitting institutions for their clients, including data such as denomination, product, brand, credit limits, payment transaction details, and invoices.
+The *integration layer* API that returns information about *postpaid payment accounts* held by transmitting institutions for their clients, including data such as denomination, product, brand, credit limits, payment transaction details, and invoices.
 
 This API does not separate between individual and corporate clients.
 
@@ -28,4 +28,4 @@ There are endpoints for:
 
 The documentation for the Credit Card API to be built in the *integration layer* can be found [here][API-Cartão-de-crédito].
 
-[API-Cartão-de-crédito]: ../../../../swagger-ui/index.html?api=Cartão-de-crédito
+[API-Cartão-de-crédito]: ../../../../swagger-ui/index.html?api=en-Cartão-de-crédito

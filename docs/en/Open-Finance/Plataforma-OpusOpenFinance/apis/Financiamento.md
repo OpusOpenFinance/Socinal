@@ -27,4 +27,4 @@ There are *endpoints* for:
 
 The documentation for the Credit Operations API to be built in the *integration layer* can be found [here][API-Financiamento].
 
-[API-Financiamento]: ../../../../swagger-ui/index.html?api=Financiamento
+[API-Financiamento]: ../../../../swagger-ui/index.html?api=en-Financiamento

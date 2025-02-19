@@ -9,7 +9,7 @@ alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/Contas
 
 # Accounts API
 
-The *integration layer* API that returns information about checking accounts, savings accounts, and prepaid payment accounts held by transmitting institutions for their clients, including account identification data, balances, limits, and transactions.
+The *integration layer* API that returns information about *checking accounts*, *savings accounts*, and *prepaid payment accounts* held by transmitting institutions for their clients, including account identification data, balances, limits, and transactions.
 
 This API does not separate between individual and corporate clients.
 
@@ -28,4 +28,4 @@ There are endpoints for:
 
 The documentation for the Accounts API to be built in the *integration layer* can be found [here][API-Contas].
 
-[API-Contas]: ../../../../swagger-ui/index.html?api=Contas
+[API-Contas]: ../../../../swagger-ui/index.html?api=en-Contas

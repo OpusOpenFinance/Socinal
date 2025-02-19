@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: API Credit-cards-accounts - Integration Layer - OPUS Open Finance Brasil
+  title: Credit-cards-accounts API - Integration Layer - OPUS Open Finance Brasil
   description: |
     Post-paid payment accounts API of the Integration Layer from the Transmitting Institution with Opus Open Finance Brasil.
     API that returns post-paid payment account information maintained at transmitting institutions by their customers, including data such as denomination, product, brand, credit limits, information on payment transactions made and invoices.

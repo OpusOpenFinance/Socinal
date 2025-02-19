@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: API Loans - Integration Layer - OPUS Open Finance Brasil
+  title: Loans API - Integration Layer - OPUS Open Finance Brasil
   description: |
     API for loan operation information from the Transmitting Institution's Integration Layer with Opus Open Finance Brasil. API that returns information on loan-type credit operations, maintained at transmitting institutions by their customers, including data such as denomination, modality, contract number, fees, term, instalments, payments (at least for the last 12 months), amortizations, guarantees, charges and compensatory interest rates.
     Does not segregate between natural person and legal entity.

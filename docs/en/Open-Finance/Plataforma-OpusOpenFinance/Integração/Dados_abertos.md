@@ -9,7 +9,7 @@ alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Integraçã
 
 # Introduction
 
-The open data profile, or phase 1 + 4A, refers to the public data that participating institutions in Open Finance must disclose to the ecosystem. For more information on the open data profile, [see here][Perfis-Open-Finance-Brasil].
+The open data profile, or phase 1 + 4A, refers to the public data that participating institutions in Open Finance must disclose to the ecosystem. Typically, this data refers to Customer Service Channels and Products offered by the financial institution. For more information on the open data profile, [see here][Perfis-Open-Finance-Brasil].
 The open data profile also requires integration with the product, but it is much simpler. The purpose of the open data profile is to have non-sensitive information from the participant publicly disclosed. To achieve this, a highly sophisticated integration is not necessary.
 
 ## Integration
