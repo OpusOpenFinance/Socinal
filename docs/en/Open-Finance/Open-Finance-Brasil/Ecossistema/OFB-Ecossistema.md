@@ -20,11 +20,13 @@ To learn more, [visit the website](https://openfinancebrasil.org.br/conheca-o-op
 Open Finance has a scope of implementation in 4 different phases, known as:
 
 1. **Phase 1 - Open Data**
+    Data provided by the Open Finance participants to be shared in public APIs for anyone to consume. The data is non-sensitive and mandatory for phase 2 participants to share. For more information about the data, check this [link](../PerfisOFB/Dados-abertos.html).
 2. **Phase 2 - Customer Data**
+    This phase is related to instituion users to share their personal financial data between different Open Finance participants. The whole list of products possible to share can be found [here](../PerfisOFB/OFB-Transmissor.html).
 3. **Phase 3 - Services**
-4. **Phase 4 - Complement to Phases 1 and 3**
-
-Each phase is described in detail in the image below:
+    Phase 3 provides a possibility for a frictionless journey to make Pix payments. There are multiple functionalities that are listed in this [page](../PerfisOFB/OFB-Detentor.html).
+4. **Phase 4 - Complement to Phases 1 and 2**
+    Adds different APIs for phase 1 and 2.
 
 ![Open Finance Scope](./images/Escopo_OF.png)
 [Source: Central Bank](https://openfinancebrasil.org.br/conheca-o-open-finance/)

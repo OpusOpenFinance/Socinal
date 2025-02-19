@@ -22,7 +22,7 @@ O Open Finance tem um escopo de implementação em 4 diferentes fases, conhecida
 1. **Fase 1 - Dados Abertos**
 2. **Fase 2 - Dados do Cliente**
 3. **Fase 3 - Serviços**
-4. **Fase 4 - Complemento às Fases 1 e 3**
+4. **Fase 4 - Complemento às Fases 1 e 2**
 
 Cada fase é descrita em detalhes na imagem abaixo:
 

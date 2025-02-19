@@ -17,9 +17,6 @@ In Open Finance, any operation can only be performed — whether it is data shar
 
 ## Consent Journey for Data Sharing
 
-![Data Journey](./images/jornada_dados.png)  
-Source: Central Bank
-
 1. The user accesses the **Data Receiver's** environment and requests the initiation of a new data sharing via Open Finance.
 2. After making the request and choosing the **Data Transmitter**, the user is automatically redirected to the Transmitter's environment.
 3. In the Transmitter's environment, the user authenticates using biometrics or registered credentials to access their account.
@@ -29,9 +26,6 @@ Source: Central Bank
 ---
 
 ## Consent Journey for Payments
-
-![Payment Journey](./images/jornada_pgtos.png)  
-Source: Central Bank
 
 1. The user accesses the **Payment Initiator Service Provider (PISP)** environment and requests the initiation of a new payment via Open Finance.
 2. After making the request and choosing the **Account Holder**, the user is automatically redirected to the Account Holder's environment.
