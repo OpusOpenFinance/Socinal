@@ -24,6 +24,7 @@ The different types of investments are:
 
 Since each of these modalities has its own characteristics, the *integration layer* must implement five distinct APIs, considering their different data types.
 
+{: note}
 In the particular case of Brazilian *Treasury Bonds*, they are called *Tesouro Direto*.  *Tesouro Direto* is a Brazilian government bond investment program that allows individuals to buy and sell Treasury bonds online. Created in 2002 by the *Brazilian National Treasury* and *B3* (the stock exchange), it provides retail investors with direct access to fixed-income securities, similar to *U.S. Treasury bonds*. *Tesouro Direto* offers fixed-rate, inflation-linked, and floating-rate bonds, making it a popular low-risk investment for long-term savings and portfolio diversification.
 
 The official documentation of *Open Finance Brasil* has a table summarizing the investments associated with each modality, as well as the API that should be responsible for it, which can be viewed [here][Tabela-Investimento-OFB].
