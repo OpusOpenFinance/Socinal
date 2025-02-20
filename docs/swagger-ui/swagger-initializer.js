@@ -7,7 +7,7 @@ window.onload = () => {
   const apis = {
     // APIs em português.
     // -----------------
-    "Dados-cadastrais": "../pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/customers-2-1-0.yml",
+    "Dados-cadastrais": "../pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/customers-2-2-0.yml",
     "Cartão-de-crédito": "../pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/credit-cards-2-3-1.yml",
     "Contas": "../pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/accounts-2-4-1.yml",
     "Empréstimo": "../pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/loans-2-3-0.yml",
@@ -42,7 +42,7 @@ window.onload = () => {
     // -----------------
     // APIs em inglês.
     // -----------------
-    "en-Dados-cadastrais": "../en/Open-Finance/Plataforma-OpusOpenFinance/apis/en-customers-2-1-0.yml",
+    "en-Dados-cadastrais": "../en/Open-Finance/Plataforma-OpusOpenFinance/apis/en-customers-2-2-0.yml",
     "en-Cartão-de-crédito": "../en/Open-Finance/Plataforma-OpusOpenFinance/apis/en-credit-cards-2-3-1.yml",
     "en-Contas": "../en/Open-Finance/Plataforma-OpusOpenFinance/apis/en-accounts-2-4-1.yml",
     "en-Empréstimo": "../en/Open-Finance/Plataforma-OpusOpenFinance/apis/en-loans-2-3-0.yml",
