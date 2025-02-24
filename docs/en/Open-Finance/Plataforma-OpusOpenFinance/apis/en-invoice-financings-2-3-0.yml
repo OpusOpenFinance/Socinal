@@ -10,6 +10,7 @@ info:
 
     ### Note:
       - In the `/contracts/{contratId}/payments` endpoint, pagination will occur under the data contained in the `releases` field of the list type.
+
   version: 1.0.0-alpha-base2.3.0
   license:
     name: Apache 2.0

@@ -397,7 +397,7 @@ components:
           type: string
           enum:
             - REPRESENTANTE_LEGAL /* Legal Representative */
-            - PROCURADOR         /* Attorney */
+            - PROCURADOR          /* Attorney */
           description: |
             Type of representative.
             Legal representative - Full Civil Name of the Natural Person who represents an entity or a company and is named in its articles of incorporation, that is, in the articles of association or bylaws.
@@ -1061,8 +1061,8 @@ components:
     EnumOccupationMainCodeType:
       type: string
       enum:
-        - RECEITA_FEDERAL /* FEDERAL_REVENUE */
-        - CBO             /* CBO */
+        - RECEITA_FEDERAL /* National Classification of Economic Activities - Brazilian Federal Revenue Service */
+        - CBO             /* Brazilian Classification of Occupations - Ministry of Labor */
         - OUTRO           /* OTHER */
       example: RECEITA_FEDERAL
       description: |
@@ -1090,7 +1090,7 @@ components:
       type: string
       enum:
         - REPRESENTANTE_LEGAL /* LEGAL_REPRESENTATIVE */
-        - PROCURADOR         /* ATTORNEY */
+        - PROCURADOR          /* ATTORNEY */
       example: PROCURADOR
       description: |
         Type of representative.

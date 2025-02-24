@@ -11,7 +11,7 @@ alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Integraçã
 
 Integration layer API that returns data on *treasury bonds* held by the client at the Data Transmitting Institution.
 
-{: note}
+{: .note}
 We are talking here about *Tesouro Direto*. A brief explanation about this kind of treasury bonds can be found [here][OOF-Investimentos].
 
 In general, there are *endpoints* for:
