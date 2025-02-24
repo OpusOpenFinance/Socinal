@@ -10,6 +10,7 @@ info:
 
     ### Observation
       - In the `/contracts/{contratId}/payments` endpoint, pagination will occur under the data contained in the `releases` field of the list type.
+
   version: 1.0.0-alpha-base2.3.0
   license:
     name: Apache 2.0
@@ -323,12 +324,12 @@ components:
       description: Tipo de encargo pactuado no contrato.
       enum:
         - JUROS_REMUNERATORIOS_POR_ATRASO /* Late Remuneratory Interest */
-        - MULTA_ATRASO_PAGAMENTO      /* Late Payment Fine */
-        - JUROS_MORA_ATRASO           /* Late Default Interest */
-        - IOF_CONTRATACAO             /* IOF Contracting */
-        - IOF_POR_ATRASO              /* IOF for Late Payment */
-        - SEM_ENCARGO                 /* No Charge */
-        - OUTROS                      /* Others */
+        - MULTA_ATRASO_PAGAMENTO          /* Late Payment Fine */
+        - JUROS_MORA_ATRASO               /* Late Default Interest */
+        - IOF_CONTRATACAO                 /* IOF Contracting */
+        - IOF_POR_ATRASO                  /* IOF for Late Payment */
+        - SEM_ENCARGO                     /* No Charge */
+        - OUTROS                          /* Others */
       example: JUROS_REMUNERATORIOS_POR_ATRASO
     EnumProductType:
       type: string
@@ -346,14 +347,14 @@ components:
         "Sub tipo da modalidades de crédito contratadas, conforme  circular 4.015 e descrição do DOC3040 do SCR). (Vide Enum)
         Aquisição de bens veículos automotores, Aquisição de bens de outros bens, Microcrédito, Custeio, Investimento, Industrialização, Comercialização, Financiamento habitacional SFH e Financiamento habitacional exceto SFH"
       enum:
-        - AQUISICAO_BENS_VEICULOS_AUTOMOTORES  /* Acquisition of Motor Vehicle Assets */
-        - AQUISICAO_BENS_OUTROS_BENS         /* Acquisition of Other Assets */
-        - MICROCREDITO                        /* Microcredit */
-        - CUSTEIO                             /* Funding */
-        - INVESTIMENTO                        /* Investment */
-        - INDUSTRIALIZACAO                    /* Industrialization */
-        - COMERCIALIZACAO                     /* Marketing */
-        - FINANCIAMENTO_HABITACIONAL_SFH      /* SFH Housing Financing */
+        - AQUISICAO_BENS_VEICULOS_AUTOMOTORES   /* Acquisition of Motor Vehicle Assets */
+        - AQUISICAO_BENS_OUTROS_BENS            /* Acquisition of Other Assets */
+        - MICROCREDITO                          /* Microcredit */
+        - CUSTEIO                               /* Funding */
+        - INVESTIMENTO                          /* Investment */
+        - INDUSTRIALIZACAO                      /* Industrialization */
+        - COMERCIALIZACAO                       /* Marketing */
+        - FINANCIAMENTO_HABITACIONAL_SFH        /* SFH Housing Financing */
         - FINANCIAMENTO_HABITACIONAL_EXCETO_SFH /* Housing Financing except SFH */
       example: AQUISICAO_BENS_VEICULOS_AUTOMOTORES
     FinancingsContractInterestRate:
@@ -653,14 +654,14 @@ components:
             no regular periodicity, weekly, biweekly, monthly, bimonthly, quarterly, semiannual, annual"
           enum:
             - SEM_PERIODICIDADE_REGULAR /* No Regular Periodicity */
-            - SEMANAL                  /* Weekly */
-            - QUINZENAL                /* Biweekly */
-            - MENSAL                   /* Monthly */
-            - BIMESTRAL                /* Bimonthly */
-            - TRIMESTRAL               /* Quarterly */
-            - SEMESTRAL                /* Semiannual */
-            - ANUAL                    /* Annual */
-            - OUTROS                   /* Others */
+            - SEMANAL                   /* Weekly */
+            - QUINZENAL                 /* Biweekly */
+            - MENSAL                    /* Monthly */
+            - BIMESTRAL                 /* Bimonthly */
+            - TRIMESTRAL                /* Quarterly */
+            - SEMESTRAL                 /* Semiannual */
+            - ANUAL                     /* Annual */
+            - OUTROS                    /* Others */
           example: SEMANAL
         instalmentPeriodicityAdditionalInfo:
           type: string
@@ -1097,19 +1098,19 @@ components:
           type: string
           description: 'Name/Identification of the type of guarantee that endorses the Credit Operation Modality contracted (Doc 3040, Annex 12)'
           enum:
-            - CESSAO_DIREITOS_CREDITORIOS         /* Assignment of Credit Rights */
-            - CAUCAO                             /* Collateral */
-            - PENHOR                             /* Pledge */
-            - ALIENACAO_FIDUCIARIA                 /* Fiduciary Alienation */
-            - HIPOTECA                           /* Mortgage */
-            - OPERACOES_GARANTIDAS_PELO_GOVERNO    /* Government Guaranteed Operations */
-            - OUTRAS_GARANTIAS_NAO_FIDEJUSSORIAS /* Other Non-Fidejussory Guarantees */
-            - SEGUROS_ASSEMELHADOS               /* Similar Insurances */
-            - GARANTIA_FIDEJUSSORIA              /* Fidejussory Guarantee */
-            - BENS_ARRENDADOS                    /* Leased Assets */
-            - GARANTIAS_INTERNACIONAIS           /* International Guarantees */
+            - CESSAO_DIREITOS_CREDITORIOS           /* Assignment of Credit Rights */
+            - CAUCAO                                /* Collateral */
+            - PENHOR                                /* Pledge */
+            - ALIENACAO_FIDUCIARIA                  /* Fiduciary Alienation */
+            - HIPOTECA                              /* Mortgage */
+            - OPERACOES_GARANTIDAS_PELO_GOVERNO     /* Government Guaranteed Operations */
+            - OUTRAS_GARANTIAS_NAO_FIDEJUSSORIAS    /* Other Non-Fidejussory Guarantees */
+            - SEGUROS_ASSEMELHADOS                  /* Similar Insurances */
+            - GARANTIA_FIDEJUSSORIA                 /* Fidejussory Guarantee */
+            - BENS_ARRENDADOS                       /* Leased Assets */
+            - GARANTIAS_INTERNACIONAIS              /* International Guarantees */
             - OPERACOES_GARANTIDAS_OUTRAS_ENTIDADES /* Operations Guaranteed by Other Entities */
-            - ACORDOS_COMPENSACAO                /* Set-Off Agreements */
+            - ACORDOS_COMPENSACAO                   /* Set-Off Agreements */
           example: CESSAO_DIREITOS_CREDITORIOS
         warrantySubType:
           type: string

@@ -1087,20 +1087,20 @@ components:
         - DOC
         - PIX
         - TRANSFERENCIA_MESMA_INSTITUICAO /* SAME_INSTITUTION_TRANSFER */
-        - BOLETO                         /* BOLETO */
-        - CONVENIO_ARRECADACAO           /* COLLECTION_AGREEMENT */
-        - PACOTE_TARIFA_SERVICOS         /* SERVICE_FEE_PACKAGE */
-        - TARIFA_SERVICOS_AVULSOS       /* MISCELLANEOUS_SERVICE_FEE */
-        - FOLHA_PAGAMENTO                /* PAYROLL */
-        - DEPOSITO                       /* DEPOSIT */
-        - SAQUE                          /* WITHDRAWAL */
-        - CARTAO                         /* CREDIT_CARD */
-        - ENCARGOS_JUROS_CHEQUE_ESPECIAL /* SPECIAL_CHECK_INTEREST_CHARGES */
-        - RENDIMENTO_APLIC_FINANCEIRA    /* FINANCIAL_INVESTMENT_YIELD */
-        - PORTABILIDADE_SALARIO          /* SALARY_PORTABILITY */
-        - RESGATE_APLIC_FINANCEIRA       /* FINANCIAL_APPLICATION_REDEMPTION */
-        - OPERACAO_CREDITO               /* CREDIT_OPERATION */
-        - OUTROS                         /* OTHERS */
+        - BOLETO                          /* BOLETO */
+        - CONVENIO_ARRECADACAO            /* COLLECTION_AGREEMENT */
+        - PACOTE_TARIFA_SERVICOS          /* SERVICE_FEE_PACKAGE */
+        - TARIFA_SERVICOS_AVULSOS         /* MISCELLANEOUS_SERVICE_FEE */
+        - FOLHA_PAGAMENTO                 /* PAYROLL */
+        - DEPOSITO                        /* DEPOSIT */
+        - SAQUE                           /* WITHDRAWAL */
+        - CARTAO                          /* CREDIT_CARD */
+        - ENCARGOS_JUROS_CHEQUE_ESPECIAL  /* SPECIAL_CHECK_INTEREST_CHARGES */
+        - RENDIMENTO_APLIC_FINANCEIRA     /* FINANCIAL_INVESTMENT_YIELD */
+        - PORTABILIDADE_SALARIO           /* SALARY_PORTABILITY */
+        - RESGATE_APLIC_FINANCEIRA        /* FINANCIAL_APPLICATION_REDEMPTION */
+        - OPERACAO_CREDITO                /* CREDIT_OPERATION */
+        - OUTROS                          /* OTHERS */
       example: PIX
     Meta:
       type: object
