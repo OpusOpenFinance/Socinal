@@ -28,6 +28,6 @@ There are endpoints for:
 
 ## *Open API Specification* of the API
 
-The documentation for the Credit Operations API to be built in the *integration layer* can be found [here][API-Adiantamento].
+The documentation for the Unarranged Accounts Overdraft API to be built in the *integration layer* can be found [here][API-Adiantamento].
 
 [API-Adiantamento]: ../../../../swagger-ui/index.html?api=en-Adiantamento

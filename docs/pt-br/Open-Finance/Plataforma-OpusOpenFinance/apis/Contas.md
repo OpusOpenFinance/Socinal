@@ -24,9 +24,9 @@ Existem *endpoints* para:
 - Obter a lista de transações recentes (últimos 7 dias) de uma conta;
 - Obter os limites de uma conta.
 
-Além disso, é necessário implementar uma outra API regulatória para a verificação de conta de um cliente PF ou PJ em determinada instituição. Essa API é denominada *common* e ela realiza a verificação se um cliente abandonou o fluxo de consentimento por não ter conta na instituição. A sua API pode ser encontrada abaixo.
+Além disso, é necessário implementar uma outra API regulatória para a verificação de conta de um cliente PF ou PJ em determinada instituição. Essa API é denominada *common* e verifica se um cliente abandonou o fluxo de consentimento por não ter conta na instituição.
 
-## *Open API Specification* da API
+## *Open API Specification* das APIs
 
 A documentação das APIs a serem construídas na *camada de integração* podem ser encontradas na tabela abaixo:
 

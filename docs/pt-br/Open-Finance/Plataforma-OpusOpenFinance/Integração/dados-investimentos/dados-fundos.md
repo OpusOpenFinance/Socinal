@@ -21,6 +21,6 @@ Em linhas gerais, existem *endpoints* para:
 
 ## *Open API Specification* da API
 
-A documentação da API de fundos de investimento a ser construída na *camada de integração* pode ser encontrada [aqui][API-Fundos-de-Investimento]
+A documentação da API de fundos de investimento a ser construída na *camada de integração* pode ser encontrada [aqui][API-Fundos-de-Investimento].
 
 [API-Fundos-de-Investimento]: ../../../../../swagger-ui/index.html?api=data-funds

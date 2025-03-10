@@ -21,6 +21,6 @@ Em linhas gerais, existem *endpoints* para:
 
 ## *Open API Specification* da API
 
-A documentação da API de renda fixa bancária a ser construída na *camada de integração* pode ser encontrada [aqui][API-Renda-Fixa-Bancaria]
+A documentação da API de renda fixa bancária a ser construída na *camada de integração* pode ser encontrada [aqui][API-Renda-Fixa-Bancaria].
 
 [API-Renda-Fixa-Bancaria]: ../../../../../swagger-ui/index.html?api=data-bank-fixed-incomes

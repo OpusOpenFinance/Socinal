@@ -21,6 +21,6 @@ Em linhas gerais, existem *endpoints* para:
 
 ## *Open API Specification* da API
 
-A documentação da API de renda variável a ser construída na *camada de integração* pode ser encontrada [aqui][API-Renda-Variável]
+A documentação da API de renda variável a ser construída na *camada de integração* pode ser encontrada [aqui][API-Renda-Variável].
 
 [API-Renda-Variável]: ../../../../../swagger-ui/index.html?api=data-variable-incomes

@@ -25,6 +25,6 @@ There are *endpoints* for:
 
 ## *Open API Specification* of the API
 
-The documentation for the Credit Operations API to be built in the *integration layer* can be found [here][API-Financiamento].
+The documentation for the Financing API to be built in the *integration layer* can be found [here][API-Financiamento].
 
 [API-Financiamento]: ../../../../swagger-ui/index.html?api=en-Financiamento

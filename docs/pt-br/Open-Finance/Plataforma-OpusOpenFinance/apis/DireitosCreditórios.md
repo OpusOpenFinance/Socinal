@@ -9,7 +9,7 @@ alternate_lang: "/docs/en/Open-Finance/Plataforma-OpusOpenFinance/apis/DireitosC
 
 # Direitos Creditórios Descontados
 
-API da *camada de integração* que retorna informações de operações de credito do tipo *antecipação de recebíveis*, mantidas nas instituições transmissoras por seus clientes, incluindo dados como denominação, modalidade, número do contrato, tarifas, prazo, prestações, pagamentos (ao menos para os últimos 12 meses), amortizações, garantias, encargos e taxas de juros remuneratórios.
+API da *camada de integração* que retorna informações de operações de crédito do tipo *antecipação de recebíveis*, mantidas nas instituições transmissoras por seus clientes, incluindo dados como denominação, modalidade, número do contrato, tarifas, prazo, prestações, pagamentos (ao menos para os últimos 12 meses), amortizações, garantias, encargos e taxas de juros remuneratórios.
 
 Essa API não faz separação entre pessoa natural e pessoa jurídica.
 
@@ -25,6 +25,6 @@ Existem *endpoints* para:
 
 ## *Open API Specification* da API
 
-A documentação da API de Operações de Crédito a ser construída na *camada de integração* pode ser encontrada [aqui][API-Direitos-Creditórios].
+A documentação da API de Direitos Creditórios a ser construída na *camada de integração* pode ser encontrada [aqui][API-Direitos-Creditórios].
 
 [API-Direitos-Creditórios]: ../../../../swagger-ui/index.html?api=Direitos-Creditórios

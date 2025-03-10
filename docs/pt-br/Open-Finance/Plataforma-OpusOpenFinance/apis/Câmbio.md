@@ -11,7 +11,7 @@ alternate_lang: "/docs/en/Open-Finance/Plataforma-OpusOpenFinance/apis/Câmbio/"
 
 API da *camada de integração* que retorna informações de operações de Câmbio realizadas nas instituições transmissoras por seus clientes, incluindo dados como informações da operação contratada, valor da operação em moeda nacional e moeda estrangeira, classificação da operação, forma de entrega, VET e, quando aplicável, valor a liquidar. Também serão compartilhados os eventos de alteração da operação, caso existam, com as informações modificadas.
 
-São escopo de compartilhamento as operações negociadas no mercado primário, pronto (inclusive espécie, cartão pré pago, cartão de débito) e futuro (inclusive ACC, ACE ou trava cambial).
+São escopo de compartilhamento as operações negociadas no mercado primário, pronto (inclusive espécie, cartão pré-pago, cartão de débito) e futuro (inclusive ACC, ACE ou trava cambial).
 
 Devem ser compartilhadas as operações contratadas e disponibilizadas nos canais eletrônicos da instituição, mesmo nas situações nas quais a operação ainda não tenha sido registrada junto ao Banco Central. Caso o evento de contratação seja anulado no Sistema de Câmbio, o que significa que a operação foi anulada, então esta operação deixa de ser escopo de exposição. Caso o registro aconteça a operação deve ser complementada com o número de operação registrado e os eventos ocorridos.
 

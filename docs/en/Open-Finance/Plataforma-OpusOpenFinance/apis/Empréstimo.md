@@ -25,6 +25,6 @@ There are *endpoints* for:
 
 ## *Open API Specification* of the API
 
-The documentation for the Credit Operations API to be built in the *integration layer* can be found [here][API-Empréstimo].
+The documentation for the Loans API to be built in the *integration layer* can be found [here][API-Empréstimo].
 
 [API-Empréstimo]: ../../../../swagger-ui/index.html?api=en-Empréstimo

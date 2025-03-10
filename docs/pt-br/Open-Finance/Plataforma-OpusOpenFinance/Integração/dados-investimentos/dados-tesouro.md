@@ -21,6 +21,6 @@ Em linhas gerais, existem *endpoints* para:
 
 ## *Open API Specification* da API
 
-A documentação da API de títulos do tesouro direto a ser construída na *camada de integração* pode ser encontrada [aqui][API-Tesouro-Direto]
+A documentação da API de títulos do tesouro direto a ser construída na *camada de integração* pode ser encontrada [aqui][API-Tesouro-Direto].
 
 [API-Tesouro-Direto]: ../../../../../swagger-ui/index.html?api=data-treasure-titles

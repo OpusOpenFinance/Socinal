@@ -21,6 +21,6 @@ Em linhas gerais, existem *endpoints* para:
 
 ## *Open API Specification* da API
 
-A documentação da API de renda fixa de crédito a ser construída na *camada de integração* pode ser encontrada [aqui][API-Renda-Fixa-Credito]
+A documentação da API de renda fixa de crédito a ser construída na *camada de integração* pode ser encontrada [aqui][API-Renda-Fixa-Credito].
 
 [API-Renda-Fixa-Credito]: ../../../../../swagger-ui/index.html?api=data-credit-fixed-incomes

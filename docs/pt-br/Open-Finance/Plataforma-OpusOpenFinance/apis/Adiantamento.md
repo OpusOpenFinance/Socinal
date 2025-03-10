@@ -9,7 +9,7 @@ alternate_lang: "/docs/en/Open-Finance/Plataforma-OpusOpenFinance/apis/Adiantame
 
 # Adiantamento a Depositantes
 
-API da *camada de integração* que retorna informações de operações de credito do tipo *adiantamento a depositantes*, mantidas nas instituições transmissoras por seus clientes, incluindo dados como denominação, modalidade, número do contrato, tarifas, prazo, prestações, pagamentos (ao menos para os últimos 12 meses), amortizações, garantias, encargos e taxas de juros remuneratórios.
+API da *camada de integração* que retorna informações de operações de crédito do tipo *adiantamento a depositantes*, mantidas nas instituições transmissoras por seus clientes, incluindo dados como denominação, modalidade, número do contrato, tarifas, prazo, prestações, pagamentos (ao menos para os últimos 12 meses), amortizações, garantias, encargos e taxas de juros remuneratórios.
 
 Essa API não faz separação entre pessoa natural e pessoa jurídica.
 
@@ -25,6 +25,6 @@ Existem *endpoints* para:
 
 ## *Open API Specification* da API
 
-A documentação da API de Operações de Crédito a ser construída na *camada de integração* pode ser encontrada [aqui][API-Adiantamento].
+A documentação da API de Adiantamento a Depositantes a ser construída na *camada de integração* pode ser encontrada [aqui][API-Adiantamento].
 
 [API-Adiantamento]: ../../../../swagger-ui/index.html?api=Adiantamento
