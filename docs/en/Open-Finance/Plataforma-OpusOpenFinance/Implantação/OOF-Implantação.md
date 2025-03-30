@@ -20,7 +20,7 @@ It is important to highlight that the most labor-intensive stages of the deploym
 
 ## Deployment Roadmap
 
-![Roadmap](./images/implantação.png)
+![Roadmap][Implementation Roadmap]
 
 ### 1. **Kickoff**
 
@@ -95,3 +95,4 @@ It is important to highlight that the most labor-intensive stages of the deploym
 - Submission of regulatory reports.
 
 [Site-OpenID]: https://openid.net/certification/#FAPI_OPs
+[Implementation Roadmap]: ./images/implantação.png

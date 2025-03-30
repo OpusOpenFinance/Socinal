@@ -14,16 +14,19 @@ This document aims to guide the replication of our Open Finance infrastructure i
 ---
 
 ## Introduction to Open Finance Brasil
+
 Open Finance Brasil is a regulated system that enables the secure sharing of financial data between authorized institutions, with user consent. Its goal is to promote greater competitiveness, financial inclusion, and innovation through the interoperability of financial systems. Our infrastructure is designed to meet the requirements of this ecosystem, ensuring security and reliability in data handling.
 
 ---
 
 ## Opus Open Finance Architecture Diagram
-*(Insert Architecture Diagram here - sent by email)*
+
+![Architecture][Architecture Diagram]
 
 ---
 
 ## Requirements
+
 To use Opus Open Finance, the following requirements must be met:
 
 1. **Kubernetes Cluster**:
@@ -52,6 +55,7 @@ To use Opus Open Finance, the following requirements must be met:
 ---
 
 ## About Terragrunt
+
 The entire infrastructure of the Opus Open Finance Platform is built using Terraform scripts. To facilitate infrastructure-as-code management, we use **Terragrunt**, a tool that provides an abstraction layer to simplify common Terraform tasks such as managing configurations, dependencies, and environments. This makes the implementation and maintenance process easier for users.
 
 Some of the key features of Terragrunt include its **hierarchical model**, where configurations are inherited from "parent" files using the `include` block. To better understand this functionality, it is recommended to read the article provided by the Terragrunt team: [link](https://terragrunt.gruntwork.io/docs/features/keep-your-terragrunt-architecture-dry/).
@@ -61,14 +65,17 @@ The structure is divided into two main components: **Core** and **Client**, whic
 ---
 
 ## Microservices and Containers Compatibility
+
 Our microservices are packaged and executed in containers, ensuring portability and consistency across environments. The infrastructure supports multiple orchestration platforms based on Kubernetes and is compatible with Kubernetes versions up to **1.30**, allowing flexibility for on-premise or cloud environments.
 
 ---
 
 ## Hierarchy
+
 The code hierarchy is essential to ensure modularity and reusability. Terragrunt allows separation into two parts: **Core** and **Client**:
 
 ### Core
+
 - **Terraform Modules**: Contains the Terraform code for components.
 - **Terragrunt Templates**: Terragrunt files used as "templates". These define much of the "intelligence" of the code, including default variables for each context and the dependency logic between components. Whenever you want to understand how a variable is configured, this is the first place to look.
 - **Scripts**: Auxiliary scripts, such as those handling the encryption and decryption logic for the `secrets.tfvars.encrypted` files.
@@ -76,6 +83,7 @@ The code hierarchy is essential to ensure modularity and reusability. Terragrunt
 - **opus.hcl**: Contains Opus-specific configurations used by certain components, such as the product's image repository address.
 
 ### Client
+
 - **client.hcl**: Global configurations for all environments, e.g., organization and brand information.
 - **env.hcl**: Environment-specific configurations, defining versions to be used (for both applications and the core), Open Banking participant directory information, database addresses, URL modifications, among others.
 - **namespace.hcl**: Namespace-specific configurations for the Kubernetes cluster.
@@ -84,7 +92,8 @@ The code hierarchy is essential to ensure modularity and reusability. Terragrunt
 ---
 
 ## Automatic Core Download
-Before executing each component, the script `opus_get_core.sh` is run. This script is responsible for automatically cloning the Core repository if it does not already exist.
+
+Before executing each component, the script `opus_get_core.sh` is run. This script is responsible for automatically cloning the core repository if it does not already exist.
 
 The script determines the Core version to be used by referencing the appropriate `env.hcl` file. To correctly identify the environment, the environment directory name must match the `env_path` regex specified in the script.
 
@@ -93,9 +102,11 @@ For example codebases (where the Core version is set to `example`), the Core is 
 ---
 
 ## Secrets
+
 All sensitive configurations are stored in an encrypted file named `secrets.encrypted.tfvars`. This file is decrypted and read by Terragrunt during runtime. It allows you to define variables as well as Helm values using the `values_sensitive_custom` variable, which works in the same way as the previously explained `values_custom` variable.
 
 ### Editing the Encrypted File
+
 The encrypted file can only be edited using **sops**. Before editing, the private key from the cluster must be saved locally by running the following command:
 
 ```shell
@@ -103,80 +114,100 @@ export SOPS_AGE_KEY_FILE="$HOME/.config/sops/age/keys.txt" && \
 $(find $(git rev-parse --show-toplevel) -name 'save_keys.sh' | head -n1)
 ```
 
-sops `secrets.encrypted.tfvars`: When the file is saved, **sops** automatically re-encrypts it.
+The edition command should be:
+
+```shell
+sops `secrets.encrypted.tfvars`
+```
+
+When the file is saved, **sops** automatically re-encrypts it.
 
 ---
 
 ## Encryption Key Rotation
+
 **WARNING**: The following steps only rotate the key pair used to encrypt the `secrets.encrypted.tfvars` files. They do not alter the contents of these files (e.g., database access keys remain unchanged).
 
 **WARNING**: It is critical that the machine performing this rotation has access to the Git repository where the Client code is stored. This is because all files must be re-encrypted and committed to the repository during this process.
 
-### Steps:
-1. **Remove the local file containing the keys:**
+### Steps
+
+1. **Remove the local file containing the keys**
 
    ```shell
    rm $HOME/.config/sops/age/keys.txt
    ```
-2. **Apply the code to rotate the keys (generates a new pair and re-encrypts all files):**
 
-```shell
-terragrunt apply -auto-approve \
---terragrunt-working-dir '06-helm/00-oob-encrypt/01-secret-keys' \
---terragrunt-config '06-helm/00-oob-encrypt/01-secret-keys/terragrunt.rotate_keys.hcl'
-```
+2. **Apply the code to rotate the keys (generates a new pair and re-encrypts all files)**
 
-3. **Update the encrypted files in the remote repository:**
-```shell
-git add '*secret.encrypted.tfvars' && git commit -m "Encryption keys rotation" && git push
-```
+   ```shell
+   terragrunt apply -auto-approve \
+   --terragrunt-working-dir '06-helm/00-oob-encrypt/01-secret-keys' \
+   --terragrunt-config '06-helm/00-oob-encrypt/01-secret-keys/terragrunt.rotate_keys.hcl'
+   ```
 
-4. **Backup the new keys (save them remotely in a secure location):**
-```shell
-$(find $(git rev-parse --show-toplevel) -name 'get_keys.sh' | head -n1)
-```
->**Tip**: The `get_keys.sh` script returns a JSON, which simplifies the automation of step 4.
+3. **Update the encrypted files in the remote repository**
+
+   ```shell
+   git add '*secret.encrypted.tfvars' && git commit -m "Encryption keys rotation" && git push
+   ```
+
+4. **Backup the new keys (save them remotely in a secure location)**
+
+   ```shell
+   $(find $(git rev-parse --show-toplevel) -name 'get_keys.sh' | head -n1)
+   ```
+
+>**Tip** The `get_keys.sh` script returns a JSON, which simplifies the automation of step 4.
 
 ## Database: PostgreSQL
-We use PostgreSQL as the default database, recommending version 14 or higher. This database is ideal for the Open Finance ecosystem due to its robustness and scalability. If a cloud provider is used, we recommend leveraging a managed database service. 
+
+We use PostgreSQL as the default database, recommending version 14 or higher. This database is ideal for the Open Finance ecosystem due to its robustness and scalability. If a cloud provider is used, we recommend leveraging a managed database service.
 
 Our templates include scripts for creating instances, users, and databases, which can be customized as needed. To access the database, the secrets configuration must be updated in the `secrets.encrypted.tfvars` file.
 
 ---
 
 ## Messaging Service
+
 To ensure communication between our distributed services, we use message queues as an essential part of the infrastructure. These queues enable asynchronous processing and decoupling between microservices, enhancing system scalability and resilience. Technologies such as Apache Kafka, RabbitMQ, or AWS SQS can be used depending on the client's environment and requirements.
 
 ---
 
 ## Log Collectors
-Any log collection solution available in the market can be used in the infrastructure environment, as long as it is compatible with the employed technologies. This includes, but is not limited to, solutions such as ELK Stack (Elasticsearch, Logstash, Kibana), Fluentd, Prometheus, Grafana Loki, Splunk, and others. 
+
+Any log collection solution available in the market can be used in the infrastructure environment, as long as it is compatible with the employed technologies. This includes, but is not limited to, solutions such as ELK Stack (Elasticsearch, Logstash, Kibana), Fluentd, Prometheus, Grafana Loki, Splunk, and others.
 
 The ideal tool should be chosen based on the client's specific needs regarding monitoring, performance analysis, and event tracing. Log collectors must be configured to ensure efficient data capture and maintain information integrity over time. OPUS provides guidance on integrating these systems, but the responsibility for maintaining and managing the logs lies with the client.
 
 ---
 
 ## WAF (Web Application Firewall)
-The Web Application Firewall (WAF) is a critical security layer to protect web applications from common attacks and vulnerabilities, such as SQL injection, cross-site scripting (XSS), and other threats. 
+
+The Web Application Firewall (WAF) is a critical security layer to protect web applications from common attacks and vulnerabilities, such as SQL injection, cross-site scripting (XSS), and other threats.
 
 We recommend clients configure the WAF according to best security practices to ensure effective integration with the production environment. Open Finance, which involves the secure exchange of financial data between institutions, demands high-security standards, including the use of mTLS, a practice the WAF must support. OPUS offers guidance for any questions, but the ongoing management, implementation, configuration, and maintenance of the WAF are the client's responsibility.
 
 ---
 
 ## Dapr
+
 The microservices architecture is complemented by the use of **Dapr** (Distributed Application Runtime), which simplifies communication and state management between services. With Dapr, we ensure the interoperability of our distributed applications efficiently and securely.
 
 ---
 
 ## Customizations
-The installation of Opus Open Banking components is performed via **Helm**. The Helm values for each component can be customized using the `values_custom` variable on the Client side. 
+
+The installation of Opus Open Banking components is performed via **Helm**. The Helm values for each component can be customized using the `values_custom` variable on the Client side.
 
 This variable is analogous to the `values_template` variable in the template. If there are any doubts, it is recommended to consult the template. Essentially, it is an indented YAML heredoc interpreted by the Terraform module as a YAML file.
 
-### Important Note:
+### Important Note
+
 It is crucial not to define the `values_template` variable within the component (in the `inputs` field of `terragrunt.hcl`). This variable is exclusively for template use. Defining it at the component level will overwrite the template and cause the code to malfunction. Always use the `values_custom` variable instead.
 
-### Example:
+### Example
+
 ```shell
 # terragrunt.hcl
 inputs = {
@@ -199,18 +230,24 @@ inputs = {
 ```
 
 ## Execution
+
 To simplify the execution of components, we provide the `apply-all.sh` script, which applies all necessary configurations in the correct order. It is essential to follow the instructions in the script to avoid configuration errors.
 
 ---
 
 ## Important Notes
+
 Some key considerations when working with a staging/production environment:
 
-### Database:
-- The application requires the use of the **postgresql** component, but it is recommended to create a database separate from the cluster. If a cloud provider is used, we advise opting for a managed database service. The template for this component includes the necessary queries to create the databases and users required by the product.
+### Database
+
+- The application requires the use of the **PostgreSQL** component, but it is recommended to create a database separated from the cluster. If a cloud provider is used, we advise opting for a managed database service. The template for this component includes the necessary queries to create the databases and users required by the product.
 - Once the instance is created, the host must be configured in the `db_host` field of the `env.hcl` file. Additionally, the `secrets.encrypted.tfvars` files for components connecting to the database must be updated with the password of the respective user.
 - For example, in the `secrets.encrypted.tfvars` file for the **oob-consent** component, you need to replace `changeThis` with the password for the user **oob_consent_user**, and so on.
 
-### Cert-manager Component:
+### Cert-manager Component
+
 - Useful in staging environments for automatically generating Let's Encrypt certificates.
 - In production, it is not required, as all production certificates must be obtained from a certification authority per the ecosystem's regulatory specifications.
+
+[Architecture Diagram]: ./images/Arquitetura.png

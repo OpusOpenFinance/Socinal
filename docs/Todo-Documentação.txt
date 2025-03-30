@@ -1,24 +1,13 @@
 Documentação Plataforma Opus Open Finance - Todo list
 =========================================   =========
 
-TODO:
- - Investigar como mexer nas páginas do GitHub Pages
-
---------------
-
-0) A versão atual da customers API é mais nova... A comparação está aberta no editor.
-0,5) Fazer a documentação da construção do aplicativo e Web.
+1) Fazer a documentação da construção do aplicativo e Web.
 2) A API opus-commons deve ser listada na seção sobre a construção de conectores.
 
 Dúvidas:
 
-1) O que é essa "  API dos endpoints de pagamentos internos, responsável pelos endpoints não regulatórios." ????
+1) O que é essa "API dos endpoints de pagamentos internos, responsável pelos endpoints não regulatórios." ????
    Arquivo oas-oof-payment.yml
-2) Procurar {{..comment}}, há alguns trechos comentados que precisam ser esclarecidos/complementados.
-
-Tradução para Inglês
--------- ---- ------
-1) Falta traduzir as imagens
 
 Site multi-idioma
 ==== ============
