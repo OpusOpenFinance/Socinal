@@ -8,7 +8,7 @@ info:
     rentabilidade, quantidade, prazos, saldos em posição do cliente e movimentações financeiras.
     Não possui segregação entre pessoa natural e pessoa jurídica. A exposição se dará por cada operação de 
     renda fixa contratada pelo cliente.
-  version: 1.0.0-base1.0.3
+  version: 2.0.0-base1.0.3
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
@@ -121,6 +121,7 @@ paths:
 
         - Valores monetários: 0.00
         - Quantidade de ativos: 0.00
+        - Data e hora da última posição: mesmo conteúdo do campo requestDateTime
       requestBody:
         required: true
         content:
@@ -336,6 +337,8 @@ components:
           minItems: 0
           items:
             $ref: '#/components/schemas/CreditFixedIncomesTransactions'
+        meta:
+          $ref: '#/components/schemas/CreditFixedIncomesMetaTransactions'
     ResponseCreditFixedIncomesTransactionsCurrent:
       type: object
       required:
@@ -461,6 +464,8 @@ components:
                 example: '1.100000'
               transactionId:
                 $ref: '#/components/schemas/LegacyId'
+        meta:
+          $ref: '#/components/schemas/CreditFixedIncomesMetaTransactions'
     BlockedBalance:
       type: object
       description: Valor não disponível para movimentação naquele momento por qualquer motivo (bloqueio judicial, bloqueio em garantia, entre outros). Prazo de carência não é considerado como bloqueio.
@@ -589,6 +594,7 @@ components:
       required:
         - totalRecords
         - totalPages
+        - requestDateTime
       properties:
         totalRecords:
           type: integer
@@ -600,6 +606,29 @@ components:
           format: int32
           description: Número total de páginas no resultado
           example: 1
+        requestDateTime:
+          description: 'Data e hora da consulta, conforme especificação RFC-3339, formato UTC.'
+          type: string
+          maxLength: 20
+          format: date-time
+          example: '2021-05-21T08:30:00Z'
+    CreditFixedIncomesMetaTransactions:
+      type: object
+      description: Meta informações referente a API requisitada.
+      required:
+        - requestDateTime
+        - hasMoreRecords
+      properties:
+        requestDateTime:
+          description: 'Data e hora da consulta, conforme especificação RFC-3339, formato UTC.'
+          type: string
+          maxLength: 20
+          format: date-time
+          example: '2021-05-21T08:30:00Z'
+        hasMoreRecords:
+          type: boolean
+          description: Indica se tem mais registros a serem retornados (true) ou não (false).
+          example: true
     CreditFixedList:
       type: object
       description: Lista de títulos de renda fixa crédito mantidos pelo cliente na instituição transmissora e para as quais ele tenha fornecido consentimento
@@ -1193,6 +1222,18 @@ components:
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 2048
+        meta:
+          type: object
+          description: Meta informações referente à API requisitada.
+          required:
+            - requestDateTime
+          properties:
+            requestDateTime:
+              description: 'Data e hora da consulta, conforme especificação RFC-3339, formato UTC.'
+              type: string
+              maxLength: 20
+              format: date-time
+              example: '2021-05-21T08:30:00Z'
     ResponseError:
       type: object
       required:
@@ -1230,6 +1271,7 @@ components:
           required:
             - totalRecords
             - totalPages
+            - requestDateTime
           properties:
             totalRecords:
               type: integer
@@ -1241,6 +1283,12 @@ components:
               format: int32
               description: Número total de páginas no resultado
               example: 1
+            requestDateTime:
+              description: 'Data e hora da consulta, conforme especificação RFC-3339, formato UTC.'
+              type: string
+              maxLength: 20
+              format: date-time
+              example: '2021-05-21T08:30:00Z'
     ConsentDataSharing:
       description: Consentimento de compartilhamento de dados
       type: object

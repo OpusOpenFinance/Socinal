@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: API Treasure Bonds - Integration Layer - OPUS Open Finance Brasil
+  title: API Treasure Titles - Integration Layer - OPUS Open Finance Brasil
   description: |
     API de informações de operações de Títulos do Tesouro Direto Open Finance Brasil – Fase 4. 
     API que retorna informações de operações de investimento do tipo Títulos do Tesouro Direto mantidas nas 
@@ -8,7 +8,7 @@ info:
     saldos em posição do cliente e movimentações financeiras. Não possui segregação entre pessoa natural e pessoa jurídica. 
     Devem ser considerados como escopo de exposição todos os títulos ofertados pelo Tesouro Direto. 
     A exposição se dará por cada operação de títulos do Tesouro Direto contratada pelo cliente.
-  version: 1.0.0-base1.0.1
+  version: 2.0.0-base1.0.1
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
@@ -121,6 +121,7 @@ paths:
 
         - Valores monetários: 0.00
         - Quantidade de ativos: 0.00
+        - Data e hora da última posição: mesmo conteúdo do campo requestDateTime
       requestBody:
         required: true
         content:
@@ -280,6 +281,7 @@ components:
           required:
             - totalRecords
             - totalPages
+            - requestDateTime
           properties:
             totalRecords:
               type: integer
@@ -291,6 +293,12 @@ components:
               format: int32
               description: Número total de páginas no resultado
               example: 1
+            requestDateTime:
+              description: 'Data e hora da consulta, conforme especificação RFC-3339, formato UTC.'
+              type: string
+              maxLength: 20
+              format: date-time
+              example: '2021-05-21T08:30:00Z'
           additionalProperties: false
       additionalProperties: false
     ResponseError:
@@ -324,10 +332,23 @@ components:
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 2048
+        meta:
+          type: object
+          description: Meta informações referente à API requisitada.
+          required:
+            - requestDateTime
+          properties:
+            requestDateTime:
+              description: 'Data e hora da consulta, conforme especificação RFC-3339, formato UTC.'
+              type: string
+              maxLength: 20
+              format: date-time
+              example: '2021-05-21T08:30:00Z'
     ResponseTreasureTitlesListProduct:
       type: object
       required:
-        - data        
+        - data
+        - meta
       properties:
         data:
           type: array
@@ -343,6 +364,7 @@ components:
       required:
         - totalRecords
         - totalPages
+        - requestDateTime
       properties:
         totalRecords:
           type: integer
@@ -354,6 +376,12 @@ components:
           format: int32
           description: Número total de páginas no resultado
           example: 1
+        requestDateTime:
+          description: 'Data e hora da consulta, conforme especificação RFC-3339, formato UTC.'
+          type: string
+          maxLength: 20
+          format: date-time
+          example: '2021-05-21T08:30:00Z'
       additionalProperties: false
     ResponseTreasureTitlesBalances:
       type: object
@@ -470,6 +498,8 @@ components:
           minItems: 0
           items:
             $ref: '#/components/schemas/TreasureTitlesProductTransaction'
+        meta:
+          $ref: '#/components/schemas/TreasureTitlesMetaTransaction'
       additionalProperties: false
     TreasureTitlesAmount:
       description: Valor relacionado ao objeto.
@@ -687,6 +717,24 @@ components:
       pattern: '^[A-Z]{2}([A-Z0-9]){9}\d{1}$'
       example: BRCST4CTF001
       type: string
+    TreasureTitlesMetaTransaction:
+      type: object
+      description: Meta informações referente a API requisitada.
+      required:
+        - requestDateTime
+        - hasMoreRecords
+      properties:
+        requestDateTime:
+          description: 'Data e hora da consulta, conforme especificação RFC-3339, formato UTC.'
+          type: string
+          maxLength: 20
+          format: date-time
+          example: '2021-05-21T08:30:00Z'
+        hasMoreRecords:
+          type: boolean
+          description: Indica se tem mais registros a serem retornados (true) ou não (false).
+          example: true
+      additionalProperties: false
     TreasureTitlesNetAmount:
       description: 'Valor do investimento posterior a dedução de impostos, taxas e tarifas (se houver), atualizado (a mercado) na data de referência.'
       type: object

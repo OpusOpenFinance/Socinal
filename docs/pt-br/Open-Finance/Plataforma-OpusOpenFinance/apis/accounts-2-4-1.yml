@@ -1257,9 +1257,9 @@ components:
           $ref: '#/components/schemas/Page'
         pageSize:
           $ref: '#/components/schemas/PageSize'
-        fromBookingDate:
+        fromBookingDateMaxLimited:
           $ref: '#/components/schemas/FromBookingDateMaxLimited'
-        toBookingDate:
+        toBookingDateMaxLimited:
           $ref: '#/components/schemas/ToBookingDateMaxLimited'
         creditDebitIndicator:
           $ref: '#/components/schemas/EnumCreditDebitIndicator'

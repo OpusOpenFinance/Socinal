@@ -20,7 +20,7 @@ info:
     - Após 12 meses sem movimentações e com quantidade de ativos zerada, o resourceId correspondente ao investmentId em questão deve passar ao status UNAVAILABLE (considerando consentimento válido);
 
     - Nas situações em que o cliente compre novamente o ativo após um período de 12 meses sem movimentação e com quantidade de ativos zerada, o mesmo identificador (investmentId) deve ser utilizado. Especificamente para tais produtos, o status do recurso na resources deve passar de UNAVAILABLE para AVAILABLE.
-  version: 1.0.0-base1.0.2
+  version: 2.0.0-base1.0.2
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
@@ -133,6 +133,7 @@ paths:
 
         - Valores monetários: 0.00
         - Quantidade de ativos: 0.00
+        - Data da última posição: mesmo conteúdo (data) do campo requestDateTime, com exceção da fração correspondente ao horário
       requestBody:
         required: true
         content:
@@ -293,24 +294,30 @@ components:
     ResponseFundsTransactions:
       type: object
       required:
-        - data        
+        - data
+        - meta
       properties:
         data:
           type: array
           minItems: 0
           items:
             $ref: '#/components/schemas/ResponseFundsTransactionsData'
+        meta:
+          $ref: '#/components/schemas/MetaOnlyRequestDateTimeAndHasMoreRecords'
       additionalProperties: false
     ResponseFundsTransactionsCurrent:
       type: object
       required:
         - data
+        - meta
       properties:
         data:
           type: array
           minItems: 0
           items:
             $ref: '#/components/schemas/ResponseFundsTransactionsCurrentData'
+        meta:
+          $ref: '#/components/schemas/MetaOnlyRequestDateTimeAndHasMoreRecords'
       additionalProperties: false
     ResponseFundsProductListData:
       type: object
@@ -647,6 +654,7 @@ components:
           type: object
           description: |
             Valor líquido da movimentação posterior à dedução de impostos (IOF e IR) e taxa de saída.   
+            
             [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'type' for preenchido com o valor 'SAIDA'.
           required:
             - amount
@@ -864,12 +872,30 @@ components:
               maxLength: 3
               example: BRL
       additionalProperties: false
+    MetaOnlyRequestDateTimeAndHasMoreRecords:
+      type: object
+      description: Meta informação referente a API requisitada.
+      required:
+        - requestDateTime
+        - hasMoreRecords
+      properties:
+        requestDateTime:
+          description: 'Data e hora da consulta, conforme especificação RFC-3339, formato UTC.'
+          type: string
+          maxLength: 20
+          format: date-time
+          example: '2021-05-21T08:30:00Z'
+        hasMoreRecords:
+          type: boolean
+          description: Indica se tem mais registros a serem retornados (true) ou não (false).
+          example: true
     FundsMeta:
       type: object
       description: Meta informações referente a API requisitada.
       required:
         - totalRecords
         - totalPages
+        - requestDateTime
       properties:
         totalRecords:
           type: integer
@@ -881,6 +907,12 @@ components:
           format: int32
           description: Número total de páginas no resultado
           example: 1
+        requestDateTime:
+          description: 'Data e hora da consulta, conforme especificação RFC-3339, formato UTC.'
+          type: string
+          maxLength: 20
+          format: date-time
+          example: '2021-05-21T08:30:00Z'
       additionalProperties: false
     FundsBalancesBlockedAmount:
       type: object
@@ -1083,6 +1115,20 @@ components:
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 2048
+        meta:
+          $ref: '#/components/schemas/MetaOnlyRequestDateTime'
+    MetaOnlyRequestDateTime:
+      type: object
+      description: Meta informações referente à API requisitada.
+      required:
+        - requestDateTime
+      properties:
+        requestDateTime:
+          description: 'Data e hora da consulta, conforme especificação RFC-3339, formato UTC.'
+          type: string
+          maxLength: 20
+          format: date-time
+          example: '2021-05-21T08:30:00Z'
     ResponseErrorWithAbleAdditionalProperties:
       type: object
       required:
@@ -1122,6 +1168,7 @@ components:
       required:
         - totalRecords
         - totalPages
+        - requestDateTime
       properties:
         totalRecords:
           type: integer
@@ -1133,6 +1180,12 @@ components:
           format: int32
           description: Número total de páginas no resultado
           example: 1
+        requestDateTime:
+          description: 'Data e hora da consulta, conforme especificação RFC-3339, formato UTC.'
+          type: string
+          maxLength: 20
+          format: date-time
+          example: '2021-05-21T08:30:00Z'
     ConsentDataSharing:
       description: Consentimento de compartilhamento de dados
       type: object
