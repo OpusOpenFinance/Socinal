@@ -5,7 +5,7 @@ info:
     API de dados cadastrais de clientes da Camada de Integração da Instituição Transmissora com o Opus Open Finance Brasil.
     API que retorna os dados cadastrais de clientes e de seus representantes, incluindo dados de identificação, de qualificação financeira, informações sobre representantes cadastrados e sobre o relacionamento financeiro do cliente com a instituição transmissora dos dados.
     Possui segregação entre pessoa natural e pessoa jurídica.
-  version: 1.0.0-base2.2.0
+  version: 2.0.0-base2.2.0
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
@@ -590,7 +590,10 @@ components:
           $ref: '#/components/schemas/EnumCustomerPhoneType'
         additionalInfo:
           type: string
-          description: 'Informação complementar relativa ao tipo de telefone selecionado. [Restrição] De preenchimento obrigatório quando selecionado o tipo ''OUTRO''.'
+          description: | 
+            Informação complementar relativa ao tipo de telefone selecionado. 
+            
+            [Restrição] De preenchimento obrigatório quando selecionado o tipo ''OUTRO''.
           pattern: '[\w\W\s]*'
           maxLength: 70
           example: Informações adicionais.
@@ -719,6 +722,7 @@ components:
           example: Centro
           description: |
             Bairro é uma comunidade ou região localizada em uma cidade ou município de acordo com as suas subdivisões geográficas.
+            
             [Restrição] De preenchimento obrigatório, se houver.
         townName:
           type: string
@@ -776,6 +780,7 @@ components:
           pattern: '^\d{4}$'
           description: |
             Código da Agência detentora da conta. (Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito, no exercício de atividades da instituição, não podendo ser móvel ou transitória)   
+            
             [Restrição] Obrigatoriamente deve ser preenchido quando o campo "type" for diferente de conta pré paga.
           example: '6272'
         number:
@@ -817,6 +822,7 @@ components:
           pattern: '^\d{4}$'
           description: |
             Código da Agência detentora da conta. (Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito, no exercício de atividades da instituição, não podendo ser móvel ou transitória)   
+            
             [Restrição] Obrigatoriamente deve ser preenchido quando o campo "type" for diferente de conta pré paga.
           example: '6272'
         number:
@@ -945,7 +951,10 @@ components:
           example: '8599604'
         isMain:
           type: boolean
-          description: 'Indica se é o ramo principal de atividade da empresa quando true e se é o ramo secundário quando false. [Restrição] Somente uma ocorrência relativa ao código da atividade econômica principal deve trazer o valor true.'
+          description: | 
+            Indica se é o ramo principal de atividade da empresa quando true e se é o ramo secundário quando false. 
+            
+            [Restrição] Somente uma ocorrência relativa ao código da atividade econômica principal deve trazer o valor true.
           example: true
     EnumAccountTypeCustomers:
       type: string
@@ -1253,6 +1262,18 @@ components:
           maxLength: 3
           description: 'Moeda referente ao valor monetário, seguindo o modelo ISO-4217.'
           example: BRL
+    Meta:
+      type: object
+      description: Meta informações referente à API requisitada.
+      required:
+        - requestDateTime
+      properties:
+        requestDateTime:
+          description: 'Data e hora da consulta, conforme especificação RFC-3339, formato UTC.'
+          type: string
+          maxLength: 20
+          format: date-time
+          example: '2021-05-21T08:30:00Z'
     Nationality:
       type: object
       description: Objeto que agrupa informações relativas à nacionalidade da Pessoa Natural
@@ -1481,6 +1502,7 @@ components:
           example: Informações adicionais do tipo de serviço.
           description: |
             Informações adicionais do tipo de serviço.
+            
             [Restrição] Campo obrigatório quando productsServicesType for 'OUTROS'.
         procurators:
           type: array
@@ -1489,6 +1511,7 @@ components:
           minItems: 0
           description: |
             Lista dos representantes. 
+            
             [Restrição] De preenchimento obrigatório se houver representante.
         accounts:
           type: array
@@ -1670,6 +1693,7 @@ components:
           example: SSP/SP
           description: |
             Para documentos em que se aplique o uso do local de emissão o mesmo deve ser enviado mandatoriamente, com a informação de órgão e UF. Exemplo: RG, local de emissão: SSP/RS.
+            
             [Restrição] Obrigatório quando o Local de Emissão do Documento for relevante.
         expirationDate:
           type: string
@@ -1794,26 +1818,35 @@ components:
       type: object
       required:
         - data
+        - meta
       properties:
         data:
           $ref: '#/components/schemas/BusinessFinancialRelationData'
+        meta:
+          $ref: '#/components/schemas/Meta'
     ResponseBusinessCustomersIdentification:
       type: object
       required:
         - data
+        - meta
       properties:
         data:
           type: array
           minItems: 1
           items:
             $ref: '#/components/schemas/BusinessIdentificationData'
+        meta:
+          $ref: '#/components/schemas/Meta'
     ResponseBusinessCustomersQualification:
       type: object
       required:
         - data
+        - meta
       properties:
         data:
           $ref: '#/components/schemas/BusinessQualificationData'
+        meta:
+          $ref: '#/components/schemas/Meta'
     ResponseError:
       type: object
       required:
@@ -1845,30 +1878,41 @@ components:
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 2048
+        meta:
+          $ref: '#/components/schemas/Meta'
     ResponsePersonalCustomersFinancialRelation:
       type: object
       required:
         - data
+        - meta
       properties:
         data:
           $ref: '#/components/schemas/PersonalFinancialRelationData'
+        meta:
+          $ref: '#/components/schemas/Meta'
     ResponsePersonalCustomersIdentification:
       type: object
       required:
         - data
+        - meta
       properties:
         data:
           type: array
           minItems: 1
           items:
             $ref: '#/components/schemas/PersonalIdentificationData'
+        meta:
+          $ref: '#/components/schemas/Meta'
     ResponsePersonalCustomersQualification:
       type: object
       required:
         - data
+        - meta
       properties:
         data:
           $ref: '#/components/schemas/PersonalQualificationData'
+        meta:
+          $ref: '#/components/schemas/Meta'
     ConsentDataSharing:
       description: Consentimento de compartilhamento de dados
       type: object
