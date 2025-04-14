@@ -1,4 +1,5 @@
-﻿openapi: 3.0.0
+﻿
+openapi: 3.0.0
 info:
   title: API Financings - Integration Layer - OPUS Open Finance Brasil
   description: |
@@ -9,9 +10,9 @@ info:
     # Guidelines
 
     ### Observation
-      - In the `/contracts/{contratId}/payments` endpoint, pagination will occur under the data contained in the `releases` field of the list type.
+      - In the `/payments` endpoint, pagination will occur under the data contained in the `releases` field of the list type.
 
-  version: 1.0.0-alpha-base2.3.0
+  version: 2.2.0-alpha-base2.3.0
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
@@ -321,7 +322,7 @@ components:
           $ref: '#/components/schemas/Meta'
     EnumContractFinanceChargeType:
       type: string
-      description: Tipo de encargo pactuado no contrato.
+      description: Type of charge agreed in the contract.
       enum:
         - JUROS_REMUNERATORIOS_POR_ATRASO /* Late Remuneratory Interest */
         - MULTA_ATRASO_PAGAMENTO          /* Late Payment Fine */
@@ -334,8 +335,8 @@ components:
     EnumProductType:
       type: string
       description: |
-        "Tipo da modalidade de crédito contratada, conforme  circular 4.015 e descrição do DOC3040 do SCR). (Vide Enum)
-        Financiamentos, Financiamentos rurais  e Financiamentos imobiliários"
+        "Type of contracted credit modality, according to circular 4,015 and description of DOC3040 of the SCR). (See Enum)
+        Financings, Rural Financings and Real Estate Financings"
       enum:
         - FINANCIAMENTOS              /* Financings */
         - FINANCIAMENTOS_RURAIS       /* Rural Financings */
@@ -344,8 +345,8 @@ components:
     EnumProductSubType:
       type: string
       description: |
-        "Sub tipo da modalidades de crédito contratadas, conforme  circular 4.015 e descrição do DOC3040 do SCR). (Vide Enum)
-        Aquisição de bens veículos automotores, Aquisição de bens de outros bens, Microcrédito, Custeio, Investimento, Industrialização, Comercialização, Financiamento habitacional SFH e Financiamento habitacional exceto SFH"
+        "Subtype of contracted credit modalities, according to circular 4,015 and description of DOC3040 of the SCR). (See Enum)
+        Acquisition of motor vehicle assets, Acquisition of other assets, Microcredit, Funding, Investment, Industrialization, Marketing, SFH housing financing and Housing financing except SFH"
       enum:
         - AQUISICAO_BENS_VEICULOS_AUTOMOTORES   /* Acquisition of Motor Vehicle Assets */
         - AQUISICAO_BENS_OUTROS_BENS            /* Acquisition of Other Assets */
@@ -359,7 +360,7 @@ components:
       example: AQUISICAO_BENS_VEICULOS_AUTOMOTORES
     FinancingsContractInterestRate:
       type: object
-      description: Objeto que traz o conjunto de informações necessárias para demonstrar a composição das taxas de juros remuneratórios da Modalidade de crédito
+      description: Object that brings the set of information necessary to demonstrate the composition of the interest rates of the Credit Modality
       required:
         - taxType
         - interestRateType
@@ -370,9 +371,9 @@ components:
         taxType:
           type: string
           description: |
-            "Tipo de Taxa (vide  Enum)
-            - NOMINAL (taxa nominal é uma taxa de juros em que a unidade referencial não coincide com a unidade de tempo da capitalização. Ela é sempre fornecida em termos anuais, e seus períodos de capitalização podem ser diários, mensais, trimestrais ou semestrais. p.ex. Uma taxa de 12% ao ano com capitalização mensal)
-            - EFETIVA (É a taxa de juros em que a unidade referencial coincide com a unidade de tempo da capitalização. Como as unidades de medida de tempo da taxa de juros e dos períodos de capitalização são iguais, usa-se exemplos simples como 1% ao mês, 60% ao ano)"
+            "Tax Type (see Enum)
+            - NOMINAL (nominal rate is an interest rate in which the reference unit does not coincide with the time unit of capitalization. It is always provided in annual terms, and its capitalization periods can be daily, monthly, quarterly or semi-annual. e.g. A rate of 12% per year with monthly capitalization)
+            - EFETIVA (It is the interest rate in which the reference unit coincides with the time unit of capitalization. As the units of time measurement of the interest rate and the capitalization periods are the same, simple examples are used such as 1% per month, 60% per year)"
           enum:
             - NOMINAL   /* Nominal */
             - EFETIVA   /* Effective */
@@ -380,9 +381,9 @@ components:
         interestRateType:
           type: string
           description: |
-            "Tipo de Juros  (vide  Enum)
-            - SIMPLES (aplicada/cobrada sempre sobre o capital inicial, que é o valor emprestado/investido. Não há cobrança de juros sobre juros acumulados no(s) período(s) anterior(es). Exemplo: em um empréstimo de R\$1.000, com taxa de juros simples de 8% a.a., com duração de 2 anos, o total de juros será R\$80 no primeiro ano e R\$ 80 no segundo ano. Ao final do contrato, o tomador irá devolver o principal e os juros simples de cada ano: R\$1.000+R\$80+R\$80=R\$1.160)
-            - COMPOSTO (para cada período do contrato (diário, mensal, anual etc.), há um “novo capital” para a cobrança da taxa de juros contratada. Esse “novo capital” é a soma do capital e do juro cobrado no período anterior. Exemplo: em um empréstimo de R\$1.000, com taxa de juros composta de 8% a.a., com duração de 2 anos, o total de juros será R\$80 no primeiro ano. No segundo ano, os juros vão ser somados ao capital (R\$1.000 + R\$ 80 = R\$ 1.080), resultando em juros de R\$ 86 (8%de R\$ 1.080))"
+            "Interest Type (see Enum)
+            - SIMPLES (applied/charged always on the initial capital, which is the borrowed/invested amount. There is no charge of interest on interest accumulated in the previous period(s). Example: in a loan of R\$1,000, with a simple interest rate of 8% p.a., with a duration of 2 years, the total interest will be R\$80 in the first year and R\$80 in the second year. At the end of the contract, the borrower will return the principal and the simple interest of each year: R\$1,000+R\$80+R\$80=R\$1,160)
+            - COMPOSTO (for each period of the contract (daily, monthly, annual, etc.), there is a “new capital” for charging the contracted interest rate. This “new capital” is the sum of the capital and the interest charged in the previous period. Example: in a loan of R\$1,000, with a compound interest rate of 8% p.a., with a duration of 2 years, the total interest will be R\$80 in the first year. In the second year, the interest will be added to the capital (R\$1,000 + R\$ 80 = R\$ 1,080), resulting in interest of R\$ 86 (8% of R\$ 1,080))"
           enum:
             - SIMPLES   /* Simple */
             - COMPOSTO  /* Compound */
@@ -390,16 +391,16 @@ components:
         taxPeriodicity:
           type: string
           description: |
-            "Periodicidade da taxa . (Vide  Enum)
-            a.m - ao mês
-            a.a. - ao ano"
+            "Rate periodicity. (See Enum)
+            a.m - per month
+            a.a. - per year"
           enum:
             - AM /* per month */
             - AA /* per year */
           example: AA
         calculation:
           type: string
-          description: Base de cálculo
+          description: Calculation basis
           enum:
             - 21/252
             - 30/360
@@ -408,7 +409,7 @@ components:
         referentialRateIndexerType:
           type: string
           description: |
-            "Tipos de taxas referenciais ou indexadores, conforme Anexo 5: Taxa referencial ou Indexador (Indx), do Documento 3040"
+            "Types of reference rates or indexers, according to Annex 5: Reference Rate or Indexer (Indx), of Document 3040"
           enum:
             - SEM_TIPO_INDEXADOR      /* No Indexer Type */
             - PRE_FIXADO              /* Pre-Fixed */
@@ -421,7 +422,7 @@ components:
         referentialRateIndexerSubType:
           type: string
           description: |
-            "Sub tipos de taxas referenciais ou indexadores, conforme Anexo 5: Taxa referencial ou Indexador (Indx), do Documento 3040"
+            "Subtypes of reference rates or indexers, according to Annex 5: Reference Rate or Indexer (Indx), of Document 3040"
           enum:
             - SEM_SUB_TIPO_INDEXADOR    /* No Sub-Indexer Type */
             - PRE_FIXADO                /* Pre-Fixed */
@@ -449,9 +450,9 @@ components:
           pattern: '^(?!\s)[\w\W\s]*[^\s]$'
           example: Informações adicionais
           description: |
-            Campo livre para complementar a informação relativa ao Tipo de taxa referencial ou indexador.
+            Free field to complement the information regarding the Type of reference rate or indexer.
 
-            [Restrição] Obrigatório para complementar a informação relativa ao Tipo de taxa referencial ou indexador, quando selecionada o tipo ou subtipo OUTRO.
+            [Restriction] Mandatory to complement the information regarding the Type of reference rate or indexer, when the type or subtype OTHER is selected.
         preFixedRate:
           type: string
           format: double
@@ -460,8 +461,8 @@ components:
           pattern: '^\d{1,2}\.\d{6}$'
           example: '0.600000'
           description: |
-            Taxa pré fixada aplicada sob o contrato da modalidade crédito. p.ex. 0.014500.
-            O preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros(representação de porcentagem p.ex: 0.150000. Este valor representa 15%. O valor 1 representa 100%).
+            Pre-fixed rate applied under the credit modality contract. e.g. 0.014500.
+            The completion must respect the 6 decimal places, even if they are filled with zeros (percentage representation e.g.: 0.150000. This value represents 15%. The value 1 represents 100%).
         postFixedRate:
           type: string
           format: double
@@ -470,20 +471,20 @@ components:
           pattern: '^\d{1,2}\.\d{6}$'
           example: '0.550000'
           description: |
-            Taxa pós fixada aplicada sob o contrato da modalidade crédito. p.ex. 0.014500.
-            O preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.150000. Este valor representa 15%. O valor 1 representa 100%).
+            Post-fixed rate applied under the credit modality contract. e.g. 0.014500.
+            The completion must respect the 6 decimal places, even if they are filled with zeros (percentage representation e.g.: 0.150000. This value represents 15%. The value 1 represents 100%).
         additionalInfo:
           type: string
           maxLength: 1200
           pattern: '^(?!\s)[\w\W\s]*[^\s]$'
           example: Informações adicionais
           description: |
-            Texto com informações adicionais sobre a composição das taxas de juros pactuadas.
+            Text with additional information about the composition of the agreed interest rates.
 
-            [Restrição] Caso a instituição possua a informação para compartilhamento, esta deverá ser informada.
+            [Restriction] If the institution has the information to share, it must be informed.
     FinancingsBalloonPayment:
       type: object
-      description: Lista que traz as datas de vencimento e valor das parcelas não regulares  do contrato da modalidade de crédito consultada.
+      description: List that brings the due dates and amount of non-regular installments of the consulted credit modality contract.
       required:
         - dueDate
         - amount
@@ -492,7 +493,7 @@ components:
           type: string
           format: date
           pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
-          description: 'Data de vencimento da parcela não regular  a vencer do contrato da modalidade de crédito consultada, conforme especificação RFC-3339. p.ex. 2014-03-19'
+          description: 'Due date of the non-regular installment to be paid of the consulted credit modality contract, according to RFC-3339 specification. e.g. 2014-03-19'
           maxLength: 10
           example: '2020-01-10'
         amount:
@@ -502,7 +503,7 @@ components:
       required:
         - amount
         - currency
-      description: Valor monetário da parcela não regular a vencer
+      description: Monetary value of the non-regular installment to be paid
       properties:
         amount:
           type: string
@@ -511,12 +512,12 @@ components:
           maxLength: 20
           minLength: 4
           example: '1000.0400'
-          description: Valor monetário da parcela não regular a vencer. Expresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais.
+          description: Monetary value of the non-regular installment to be paid. Expressed in monetary value with a minimum of 2 decimal places and a maximum of 4 decimal places.
         currency:
           type: string
           pattern: '^[A-Z]{3}$'
           maxLength: 3
-          description: 'Moeda referente ao valor monetário, seguindo o modelo ISO-4217.'
+          description: 'Currency referring to the monetary value, following the ISO-4217 model.'
           example: BRL
     FinancingsChargeOverParcel:
       type: object
@@ -533,19 +534,19 @@ components:
           maxLength: 21
           minLength: 4
           example: '1000.0400'
-          description: Valor do pagamento do encargo pago fora da parcela. Expresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais.
+          description: Value of the payment of the charge paid outside the installment. Expressed in monetary value with a minimum of 2 decimal places and a maximum of 4 decimal places.
         chargeAdditionalInfo:
           type: string
           pattern: '^(?!\s)[\w\W\s]*[^\s]$'
           maxLength: 140
           example: Informações adicionais
           description: |
-            Campo livre para preenchimento das informações adicionais referente ao encargo.
+            Free field to fill in additional information regarding the charge.
 
-            [Restrição] Obrigatório quando chargeType for igual 'OUTROS'.
+            [Restriction] Mandatory when chargeType is equal to 'OTHERS'.
     FinancingsContract:
       type: object
-      description: Conjunto de informações referentes à identificação da operação de crédito de financiamentos
+      description: Set of information regarding the identification of the financing credit operation
       required:
         - contractNumber
         - ipocCode
@@ -1118,28 +1119,28 @@ components:
             Name/Identification of the sub type of guarantee that endorses the Credit Operation Modality contracted (Doc 3040, Annex 12).
           enum:
             - ACOES_DEBENTURES                                  /* Shares/Debentures */
-            - ACORDOS_COMPENSACAO_LIQUIDACAO_OBRIGACOES           /* Set-Off Agreements for Settlement of Obligations */
-            - APLICACOES_FINANCEIRAS_RENDA_FIXA                  /* Fixed Income Financial Investments */
-            - APLICACOES_FINANCEIRAS_RENDA_VARIAVEL              /* Variable Income Financial Investments */
+            - ACORDOS_COMPENSACAO_LIQUIDACAO_OBRIGACOES         /* Set-Off Agreements for Settlement of Obligations */
+            - APLICACOES_FINANCEIRAS_RENDA_FIXA                 /* Fixed Income Financial Investments */
+            - APLICACOES_FINANCEIRAS_RENDA_VARIAVEL             /* Variable Income Financial Investments */
             - APOLICES_CREDITO_EXPORTACAO                       /* Export Credit Policies */
-            - CCR_CONVENIO_CREDITOS_RECIPROCOS                    /* CCR - Reciprocal Credit Agreement */
+            - CCR_CONVENIO_CREDITOS_RECIPROCOS                  /* CCR - Reciprocal Credit Agreement */
             - CHEQUES                                           /* Checks */
             - CIVIL                                             /* Civil */
             - DIREITOS_SOBRE_ALUGUEIS                           /* Rights over Rents */
             - DEPOSITOS_A_VISTA_A_PRAZO_POUPANCA_OURO_TITULOS_PUBLICOS_FEDERAIS_ART_36 /* Demand Deposits, Term Deposits, Savings Deposits, Gold, Federal Public Securities - Art. 36 */
-            - DEPOSITO_TITULOS_EMITIDOS_ENTIDADES_ART_23          /* Deposit of Securities Issued by Entities - Art. 23 */
+            - DEPOSITO_TITULOS_EMITIDOS_ENTIDADES_ART_23        /* Deposit of Securities Issued by Entities - Art. 23 */
             - DUPLICATAS                                        /* Bills of Exchange */
             - EMD_ENTIDADES_MULTILATERAIS_DESENVOLVIMENTO_ART_37  /* EMD - Multilateral Development Entities - Art. 37 */
             - EQUIPAMENTOS                                      /* Equipments */
             - ESTADUAL_OU_DISTRITAL                             /* State or District */
             - FATURA_CARTAO_CREDITO                             /* Credit Card Invoice */
             - FEDERAL                                           /* Federal */
-            - FCVS_FUNDO_COMPENSACAO_VARIACOES_SALARIAIS          /* FCVS - Wage Variation Compensation Fund */
-            - FGI_FUNDO_GARANTIDOR_INVESTIMENTOS                  /* FGI - Investment Guarantee Fund */
-            - FGPC_FUNDO_GARANTIA_PROMOCAO_COMPETIT               /* FGPC - Competitiveness Promotion Guarantee Fund */
-            - FGTS_FUNDO_GARANTIA_TEMPO_SERVICO                   /* FGTS - Severance Indemnity Fund */
-            - FUNDO_GARANTIDOR_AVAL                               /* Guarantee Fund/Surety Fund */
-            - GARANTIA_PRESTADA_FGPC_LEI_9531_ART_37             /* Guarantee Provided by FGPC - Law 9531 - Art. 37 */
+            - FCVS_FUNDO_COMPENSACAO_VARIACOES_SALARIAIS        /* FCVS - Wage Variation Compensation Fund */
+            - FGI_FUNDO_GARANTIDOR_INVESTIMENTOS                /* FGI - Investment Guarantee Fund */
+            - FGPC_FUNDO_GARANTIA_PROMOCAO_COMPETIT             /* FGPC - Competitiveness Promotion Guarantee Fund */
+            - FGTS_FUNDO_GARANTIA_TEMPO_SERVICO                 /* FGTS - Severance Indemnity Fund */
+            - FUNDO_GARANTIDOR_AVAL                             /* Guarantee Fund/Surety Fund */
+            - GARANTIA_PRESTADA_FGPC_LEI_9531_ART_37            /* Guarantee Provided by FGPC - Law 9531 - Art. 37 */
             - GARANTIA_PRESTADA_FUNDOS_QUAISQUER_OUTROS_MECANISMOS_COBERTURA_RISCO_CREDITO_ART_37 /* Guarantee Provided by Funds or Any Other Credit Risk Coverage Mechanisms - Art. 37 */
             - GARANTIA_PRESTADA_TESOURO_NACIONAL_OU_BACEN_ART_37_BENS_DIREITOS_INTEGRANTES_PATRIMONIO_AFETACAO /* Guarantee Provided by the National Treasury or BACEN - Art. 37 - Assets and Rights Composing Dedicated Patrimony */
             - IMOVEIS                                           /* Real Estate */
@@ -1147,7 +1148,7 @@ components:
             - MITIGADORAS                                       /* Mitigating */
             - MUNICIPAL                                         /* Municipal */
             - NAO_MITIGADORAS                                   /* Non-Mitigating */
-            - NOTAS_PROMISSORIAS_OUTROS_DIREITOS_CREDITO          /* Promissory Notes/Other Credit Rights */
+            - NOTAS_PROMISSORIAS_OUTROS_DIREITOS_CREDITO        /* Promissory Notes/Other Credit Rights */
             - OUTRAS                                            /* Others */
             - OUTROS                                            /* Others */
             - OUTROS_BENS                                       /* Other Assets */
@@ -1159,15 +1160,15 @@ components:
             - PESSOA_JURIDICA                                   /* Legal Entity */
             - PESSOA_JURIDICA_EXTERIOR                          /* Non-Resident Legal Entity */
             - PRIMEIRO_GRAU_BENS_DIREITOS_INTEGRANTES_PATRIMONIO_AFETACAO /* First Degree Assets and Rights Composing Dedicated Patrimony */
-            - PRIMEIRO_GRAU_IMOVEIS_RESIDENCIAIS                    /* First Degree Residential Real Estate */
-            - PRIMEIRO_GRAU_OUTROS                                  /* First Degree Others */
+            - PRIMEIRO_GRAU_IMOVEIS_RESIDENCIAIS                /* First Degree Residential Real Estate */
+            - PRIMEIRO_GRAU_OUTROS                              /* First Degree Others */
             - PROAGRO                                           /* PROAGRO */
             - PRODUTOS_AGROPECUARIOS_COM_WARRANT                /* Agricultural Products with Warrant */
             - PRODUTOS_AGROPECUARIOS_SEM_WARRANT                /* Agricultural Products without Warrant */
-            - SBCE_SOCIEDADE_BRASILEIRA_CREDITO_EXPORTAÇÃO          /* SBCE - Brazilian Export Credit Society */
+            - SBCE_SOCIEDADE_BRASILEIRA_CREDITO_EXPORTAÇÃO      /* SBCE - Brazilian Export Credit Society */
             - SEGURO_RURAL                                      /* Rural Insurance */
             - SEM_SUB_TIPO_GARANTIA                             /* No Sub-Warranty Type */
-            - TRIBUTOS_RECEITAS_ORCAMENTARIAS                     /* Taxes/Budget Revenues */
+            - TRIBUTOS_RECEITAS_ORCAMENTARIAS                   /* Taxes/Budget Revenues */
             - VEICULOS                                          /* Vehicles */
             - VEICULOS_AUTOMOTORES                              /* Motor Vehicles */
           example: NOTAS_PROMISSORIAS_OUTROS_DIREITOS_CREDITO
@@ -1179,16 +1180,17 @@ components:
           minLength: 4
           example: '1000.0400'
           description: |
-            Valor original da garantia. Expresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais.
+            Original value of the guarantee. Expressed in monetary value with a minimum of 2 decimal places and a maximum of 4 decimal places.
 
-            [Restrição] Para casos em que warrantyType for igual a "GARANTIA_FIDEJUSSORIA" o valor da garantia corresponde a uma porcentagem do total garantido.
-            Dessa forma, os casos de garantia fidejussória para os quais não é possível determinar um valor monetário para a garantia devem ser preenchidos com 0.00.
+            [Restriction] For cases where warrantyType is equal to "GARANTIA_FIDEJUSSORIA" the guarantee value corresponds to a percentage of the total guaranteed.
+            Thus, cases of fidejussory guarantee for which it is not possible to determine a monetary value for the guarantee must be filled in with 0.00.
     Meta:
       type: object
       description: Meta information regarding the requested API.
       required:
         - totalRecords
         - totalPages
+        - requestDateTime
       properties:
         totalRecords:
           type: integer
@@ -1200,6 +1202,12 @@ components:
           format: int32
           description: Total number of pages in the result
           example: 1
+        requestDateTime:
+          description: 'Date and time of request according to RFC-3339 specification, UTC time format.'
+          type: string
+          maxLength: 20
+          format: date-time
+          example: '2021-05-21T08:30:00Z'
     ConsentDataSharing:
       description: Data sharing consent
       type: object
@@ -1415,6 +1423,7 @@ components:
           pattern: |
             ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
           example: '2021-05-21T08:30:00Z'
+          maxLength: 20
         permissions:
           type: array
           items:

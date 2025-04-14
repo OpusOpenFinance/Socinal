@@ -8,7 +8,7 @@ info:
 
     ### Observation
       - In the `/payments` endpoint, pagination will occur under the data contained in the `releases` field of list type.
-  version: 1.0.0-base2.4.0
+  version: 2.0.0-base2.4.0
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
@@ -1174,6 +1174,7 @@ components:
       required:
         - totalRecords
         - totalPages
+        - requestDateTime
       properties:
         totalRecords:
           type: integer
@@ -1185,6 +1186,12 @@ components:
           format: int32
           description: Total number of pages in the result
           example: 1
+        requestDateTime:
+          description: 'Date and time of request according to RFC-3339 specification, UTC time format.'
+          type: string
+          maxLength: 20
+          format: date-time
+          example: '2021-05-21T08:30:00Z'
     ConsentDataSharing:
       description: Data sharing consent
       type: object

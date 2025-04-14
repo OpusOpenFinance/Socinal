@@ -86,7 +86,7 @@ info:
 
             - For example, for situations of miscellaneous fee collection in which there is a negotiated agreement or insufficient balance.
 
-  version: 1.0.0-base2.4.1
+  version: 2.0.0-base2.4.1
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
@@ -153,31 +153,31 @@ paths:
         '200':
           $ref: '#/components/responses/OKResponseAccountList'
         '400':
-          $ref: '#/components/responses/BadRequest'
+          $ref: '#/components/responses/BadRequestWithAdditionalProperties'
         '401':
-          $ref: '#/components/responses/Unauthorized'
+          $ref: '#/components/responses/UnauthorizedWithAdditionalProperties'
         '403':
-          $ref: '#/components/responses/Forbidden'
+          $ref: '#/components/responses/ForbiddenWithAdditionalProperties'
         '404':
-          $ref: '#/components/responses/NotFound'
+          $ref: '#/components/responses/NotFoundWithAdditionalProperties'
         '405':
-          $ref: '#/components/responses/MethodNotAllowed'
+          $ref: '#/components/responses/MethodNotAllowedWithAdditionalProperties'
         '406':
-          $ref: '#/components/responses/NotAcceptable'
+          $ref: '#/components/responses/NotAcceptableWithAdditionalProperties'
         '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+          $ref: '#/components/responses/UnprocessableEntityWithAdditionalProperties'
         '423':
-          $ref: '#/components/responses/Locked'
+          $ref: '#/components/responses/LockedWithAdditionalProperties'
         '429':
-          $ref: '#/components/responses/TooManyRequests'
+          $ref: '#/components/responses/TooManyRequestsWithAdditionalProperties'
         '500':
-          $ref: '#/components/responses/InternalServerError'
+          $ref: '#/components/responses/InternalServerErrorWithAdditionalProperties'
         '504':
-          $ref: '#/components/responses/GatewayTimeout'
+          $ref: '#/components/responses/GatewayTimeoutWithAdditionalProperties'
         '529':
-          $ref: '#/components/responses/SiteIsOverloaded'
+          $ref: '#/components/responses/SiteIsOverloadedWithAdditionalProperties'
         default:
-          $ref: '#/components/responses/Default'
+          $ref: '#/components/responses/DefaultWithAdditionalProperties'
   /find:
     post:
       tags:
@@ -195,31 +195,31 @@ paths:
         '200':
           $ref: '#/components/responses/OKResponseAccountIdentification'
         '400':
-          $ref: '#/components/responses/BadRequest'
+          $ref: '#/components/responses/BadRequestWithAdditionalProperties'
         '401':
-          $ref: '#/components/responses/Unauthorized'
+          $ref: '#/components/responses/UnauthorizedWithAdditionalProperties'
         '403':
-          $ref: '#/components/responses/Forbidden'
+          $ref: '#/components/responses/ForbiddenWithAdditionalProperties'
         '404':
-          $ref: '#/components/responses/NotFound'
+          $ref: '#/components/responses/NotFoundWithAdditionalProperties'
         '405':
-          $ref: '#/components/responses/MethodNotAllowed'
+          $ref: '#/components/responses/MethodNotAllowedWithAdditionalProperties'
         '406':
-          $ref: '#/components/responses/NotAcceptable'
+          $ref: '#/components/responses/NotAcceptableWithAdditionalProperties'
         '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+          $ref: '#/components/responses/UnprocessableEntityWithAdditionalProperties'
         '423':
-          $ref: '#/components/responses/Locked'
+          $ref: '#/components/responses/LockedWithAdditionalProperties'
         '429':
-          $ref: '#/components/responses/TooManyRequests'
+          $ref: '#/components/responses/TooManyRequestsWithAdditionalProperties'
         '500':
-          $ref: '#/components/responses/InternalServerError'
+          $ref: '#/components/responses/InternalServerErrorWithAdditionalProperties'
         '504':
-          $ref: '#/components/responses/GatewayTimeout'
+          $ref: '#/components/responses/GatewayTimeoutWithAdditionalProperties'
         '529':
-          $ref: '#/components/responses/SiteIsOverloaded'
+          $ref: '#/components/responses/SiteIsOverloadedWithAdditionalProperties'
         default:
-          $ref: '#/components/responses/Default'
+          $ref: '#/components/responses/DefaultWithAdditionalProperties'
   /balances:
     post:
       tags:
@@ -237,31 +237,31 @@ paths:
         '200':
           $ref: '#/components/responses/OKResponseAccountBalances'
         '400':
-          $ref: '#/components/responses/BadRequest'
+          $ref: '#/components/responses/BadRequestWithAdditionalProperties'
         '401':
-          $ref: '#/components/responses/Unauthorized'
+          $ref: '#/components/responses/UnauthorizedWithAdditionalProperties'
         '403':
-          $ref: '#/components/responses/Forbidden'
+          $ref: '#/components/responses/ForbiddenWithAdditionalProperties'
         '404':
-          $ref: '#/components/responses/NotFound'
+          $ref: '#/components/responses/NotFoundWithAdditionalProperties'
         '405':
-          $ref: '#/components/responses/MethodNotAllowed'
+          $ref: '#/components/responses/MethodNotAllowedWithAdditionalProperties'
         '406':
-          $ref: '#/components/responses/NotAcceptable'
+          $ref: '#/components/responses/NotAcceptableWithAdditionalProperties'
         '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+          $ref: '#/components/responses/UnprocessableEntityWithAdditionalProperties'
         '423':
-          $ref: '#/components/responses/Locked'
+          $ref: '#/components/responses/LockedWithAdditionalProperties'
         '429':
-          $ref: '#/components/responses/TooManyRequests'
+          $ref: '#/components/responses/TooManyRequestsWithAdditionalProperties'
         '500':
-          $ref: '#/components/responses/InternalServerError'
+          $ref: '#/components/responses/InternalServerErrorWithAdditionalProperties'
         '504':
-          $ref: '#/components/responses/GatewayTimeout'
+          $ref: '#/components/responses/GatewayTimeoutWithAdditionalProperties'
         '529':
-          $ref: '#/components/responses/SiteIsOverloaded'
+          $ref: '#/components/responses/SiteIsOverloadedWithAdditionalProperties'
         default:
-          $ref: '#/components/responses/Default'
+          $ref: '#/components/responses/DefaultWithAdditionalProperties'
   /transactions:
     post:
       tags:
@@ -363,31 +363,31 @@ paths:
         '200':
           $ref: '#/components/responses/OKResponseAccountOverdraftLimits'
         '400':
-          $ref: '#/components/responses/BadRequest'
+          $ref: '#/components/responses/BadRequestWithAdditionalProperties'
         '401':
-          $ref: '#/components/responses/Unauthorized'
+          $ref: '#/components/responses/UnauthorizedWithAdditionalProperties'
         '403':
-          $ref: '#/components/responses/Forbidden'
+          $ref: '#/components/responses/ForbiddenWithAdditionalProperties'
         '404':
-          $ref: '#/components/responses/NotFound'
+          $ref: '#/components/responses/NotFoundWithAdditionalProperties'
         '405':
-          $ref: '#/components/responses/MethodNotAllowed'
+          $ref: '#/components/responses/MethodNotAllowedWithAdditionalProperties'
         '406':
-          $ref: '#/components/responses/NotAcceptable'
+          $ref: '#/components/responses/NotAcceptableWithAdditionalProperties'
         '422':
-          $ref: '#/components/responses/UnprocessableEntity'
+          $ref: '#/components/responses/UnprocessableEntityWithAdditionalProperties'
         '423':
-          $ref: '#/components/responses/Locked'
+          $ref: '#/components/responses/LockedWithAdditionalProperties'
         '429':
-          $ref: '#/components/responses/TooManyRequests'
+          $ref: '#/components/responses/TooManyRequestsWithAdditionalProperties'
         '500':
-          $ref: '#/components/responses/InternalServerError'
+          $ref: '#/components/responses/InternalServerErrorWithAdditionalProperties'
         '504':
-          $ref: '#/components/responses/GatewayTimeout'
+          $ref: '#/components/responses/GatewayTimeoutWithAdditionalProperties'
         '529':
-          $ref: '#/components/responses/SiteIsOverloaded'
+          $ref: '#/components/responses/SiteIsOverloadedWithAdditionalProperties'
         default:
-          $ref: '#/components/responses/Default'
+          $ref: '#/components/responses/DefaultWithAdditionalProperties'
 components:
   schemas:
     AccountBalancesDataAutomaticallyInvestedAmount:
@@ -1108,6 +1108,7 @@ components:
       required:
         - totalRecords
         - totalPages
+        - requestDateTime
       properties:
         totalRecords:
           type: integer
@@ -1119,6 +1120,41 @@ components:
           format: int32
           description: Total number of pages in the result
           example: 1
+        requestDateTime:
+          description: 'Date and time of request according to RFC-3339 specification, always using UTC timezone (UTC time format).'
+          type: string
+          maxLength: 20
+          format: date-time
+          example: '2021-05-21T08:30:00Z'
+    MetaOnlyRequestDateTime:
+      type: object
+      description: Meta information regarding the requested API.
+      required:
+        - requestDateTime
+      properties:
+        requestDateTime:
+          description: 'Date and time of request according to RFC-3339 specification, UTC time format.'
+          type: string
+          maxLength: 20
+          format: date-time
+          example: '2021-05-21T08:30:00Z'
+    MetaOnlyRequestDateTimeAndHasMoreRecords:
+      type: object
+      description: Meta information regarding the requested API.
+      required:
+        - requestDateTime
+        - hasMoreRecords
+      properties:
+        requestDateTime:
+          description: 'Date and time of request according to RFC-3339 specification, UTC time format.'
+          type: string
+          maxLength: 20
+          format: date-time
+          example: '2021-05-21T08:30:00Z'
+        hasMoreRecords:
+          type: boolean
+          description: Indicates if there are more records to be retrieved (true) or not (false).
+          example: true
     RequestMeta:
       type: object
       description: Object that contains data referring to the context in which the request is received.
@@ -1360,6 +1396,7 @@ components:
       type: object
       required:
         - data
+        - meta
       properties:
         data:
           type: array
@@ -1368,6 +1405,41 @@ components:
           minItems: 0
           items:
             $ref: '#/components/schemas/AccountTransactionsData'
+        meta:
+          $ref: '#/components/schemas/MetaOnlyRequestDateTimeAndHasMoreRecords'
+    ResponseErrorMetaSingle:
+      type: object
+      required:
+        - errors
+      properties:
+        errors:
+          type: array
+          minItems: 1
+          maxItems: 13
+          items:
+            type: object
+            required:
+              - code
+              - title
+              - detail
+            properties:
+              code:
+                description: Endpoint specific error code
+                type: string
+                pattern: '[\w\W\s]*'
+                maxLength: 255
+              title:
+                description: Human-readable title for this specific error
+                type: string
+                pattern: '[\w\W\s]*'
+                maxLength: 255
+              detail:
+                description: Human-readable description for this specific error
+                type: string
+                pattern: '[\w\W\s]*'
+                maxLength: 2048
+        meta:
+          $ref: '#/components/schemas/MetaOnlyRequestDateTime'
     ResponseError:
       type: object
       required:
@@ -1399,6 +1471,8 @@ components:
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 2048
+        meta:
+          $ref: '#/components/schemas/Meta'
     LegacyId:
       description: >-
         Array of key and value with the resource identification key in the origin
@@ -1521,75 +1595,153 @@ components:
       content:
         application/json; charset=utf-8:
           schema:
-            $ref: '#/components/schemas/ResponseError'
+            $ref: '#/components/schemas/ResponseErrorMetaSingle'
     Forbidden:
       description: The token has incorrect scope or a security policy was violated
       content:
         application/json; charset=utf-8:
           schema:
-            $ref: '#/components/schemas/ResponseError'
+            $ref: '#/components/schemas/ResponseErrorMetaSingle'
     GatewayTimeout:
       description: GATEWAY TIMEOUT - The request was not answered within the established timeout
       content:
         application/json; charset=utf-8:
           schema:
-            $ref: '#/components/schemas/ResponseError'
+            $ref: '#/components/schemas/ResponseErrorMetaSingle'
     InternalServerError:
       description: An error occurred in the API gateway or microservice
       content:
         application/json; charset=utf-8:
           schema:
-            $ref: '#/components/schemas/ResponseError'
+            $ref: '#/components/schemas/ResponseErrorMetaSingle'
     Locked:
       description: Locked
       content:
         application/json; charset=utf-8:
           schema:
-            $ref: '#/components/schemas/ResponseError'
+            $ref: '#/components/schemas/ResponseErrorMetaSingle'
     MethodNotAllowed:
       description: The consumer tried to access the resource with an unsupported method
       content:
         application/json; charset=utf-8:
           schema:
-            $ref: '#/components/schemas/ResponseError'
+            $ref: '#/components/schemas/ResponseErrorMetaSingle'
     NotAcceptable:
       description: The request contained an Accept header different from the allowed media types or a character set other than UTF-8
       content:
         application/json; charset=utf-8:
           schema:
-            $ref: '#/components/schemas/ResponseError'
+            $ref: '#/components/schemas/ResponseErrorMetaSingle'
     NotFound:
       description: The requested resource does not exist or has not been implemented
       content:
         application/json; charset=utf-8:
           schema:
-            $ref: '#/components/schemas/ResponseError'
+            $ref: '#/components/schemas/ResponseErrorMetaSingle'
     TooManyRequests:
       description: 'The operation was refused because too many requests were made within a certain period or the global limit of concurrent requests was reached'
       content:
         application/json; charset=utf-8:
           schema:
-            $ref: '#/components/schemas/ResponseError'
+            $ref: '#/components/schemas/ResponseErrorMetaSingle'
     Unauthorized:
       description: Missing/invalid authentication header or invalid token
       content:
         application/json; charset=utf-8:
           schema:
-            $ref: '#/components/schemas/ResponseError'
+            $ref: '#/components/schemas/ResponseErrorMetaSingle'
     UnprocessableEntity:
       description: 'The request syntax is correct, but it was not possible to process the instructions present.'
       content:
         application/json; charset=utf-8:
           schema:
-            $ref: '#/components/schemas/ResponseError'
+            $ref: '#/components/schemas/ResponseErrorMetaSingle'
     SiteIsOverloaded:
       description: 'The site is overloaded and the operation was refused because the maximum global TPS limit was reached at this moment.'
       content:
         application/json; charset=utf-8:
           schema:
-            $ref: '#/components/schemas/ResponseError'
+            $ref: '#/components/schemas/ResponseErrorMetaSingle'
     Default:
       description: Unexpected error.
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseErrorMetaSingle'
+    BadRequestWithAdditionalProperties:
+      description: 'The request was malformed, omitting mandatory attributes, either in the payload or through attributes in the URL.'
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    ForbiddenWithAdditionalProperties:
+      description: The token has incorrect scope or a security policy was violated
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    GatewayTimeoutWithAdditionalProperties:
+      description: GATEWAY TIMEOUT - The request was not answered within the established timeout
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    InternalServerErrorWithAdditionalProperties:
+      description: An error occurred in the API gateway or microservice
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    LockedWithAdditionalProperties:
+      description: Locked
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    MethodNotAllowedWithAdditionalProperties:
+      description: The consumer tried to access the resource with an unsupported method
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    NotAcceptableWithAdditionalProperties:
+      description: The request contained an Accept header different from the allowed media types or a character set other than UTF-8
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    NotFoundWithAdditionalProperties:
+      description: The requested resource does not exist or has not been implemented
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    TooManyRequestsWithAdditionalProperties:
+      description: 'The operation was refused because too many requests were made within a certain period or the global limit of concurrent requests was reached'
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    UnauthorizedWithAdditionalProperties:
+      description: Missing/invalid authentication header or invalid token
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    UnprocessableEntityWithAdditionalProperties:
+      description: 'The request syntax is correct, but it was not possible to process the instructions present.'
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    DefaultWithAdditionalProperties:
+      description: Unexpected Error.
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/ResponseError'
+    SiteIsOverloadedWithAdditionalProperties:
+      description: 'The site is overloaded and the operation was refused because the maximum global TPS limit was reached at this moment.'
       content:
         application/json; charset=utf-8:
           schema:

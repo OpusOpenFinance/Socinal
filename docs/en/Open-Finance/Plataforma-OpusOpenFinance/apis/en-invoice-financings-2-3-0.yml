@@ -9,9 +9,9 @@ info:
     # Guidelines
 
     ### Note:
-      - In the `/contracts/{contratId}/payments` endpoint, pagination will occur under the data contained in the `releases` field of the list type.
+      - In the `/payments` endpoint, pagination will occur under the data contained in the `releases` field of the list type.
 
-  version: 1.0.0-alpha-base2.3.0
+  version: 2.0.0-alpha-base2.3.0
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
@@ -330,12 +330,12 @@ components:
       description: Type of charge agreed in the contract.
       enum:
         - JUROS_REMUNERATORIOS_POR_ATRASO /* REMUNERATORY_INTEREST_FOR_LATE_PAYMENT */
-        - MULTA_ATRASO_PAGAMENTO /* LATE_PAYMENT_FINE */
-        - JUROS_MORA_ATRASO /* DEFAULT_INTEREST_LATE_PAYMENT */
-        - IOF_CONTRATACAO /* IOF_CONTRACTING */
-        - IOF_POR_ATRASO /* IOF_FOR_LATE_PAYMENT */
-        - SEM_ENCARGOk /* NO_CHARGE */
-        - OUTROS /* OTHERS */
+        - MULTA_ATRASO_PAGAMENTO          /* LATE_PAYMENT_FINE */
+        - JUROS_MORA_ATRASO               /* DEFAULT_INTEREST_LATE_PAYMENT */
+        - IOF_CONTRATACAO                 /* IOF_CONTRACTING */
+        - IOF_POR_ATRASO                  /* IOF_FOR_LATE_PAYMENT */
+        - SEM_ENCARGO                     /* NO_CHARGE */
+        - OUTROS                          /* OTHERS */
       example: JUROS_REMUNERATORIOS_POR_ATRASO
     EnumContractInterestRateType:
       type: string
@@ -378,11 +378,11 @@ components:
         "Types of benchmark rates or indexers, according to Annex 5: Benchmark Rate or Indexer (Indx), of Document 3040"
       enum:
         - SEM_TIPO_INDEXADOR /* NO_INDEXER_TYPE */
-        - PRE_FIXADO /* PRE_FIXED */
-        - POS_FIXADO /* POST_FIXED */
-        - FLUTUANTES /* FLOATING */
-        - INDICES_PRECOS /* PRICE_INDEXES */
-        - CREDITO_RURAL /* RURAL_CREDIT */
+        - PRE_FIXADO         /* PRE_FIXED */
+        - POS_FIXADO         /* POST_FIXED */
+        - FLUTUANTES         /* FLOATING */
+        - INDICES_PRECOS     /* PRICE_INDEXES */
+        - CREDITO_RURAL      /* RURAL_CREDIT */
         - OUTROS_INDEXADORES /* OTHER_INDEXERS */
       example: PRE_FIXADO
     EnumContractTaxPeriodicity:
@@ -402,14 +402,14 @@ components:
         no regular periodicity, weekly, biweekly, monthly, bimonthly, quarterly, semi-annual, annual"
       enum:
         - SEM_PERIODICIDADE_REGULAR /* NO_REGULAR_PERIODICITY */
-        - SEMANAL /* WEEKLY */
-        - QUINZENAL /* BIWEEKLY */
-        - MENSAL /* MONTHLY */
-        - BIMESTRAL /* BIMONTHLY */
-        - TRIMESTRAL /* QUARTERLY */
-        - SEMESTRAL /* SEMI_ANNUAL */
-        - ANUAL /* ANNUAL */
-        - OUTROS /* OTHERS */
+        - SEMANAL                   /* WEEKLY */
+        - QUINZENAL                 /* BIWEEKLY */
+        - MENSAL                    /* MONTHLY */
+        - BIMESTRAL                 /* BIMONTHLY */
+        - TRIMESTRAL                /* QUARTERLY */
+        - SEMESTRAL                 /* SEMI_ANNUAL */
+        - ANUAL                     /* ANNUAL */
+        - OUTROS                    /* OTHERS */
       example: SEMANAL
     EnumWarrantySubType:
       type: string
@@ -854,10 +854,10 @@ components:
           type: string
           description: Type of total term of the contract referring to the informed credit modality.
           enum:
-            - DIA /* DAY */
-            - SEMANA /* WEEK */
-            - MES /* MONTH */
-            - ANO /* YEAR */
+            - DIA             /* DAY */
+            - SEMANA          /* WEEK */
+            - MES             /* MONTH */
+            - ANO             /* YEAR */
             - SEM_PRAZO_TOTAL /* NO_TOTAL_TERM */
           example: MES
         totalNumberOfInstalments:
@@ -1117,6 +1117,7 @@ components:
       required:
         - totalRecords
         - totalPages
+        - requestDateTime
       properties:
         totalRecords:
           type: integer
@@ -1128,6 +1129,12 @@ components:
           format: int32
           description: Total number of pages in the result
           example: 1
+        requestDateTime:
+          description: 'Date and time of request according to RFC-3339 specification, UTC time format.'
+          type: string
+          maxLength: 20
+          format: date-time
+          example: '2021-05-21T08:30:00Z'
     ResponseError:
       type: object
       required:

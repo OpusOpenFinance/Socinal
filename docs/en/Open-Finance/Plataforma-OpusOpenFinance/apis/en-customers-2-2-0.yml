@@ -5,7 +5,7 @@ info:
     Customer registration data API for the Integration Layer of the Transmitting Institution with Opus Open Finance Brazil.
     API that returns customer and representative registration data, including identification, financial qualification data, information about registered representatives and the customer's financial relationship with the data transmitting institution.
     It has segregation between natural and legal persons.
-  version: 1.0.0-base2.2.0
+  version: 2.0.0-base2.2.0
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
@@ -1253,6 +1253,18 @@ components:
           maxLength: 3
           description: 'Currency referring to the monetary value, following the ISO-4217 model.'
           example: BRL
+    Meta:
+      type: object
+      description: Meta information regarding the requested API.
+      required:
+        - requestDateTime
+      properties:
+        requestDateTime:
+          description: 'Date and time of request according to RFC-3339 specification, UTC time format.'
+          type: string
+          maxLength: 20
+          format: date-time
+          example: '2021-05-21T08:30:00Z'
     Nationality:
       type: object
       description: Object that groups information related to the Nationality of the Natural Person
@@ -1794,26 +1806,35 @@ components:
       type: object
       required:
         - data
+        - meta
       properties:
         data:
           $ref: '#/components/schemas/BusinessFinancialRelationData'
+        meta:
+          $ref: '#/components/schemas/Meta'
     ResponseBusinessCustomersIdentification:
       type: object
       required:
         - data
+        - meta
       properties:
         data:
           type: array
           minItems: 1
           items:
             $ref: '#/components/schemas/BusinessIdentificationData'
+        meta:
+          $ref: '#/components/schemas/Meta'
     ResponseBusinessCustomersQualification:
       type: object
       required:
         - data
+        - meta
       properties:
         data:
           $ref: '#/components/schemas/BusinessQualificationData'
+        meta:
+          $ref: '#/components/schemas/Meta'
     ResponseError:
       type: object
       required:
@@ -1845,30 +1866,41 @@ components:
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 2048
+        meta:
+          $ref: '#/components/schemas/Meta'
     ResponsePersonalCustomersFinancialRelation:
       type: object
       required:
         - data
+        - meta
       properties:
         data:
           $ref: '#/components/schemas/PersonalFinancialRelationData'
+        meta:
+          $ref: '#/components/schemas/Meta'
     ResponsePersonalCustomersIdentification:
       type: object
       required:
         - data
+        - meta
       properties:
         data:
           type: array
           minItems: 1
           items:
             $ref: '#/components/schemas/PersonalIdentificationData'
+        meta:
+          $ref: '#/components/schemas/Meta'
     ResponsePersonalCustomersQualification:
       type: object
       required:
         - data
+        - meta
       properties:
         data:
           $ref: '#/components/schemas/PersonalQualificationData'
+        meta:
+          $ref: '#/components/schemas/Meta'
     ConsentDataSharing:
       description: Data sharing consent
       type: object
