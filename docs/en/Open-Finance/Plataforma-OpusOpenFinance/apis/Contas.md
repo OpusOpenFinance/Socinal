@@ -30,7 +30,7 @@ Additionally, it is necessary to implement another regulatory API for verifying 
 
 The documentation for the Accounts API to be built in the *integration layer* can be found [here][API-Contas].
 
-The documentation for the *common* API can be fount [here][API-Common].
+The documentation for the *common* API can be found [here][API-Common].
 
 [API-Contas]: ../../../../swagger-ui/index.html?api=en-Contas
 [API-Common]: ../../../../swagger-ui/index.html?api=Opus-Commons
