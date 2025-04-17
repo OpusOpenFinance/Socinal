@@ -19,7 +19,7 @@ As diferentes modalidades de operações de crédito são:
 - Empréstimos
 - Financiamentos
 - Adiantamento a depositantes
-- Direitos creditórios Descontados
+- Direitos creditórios descontados
 
 Dado que cada uma dessas modalidades possui suas próprias características, a *camada de integração* deve implementar quatro APIs distintas, considerando seus diferentes tipos de dados.
 
@@ -40,9 +40,13 @@ O detalhamento das APIs de cada modalidade de operação de crédito pode ser en
 
 |API                             |Link                     |
 |--------------------------------|:-----------------------:|
-|Empréstimo                      |[Link](../../../../apis/Empréstimo.html)|
-|Financiamento                   |[Link](../../../../apis/Financiamento.html) |
-|Direitos creditórios descontados|[Link](../../../../apis/DireitosCreditórios.html)     |
-|Adiantamento a depositantes     |[Link](../../../../apis/Adiantamento.html)            |
+|Empréstimo                      |[Link][Empréstimo]|
+|Financiamento                   |[Link][Financiamento]|
+|Adiantamento a depositantes     |[Link][Adiantamento]|
+|Direitos creditórios descontados|[Link][Direitos-Creditórios]|
 
+[Empréstimo]: ../apis/Empréstimo.html
+[Financiamento]: ../apis/Financiamento.html
+[Adiantamento]: ../apis/Adiantamento.html
+[Direitos-Creditórios]: ../apis/DireitosCreditórios.html
 [Tabela-Crédito-OFB]: https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/320176146/Orienta+es+-+DC+Opera+es+de+cr+dito#Tabela-com-as-modalidades-e-submodalidades-das-APIs-de-opera%C3%A7%C3%B5es-de-cr%C3%A9dito

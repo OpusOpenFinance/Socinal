@@ -64,10 +64,10 @@ Detailed information on the *endpoints* and data required to handle this type of
 
 In the case of credit operations, the customer shares data by product grouping, meaning all types of credit operations are shared within the scope of *Open Finance Brasil*. Below is a list of the operations:
 
-- Loans
-- Financing
-- Advances to depositors
-- Discounted receivables
+- [Loans][Empréstimo]
+- [Financing][Financiamento]
+- [Unarranged Accounts Overdraft][Adiantamento]
+- [Invoice Financing][Direitos-Creditórios]
 
 Detailed information on the data required for each of these operations can be found on the [credit operations page][Crédito].
 
@@ -96,8 +96,12 @@ Detailed information on the data required for this product can be found on the [
 [Imagem da Camada de Integração]: ./images/CamadaIntegração.png
 [Tempos de Resposta]: https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17957025/Refer+ncia
 <!-- [Guia APIs]: https://openfinancebrasil.atlassian.net/wiki/pages/viewpageattachments.action?pageId=17378841&preview=%2F17378841%2F17378864%2F%5B23-06%5DGuia_GT_Implementa%C3%A7%C3%A3oAPIs.pdf -->
-[Dados-Cadastrais]: ../../../../apis/Dados-Cadastrais.html
-[Cartão-crédito]: ../../../../apis/Cartão-de-Credito.html
-[Contas]: ../../../../apis/Contas.html
+[Dados-Cadastrais]: ../apis/Dados-Cadastrais.html
+[Cartão-crédito]: ../apis/Cartão-de-Credito.html
+[Contas]: ../apis/Contas.html
 [Crédito]: ./OOF-Crédito.html
-[Câmbio]: ../../../../apis/Câmbio.html
+[Câmbio]: ../apis/Câmbio.html
+[Empréstimo]: ../apis/Empréstimo.html
+[Financiamento]: ../apis/Financiamento.html
+[Adiantamento]: ../apis/Adiantamento.html
+[Direitos-Creditórios]: ../apis/DireitosCreditórios.html

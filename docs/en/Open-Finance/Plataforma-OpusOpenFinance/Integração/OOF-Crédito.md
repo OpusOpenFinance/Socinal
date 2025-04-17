@@ -18,8 +18,8 @@ The different types of credit operations are:
 
 - Loans
 - Financing
-- Advances to depositors
-- Discounted receivables
+- Unarranged Accounts Overdraft
+- Invoice Financing
 
 Since each of these modalities has its own characteristics, the *integration layer* must implement four distinct APIs, considering their different types of data.
 
@@ -40,9 +40,13 @@ The details of the APIs for each credit operation modality can be found in the t
 
 |API                             |Link                     |
 |--------------------------------|:-----------------------:|
-|Loans                           |[Link](../../../../apis/Empréstimo.html)|
-|Financing                       |[Link](../../../../apis/Financiamento.html)|
-|Invoice Financing               |[Link](../../../../apis/DireitosCreditórios.html)|
-|Unarranged Accounts Overdraft   |[Link](../../../../apis/Adiantamento.html)|
+|Loans                           |[Link][Empréstimo]|
+|Financing                       |[Link][Financiamento]|
+|Unarranged Accounts Overdraft   |[Link][Adiantamento]|
+|Invoice Financing               |[Link][Direitos-Creditórios]|
 
+[Empréstimo]: ../apis/Empréstimo.html
+[Financiamento]: ../apis/Financiamento.html
+[Adiantamento]: ../apis/Adiantamento.html
+[Direitos-Creditórios]: ../apis/DireitosCreditórios.html
 [Tabela-Crédito-OFB]: https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/320176146/Orienta+es+-+DC+Opera+es+de+cr+dito#Tabela-com-as-modalidades-e-submodalidades-das-APIs-de-opera%C3%A7%C3%B5es-de-cr%C3%A9dito
