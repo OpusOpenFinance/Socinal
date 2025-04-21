@@ -13,7 +13,7 @@ Este é um exemplo de arquivo JSON de resposta da API ***OpenData Unarranged Acc
 
 Clique [**aqui**](open-data-unarranged-account-overdraft.json){:download="open-data-unarranged-account-overdraft.json"} para fazer o download do arquivo exemplo.
 
-Para os possíveis valores de cada campo consulte a [API associada][Link-API].
+Para os possíveis valores de cada chave JSON consulte a [API associada][Link-API].
 
 ```json
 {% include_relative open-data-unarranged-account-overdraft.json %}

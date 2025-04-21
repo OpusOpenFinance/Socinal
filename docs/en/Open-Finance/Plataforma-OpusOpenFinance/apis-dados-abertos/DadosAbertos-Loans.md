@@ -15,7 +15,7 @@ Click [**here**](open-data-loans.json){:download="open-data-loans.json"} to down
 
 This example in English is for illustrative purposes only. To use the JSON example as a starting point for creating a version with data from a financial institution, we recommend downloading the [example in Portuguese](../../../../pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis-dados-abertos/open-data-loans.json){:download="open-data-loans.json"}.
 
-For the possible values of each field, consult the [associated API][Link-API].
+For the possible values of each JSON key, consult the [associated API][Link-API].
 
 ```json
 {% include_relative open-data-loans.json %}
