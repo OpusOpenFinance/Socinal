@@ -1,36 +1,42 @@
 openapi: 3.0.0
 info:
-  title: API Treasure Bonds - Integration Layer - OPUS Open Finance Brasil
+  title: API Treasury Bonds - Integration Layer - OPUS Open Finance Brasil
   description: |
-    API de informações de operações de Títulos do Tesouro Direto Open Finance Brasil – Fase 4. 
-    API que retorna informações de operações de investimento do tipo Títulos do Tesouro Direto mantidas nas 
-    instituições transmissoras por seus clientes, incluindo dados como informações do produto, quantidade, 
-    saldos em posição do cliente e movimentações financeiras. Não possui segregação entre pessoa natural e pessoa jurídica. 
-    Devem ser considerados como escopo de exposição todos os títulos ofertados pelo Tesouro Direto. 
-    A exposição se dará por cada operação de títulos do Tesouro Direto contratada pelo cliente.
-  version: 1.0.0-base1.0.1
+    Open Finance Brasil Treasury Bonds (Tesouro Direto) Operations API - Phase 4.
+    API that returns information on Treasury Bonds (Tesouro Direto) investment operations held at
+    transmitting institutions by their clients, including data such as product information, quantity,
+    customer position balances and financial transactions. There is no segregation between natural and legal persons.
+    All bonds offered by Tesouro Direto must be considered as the scope of exposure.
+    Exposure will be given for each Treasury Bonds (Tesouro Direto) operation contracted by the client.
+    Note 1: In Brazil, government bonds are known as 'Tesouro Direto'. This is an online platform where individuals can
+            invest in government bonds. This API is specifically designed to work with this type of investment. 
+    Note 2: The official Open Finance Brasil Team made a translation error for this concept.  Due to a false cognate, it
+            was literally translated as 'Direct Title' or 'Treasure Direct Title'. Consequently, some API element names
+            reflect this error. For example, names like 'treasureTitlesGetInvestments' should be understood as
+            'treasuryBondsGetInvestments'.
+  version: 2.0.0-base1.0.1
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 tags:
   - name: Product List
-    description: Obtém a lista de operações de Títulos do Tesouro Direto mantidas pelo cliente na instituição transmissora e para as quais ele tenha fornecido consentimento.
+    description: Obtains the list of Treasury Bonds (Tesouro Direto) operations held by the customer at the transmitting institution and for which they have given consent.
   - name: Product Identification
-    description: Obtém os dados da operação de Títulos do Tesouro Direto identificada por investmentId.
+    description: Obtains the data of the Treasury Bonds (Tesouro Direto) operation identified by investmentId.
   - name: Balances
-    description: Obtém a posição da operação de Títulos do Tesouro Direto identificada por investmentId.
+    description: Obtains the position of the Treasury Bonds (Tesouro Direto) operation identified by investmentId.
   - name: Transactions
-    description: Obtém as movimentações da operação (últimos 12 meses) de Títulos do Tesouro Direto identificada por investmentId.
+    description: Obtains the transactions of the operation (last 12 months) of Treasury Bonds (Tesouro Direto) identified by investmentId.
   - name: Transactions Current
-    description: 'Obtém as movimentações recentes da operação de Títulos do Tesouro Direto identificada por investmentId. O período a ser considerado para apresentação de movimentações será de até 7 dias - 7 dias anteriores da consulta, incluindo o dia da consulta (D-6).'
+    description: 'Obtains recent transactions of the Treasury Bonds (Tesouro Direto) operation identified by investmentId. The period to be considered for presenting transactions will be up to 7 days - 7 days prior to the query, including the day of the query (D-6).'
 paths:
   /investments:
     post:
       tags:
         - Product List
-      summary: Obtém a lista de operações de Títulos do Tesouro Direto mantidas pelo cliente na instituição transmissora e para as quais ele tenha fornecido consentimento.
+      summary: Obtains the list of Treasury Bonds (Tesouro Direto) operations held by the customer at the transmitting institution and for which they have given consent.
       operationId: treasureTitlesGetInvestments
-      description: Obtém a lista de operações de Títulos do Tesouro Direto mantidas pelo cliente na instituição transmissora e para as quais ele tenha fornecido consentimento.
+      description: Obtains the list of Treasury Bonds (Tesouro Direto) operations held by the customer at the transmitting institution and for which they have given consent.
       requestBody:
         required: true
         content:
@@ -70,9 +76,9 @@ paths:
     post:
       tags:
         - Product Identification
-      summary: Obtém os dados da operação de Títulos do Tesouro Direto identificada por investmentId.
+      summary: Obtains the data of the Treasury Bonds (Tesouro Direto) operation identified by investmentId.
       operationId: treasureTitlesGetInvestmentsInvestmentId
-      description: Obtém os dados da operação de Títulos do Tesouro Direto identificada por investmentId.
+      description: Obtains the data of the Treasury Bonds (Tesouro Direto) operation identified by investmentId.
       requestBody:
         required: true
         content:
@@ -112,15 +118,16 @@ paths:
     post:
       tags:
         - Balances
-      summary: Obtém a posição da operação de Títulos do Tesouro Direto identificada por investmentId.
+      summary: Obtains the position of the Treasury Bonds (Tesouro Direto) operation identified by investmentId.
       operationId: treasureTitlesGetInvestmentsInvestmentIdBalances
       description: |
-        Obtém a posição da operação de Títulos do Tesouro Direto identificada por investmentId.
+        Obtains the position of the Treasury Bonds (Tesouro Direto) operation identified by investmentId.
 
-        Nos casos em que não houver posição para o investimento, ou seja, quantidade de ativos e valores monetários zerados, mas o mesmo ainda estiver no prazo de exposição (até 12 meses após a última movimentação), deve se retornar status code 200 e para o payload de retorno considerar os valores abaixo. Campos não obrigatórios não devem ser retornados: 
+        In cases where there is no position for the investment, that is, the quantity of assets and monetary values are zeroed, but it is still within the exposure period (up to 12 months after the last transaction), status code 200 must be returned and for the return payload consider the values below. Non-mandatory fields should not be returned:
 
-        - Valores monetários: 0.00
-        - Quantidade de ativos: 0.00
+        - Monetary values: 0.00
+        - Quantity of assets: 0.00
+        - Date and time of the last position: same content as the requestDateTime field
       requestBody:
         required: true
         content:
@@ -160,9 +167,9 @@ paths:
     post:
       tags:
         - Transactions
-      summary: Obtém as movimentações da operação (últimos 12 meses) de Títulos do Tesouro Direto identificada por investmentId.
+      summary: Obtains the transactions of the operation (last 12 months) of Treasury Bonds (Tesouro Direto) identified by investmentId.
       operationId: treasureTitlesGetInvestmentsInvestmentIdTransactions
-      description: Obtém as movimentações da operação (últimos 12 meses) de Títulos do Tesouro Direto identificada por investmentId.
+      description: Obtains the transactions of the operation (last 12 months) of Treasury Bonds (Tesouro Direto) identified by investmentId.
       requestBody:
         required: true
         content:
@@ -202,9 +209,9 @@ paths:
     post:
       tags:
         - Transactions Current
-      summary: 'Obtém as movimentações recentes da operação de Títulos do Tesouro Direto identificada por investmentId. O período a ser considerado para apresentação de movimentações será de até 7 dias - 7 dias anteriores da consulta, incluindo o dia da consulta (D-6).'
+      summary: 'Obtains recent transactions of the Treasury Bonds (Tesouro Direto) operation identified by investmentId. The period to be considered for presenting transactions will be up to 7 days - 7 days prior to the query, including the day of the query (D-6).'
       operationId: treasureTitlesGetInvestmentsInvestmentIdTransactionsCurrent
-      description: 'Obtém as movimentações recentes da operação de Títulos do Tesouro Direto identificada por investmentId. O período a ser considerado para apresentação de movimentações será de até 7 dias - 7 dias anteriores da consulta, incluindo o dia da consulta (D-6).'
+      description: 'Obtains recent transactions of the Treasury Bonds (Tesouro Direto) operation identified by investmentId. The period to be considered for presenting transactions will be up to 7 days - 7 days prior to the query, including the day of the query (D-6).'
       requestBody:
         required: true
         content:
@@ -259,38 +266,45 @@ components:
               - detail
             properties:
               code:
-                description: Código de erro específico do endpoint
+                description: Specific endpoint error code
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 255
               title:
-                description: Título legível por humanos deste erro específico
+                description: Human-readable title for this specific error
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 255
               detail:
-                description: Descrição legível por humanos deste erro específico
+                description: Human-readable description of this specific error
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 2048
             additionalProperties: false
         meta:
           type: object
-          description: Meta informações referente a API requisitada.
+          description: Meta information regarding the requested API.
           required:
             - totalRecords
             - totalPages
+            - requestDateTime
           properties:
             totalRecords:
               type: integer
               format: int32
-              description: Número total de registros no resultado
+              description: Total number of records in the result
               example: 1
             totalPages:
               type: integer
               format: int32
-              description: Número total de páginas no resultado
+              description: Total number of pages in the result
               example: 1
+            requestDateTime:
+              description: 'Date and time of the query, according to RFC-3339 specification, UTC format.'
+              type: string
+              maxLength: 20
+              format: date-time
+              example: '2021-05-21T08:30:00Z'
           additionalProperties: false
       additionalProperties: false
     ResponseError:
@@ -310,24 +324,37 @@ components:
               - detail
             properties:
               code:
-                description: Código de erro específico do endpoint
+                description: Specific endpoint error code
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 255
               title:
-                description: Título legível por humanos deste erro específico
+                description: Human-readable title for this specific error
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 255
               detail:
-                description: Descrição legível por humanos deste erro específico
+                description: Human-readable description of this specific error
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 2048
+        meta:
+          type: object
+          description: Meta information regarding the requested API.
+          required:
+            - requestDateTime
+          properties:
+            requestDateTime:
+              description: 'Date and time of the query, according to RFC-3339 specification, UTC format.'
+              type: string
+              maxLength: 20
+              format: date-time
+              example: '2021-05-21T08:30:00Z'
     ResponseTreasureTitlesListProduct:
       type: object
       required:
-        - data        
+        - data
+        - meta
       properties:
         data:
           type: array
@@ -339,21 +366,28 @@ components:
       additionalProperties: false
     TreasureTitlesMeta:
       type: object
-      description: Meta informações referente a API requisitada.
+      description: Meta information regarding the requested API.
       required:
         - totalRecords
         - totalPages
+        - requestDateTime
       properties:
         totalRecords:
           type: integer
           format: int32
-          description: Número total de registros no resultado
+          description: Total number of records in the result
           example: 1
         totalPages:
           type: integer
           format: int32
-          description: Número total de páginas no resultado
+          description: Total number of pages in the result
           example: 1
+        requestDateTime:
+          description: 'Date and time of the query, according to RFC-3339 specification, UTC format.'
+          type: string
+          maxLength: 20
+          format: date-time
+          example: '2021-05-21T08:30:00Z'
       additionalProperties: false
     ResponseTreasureTitlesBalances:
       type: object
@@ -384,9 +418,9 @@ components:
           $ref: '#/components/schemas/TreasureTitlesTransactionType'
         transactionTypeAdditionalInfo:
           description: |
-            Informação adicional do tipo de movimentação, para preenchimento no caso de movimentações não de limitadas no domínio.
+            Additional information of the transaction type, to be filled in in the case of transactions not limited in the domain.
 
-            [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'transactionType' for preenchido com o valor 'OUTROS'.
+            [Restriction] Field must be filled in by participants when the 'transactionType' field is filled in with the value 'OUTROS'. # Portuguese: OUTROS - OTHERS
           maxLength: 100
           pattern: '[\w\W\s]*'
           example: ''
@@ -401,9 +435,9 @@ components:
           $ref: '#/components/schemas/TreasureTitlesTransactionGrossValue'
         incomeTax:
           description: |
-            Valor do imposto de renda recolhido na transação
+            Income tax amount withheld in the transaction
 
-            [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'type' for preenchido com o valor 'SAIDA'.
+            [Restriction] Field must be filled in by participants when the 'type' field is filled in with the value 'SAIDA'. # Portuguese: SAIDA - Exit
           type: object
           required:
             - amount
@@ -415,9 +449,9 @@ components:
               $ref: '#/components/schemas/TreasureTitlesCurrency'
         financialTransactionTax:
           description: |
-            Valor do IOF recolhido na transação
+            IOF amount withheld in the transaction
 
-            [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'type' for preenchido com o valor 'SAIDA'.
+            [Restriction] Field must be filled in by participants when the 'type' field is filled in with the value 'SAIDA'. # Portuguese: SAIDA - Exit
           type: object
           required:
             - amount
@@ -446,7 +480,7 @@ components:
       additionalProperties: false
     ResponseTreasureTitlesListProductData:
       type: object
-      description: Lista de títulos de tesouro direto mantidos pelo cliente na instituição transmissora e para as quais ele tenha fornecido consentimento
+      description: List of Treasury Bonds (Tesouro Direto) held by the customer at the transmitting institution and for which they have given consent
       required:
         - brandName
         - companyCnpj
@@ -470,9 +504,11 @@ components:
           minItems: 0
           items:
             $ref: '#/components/schemas/TreasureTitlesProductTransaction'
+        meta:
+          $ref: '#/components/schemas/TreasureTitlesMetaTransaction'
       additionalProperties: false
     TreasureTitlesAmount:
-      description: Valor relacionado ao objeto.
+      description: Value related to the object.
       maxLength: 24
       pattern: '^\d{1,15}\.\d{2,8}$'
       example: '1000.000004'
@@ -509,7 +545,7 @@ components:
         quantity:
           $ref: '#/components/schemas/TreasureTitlesQuantity'
     TreasureTitlesBlockedBalance:
-      description: Valor não disponível para movimentação naquele momento por qualquer motivo (bloqueio judicial, bloqueio em garantia, entre outros). Prazo de carência não é considerado como bloqueio.
+      description: Value not available for movement at that time for any reason (judicial block, guarantee block, among others). Grace period is not considered as a block.
       type: object
       required:
         - amount
@@ -520,7 +556,7 @@ components:
         currency:
           $ref: '#/components/schemas/TreasureTitlesCurrency'
     TreasureTitlesBlockedBalanceAmount:
-      description: Valor relacionado ao objeto.
+      description: Value related to the object.
       maxLength: 20
       pattern: '^\d{1,15}\.\d{2,4}$'
       example: '1000.04'
@@ -528,37 +564,37 @@ components:
       format: double
     TreasureTitlesBrandName:
       description: |
-        Nome da Marca reportada pelo participante no Open Finance.
-        Recomenda-se utilizar, sempre que possível, o mesmo nome de marca atribuído no
-        campo do diretório Customer Friendly Server Name (Authorisation Server).
+        Brand Name reported by the participant in Open Finance.
+        It is recommended to use, whenever possible, the same brand name assigned in the
+        Customer Friendly Server Name (Authorization Server) directory field.
       maxLength: 80
       pattern: '[\w\W\s]*'
       example: Organização A
       type: string
     TreasureTitlesCalculation:
-      description: Base de cálculo (dias úteis ou dias corridos)
+      description: Calculation basis (business days or calendar days)
       example: DIAS_CORRIDOS
       enum:
-        - DIAS_UTEIS
-        - DIAS_CORRIDOS
+        - DIAS_UTEIS    # Business days
+        - DIAS_CORRIDOS # Calendar days
       type: string
     TreasureTitlesCompanyCnpj:
       description: |
-        Número completo do CNPJ da instituição responsável pelo Cadastro -
-        o CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica.
-        Deve-se ter apenas os números do CNPJ, sem máscara
+        Full CNPJ number of the institution responsible for Registration -
+        CNPJ corresponds to the registration number in the National Registry of Legal Entities.
+        Only the CNPJ numbers should be present, without mask
       maxLength: 14
       pattern: '^\d{14}$'
       example: '21128159000166'
       type: string
     TreasureTitlesCurrency:
-      description: 'Moeda referente ao valor monetário, seguindo o modelo ISO-4217.'
+      description: 'Currency referring to the monetary value, following the ISO-4217 model.'
       maxLength: 3
       pattern: '^[A-Z]{3}$'
       example: BRL
       type: string
     TreasureTitlesDueDate:
-      description: Data de vencimento do título.
+      description: Title due date.
       maxLength: 10
       pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
       example: '2018-02-15'
@@ -566,9 +602,9 @@ components:
       format: date
     TreasureTitlesFinancialTransactionTax:
       description: |
-        IOF provisionado.
+        IOF provisioned.
 
-        Caso seja um produto com alíquota zero esse objeto pode ser enviado sem valores (vazio).
+        If it is a product with a zero rate, this object can be sent without values (empty).
       type: object
       required:
         - amount
@@ -579,7 +615,7 @@ components:
         currency:
           $ref: '#/components/schemas/TreasureTitlesCurrency'
     TreasureTitlesFinancialTransactionTaxAmount:
-      description: Valor relacionado ao objeto.
+      description: Value related to the object.
       maxLength: 20
       pattern: '^\d{1,15}\.\d{2,4}$'
       example: '1000.04'
@@ -587,8 +623,8 @@ components:
       format: double
     TreasureTitlesGrossAmount:
       description: |
-        Valor do investimento anterior à dedução de impostos, taxas e
-        tarifas (se houver), atualizado (a mercado) na data de referência.
+        Investment value prior to the deduction of taxes, fees and
+        tariffs (if any), updated (to market) on the reference date.
       type: object
       required:
         - amount
@@ -599,7 +635,7 @@ components:
         currency:
           $ref: '#/components/schemas/TreasureTitlesCurrency'
     TreasureTitlesGrossAmountAmount:
-      description: Valor relacionado ao objeto.
+      description: Value related to the object.
       maxLength: 20
       pattern: '^\d{1,15}\.\d{2,4}$'
       example: '1000.04'
@@ -633,7 +669,7 @@ components:
           $ref: '#/components/schemas/TreasureTitlesVoucherPaymentPeriodicityAdditionalInfo'
     TreasureTitlesIncomeTax:
       description: |
-        Valor do imposto de renda provisionado considerando a alíquota vigente na data de referência.
+        Provisioned income tax amount considering the current rate on the reference date.
       type: object
       required:
         - amount
@@ -644,34 +680,34 @@ components:
         currency:
           $ref: '#/components/schemas/TreasureTitlesCurrency'
     TreasureTitlesIncomeTaxAmount:
-      description: Valor relacionado ao objeto.
+      description: Value related to the object.
       maxLength: 20
       pattern: '^\d{1,15}\.\d{2,4}$'
       example: '1000.04'
       type: string
       format: double
     TreasureTitlesIndexer:
-      description: 'Índice utilizado como referência para a correção da rentabilidade e/ou rendimentos do ativo (CDI, DI , TR, IPCA, IGP_M, IGP_DI, INPC, BCP, TLC, SELIC, PRE_FIXADO e OUTROS)'
+      description: 'Index used as a reference for the correction of profitability and/or asset returns (CDI, DI, TR, IPCA, IGP_M, IGP_DI, INPC, BCP, TLC, SELIC, PRE_FIXADO and OUTROS)'
       example: CDI
       enum:
-        - CDI
-        - DI
-        - TR
-        - IPCA
-        - IGP_M
-        - IGP_DI
-        - INPC
-        - BCP
-        - TLC
-        - SELIC
-        - PRE_FIXADO
-        - OUTROS
+        - CDI        # Interbank Deposit Certificate rate, a benchmark for fixed income
+        - DI         # Interbank Deposit rate, similar to CDI
+        - TR         # Reference Rate, a basic interest rate, historically for savings
+        - IPCA       # Broad National Consumer Price Index, Brazil's official inflation
+        - IGP_M      # General Market Price Index, an inflation index for contracts
+        - IGP_DI     # General Price Index - Internal Availability, similar to IGP-M
+        - INPC       # National Consumer Price Index, inflation for low-income families
+        - BCP        # Central Bank Bond rate, related to government bond yields
+        - TLC        # Short-Term Lending Rate, may vary between institutions
+        - SELIC      # Special System for Settlement and Custody rate, Brazil's base rate
+        - PRE_FIXADO # FIXED_RATE
+        - OUTROS     # OTHERS
       type: string
     TreasureTitlesIndexerAdditionalInfo:
       description: |
-        Informações adicionais do indexador.
+        Additional information of the indexer.
 
-        [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'indexer' for preenchido com o valor 'OUTROS'.
+        [Restriction] Field must be filled in by participants when the 'indexer' field is filled in with the value 'OUTROS'. # Portuguese: OUTROS - OTHERS
       maxLength: 50
       pattern: '[\w\W\s]*'
       example: Dólar
@@ -680,15 +716,33 @@ components:
       $ref: '#/components/schemas/LegacyId'
     TreasureTitlesIsinCode:
       description: |
-        Código ISIN da emissão, Código ISIN do produto, Código da emissora
-        : código universal que identifica cada valor mobiliário ou instrumento
-        financeiro, conforme Norma ISO 6166.
+        ISIN code of the issue, ISIN code of the product, Issuer code
+        : universal code that identifies each security or financial instrument,
+        according to ISO 6166 Standard.
       maxLength: 12
       pattern: '^[A-Z]{2}([A-Z0-9]){9}\d{1}$'
       example: BRCST4CTF001
       type: string
+    TreasureTitlesMetaTransaction:
+      type: object
+      description: Meta information regarding the requested API.
+      required:
+        - requestDateTime
+        - hasMoreRecords
+      properties:
+        requestDateTime:
+          description: 'Date and time of the query, according to RFC-3339 specification, UTC format.'
+          type: string
+          maxLength: 20
+          format: date-time
+          example: '2021-05-21T08:30:00Z'
+        hasMoreRecords:
+          type: boolean
+          description: Indicates whether there are more records to be returned (true) or not (false).
+          example: true
+      additionalProperties: false
     TreasureTitlesNetAmount:
-      description: 'Valor do investimento posterior a dedução de impostos, taxas e tarifas (se houver), atualizado (a mercado) na data de referência.'
+      description: 'Investment value after deduction of taxes, fees and tariffs (if any), updated (to market) on the reference date.'
       type: object
       required:
         - amount
@@ -699,7 +753,7 @@ components:
         currency:
           $ref: '#/components/schemas/TreasureTitlesCurrency'
     TreasureTitlesNetAmountAmount:
-      description: Valor relacionado ao objeto.
+      description: Value related to the object.
       maxLength: 20
       pattern: '^\d{1,15}\.\d{2,4}$'
       example: '1000.04'
@@ -707,9 +761,9 @@ components:
       format: double
     TreasureTitlesPostFixedIndexerPercentage:
       description: |
-        Percentual do indexador da aquisição do contrato.
+        Percentage of the acquisition indexer of the contract.
 
-        [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'indexer' for preenchido de forma diferente de ‘PRE FIXADO’.
+        [Restriction] Field must be filled in by participants when the 'indexer' field is filled in differently from 'PRE FIXADO'. # Portuguese: PRE FIXADO - PRE_FIXED
       maxLength: 8
       minLength: 8
       pattern: '^\d{1}\.\d{6}$'
@@ -718,9 +772,9 @@ components:
       format: double
     TreasureTitlesPreFixedRate:
       description: |
-        Valor da taxa da aquisição do contrato.
+        Value of the contract acquisition rate.
 
-        [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'indexer' for preenchido com o valor ‘PRE FIXADO’.
+        [Restriction] Field must be filled in by participants when the 'indexer' field is filled in with the value 'PRE FIXADO'. # Portuguese: PRE FIXADO - PRE_FIXED
       maxLength: 8
       minLength: 8
       pattern: '^\d{1}\.\d{6}$'
@@ -728,20 +782,20 @@ components:
       type: string
       format: double
     TreasureTitlesProductName:
-      description: Nome do título em questão, conforme listado no site do Tesouro Direto [https://www.tesourodireto.com.br](https://www.tesourodireto.com.br)
+      description: Title name in question, as listed on the Tesouro Direto website [https://www.tesourodireto.com.br](https://www.tesourodireto.com.br)
       maxLength: 70
       pattern: '[\w\W\s]*'
       example: Tesouro Selic 2025
       type: string
     TreasureTitlesPurchaseDate:
-      description: Data de aquisição do cliente.
+      description: Customer acquisition date.
       maxLength: 10
       pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
       example: '2018-02-15'
       type: string
       format: date
     TreasureTitlesPurchaseUnitPrice:
-      description: Valor unitário negociado com o cliente na data de aquisição.
+      description: Unit value negotiated with the customer on the acquisition date.
       type: object
       required:
         - amount
@@ -752,30 +806,30 @@ components:
         currency:
           $ref: '#/components/schemas/TreasureTitlesCurrency'
     TreasureTitlesQuantity:
-      description: Quantidade de títulos detidos na data da posição do cliente.
+      description: Quantity of titles held on the customer's position date.
       maxLength: 24
       pattern: '^\d{1,15}\.\d{2,8}$ '
       format: double
       type: string
       example: '1000.015'
     TreasureTitlesRatePeriodicity:
-      description: 'Periodicidade da taxa de remuneração (mensal, anual, diário e semestral)'
+      description: 'Remuneration rate periodicity (monthly, annual, daily and semi-annual)'
       example: DIARIO
       enum:
-        - MENSAL
-        - ANUAL
-        - DIARIO
-        - SEMESTRAL
+        - MENSAL    # Monthly
+        - ANUAL     # Annual
+        - DIARIO    # Daily
+        - SEMESTRAL # Semiannual
       type: string
     TreasureTitlesReferenceDateTime:
-      description: Data da última posição consolidada disponível a que se referem os dados transacionais do cliente disponíveis nos canais eletrônicos.
+      description: Date of the last consolidated position available to which the customer's transactional data available in electronic channels refers.
       maxLength: 20
       pattern: '(^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$)'
       example: '2022-07-21T17:32:00Z'
       type: string
       format: date-time
     TreasureTitlesRemuneration:
-      description: Objeto para detalhamento de remuneração do titulo.
+      description: Object for detailing title remuneration.
       type: object
       required:
         - indexer
@@ -796,9 +850,9 @@ components:
           $ref: '#/components/schemas/TreasureTitlesCalculation'
     TreasureTitlesRemunerationTransactionRate:
       description: |
-        Taxa de remuneração da movimentação.  
+        Transaction remuneration rate.
 
-        [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'type' for preenchido com o valor 'ENTRADA'.
+        [Restriction] Field must be filled in by participants when the 'type' field is filled in with the value 'ENTRADA'. # Portuguese: ENTRADA - ENTRY
       maxLength: 8
       minLength: 8
       pattern: '^\d{1}\.\d{6}$'
@@ -806,7 +860,7 @@ components:
       type: string
       format: double
     TreasureTitlesTransactionDate:
-      description: Data da movimentação.
+      description: Transaction date.
       maxLength: 10
       pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
       example: '2018-02-15'
@@ -814,9 +868,9 @@ components:
       format: date
     TreasureTitlesTransactionGrossValue:
       description: |
-        Valor bruto da movimentação
+        Gross transaction value
 
-        Nos casos em que se tratar de movimento de saída e a instituição não tiver a informação de IR recolhido na fonte, o valor bruto e o valor líquido expostos deverão ser iguais.
+        In cases where it is an exit movement and the institution does not have the information of IR withheld at source, the gross value and the net value exposed must be equal.
       type: object
       required:
         - amount
@@ -827,14 +881,14 @@ components:
         currency:
           $ref: '#/components/schemas/TreasureTitlesTransactionGrossValueCurrency'
     TreasureTitlesTransactionGrossValueAmount:
-      description: 'Valor bruto da transação (Preço unitário da movimentação x Quantidade) '
+      description: 'Gross transaction value (Transaction unit price x Quantity) '
       maxLength: 20
       pattern: '^\d{1,15}\.\d{2,4}$'
       example: '1000.04'
       type: string
       format: double
     TreasureTitlesTransactionGrossValueCurrency:
-      description: 'Moeda referente ao valor monetário, seguindo o modelo ISO-4217'
+      description: 'Currency referring to the monetary value, following the ISO-4217 model'
       maxLength: 3
       pattern: '^[A-Z]{3}$'
       example: BRL
@@ -843,9 +897,9 @@ components:
       $ref: '#/components/schemas/LegacyId'
     TreasureTitlesTransactionNetValue:
       description: |
-        Valor líquido da transação
+        Net transaction value
 
-        Nos casos em que se tratar de movimento de saída e a instituição não tiver a informação de IR recolhido na fonte, o valor bruto e o valor líquido expostos deverão ser iguais.
+        In cases where it is an exit movement and the institution does not have the information of IR withheld at source, the gross value and the net value exposed must be equal.
       type: object
       required:
         - amount
@@ -856,41 +910,41 @@ components:
         currency:
           $ref: '#/components/schemas/TreasureTitlesTransactionNetValueCurrency'
     TreasureTitlesTransactionNetValueAmount:
-      description: Valor relacionado ao objeto
+      description: Value related to the object
       maxLength: 20
       pattern: '^\d{1,15}\.\d{2,4}$'
       example: '1000.04'
       type: string
       format: double
     TreasureTitlesTransactionNetValueCurrency:
-      description: 'Moeda referente ao valor monetário, seguindo o modelo ISO-4217'
+      description: 'Currency referring to the monetary value, following the ISO-4217 model'
       maxLength: 3
       pattern: '^[A-Z]{3}$'
       example: BRL
       type: string
     TreasureTitlesTransactionQuantity:
-      description: Quantidade de títulos envolvidos na movimentação.
+      description: Quantity of bonds involved in the transaction.
       maxLength: 24
       pattern: '^\d{1,15}\.\d{2,8}$'
       example: '42.25'
       type: string
       format: double
     TreasureTitlesTransactionType:
-      description: 'Compra, venda, cancelamento, vencimento, pagamento de juros, amortização, transferência de titularidade, transferência de custódia e outros.'
+      description: 'Purchase, sale, cancellation, maturity, interest payment, amortization, ownership transfer, custody transfer and others.'
       example: AMORTIZACAO
       enum:
-        - COMPRA
-        - VENDA
-        - CANCELAMENTO
-        - VENCIMENTO
-        - PAGAMENTO_JUROS
-        - AMORTIZACAO
-        - TRANSFERENCIA_TITULARIDADE
-        - TRANSFERENCIA_CUSTODIA
-        - OUTROS
+        - COMPRA # Purchase
+        - VENDA # Sale
+        - CANCELAMENTO # Cancellation
+        - VENCIMENTO # Maturity
+        - PAGAMENTO_JUROS # Interest payment
+        - AMORTIZACAO # Amortization
+        - TRANSFERENCIA_TITULARIDADE # Ownership transfer
+        - TRANSFERENCIA_CUSTODIA # Custody transfer
+        - OUTROS # Others
       type: string
     TreasureTitlesTransactionUnitPrice:
-      description: Preço unitário bruto negociado na transação.
+      description: Gross unit price negotiated in the transaction.
       type: object
       required:
         - amount
@@ -901,30 +955,30 @@ components:
         currency:
           $ref: '#/components/schemas/TreasureTitlesTransactionUnitPriceCurrency'
     TreasureTitlesTransactionUnitPriceAmount:
-      description: Valor relacionado ao objeto
+      description: Value related to the object
       maxLength: 24
       pattern: '^\d{1,15}\.\d{2,8}$'
       example: '1000.04'
       type: string
       format: double
     TreasureTitlesTransactionUnitPriceCurrency:
-      description: 'Moeda referente ao valor monetário, seguindo o modelo ISO-4217'
+      description: 'Currency referring to the monetary value, following the ISO-4217 model'
       maxLength: 3
       pattern: '^[A-Z]{3}$'
       example: BRL
       type: string
     TreasureTitlesType:
       description: |
-        Tipo de movimentação na visão de investimento (Nos casos de
-        pagamento de juros e amortização) fica convencionado que será considerado que
-        o tipo de movimento será saída.
+        Type of transaction in the investment view (In cases of
+        interest payment and amortization) it is agreed that it will be considered that
+        the type of movement will be EXIT.
       example: ENTRADA
       enum:
-        - ENTRADA
-        - SAIDA
+        - ENTRADA # ENTRY
+        - SAIDA   # EXIT
       type: string
     TreasureTitlesUpdatedUnitPrice:
-      description: Valor bruto unitário atualizado (a mercado) na data de referência.
+      description: Gross unit value updated (to market) on the reference date.
       type: object
       required:
         - amount
@@ -935,38 +989,38 @@ components:
         currency:
           $ref: '#/components/schemas/TreasureTitlesCurrency'
     TreasureTitlesVoucherPaymentIndicator:
-      description: Indicativo se há pagamento de cupom (Sim ou não).
+      description: Indicator if there is coupon payment (Yes or No).
       example: SIM
       enum:
-        - SIM
-        - NAO
+        - SIM # Yes
+        - NAO # No
       type: string
     TreasureTitlesVoucherPaymentPeriodicity:
       description: |
-        Em caso de haver pagamento de cupom, descrever a periodicidade
-        (mensal, trimestral, semestral, anual, irregular e outros)
+        If there is coupon payment, describe the periodicity
+        (monthly, quarterly, semi-annual, annual, irregular and others)
 
-        [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'voucherPaymentIndicator' for preenchido com o valor 'SIM'.
+        [Restriction] Field must be filled in by participants when the 'voucherPaymentIndicator' field is filled in with the value 'SIM'. # Portuguese: SIM - Yes
       example: MENSAL
       enum:
-        - MENSAL
-        - TRIMESTRAL
-        - SEMESTRAL
-        - ANUAL
-        - IRREGULAR
-        - OUTROS
+        - MENSAL # Monthly
+        - TRIMESTRAL # Quarterly
+        - SEMESTRAL # Semiannual
+        - ANUAL # Annual
+        - IRREGULAR # Irregular
+        - OUTROS # Others
       type: string
     TreasureTitlesVoucherPaymentPeriodicityAdditionalInfo:
       description: |
-        Informações adicionais da periodicidade de pagamento de cupom.
+        Additional information on the coupon payment periodicity.
 
-        [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'voucherPaymentPeriodicity' for preenchido com o valor 'OUTROS'.
+        [Restriction] Field must be filled in by participants when the 'voucherPaymentPeriodicity' field is filled in with the value 'OUTROS'. # Portuguese: OUTROS - OTHERS
       maxLength: 50
       pattern: '[\w\W\s]*'
       example: Diária
       type: string
     ConsentDataSharing:
-      description: Consentimento de compartilhamento de dados
+      description: Data sharing consent
       type: object
       required:
         - brandId
@@ -979,8 +1033,8 @@ components:
         authExtraData:
           type: array
           description: |
-            Array de chave e valor com dados adicionais vindos do autorizador. Esses
-            dados podem ser utilizados como filtros de recursos.
+            Array of key and value with additional data coming from the authorizer. These
+            data can be used as resource filters.
           items:
             type: object
             required:
@@ -997,8 +1051,8 @@ components:
           deprecated: true
           type: array
           description: |
-            [Obsoleto] Array de chave e valor com os dados de identificação
-            referente ao dono do consentimento.
+            [Deprecated] Array of key and value with identification data
+            referring to the consent owner.
           items:
             type: object
             required:
@@ -1013,15 +1067,15 @@ components:
                 example: '0011'
         brandId:
           type: string
-          description: Identificador da marca reportada pelo participante do Open Finance
+          description: Brand identifier reported by the Open Finance participant
           example: cbanco
           minLength: 1
           maxLength: 50
         creationDateTime:
           description: |
-            Data e hora em que o consentimento foi criado. Uma string com data e
-            hora conforme especificação RFC-3339, sempre com a utilização de
-            timezone UTC (UTC time format).
+            Date and time when the consent was created. A string with date and
+            time as specified by RFC-3339, always using
+            UTC timezone (UTC time format).
           type: string
           pattern: |
             ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
@@ -1029,33 +1083,33 @@ components:
           maxLength: 20
         tpp:
           type: object
-          description: Detalhes do TPP (Third Party Provider) que solicitou o consentimento
+          description: Details of the TPP (Third Party Provider) that requested consent
           additionalProperties: false
           required:
             - name
           properties:
             name:
               type: string
-              description: Nome do TPP que solicitou o consentimento
+              description: Name of the TPP that requested consent
               example: GuiaBolsa
               maxLength: 100
         externalId:
           type: string
-          description: Identificador do consentimento utilizado fora da plataforma Opus Open Finance
+          description: Consent identifier used outside the Opus Open Finance platform
           example: urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf
           maxLength: 100
         loggedUser:
           type: object
           description: |
-            Usuário (pessoa natural) que encontra-se logado na instituição
-            Transmissora de Dados.
+            User (natural person) who is logged in at the Data
+            Transmitting Institution.
           additionalProperties: false
           required:
             - document
           properties:
             document:
               type: object
-              description: Documento de identificação oficial do usuário.
+              description: Official identification document of the user.
               additionalProperties: false
               required:
                 - identification
@@ -1064,30 +1118,30 @@ components:
                 identification:
                   type: string
                   maxLength: 11
-                  description: Número do documento de identificação oficial do usuário.
+                  description: Number of the user's official identification document.
                   example: '11111111111'
                   pattern: ^\d{11}$
                 rel:
                   type: string
                   maxLength: 3
-                  description: Tipo do documento de identificação oficial do usuário.
+                  description: Type of the user's official identification document.
                   example: CPF
                   pattern: ^[A-Z]{3}$
         businessDocumentType:
           type: object
           description: |
-            Usuário (pessoa jurídica) que encontra-se logado na instituição
-            Transmissora de Dados.
+            User (legal entity) who is logged in at the Data
+            Transmitting Institution.
 
-            [Restrição] Preenchimento obrigatório se usuário logado na instituição
-            Transmissora de Dados for um CNPJ (pessoa jurídica).
+            [Restriction] Mandatory to fill in if the user logged in at the Data
+            Transmitting Institution is a CNPJ (legal entity).
           additionalProperties: false
           required:
             - document
           properties:
             document:
               type: object
-              description: Documento de identificação oficial do titular pessoa jurídica.
+              description: Official identification document of the legal entity holder.
               additionalProperties: false
               required:
                 - identification
@@ -1097,31 +1151,31 @@ components:
                   type: string
                   maxLength: 14
                   description: |
-                    Número do documento de identificação oficial do titular pessoa
-                    jurídica.
+                    Number of the official identification document of the legal
+                    entity holder.
                   example: '11111111111111'
                   pattern: ^\d{14}$
                 rel:
                   type: string
                   maxLength: 4
                   description: |
-                    Tipo do documento de identificação oficial do titular pessoa
-                    jurídica.
+                    Type of the official identification document of the legal
+                    entity holder.
                   example: CNPJ
                   pattern: ^[A-Z]{4}$
         resources:
           description: |
-            Lista de recursos permitidos pelo cliente
+            List of resources allowed by the customer
           type: array
           items:
             type: object
-            description: Recursos selecionados pelo cliente
+            description: Resources selected by the customer
             required:
               - type
               - resourceLegacyId
             properties:
               type:
-                description: Tipo do recurso
+                description: Resource type
                 type: string
                 enum:
                   - ACCOUNT
@@ -1142,9 +1196,9 @@ components:
               authorizers:
                 deprecated: true
                 description: |
-                  [Obsoleto] Lista dos autorizadores para o recurso para casos de
-                  múltipla alçada. Caso o recurso seja selecionado, todos os
-                  autorizadores deverão aceitar o consentimento que o recurso faz parte
+                  [Deprecated] List of authorizers for the resource for cases of
+                  multiple signatures. If the resource is selected, all
+                  authorizers must accept the consent that the resource is part of
                 type: array
                 items:
                   type: object
@@ -1153,14 +1207,14 @@ components:
                     - name
                   properties:
                     cpf:
-                      description: CPF do autorizador
+                      description: Authorizer's CPF
                       type: string
                       minLength: 11
                       maxLength: 11
                       pattern: ^\d{11}$
                       example: '11111111111'
                     name:
-                      description: Nome do autorizador
+                      description: Authorizer's name
                       type: string
                       example: Marco Antonio de Brito
                 minItems: 1
@@ -1172,10 +1226,10 @@ components:
           maxItems: 1000
         expirationDateTime:
           description: |
-            Data e hora de expiração da permissão. De preenchimento obrigatório,
-            reflete a data limite de validade do consentimento. Uma string com
-            data e hora conforme especificação RFC-3339, sempre com a utilização
-            de timezone UTC (UTC time format).
+            Permission expiration date and time. Mandatory to fill in,
+            reflects the expiration date of the consent. A string with
+            date and time as specified by RFC-3339, always using
+            UTC timezone (UTC time format).
           type: string
           maxLength: 20
           pattern: |
@@ -1185,10 +1239,10 @@ components:
           type: array
           items:
             description: |
-              Somente para consentimentos de compartilhamento de dados. Especifica
-              os tipos de permissões de acesso às APIs no escopo do Open Finance
-              Brasil - Fase 2, de acordo com os blocos de consentimento fornecidos
-              pelo usuário e necessários ao acesso a cada endpoint das APIs.
+              Only for data sharing consents. Specifies
+              the types of permissions to access APIs within the scope of Open Finance
+              Brazil - Phase 2, according to the consent blocks provided
+              by the user and necessary to access each API endpoint.
             type: string
             enum:
               - ACCOUNTS_READ
@@ -1224,7 +1278,7 @@ components:
               - CREDIT_FIXED_INCOMES_READ
               - FUNDS_READ
               - VARIABLE_INCOMES_READ
-              - TREASURE_TITLES_READ
+              - TREASURE_TITLES_READ  # TREASURY_BONDS_READ
               - EXCHANGES_READ
               - RESOURCES_READ
           minItems: 1
@@ -1233,20 +1287,20 @@ components:
       additionalProperties: false
     RequestMeta:
       type: object
-      description: Objeto que contém dados referentes ao contexto no qual o request for recebido.
+      description: Object containing data referring to the context in which the request was received.
       required:
         - correlationId
         - brandId
       properties:
         correlationId:
           type: string
-          description: UUID que identifica o correlation ID da requisição realizada. Deve ser propagado para todas as chamadas feitas entre sistemas e logado sempre que possível para facilitar o trace de erros
+          description: UUID that identifies the correlation ID of the request made. It must be propagated to all calls made between systems and logged whenever possible to facilitate error tracing
           pattern: >-
             ^(localID:)?[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           example: localID:97623ed1-4732-4bf2-8d4b-ae7aced5443b
         brandId:
           type: string
-          description: Identificador da marca reportada pelo participante do Open Finance
+          description: Brand identifier reported by the Open Finance participant
           example: cbanco
           minLength: 1
           maxLength: 50
@@ -1338,8 +1392,8 @@ components:
           $ref: '#/components/schemas/PaginationKey'
     LegacyId:
       description: >-
-        Array de chave e valor com a chave de identificação do recurso no sistema
-        de origem (legado), permitindo chaves compostas
+        Array of key and value with the resource identification key in the system
+        of origin (legacy), allowing composite keys
       type: array
       items:
         type: object
@@ -1348,11 +1402,11 @@ components:
           - value
         properties:
           key:
-            description: Nome do campo do identificador no sistema de origem
+            description: Name of the identifier field in the system of origin
             type: string
             example: internalResourceId
           value:
-            description: Valor do campo do identificador no sistema de origem
+            description: Value of the identifier field in the system of origin
             type: string
             example: '1234'
         additionalProperties: false
@@ -1360,56 +1414,56 @@ components:
       maxItems: 10
     FromTransactionDate:
       description: |
-        Data inicial de filtragem.
+        Initial filtering date.
 
-        [Restrição] Deve obrigatoriamente ser enviado caso o campo toTransactionDate seja informado. Caso não seja informado, deve ser assumido o dia atual.
+        [Restriction] Must be mandatorily sent if the toTransactionDate field is informed. If not informed, the current day must be assumed.
       type: string
       maxLength: 10
       format: date
       example: '2021-05-21'
     FromTransactionDateMaxLimited:
       description: |
-        Data inicial de filtragem. O período máximo utilizado no filtro é de 7 dias inclusive (D-6).
+        Initial filtering date. The maximum period used in the filter is 7 days inclusive (D-6).
 
-        [Restrição] Deve obrigatoriamente ser enviado caso o campo toTransactionDate seja informado. Caso não seja informado, deve ser assumido o dia atual.
+        [Restriction] Must be mandatorily sent if the toTransactionDate field is informed. If not informed, the current day must be assumed.
       type: string
       maxLength: 10
       format: date
       example: '2021-05-21'
     ToTransactionDate:
       description: |
-        Data final de filtragem.
+        Final filtering date.
 
-        [Restrição] Deve obrigatoriamente ser enviado caso o campo fromTransactionDate seja informado. Caso não seja informado, deve ser assumido o dia atual.
+        [Restriction] Must be mandatorily sent if the fromTransactionDate field is informed. If not informed, the current day must be assumed.
       type: string
       maxLength: 10
       format: date
       example: '2021-05-21'
     ToTransactionDateMaxLimited:
       description: |
-        Data final de filtragem. O período máximo utilizado no filtro é de 7 dias inclusive (D-6).
+        Final filtering date. The maximum period used in the filter is 7 days inclusive (D-6).
 
-        [Restrição] Deve obrigatoriamente ser enviado caso o campo fromTransactionDate seja informado. Caso não seja informado, deve ser assumido o dia atual.
+        [Restriction] Must be mandatorily sent if the fromTransactionDate field is informed. If not informed, the current day must be assumed.
       type: string
       maxLength: 10
       format: date
       example: '2021-05-21'
     PaginationKey:
       description: >-
-        Identificador de rechamada, utilizado para evitar a contagem de chamadas
-        ao endpoint durante a paginação.
+        Re-call identifier, used to avoid counting calls
+        to the endpoint during pagination.
       type: string
       maxLength: 2048
       pattern: '[\w\W\s]*'
     Page:
-      description: Número da página que está sendo requisitada (o valor da primeira página é 1).
+      description: Page number being requested (the value of the first page is 1).
       type: integer
       default: 1
       minimum: 1
       maximum: 2147483647
       format: int32
     PageSize:
-      description: Quantidade total de registros por páginas.
+      description: Total number of records per page.
       type: integer
       default: 25
       minimum: 1
@@ -1417,55 +1471,55 @@ components:
       maximum: 1000
   responses:
     OkResponseTreasureTitlesBalances:
-      description: Dados obtidos com sucesso
+      description: Data obtained successfully
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ResponseTreasureTitlesBalances'
     OkResponseTreasureTitlesProductList:
-      description: Dados obtidos com sucesso
+      description: Data obtained successfully
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ResponseTreasureTitlesListProduct'
     ResponseTreasureTitlesIdentifyProduct:
-      description: Dados de fundos de investimentos obtidos com sucesso.
+      description: Investment funds data obtained successfully.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ResponseTreasureTitlesIdentifyProduct'
     ResponseTreasureTitlesProductTransactions:
-      description: Dados obtidos com sucesso.
+      description: Data obtained successfully.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ResponseTreasureTitlesProductTransactions'
     ResponseTreasureTitlesProductTransactionsCurrent:
-      description: Dados obtidos com sucesso.
+      description: Data obtained successfully.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ResponseTreasureTitlesProductTransactions'
     BadRequest:
-      description: 'A requisição foi malformada, omitindo atributos obrigatórios, seja no payload ou através de atributos na URL.'
+      description: 'The request was malformed, omitting mandatory attributes, either in the payload or through attributes in the URL.'
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     Forbidden:
-      description: O token tem escopo incorreto ou uma política de segurança foi violada
+      description: The token has an incorrect scope or a security policy has been violated
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     GatewayTimeout:
-      description: GATEWAY TIMEOUT - A requisição não foi atendida dentro do tempo limite estabelecido
+      description: GATEWAY TIMEOUT - The request was not answered within the established timeout
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     InternalServerError:
-      description: Ocorreu um erro no gateway da API ou no microsserviço
+      description: An error occurred in the API gateway or microservice
       content:
         application/json; charset=utf-8:
           schema:
@@ -1477,73 +1531,73 @@ components:
           schema:
             $ref: '#/components/schemas/ResponseError'
     MethodNotAllowed:
-      description: O consumidor tentou acessar o recurso com um método não suportado
+      description: The consumer tried to access the resource with an unsupported method
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     NotAcceptable:
-      description: A solicitação continha um cabeçalho Accept diferente dos tipos de mídia permitidos ou um conjunto de caracteres diferente de UTF-8
+      description: The request contained an Accept header different from the allowed media types or a character set other than UTF-8
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     NotFound:
-      description: O recurso solicitado não existe ou não foi implementado
+      description: The requested resource does not exist or has not been implemented
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     TooManyRequests:
-      description: 'A operação foi recusada, pois muitas solicitações foram feitas dentro de um determinado período ou o limite global de requisições concorrentes foi atingido'
+      description: 'The operation was refused because too many requests were made within a given period or the global limit of concurrent requests was reached'
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     Unauthorized:
-      description: Cabeçalho de autenticação ausente/inválido ou token inválido
+      description: Missing/invalid authentication header or invalid token
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     UnprocessableEntity:
-      description: 'A sintaxe da requisição esta correta, mas não foi possível processar as instruções presentes.'
+      description: 'The request syntax is correct, but it was not possible to process the instructions present.'
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     Default:
-      description: Erro inesperado.
+      description: Unexpected error.
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     SiteIsOverloaded:
-      description: 'O site está sobrecarregado e a operação foi recusada, pois foi atingido o limite máximo de TPS global, neste momento.'
+      description: 'The site is overloaded and the operation was refused because the maximum global TPS limit was reached at this moment.'
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     BadRequestWithAdditionalProperties:
-      description: 'A requisição foi malformada, omitindo atributos obrigatórios, seja no payload ou através de atributos na URL.'
+      description: 'The request was malformed, omitting mandatory attributes, either in the payload or through attributes in the URL.'
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/LockedWithAdditionalProperties'
     ForbiddenWithAdditionalProperties:
-      description: O token tem escopo incorreto ou uma política de segurança foi violada
+      description: The token has an incorrect scope or a security policy has been violated
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/LockedWithAdditionalProperties'
     GatewayTimeoutWithAdditionalProperties:
-      description: GATEWAY TIMEOUT - A requisição não foi atendida dentro do tempo limite estabelecido
+      description: GATEWAY TIMEOUT - The request was not answered within the established timeout
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/LockedWithAdditionalProperties'
     InternalServerErrorWithAdditionalProperties:
-      description: Ocorreu um erro no gateway da API ou no microsserviço
+      description: An error occurred in the API gateway or microservice
       content:
         application/json; charset=utf-8:
           schema:
@@ -1555,49 +1609,49 @@ components:
           schema:
             $ref: '#/components/schemas/LockedWithAdditionalProperties'
     MethodNotAllowedWithAdditionalProperties:
-      description: O consumidor tentou acessar o recurso com um método não suportado
+      description: The consumer tried to access the resource with an unsupported method
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/LockedWithAdditionalProperties'
     NotAcceptableWithAdditionalProperties:
-      description: A solicitação continha um cabeçalho Accept diferente dos tipos de mídia permitidos ou um conjunto de caracteres diferente de UTF-8
+      description: The request contained an Accept header different from the allowed media types or a character set other than UTF-8
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/LockedWithAdditionalProperties'
     NotFoundWithAdditionalProperties:
-      description: O recurso solicitado não existe ou não foi implementado
+      description: The requested resource does not exist or has not been implemented
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/LockedWithAdditionalProperties'
     TooManyRequestsWithAdditionalProperties:
-      description: 'A operação foi recusada, pois muitas solicitações foram feitas dentro de um determinado período ou o limite global de requisições concorrentes foi atingido'
+      description: 'The operation was refused because too many requests were made within a given period or the global limit of concurrent requests was reached'
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/LockedWithAdditionalProperties'
     UnauthorizedWithAdditionalProperties:
-      description: Cabeçalho de autenticação ausente/inválido ou token inválido
+      description: Missing/invalid authentication header or invalid token
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/LockedWithAdditionalProperties'
     UnprocessableEntityWithAdditionalProperties:
-      description: 'A sintaxe da requisição esta correta, mas não foi possível processar as instruções presentes.'
+      description: 'The request syntax is correct, but it was not possible to process the instructions present.'
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/LockedWithAdditionalProperties'
     DefaultWithAdditionalProperties:
-      description: Erro inesperado.
+      description: Unexpected error.
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/LockedWithAdditionalProperties'
     SiteIsOverloadedWithAdditionalProperties:
-      description: 'O site está sobrecarregado e a operação foi recusada, pois foi atingido o limite máximo de TPS global, neste momento.'
+      description: 'The site is overloaded and the operation was refused because the maximum global TPS limit was reached at this moment.'
       content:
         application/json; charset=utf-8:
           schema:

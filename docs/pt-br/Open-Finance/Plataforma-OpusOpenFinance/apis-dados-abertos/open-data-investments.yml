@@ -122,7 +122,7 @@ paths:
   /treasure-titles:
     get:
       tags:
-        - Treasure Titles
+        - Treasure Titles # Treasury Bonds
       summary: Conjunto de informações de Títulos do Tesouro Direto
       operationId: investmentsGetTreasure
       description: Método para obter informações de Títulos do Tesouro Direto

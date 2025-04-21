@@ -2,35 +2,35 @@ openapi: 3.0.0
 info:
   title: API Credit Fixed Incomes - Integration Layer - OPUS Open Finance Brasil
   description: |
-    API de informações de operações de Renda Fixa Crédito do Open Finance Brasil – Fase 4. 
-    API que retorna informações de operações de investimento do tipo Renda Fixa Crédito (Debêntures, CRI/CRA) 
-    mantidas nas instituições transmissoras por seus clientes, incluindo dados como denominação do produto, 
-    rentabilidade, quantidade, prazos, saldos em posição do cliente e movimentações financeiras.
-    Não possui segregação entre pessoa natural e pessoa jurídica. A exposição se dará por cada operação de 
-    renda fixa contratada pelo cliente.
-  version: 1.0.0-base1.0.3
+    Open Finance Brasil Credit Fixed Income Operations API - Phase 4.
+    API that returns investment operation information of the Credit Fixed Income type (Debentures, CRI/CRA)
+    maintained by transmitting institutions for their clients, including data such as product name,
+    profitability, quantity, terms, balances in customer position and financial transactions.
+    There is no segregation between natural and legal persons. Exposure will be given for each fixed income operation
+    contracted by the client.
+  version: 2.0.0-base1.0.3
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
 tags:
   - name: Product List
-    description: Obtém a lista de operações de Renda Fixa Crédito mantidas pelo cliente na instituição transmissora e para as quais ele tenha fornecido consentimento.
+    description: Obtains the list of Credit Fixed Income operations held by the customer at the transmitting institution and for which they have given consent.
   - name: Product Identification
-    description: Obtém os dados da operação de Renda Fixa Crédito identificada por investmentId.
+    description: Obtains the data of the Credit Fixed Income operation identified by investmentId.
   - name: Balances
-    description: Obtém a posição da operação de Renda Fixa Crédito identificada por investmentId.
+    description: Obtains the position of the Credit Fixed Income operation identified by investmentId.
   - name: Transactions
-    description: Obtém as movimentações históricas (últimos 12 meses) da operação de Renda Fixa Crédito identificada por investmentId.
+    description: Obtains the historical transactions (last 12 months) of the Credit Fixed Income operation identified by investmentId.
   - name: Transactions Current
-    description: 'Obtém as movimentações recentes da operação de Renda Fixa Crédito identificada por investmentId. O período a ser considerado para apresentação de movimentações será de até 7 dias - 7 dias anteriores da consulta, incluindo o dia da consulta (D-6).'
+    description: 'Obtains recent transactions of the Credit Fixed Income operation identified by investmentId. The period to be considered for presenting transactions will be up to 7 days - 7 days prior to the consultation, including the day of consultation (D-6).'
 paths:
   /investments:
     post:
       tags:
         - Product List
-      summary: Obtém a lista de operações de Renda Fixa Crédito mantidas pelo cliente na instituição transmissora e para as quais ele tenha fornecido consentimento.
+      summary: Obtains the list of Credit Fixed Income operations held by the customer at the transmitting institution and for which they have given consent.
       operationId: creditFixedIncomesGetInvestments
-      description: Obtém a lista de operações de Renda Fixa Crédito mantidas pelo cliente na instituição transmissora e para as quais ele tenha fornecido consentimento.        -
+      description: Obtains the list of Credit Fixed Income operations held by the customer at the transmitting institution and for which they have given consent.        -
       requestBody:
         required: true
         content:
@@ -70,9 +70,9 @@ paths:
     post:
       tags:
         - Product Identification
-      summary: Obtém os dados da operação de Renda Fixa Crédito identificada por investmentId.
+      summary: Obtains the data of the Credit Fixed Income operation identified by investmentId.
       operationId: creditFixedIncomesGetInvestmentsInvestmentId
-      description: Obtém os dados da operação de Renda Fixa Crédito identificada por investmentId.
+      description: Obtains the data of the Credit Fixed Income operation identified by investmentId.
       requestBody:
         required: true
         content:
@@ -112,15 +112,16 @@ paths:
     post:
       tags:
         - Balances
-      summary: Obtém a posição da operação de Renda Fixa Crédito identificada por investmentId.
+      summary: Obtains the position of the Credit Fixed Income operation identified by investmentId.
       operationId: creditFixedIncomesGetInvestmentsInvestmentIdBalances
       description: |
-        Obtém a posição da operação de Renda Fixa Crédito identificada por investmentId.
+        Obtains the position of the Credit Fixed Income operation identified by investmentId.
 
-        Nos casos em que não houver posição para o investimento, ou seja, quantidade de ativos e valores monetários zerados, mas o mesmo ainda estiver no prazo de exposição (até 12 meses após a última movimentação), deve se retornar status code 200 e para o payload de retorno considerar os valores abaixo. Campos não obrigatórios não devem ser retornados: 
+        In cases where there is no position for the investment, that is, the quantity of assets and monetary values are zeroed, but it is still within the exposure period (up to 12 months after the last transaction), status code 200 must be returned and for the return payload consider the values below. Non-mandatory fields should not be returned:
 
-        - Valores monetários: 0.00
-        - Quantidade de ativos: 0.00
+        - Monetary values: 0.00
+        - Quantity of assets: 0.00
+        - Date and time of the last position: same content as the requestDateTime field
       requestBody:
         required: true
         content:
@@ -160,9 +161,9 @@ paths:
     post:
       tags:
         - Transactions
-      summary: Obtém as movimentações históricas (últimos 12 meses) da operação de Renda Fixa Crédito identificada por investmentId.
+      summary: Obtains the historical transactions (last 12 months) of the Credit Fixed Income operation identified by investmentId.
       operationId: creditFixedIncomesGetInvestmentsInvestmentIdTransactions
-      description: Obtém as movimentações históricas (últimos 12 meses) da operação de Renda Fixa Crédito identificada por investmentId.
+      description: Obtains the historical transactions (last 12 months) of the Credit Fixed Income operation identified by investmentId.
       requestBody:
         required: true
         content:
@@ -202,9 +203,9 @@ paths:
     post:
       tags:
         - Transactions Current
-      summary: 'Obtém as movimentações recentes da operação de Renda Fixa Crédito identificada por investmentId. O período a ser considerado para apresentação de movimentações será de até 7 dias - 7 dias anteriores da consulta, incluindo o dia da consulta (D-6).'
+      summary: 'Obtains recent transactions of the Credit Fixed Income operation identified by investmentId. The period to be considered for presenting transactions will be up to 7 days - 7 days prior to the consultation, including the day of consultation (D-6).'
       operationId: creditFixedIncomesGetInvestmentsInvestmentIdTransactionsCurrent
-      description: 'Obtém as movimentações recentes da operação de Renda Fixa Crédito identificada por investmentId. O período a ser considerado para apresentação de movimentações será de até 7 dias - 7 dias anteriores da consulta, incluindo o dia da consulta (D-6).'
+      description: 'Obtains recent transactions of the Credit Fixed Income operation identified by investmentId. The period to be considered for presenting transactions will be up to 7 days - 7 days prior to the consultation, including the day of consultation (D-6).'
       requestBody:
         required: true
         content:
@@ -291,11 +292,11 @@ components:
             quantity:
               type: string
               format: double
-              description: quantidade de títulos detidos na data da posição do cliente
+              description: quantity of securities held on the customer's position date
               maxLength: 24
               minLength: 4
               pattern: '^\d{1,15}\.\d{2,8}$'
-              example: '15.00'
+              example: '15.00' # '15.00'
             grossAmount:
               $ref: '#/components/schemas/GrossAmount'
             netAmount:
@@ -311,8 +312,8 @@ components:
             preFixedRate:
               type: string
               description: |
-                Taxa de remuneração acordada com o cliente na contratação. Em casos de produtos progressivos, considerar a taxa máxima contratada. 
-                É esperado que o preenchimento deste campo pelas participantes seja enviado conforme foi acordado no momento da contratação.
+                Remuneration rate agreed with the customer at the time of contracting. In cases of progressive products, consider the maximum contracted rate.
+                It is expected that the filling of this field by the participants will be sent as agreed at the time of contracting.
               maxLength: 8
               minLength: 8
               pattern: '^\d{1}\.\d{6}$'
@@ -336,6 +337,8 @@ components:
           minItems: 0
           items:
             $ref: '#/components/schemas/CreditFixedIncomesTransactions'
+        meta:
+          $ref: '#/components/schemas/CreditFixedIncomesMetaTransactions'
     ResponseCreditFixedIncomesTransactionsCurrent:
       type: object
       required:
@@ -362,24 +365,25 @@ components:
               transactionTypeAdditionalInfo:
                 type: string
                 description: |
-                  Informação adicional do tipo de movimentação, para preenchimento no caso de movimentações não delimitadas no domínio.         
-                  
-                  [Restrição] Campo de preenchimento obrigatório pelas participantes quando houver 'OUTROS' no campo 'transactionType'.
+                  Additional information of the transaction type, to be filled in the case of transactions not delimited in the domain.
+
+                  [Restriction] Mandatory field to be filled in by participants when there is 'OUTROS' (OTHERS) in the 'transactionType' field.
                 maxLength: 100
                 pattern: '[\w\W\s]*'
               transactionDate:
                 type: string
                 format: date
-                description: Data da movimentação
+                description: Transaction date
                 maxLength: 10
                 pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
                 example: '2018-02-15'
               transactionUnitPrice:
                 type: object
                 description: |
-                  valor unitário negociado com o cliente na data de aquisição
+                  unit value negotiated with the customer on the acquisition date
 
-                  [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'transactionType' for preenchido com os valores 'COMPRA', 'VENDA' ou 'VENCIMENTO'.
+                  [Restriction] Mandatory field to be filled in by participants when the 'transactionType' field is filled with the values
+                                'COMPRA' (Purchase), 'VENDA' (Sale) or 'VENCIMENTO' (Maturity).
                 required:
                   - amount
                   - currency
@@ -391,15 +395,17 @@ components:
                     maxLength: 24
                     minLength: 4
                     example: '1000.000004'
-                    description: Valor relacionado ao objeto.
+                    description: Related amount.
                   currency:
                     $ref: '#/components/schemas/Currency'
               transactionQuantity:
                 type: string
                 description: |
-                  Quantidade de títulos envolvidos na movimentação
+                  Quantity of securities involved in the transaction
 
-                  [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'transactionType' for preenchido com os valores 'COMPRA', 'VENDA', 'VENCIMENTO', 'TRANSFERENCIA_TITULARIDADE' ou 'TRANSFERENCIA_CUSTODIA'.
+                  [Restriction] Mandatory field to be filled in by participants when the 'transactionType' field is filled with the values
+                                'COMPRA' (Purchase), 'VENDA'(Sale), 'VENCIMENTO' (Maturity), 'TRANSFERENCIA_TITULARIDADE' (Ownership Transfer) or
+                                'TRANSFERENCIA_CUSTODIA' (Custody Transfer).
                 maxLength: 24
                 pattern: '^\d{1,15}\.\d{2,8}$'
                 example: '42.25'
@@ -408,9 +414,9 @@ components:
               incomeTax:
                 type: object
                 description: |
-                  Valor do imposto de renda recolhido na transação.               
-                  
-                  [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'type' for preenchido com o valor 'SAIDA'.
+                  Value of income tax collected in the transaction.
+
+                  [Restriction] Mandatory field to be filled in by participants when the 'type' field is filled with the value 'SAIDA' (Exit).
                 required:
                   - amount
                   - currency
@@ -422,15 +428,15 @@ components:
                     maxLength: 20
                     minLength: 4
                     example: '1000.04'
-                    description: Valor relacionado ao objeto.
+                    description: Related amount.
                   currency:
                     $ref: '#/components/schemas/Currency'
               financialTransactionTax:
                 type: object
                 description: |
-                  Valor do IOF recolhido na transação.                  
-                  
-                  [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'type' for preenchido com o valor 'SAIDA'. 
+                  IOF value collected in the transaction.
+
+                  [Restriction] Mandatory field to be filled in by participants when the 'type' field is filled with the value 'SAIDA' (Exit).
                 required:
                   - amount
                   - currency
@@ -442,7 +448,7 @@ components:
                     maxLength: 20
                     minLength: 4
                     example: '1000.04'
-                    description: Valor relacionado ao objeto.
+                    description: Related amount.
                   currency:
                     $ref: '#/components/schemas/Currency'
               transactionNetValue:
@@ -452,18 +458,21 @@ components:
               indexerPercentage:
                 type: string
                 description: |
-                  Percentual máximo do indexador na transação acordado com o cliente na contratação. 
+                  Maximum percentage of the indexer in the transaction agreed with the customer at the time of contracting.
 
-                  [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'type' for preenchido com o valor 'ENTRADA' e se tratar de produto pós-fixado ou híbrido.
+                  [Restriction] Mandatory field to be filled in by participants when the 'type' field is filled with the value
+                                'ENTRADA' (Entry) and it is a post-fixed or hybrid product.
                 maxLength: 8
                 minLength: 8
                 pattern: '^\d{1}\.\d{6}$'
                 example: '1.100000'
               transactionId:
                 $ref: '#/components/schemas/LegacyId'
+        meta:
+          $ref: '#/components/schemas/CreditFixedIncomesMetaTransactions'
     BlockedBalance:
       type: object
-      description: Valor não disponível para movimentação naquele momento por qualquer motivo (bloqueio judicial, bloqueio em garantia, entre outros). Prazo de carência não é considerado como bloqueio.
+      description: Amount not available for movement at that moment for any reason (judicial block, guarantee block, among others). Grace period is not considered as a block.
       required:
         - amount
         - currency
@@ -475,7 +484,7 @@ components:
           maxLength: 20
           minLength: 4
           example: '1000.04'
-          description: Valor relacionado ao objeto.
+          description: Related amount.
         currency:
           $ref: '#/components/schemas/Currency'
     CreditFixedIdentification:
@@ -493,18 +502,18 @@ components:
         issuerInstitutionCnpjNumber:
           type: string
           description: |
-            CNPJ da instituição emissora.
+            Issuer institution CNPJ number.
 
-            Caso a instituição tenha a informação, o envio será obrigatório.
+            If the institution has the information, sending it is mandatory.
           maxLength: 14
           pattern: '^\d{14}$'
           example: '11225860000140'
         isinCode:
           type: string
           description: |
-            Código ISIN é um código universal que identifica cada valor mobiliário ou instrumento financeiro, conforme Norma ISO 6166. Caso a transmissora possua a informação o envio deste campo é obrigatório.
+            ISIN code is a universal code that identifies each security or financial instrument, according to ISO 6166 Standard. If the transmitter has the information, sending this field is mandatory.
 
-            [Restrição] Deve ser preenchido nos casos em que o 'clearingCode' não seja preenchido.
+            [Restriction] Must be filled in cases where 'clearingCode' is not filled.
           maxLength: 12
           pattern: '^[A-Z]{2}([A-Z0-9]){9}\d{1}$'
           example: BRCST4CTF001
@@ -513,14 +522,14 @@ components:
         debtorCnpjNumber:
           type: string
           description: |
-            CNPJ do devedor. Caso a transmissora possua a informação para os produtos CRI e CRA, o envio deste campo é obrigatório.
+            Debtor CNPJ number. If the transmitter has the information for CRI and CRA products, sending this field is mandatory.
           maxLength: 14
           pattern: '^\d{14}$'
           example: '11225860000140'
         debtorName:
           type: string
           description: |
-            Nome do devedor. Caso a transmissora possua a informação para os produtos CRI e CRA, o envio deste campo é obrigatório.
+            Debtor name. If the transmitter has the information for CRI and CRA products, sending this field is mandatory.
           pattern: '[\w\W\s]*'
           maxLength: 70
           example: Roberto Marino
@@ -533,14 +542,14 @@ components:
         issueDate:
           type: string
           format: date
-          description: Data de emissão do título
+          description: Title issue date
           maxLength: 10
           pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
           example: '2018-02-16'
         dueDate:
           type: string
           format: date
-          description: Data de vencimento do título
+          description: Title due date
           maxLength: 10
           pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
           example: '2018-02-15'
@@ -551,25 +560,24 @@ components:
         voucherPaymentPeriodicityAdditionalInfo:
           type: string
           description: |
-            Informações adicionais da periodicidade de pagamento de cupom  
-            
-            [Restrição] Campo de preenchimento obrigatório pelas participantes quando houver 'Outros' no campo 'voucherPaymentPeriodicity'.
+            Additional information on coupon payment periodicity
+            [Restriction] Mandatory field to be filled in by participants when there is 'Outros' in the 'voucherPaymentPeriodicity' field.
           maxLength: 50
           pattern: '[\w\W\s]*'
-          example: Diária
+          example: Diária # Daily
         clearingCode:
           type: string
           description: |
-            Código de registro do ativo na Clearing. Caso a transmissora possua a informação o envio deste campo é obrigatório.
+            Asset registration code at the Clearing House. If the transmitter has the information, sending this field is mandatory.
 
-            [Restrição] Deve ser preenchido nos casos em que o 'isinCode' não seja preenchido.
+            [Restriction] Must be filled in cases where 'isinCode' is not filled.
           maxLength: 30
           pattern: '[\w\W-]*'
           example: CDB421GPXXX
         purchaseDate:
           type: string
           format: date
-          description: Data de aquisição do cliente
+          description: Customer purchase date
           maxLength: 10
           pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
           example: '2018-02-15'
@@ -577,32 +585,56 @@ components:
           type: string
           format: date
           description: |
-            Data até a qual o cliente não poderá resgatar antecipadamente seu investimento.
+            Date until which the customer cannot redeem their investment early.
 
-            Caso a instituição tenha a informação, o envio será obrigatório.
+            If the institution has the information, sending it is mandatory.
           maxLength: 10
           pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
           example: '2018-02-16'
     CreditFixedIncomesMeta:
       type: object
-      description: Meta informações referente a API requisitada.
+      description: Meta information regarding the requested API.
       required:
         - totalRecords
         - totalPages
+        - requestDateTime
       properties:
         totalRecords:
           type: integer
           format: int32
-          description: Número total de registros no resultado
+          description: Total number of records in the result
           example: 1
         totalPages:
           type: integer
           format: int32
-          description: Número total de páginas no resultado
+          description: Total number of pages in the result
           example: 1
+        requestDateTime:
+          description: 'Date and time of consultation, according to RFC-3339 specification, UTC format.'
+          type: string
+          maxLength: 20
+          format: date-time
+          example: '2021-05-21T08:30:00Z'
+    CreditFixedIncomesMetaTransactions:
+      type: object
+      description: Meta information regarding the requested API.
+      required:
+        - requestDateTime
+        - hasMoreRecords
+      properties:
+        requestDateTime:
+          description: 'Date and time of consultation, according to RFC-3339 specification, UTC format.'
+          type: string
+          maxLength: 20
+          format: date-time
+          example: '2021-05-21T08:30:00Z'
+        hasMoreRecords:
+          type: boolean
+          description: Indicates whether there are more records to be returned (true) or not (false).
+          example: true
     CreditFixedList:
       type: object
-      description: Lista de títulos de renda fixa crédito mantidos pelo cliente na instituição transmissora e para as quais ele tenha fornecido consentimento
+      description: List of credit fixed income securities held by the customer at the transmitting institution and for which they have given consent
       required:
         - brandName
         - companyCnpj
@@ -611,13 +643,13 @@ components:
       properties:
         brandName:
           type: string
-          description: 'Nome da Marca reportada pelo participante no Open Finance. Recomenda-se utilizar, sempre que possível, o mesmo nome de marca atribuído no campo do diretório Customer Friendly Server Name (Authorisation Server).'
+          description: 'Brand Name reported by the participant in Open Finance. It is recommended to use, whenever possible, the same brand name attributed in the Customer Friendly Server Name (Authorization Server) directory field.'
           pattern: '[\w\W\s]*'
           maxLength: 80
-          example: Organização A
+          example: Organização A # Organization A
         companyCnpj:
           type: string
-          description: 'Número completo do CNPJ da instituição responsável pelo Cadastro - o CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica. Deve-se ter apenas os números do CNPJ, sem máscara'
+          description: 'Full CNPJ number of the institution responsible for Registration - the CNPJ corresponds to the registration number in the National Registry of Legal Entities. Only the CNPJ numbers should be included, without mask'
           maxLength: 14
           pattern: '^\d{14}$'
           example: '21128159000166'
@@ -627,45 +659,45 @@ components:
           $ref: '#/components/schemas/LegacyId'
     Currency:
       type: string
-      description: 'Moeda referente ao valor monetário, seguindo o modelo ISO-4217.'
+      description: 'Currency referring to the monetary value, following the ISO-4217 model.'
       maxLength: 3
       pattern: '^[A-Z]{3}$'
       example: BRL
     EnumCalculation:
       type: string
       description: |
-        Base de cálculo (dias úteis ou dias corridos).
-          1. dias úteis
-          2. dias corridos.
+        Calculation basis (business days or calendar days).
+          1. business days
+          2. calendar days.
 
-        Caso a instituição tenha a informação, o envio será obrigatório.
+        If the institution has the information, sending it is mandatory.
       enum:
-        - DIAS_UTEIS
-        - DIAS_CORRIDOS
-      example: DIAS_CORRIDOS
+        - DIAS_UTEIS # business_days
+        - DIAS_CORRIDOS # calendar_days
+      example: DIAS_CORRIDOS # calendar_days
     EnumTaxExemptProduct:
       type: string
-      description: Indicador de um produto incentivado
+      description: Tax-exempt product indicator
       enum:
-        - SIM
-        - NAO
-      example: SIM
+        - SIM # YES
+        - NAO # NO
+      example: SIM # YES
     EnumIndexer:
       type: string
       description: |
-        Índice utilizado como referência para a correção da rentabilidade e/ou rendimentos do ativo 
-        1. CDI
-        2. DI 
-        3. TR
-        4. IPCA
-        5. IGP_M
-        6. IGP_DI
-        7. INPC
-        8. BCP
-        10. TLC
-        11. SELIC
-        12. PRE_FIXADO
-        13. OUTROS
+        Index used as a reference for correcting the profitability and/or returns of the asset
+         1. CDI        # Interbank Deposit Certificate rate, a benchmark for fixed income
+         2. DI         # Interbank Deposit rate, similar to CDI
+         3. TR         # Reference Rate, a basic interest rate, historically for savings
+         4. IPCA       # Broad National Consumer Price Index, Brazil's official inflation
+         5. IGP_M      # General Market Price Index, an inflation index for contracts
+         6. IGP_DI     # General Price Index - Internal Availability, similar to IGP-M
+         7. INPC       # National Consumer Price Index, inflation for low-income families
+         8. BCP        # Central Bank Bond rate, related to government bond yields
+         9. TLC        # Short-Term Lending Rate, may vary between institutions
+        10. SELIC      # Special System for Settlement and Custody rate, Brazil's base rate
+        11. PRE_FIXADO # FIXED_RATE
+        12. OUTROS     # OTHERS
       enum:
         - CDI
         - DI
@@ -677,45 +709,45 @@ components:
         - BCP
         - TLC
         - SELIC
-        - PRE_FIXADO
-        - OUTROS
+        - PRE_FIXADO # PRE_FIXED
+        - OUTROS # OTHERS
       example: CDI
     EnumInvestimentType:
       type: string
-      description: 'Especificação do ativo em questão (Debêntures, CRI ou CRA).'
+      description: 'Specification of the asset in question (Debentures, CRI or CRA).'
       enum:
         - DEBENTURES
-        - CRI
-        - CRA
+        - CRI         # Real Estate Receivables Certificates
+        - CRA         # Agribusiness Receivables Certificates
       example: CRI
     EnumRatePeriodicity:
       type: string
       description: |
-        Periodicidade da taxa de remuneração (mensal, anual, diário, semestral).
+        Remuneration rate periodicity (monthly, annual, daily, semi-annual).
 
-        Caso a instituição tenha a informação, o envio será obrigatório.
+        If the institution has the information, sending it is mandatory.
       enum:
-        - MENSAL
-        - ANUAL
-        - DIARIO
-        - SEMESTRAL
-      example: MENSAL
+        - MENSAL # MONTHLY
+        - ANUAL # ANNUAL
+        - DIARIO # DAILY
+        - SEMESTRAL # SEMIANNUAL
+      example: MENSAL # MONTHLY
     EnumRateType:
       type: string
       description: |
-        Tipo da taxa de remuneração
+        Remuneration rate type
           1. LINEAR
-          2. EXPONENCIAL
+          2. EXPONENTIAL
 
-        Caso a instituição tenha a informação, o envio será obrigatório.
+        If the institution has the information, sending it is mandatory.
       enum:
         - LINEAR
-        - EXPONENCIAL
+        - EXPONENCIAL # EXPONENTIAL
       example: LINEAR
     FinancialTransactionTax:
       type: object
       description: |
-        Valor do imposto (IOF) provisionado considerando a alíquota vigente na data de referência.
+        Tax amount (IOF) provisioned considering the current rate on the reference date.
       required:
         - amount
         - currency
@@ -727,14 +759,14 @@ components:
           maxLength: 20
           minLength: 4
           example: '1000.04'
-          description: Valor relacionado ao objeto.
+          description: Related amount.
         currency:
           $ref: '#/components/schemas/Currency'
     Fine:
       type: object
       description: |
-        Valor de multa devido ao atraso do pagamento acordado em contrato.       
-        Caso a transmissora possua a informação, o envio deste campo é obrigatório.
+        Fine amount due to late payment agreed in contract.
+        If the transmitter has the information, sending this field is mandatory.
       required:
         - amount
         - currency
@@ -746,12 +778,12 @@ components:
           maxLength: 20
           minLength: 4
           example: '1000.04'
-          description: Valor relacionado ao objeto.
+          description: Related amount.
         currency:
           $ref: '#/components/schemas/Currency'
     GrossAmount:
       type: object
-      description: valor do investimento que se refere a quantidade x PU atualizado na data de referência
+      description: investment amount that refers to quantity x updated PU on the reference date
       required:
         - amount
         - currency
@@ -763,13 +795,13 @@ components:
           maxLength: 20
           minLength: 4
           example: '1000.04'
-          description: Valor relacionado ao objeto.
+          description: Related amount.
         currency:
           $ref: '#/components/schemas/Currency'
     IncomeTax:
       type: object
       description: |
-        Valor do imposto de renda provisionado considerando a alíquota vigente na data de referência.
+        Income tax amount provisioned considering the current rate on the reference date.
       required:
         - amount
         - currency
@@ -781,15 +813,15 @@ components:
           maxLength: 20
           minLength: 4
           example: '1000.04'
-          description: Valor relacionado ao objeto.
+          description: Related amount.
         currency:
           $ref: '#/components/schemas/Currency'
     IndexerPercentage:
       type: string
       description: |
-        Percentual máximo do indexador na transação acordado com o cliente na contratação. 
+        Maximum percentage of the indexer in the transaction agreed with the customer at the time of contracting.
 
-        [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'type' for preenchido com o valor 'ENTRADA' e se tratar de produto pós-fixado ou híbrido.
+        [Restriction] Mandatory field to be filled in by participants when the 'type' field is filled with the value 'ENTRADA' and it is a post-fixed or hybrid product.
       maxLength: 8
       minLength: 8
       pattern: '^\d{1}\.\d{6}$'
@@ -802,21 +834,21 @@ components:
       properties:
         amount:
           type: string
-          description: Valor relacionado ao objeto.
+          description: Related amount.
           maxLength: 24
           pattern: '^\d{1,15}\.\d{2,8}$'
           example: '1000.000004'
         currency:
           type: string
-          description: 'Moeda referente ao valor monetário, seguindo o modelo ISO-4217.'
+          description: 'Currency referring to the monetary value, following the ISO-4217 model.'
           maxLength: 3
           pattern: '^[A-Z]{3}$'
           example: BRL
     LatePayment:
       type: object
       description: |
-        Valor de mora devido ao atraso do pagamento acordado em contrato.   
-        Caso a transmissora possua a informação, o envio deste campo é obrigatório.
+        Late payment interest amount due to late payment agreed in contract.
+        If the transmitter has the information, sending this field is mandatory.
       required:
         - amount
         - currency
@@ -828,12 +860,12 @@ components:
           maxLength: 20
           minLength: 4
           example: '1000.04'
-          description: Valor relacionado ao objeto.
+          description: Related amount.
         currency:
           $ref: '#/components/schemas/Currency'
     NetAmount:
       type: object
-      description: 'valor do investimento atualizado na data de referência, posterior a dedução de impostos (IOF e IR)'
+      description: 'investment amount updated on the reference date, after deduction of taxes (IOF and IR)'
       required:
         - amount
         - currency
@@ -845,21 +877,21 @@ components:
           maxLength: 20
           minLength: 4
           example: '1000.04'
-          description: Valor relacionado ao objeto.
+          description: Related amount.
         currency:
           $ref: '#/components/schemas/Currency'
     PostFixedIndexerPercentage:
       type: string
       description: |
-        Percentual do indexador acordado com o cliente na contratação. Em casos de produtos progressivos, considerar a taxa máxima contratada. 
-        É esperado que o preenchimento deste campo pelas participantes seja enviado conforme foi acordado no momento da contratação.
+        Indexer percentage agreed with the customer at the time of contracting. In cases of progressive products, consider the maximum contracted rate.
+        It is expected that the filling of this field by the participants will be sent as agreed at the time of contracting.
       maxLength: 8
       minLength: 8
       pattern: '^\d{1}\.\d{6}$'
       example: '1.100000'
     PurchaseUnitPrice:
       type: object
-      description: valor unitário negociado com o cliente na data de aquisição
+      description: unit value negotiated with the customer on the acquisition date
       required:
         - amount
         - currency
@@ -871,13 +903,13 @@ components:
           maxLength: 24
           minLength: 4
           example: '1000.000004'
-          description: Valor relacionado ao objeto.
+          description: Related amount.
         currency:
           $ref: '#/components/schemas/Currency'
     ReferenceDateTime:
       type: string
       format: date-time
-      description: 'data e hora da última posição consolidada disponível a que se referem os dados transacionais do cliente disponíveis nos canais eletrônicos; Na representação data deve se considerar os minutos e segundos como zero (00:00:00Z)'
+      description: 'date and time of the last consolidated position available to which the client''s transactional data available in electronic channels refers; In the date representation, minutes and seconds must be considered as zero (00:00:00Z)'
       maxLength: 20
       pattern: '(^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$)'
       example: '2022-07-21T17:32:00Z'
@@ -889,18 +921,18 @@ components:
         preFixedRate:
           type: string
           description: |
-            Valor da taxa de emissão do contrato.         
-            
-            [Restrição] Campo de preenchimento obrigatório pelas participantes quando houver 'PRE_FIXADO' no campo 'indexer' ou quando se tratar de produto com remuneração híbrida.
+            Contract issuance rate value.
+
+            [Restriction] Mandatory field to be filled in by participants when there is 'PRE_FIXADO' in the 'indexer' field or when it is a product with hybrid remuneration.
           maxLength: 8
           pattern: '^\d{1}\.\d{6}$'
           example: '0.300000'
         postFixedIndexerPercentage:
           type: string
           description: |
-            Percentual do indexador de emissão do contrato.    
-            
-            [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'indexer' for preenchido de forma diferente de 'PRE_FIXADO' ou quando se tratar de produto com remuneração híbrida.
+            Indexer percentage of contract issuance.
+
+            [Restriction] Mandatory field to be filled in by participants when the 'indexer' field is filled in differently from 'PRE_FIXADO' or when it is a product with hybrid remuneration.
           maxLength: 8
           pattern: '^\d{1}\.\d{6}$'
           example: '1.100000'
@@ -915,12 +947,11 @@ components:
         indexerAdditionalInfo:
           type: string
           description: |
-            Informações adicionais do indexador  
-            
-            [Restrição] Campo de preenchimento obrigatório pelas participantes quando houver 'Outros' no campo 'indexer'.
+            Additional indexer information
+            [Restriction] Mandatory field to be filled in by participants when there is 'Outros' in the 'indexer' field.
           pattern: '[\w\W\s]*'
           maxLength: 50
-          example: Dólar
+          example: Dólar # Dollar
     CreditFixedIncomesTransactions:
       type: object
       required:
@@ -942,9 +973,9 @@ components:
         transactionUnitPrice:
           type: object
           description: |
-            valor unitário negociado com o cliente na data de aquisição
+            unit value negotiated with the customer on the acquisition date
 
-            [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'transactionType' for preenchido com os valores 'COMPRA', 'VENDA' ou 'VENCIMENTO'.
+            [Restriction] Mandatory field to be filled in by participants when the 'transactionType' field is filled with the values 'COMPRA', 'VENDA' or 'VENCIMENTO'.
           required:
             - amount
             - currency
@@ -956,7 +987,7 @@ components:
               maxLength: 24
               minLength: 4
               example: '1000.000004'
-              description: Valor relacionado ao objeto.
+              description: Related amount.
             currency:
               $ref: '#/components/schemas/Currency'
         transactionQuantity:
@@ -966,9 +997,9 @@ components:
         incomeTax:
           type: object
           description: |
-            Valor do imposto de renda recolhido na transação.               
-            
-            [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'type' for preenchido com o valor 'SAIDA'.
+            Value of income tax collected in the transaction.
+
+            [Restriction] Mandatory field to be filled in by participants when the 'type' field is filled with the value 'SAIDA'.
           required:
             - amount
             - currency
@@ -980,15 +1011,15 @@ components:
               maxLength: 20
               minLength: 4
               example: '1000.04'
-              description: Valor relacionado ao objeto.
+              description: Related amount.
             currency:
               $ref: '#/components/schemas/Currency'
         financialTransactionTax:
           type: object
           description: |
-            Valor do IOF recolhido na transação.                  
-            
-            [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'type' for preenchido com o valor 'SAIDA'. 
+            IOF value collected in the transaction.
+
+            [Restriction] Mandatory field to be filled in by participants when the 'type' field is filled with the value 'SAIDA'.
           required:
             - amount
             - currency
@@ -1000,7 +1031,7 @@ components:
               maxLength: 20
               minLength: 4
               example: '1000.04'
-              description: Valor relacionado ao objeto.
+              description: Related amount.
             currency:
               $ref: '#/components/schemas/Currency'
         transactionNetValue:
@@ -1014,9 +1045,9 @@ components:
     RemunerationTransactionRate:
       type: string
       description: |
-        Taxa de remuneração acordada com o cliente na contratação. 
+        Remuneration rate agreed with the customer at the time of contracting.
 
-        [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'type' for preenchido com o valor 'ENTRADA' e se tratar de produto prefixado ou híbrido.
+        [Restriction] Mandatory field to be filled in by participants when the 'type' field is filled with the value 'ENTRADA' and it is a prefixed or hybrid product.
       maxLength: 8
       minLength: 8
       pattern: '^\d{1}\.\d{6}$'
@@ -1024,13 +1055,13 @@ components:
     TransactionDate:
       type: string
       format: date
-      description: Data da movimentação
+      description: Transaction date
       maxLength: 10
       pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
       example: '2018-02-15'
     TransactionGrossValue:
       type: object
-      description: 'Valor bruto da transação (Preço unitário da movimentação x Quantidade)'
+      description: 'Gross transaction value (Transaction unit price x Quantity)'
       required:
         - amount
         - currency
@@ -1042,12 +1073,12 @@ components:
           maxLength: 20
           minLength: 4
           example: '1000.04'
-          description: Valor relacionado ao objeto.
+          description: Related amount.
         currency:
           $ref: '#/components/schemas/Currency'
     TransactionNetValue:
       type: object
-      description: Valor líquido da transação
+      description: Net transaction value
       required:
         - amount
         - currency
@@ -1059,60 +1090,62 @@ components:
           maxLength: 20
           minLength: 4
           example: '1000.04'
-          description: Valor relacionado ao objeto.
+          description: Related amount.
         currency:
           $ref: '#/components/schemas/Currency'
     TransactionQuantity:
       type: string
-      description: | 
-        Quantidade de títulos envolvidos na movimentação
+      description: |
+        Quantity of securities involved in the transaction
 
-        [Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'transactionType' for preenchido com os valores 'COMPRA', 'VENDA', 'VENCIMENTO', 'TRANSFERENCIA_TITULARIDADE' ou 'TRANSFERENCIA_CUSTODIA'.
+        [Restriction] Mandatory field to be filled in by participants when the 'transactionType' field is filled with the values 'COMPRA', 'VENDA', 'VENCIMENTO', 'TRANSFERENCIA_TITULARIDADE' or 'TRANSFERENCIA_CUSTODIA'.
       maxLength: 24
       pattern: '^\d{1,15}\.\d{2,8}$'
       example: '42.25'
     TransactionType:
       type: string
-      description: Compra, venda, cancelamento, vencimento, pagamento de juros, amortização, prêmio, transferência de titularidade, transferência de custódia, multa, mora e outros. Para movimentos de transferência (titularidade ou custódia) deve ser considerado o preço unitário (transactionUnitPrice) da aquisição do título.
+      description: Purchase, sale, cancellation, maturity, interest payment, amortization, premium, ownership transfer, custody transfer, fine, late payment and others. For transfer movements (ownership or custody), the unit price (transactionUnitPrice) of the title acquisition must be considered.
       enum:
-        - COMPRA
-        - VENDA
-        - CANCELAMENTO
-        - VENCIMENTO
-        - PAGAMENTO_JUROS
-        - AMORTIZACAO
-        - PREMIO
-        - TRANSFERENCIA_TITULARIDADE
-        - TRANSFERENCIA_CUSTODIA
-        - MULTA
-        - MORA
-        - OUTROS
-      example: COMPRA
+        - COMPRA # PURCHASE
+        - VENDA # SALE
+        - CANCELAMENTO # CANCELLATION
+        - VENCIMENTO # MATURITY
+        - PAGAMENTO_JUROS # INTEREST_PAYMENT
+        - AMORTIZACAO # AMORTIZATION
+        - PREMIO # PREMIUM
+        - TRANSFERENCIA_TITULARIDADE # OWNERSHIP_TRANSFER
+        - TRANSFERENCIA_CUSTODIA # CUSTODY_TRANSFER
+        - MULTA # FINE
+        - MORA # LATE_PAYMENT
+        - OUTROS # OTHERS
+      example: COMPRA # PURCHASE
     Type:
       type: string
       description: |
-        Tipo de movimentação na visão de investimento​:
+        Type of transaction in the investment view:
 
-        ENTRADA: COMPRA, CANCELAMENTO, TRANSFERENCIA_TITULARIDADE, TRANSFERENCIA_CUSTODIA, OUTROS​.
+        ENTRADA: COMPRA, CANCELAMENTO, TRANSFERENCIA_TITULARIDADE, TRANSFERENCIA_CUSTODIA, OUTROS.
+        # ENTRY: PURCHASE, CANCELLATION, OWNERSHIP_TRANSFER, CUSTODY_TRANSFER, OTHERS.
 
-        SAIDA: VENDA, CANCELAMENTO, VENCIMENTO, PAGAMENTO_JUROS, AMORTIZACAO, PREMIO, TRANSFERENCIA_TITULARIDADE, TRANSFERENCIA_CUSTODIA, MULTA, MORA, OUTROS. ​
+        SAIDA: VENDA, CANCELAMENTO, VENCIMENTO, PAGAMENTO_JUROS, AMORTIZACAO, PREMIO, TRANSFERENCIA_TITULARIDADE, TRANSFERENCIA_CUSTODIA, MULTA, MORA, OUTROS.
+        # Exit: SALE, CANCELLATION, MATURITY, INTEREST_PAYMENT, AMORTIZATION, PREMIUM, OWNERSHIP_TRANSFER, CUSTODY_TRANSFER, FINE, LATE_PAYMENT, OTHERS.
 
-        Por exemplo, para movimentação de CANCELAMENTO, tipicamente, será o type contrário ao evento originário. Ou seja, para cancelamento de COMPRA, considera-se type SAIDA; para cancelamento de VENDA, considera-se type ENTRADA.
+        For example, for CANCELLATION transaction, typically, the type will be the opposite of the originating event. That is, for cancellation of PURCHASE, consider type Exit; for cancellation of SALE, consider type ENTRY.
       enum:
-        - ENTRADA
-        - SAIDA
-      example: ENTRADA
+        - ENTRADA # ENTRY
+        - SAIDA   # EXIT
+      example: ENTRADA # ENTRY
     TypeAdditionalInfo:
       type: string
       description: |
-        Informação adicional do tipo de movimentação, para preenchimento no caso de movimentações não delimitadas no domínio  
-        
-        [Restrição] Campo de preenchimento obrigatório pelas participantes quando houver 'OUTROS' no campo 'transactionType'.
+        Additional information of the transaction type, to be filled in the case of transactions not delimited in the domain
+
+        [Restriction] Mandatory field to be filled in by participants when there is 'OUTROS' (Others) in the 'transactionType' field.
       maxLength: 100
       pattern: '[\w\W\s]*'
     UpdatedUnitPrice:
       type: object
-      description: valor bruto unitário atualizado na data de referência;
+      description: gross unit value updated on the reference date;
       required:
         - amount
         - currency
@@ -1124,44 +1157,44 @@ components:
           maxLength: 24
           minLength: 4
           example: '1000.0400'
-          description: Valor relacionado ao objeto.
+          description: Related amount.
         currency:
           $ref: '#/components/schemas/Currency'
     VoucherPaymentIndicator:
       type: string
       description: |
-        Indicativo se há pagamento de cupom
-          1. Sim
-          2. Nao
+        Indication if there is coupon payment
+          1. Yes
+          2. No
       enum:
-        - SIM
-        - NAO
-      example: SIM
+        - SIM # YES
+        - NAO # NO
+      example: SIM # YES
     VoucherPaymentPeriodicity:
       type: string
       description: |
-        Em caso de haver pagamento de cupom, descrever a periodicidade (mensal, trimestral, semestral, anual, irregular e outros)
-          1. Mensal  
+        If there is coupon payment, describe the periodicity (monthly, quarterly, semi-annual, annual, irregular and others)
+          1. Monthly
 
-          2. Trimestral  
+          2. Quarterly
 
-          3. Semestral  
+          3. Semi-annual
 
-          4. Anual  
+          4. Annual
 
-          5. Irregular  
+          5. Irregular
 
-          6. Outros   
-            
-          [Restrição] Campo de preenchimento obrigatório pelos participantes quando houver 'SIM' no campo indicativo de pagamento de cupom 'voucherPaymentIndicator'.
+          6. Others
+
+          [Restriction] Mandatory field to be filled in by participants when there is 'SIM' (Yes) in the coupon payment indicator field 'voucherPaymentIndicator'.
       enum:
-        - MENSAL
-        - TRIMESTRAL
-        - SEMESTRAL
-        - ANUAL
-        - IRREGULAR
-        - OUTROS
-      example: MENSAL
+        - MENSAL # MONTHLY
+        - TRIMESTRAL # QUARTERLY
+        - SEMESTRAL # SEMIANNUAL
+        - ANUAL # ANNUAL
+        - IRREGULAR # IRREGULAR
+        - OUTROS # OTHERS
+      example: MENSAL # MONTHLY
     ResponseErrorMetaSingle:
       type: object
       required:
@@ -1179,20 +1212,32 @@ components:
               - detail
             properties:
               code:
-                description: Código de erro específico do endpoint
+                description: Endpoint specific error code
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 255
               title:
-                description: Título legível por humanos deste erro específico
+                description: Human-readable title for this specific error
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 255
               detail:
-                description: Descrição legível por humanos deste erro específico
+                description: Human-readable description of this specific error
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 2048
+        meta:
+          type: object
+          description: Meta information regarding the requested API.
+          required:
+            - requestDateTime
+          properties:
+            requestDateTime:
+              description: 'Date and time of consultation, according to RFC-3339 specification, UTC format.'
+              type: string
+              maxLength: 20
+              format: date-time
+              example: '2021-05-21T08:30:00Z'
     ResponseError:
       type: object
       required:
@@ -1210,39 +1255,46 @@ components:
               - detail
             properties:
               code:
-                description: Código de erro específico do endpoint
+                description: Endpoint specific error code
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 255
               title:
-                description: Título legível por humanos deste erro específico
+                description: Human-readable title for this specific error
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 255
               detail:
-                description: Descrição legível por humanos deste erro específico
+                description: Human-readable description of this specific error
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 2048
         meta:
           type: object
-          description: Meta informações referente à API requisitada.
+          description: Meta information regarding the requested API.
           required:
             - totalRecords
             - totalPages
+            - requestDateTime
           properties:
             totalRecords:
               type: integer
               format: int32
-              description: Número total de registros no resultado
+              description: Total number of records in the result
               example: 1
             totalPages:
               type: integer
               format: int32
-              description: Número total de páginas no resultado
+              description: Total number of pages in the result
               example: 1
+            requestDateTime:
+              description: 'Date and time of consultation, according to RFC-3339 specification, UTC format.'
+              type: string
+              maxLength: 20
+              format: date-time
+              example: '2021-05-21T08:30:00Z'
     ConsentDataSharing:
-      description: Consentimento de compartilhamento de dados
+      description: Data sharing consent
       type: object
       required:
         - brandId
@@ -1255,8 +1307,8 @@ components:
         authExtraData:
           type: array
           description: |
-            Array de chave e valor com dados adicionais vindos do autorizador. Esses
-            dados podem ser utilizados como filtros de recursos.
+            Key-value array with additional data from the authorizer. This
+            data can be used as resource filters.
           items:
             type: object
             required:
@@ -1273,8 +1325,8 @@ components:
           deprecated: true
           type: array
           description: |
-            [Obsoleto] Array de chave e valor com os dados de identificação
-            referente ao dono do consentimento.
+            [Deprecated] Key-value array with identification data
+            referring to the consent owner.
           items:
             type: object
             required:
@@ -1289,15 +1341,15 @@ components:
                 example: '0011'
         brandId:
           type: string
-          description: Identificador da marca reportada pelo participante do Open Finance
+          description: Brand identifier reported by the Open Finance participant
           example: cbanco
           minLength: 1
           maxLength: 50
         creationDateTime:
           description: |
-            Data e hora em que o consentimento foi criado. Uma string com data e
-            hora conforme especificação RFC-3339, sempre com a utilização de
-            timezone UTC (UTC time format).
+            Date and time when consent was created. A string with date and
+            time according to RFC-3339 specification, always using
+            UTC timezone (UTC time format).
           type: string
           pattern: |
             ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
@@ -1305,33 +1357,33 @@ components:
           maxLength: 20
         tpp:
           type: object
-          description: Detalhes do TPP (Third Party Provider) que solicitou o consentimento
+          description: Details of the TPP (Third Party Provider) that requested consent
           additionalProperties: false
           required:
             - name
           properties:
             name:
               type: string
-              description: Nome do TPP que solicitou o consentimento
+              description: Name of the TPP that requested consent
               example: GuiaBolsa
               maxLength: 100
         externalId:
           type: string
-          description: Identificador do consentimento utilizado fora da plataforma Opus Open Finance
+          description: Consent identifier used outside the Opus Open Finance platform
           example: urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf
           maxLength: 100
         loggedUser:
           type: object
           description: |
-            Usuário (pessoa natural) que encontra-se logado na instituição
-            Transmissora de Dados.
+            User (natural person) who is logged in at the Data
+            Transmitting Institution.
           additionalProperties: false
           required:
             - document
           properties:
             document:
               type: object
-              description: Documento de identificação oficial do usuário.
+              description: Official identification document of the user.
               additionalProperties: false
               required:
                 - identification
@@ -1340,30 +1392,30 @@ components:
                 identification:
                   type: string
                   maxLength: 11
-                  description: Número do documento de identificação oficial do usuário.
+                  description: Official identification document number of the user.
                   example: '11111111111'
                   pattern: ^\d{11}$
                 rel:
                   type: string
                   maxLength: 3
-                  description: Tipo do documento de identificação oficial do usuário.
+                  description: Type of official identification document of the user.
                   example: CPF
                   pattern: ^[A-Z]{3}$
         businessDocumentType:
           type: object
           description: |
-            Usuário (pessoa jurídica) que encontra-se logado na instituição
-            Transmissora de Dados.
+            User (legal entity) who is logged in at the Data
+            Transmitting Institution.
 
-            [Restrição] Preenchimento obrigatório se usuário logado na instituição
-            Transmissora de Dados for um CNPJ (pessoa jurídica).
+            [Restriction] Mandatory to fill in if the user logged in at the Data
+            Transmitting Institution is a CNPJ (legal entity).
           additionalProperties: false
           required:
             - document
           properties:
             document:
               type: object
-              description: Documento de identificação oficial do titular pessoa jurídica.
+              description: Official identification document of the legal entity holder.
               additionalProperties: false
               required:
                 - identification
@@ -1373,31 +1425,31 @@ components:
                   type: string
                   maxLength: 14
                   description: |
-                    Número do documento de identificação oficial do titular pessoa
-                    jurídica.
+                    Official identification document number of the legal entity
+                    holder.
                   example: '11111111111111'
                   pattern: ^\d{14}$
                 rel:
                   type: string
                   maxLength: 4
                   description: |
-                    Tipo do documento de identificação oficial do titular pessoa
-                    jurídica.
+                    Type of official identification document of the legal entity
+                    holder.
                   example: CNPJ
                   pattern: ^[A-Z]{4}$
         resources:
           description: |
-            Lista de recursos permitidos pelo cliente
+            List of resources allowed by the customer
           type: array
           items:
             type: object
-            description: Recursos selecionados pelo cliente
+            description: Resources selected by the customer
             required:
               - type
               - resourceLegacyId
             properties:
               type:
-                description: Tipo do recurso
+                description: Resource type
                 type: string
                 enum:
                   - ACCOUNT
@@ -1410,7 +1462,7 @@ components:
                   - BANK_FIXED_INCOME
                   - CREDIT_FIXED_INCOME
                   - VARIABLE_INCOME
-                  - TREASURE_TITLE
+                  - TREASURE_TITLE  # TREASURY_BONDS
                   - FUND
                 example: PAYMENT
               resourceLegacyId:
@@ -1418,9 +1470,9 @@ components:
               authorizers:
                 deprecated: true
                 description: |
-                  [Obsoleto] Lista dos autorizadores para o recurso para casos de
-                  múltipla alçada. Caso o recurso seja selecionado, todos os
-                  autorizadores deverão aceitar o consentimento que o recurso faz parte
+                  [Deprecated] List of authorizers for the resource for cases of
+                  multiple levels of approval. If the resource is selected, all
+                  authorizers must accept the consent to which the resource belongs
                 type: array
                 items:
                   type: object
@@ -1429,14 +1481,14 @@ components:
                     - name
                   properties:
                     cpf:
-                      description: CPF do autorizador
+                      description: Authorizer's CPF
                       type: string
                       minLength: 11
                       maxLength: 11
                       pattern: ^\d{11}$
                       example: '11111111111'
                     name:
-                      description: Nome do autorizador
+                      description: Authorizer's name
                       type: string
                       example: Marco Antonio de Brito
                 minItems: 1
@@ -1448,10 +1500,10 @@ components:
           maxItems: 1000
         expirationDateTime:
           description: |
-            Data e hora de expiração da permissão. De preenchimento obrigatório,
-            reflete a data limite de validade do consentimento. Uma string com
-            data e hora conforme especificação RFC-3339, sempre com a utilização
-            de timezone UTC (UTC time format).
+            Permission expiration date and time. Mandatory to fill in,
+            reflects the consent validity limit date. A string with
+            date and time according to RFC-3339 specification, always using
+            UTC timezone (UTC time format).
           type: string
           maxLength: 20
           pattern: |
@@ -1461,10 +1513,10 @@ components:
           type: array
           items:
             description: |
-              Somente para consentimentos de compartilhamento de dados. Especifica
-              os tipos de permissões de acesso às APIs no escopo do Open Finance
-              Brasil - Fase 2, de acordo com os blocos de consentimento fornecidos
-              pelo usuário e necessários ao acesso a cada endpoint das APIs.
+              Only for data sharing consents. Specifies
+              the types of permissions to access APIs within the scope of Open Finance
+              Brasil - Phase 2, according to the consent blocks provided
+              by the user and necessary to access each API endpoint.
             type: string
             enum:
               - ACCOUNTS_READ
@@ -1500,7 +1552,7 @@ components:
               - CREDIT_FIXED_INCOMES_READ
               - FUNDS_READ
               - VARIABLE_INCOMES_READ
-              - TREASURE_TITLES_READ
+              - TREASURE_TITLES_READ  # TREASURY_BONDS_READ
               - EXCHANGES_READ
               - RESOURCES_READ
           minItems: 1
@@ -1509,20 +1561,20 @@ components:
       additionalProperties: false
     RequestMeta:
       type: object
-      description: Objeto que contém dados referentes ao contexto no qual o request for recebido.
+      description: Object containing data referring to the context in which the request was received.
       required:
         - correlationId
         - brandId
       properties:
         correlationId:
           type: string
-          description: UUID que identifica o correlation ID da requisição realizada. Deve ser propagado para todas as chamadas feitas entre sistemas e logado sempre que possível para facilitar o trace de erros
+          description: UUID that identifies the correlation ID of the request made. It must be propagated to all calls made between systems and logged whenever possible to facilitate error tracing
           pattern: >-
             ^(localID:)?[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
           example: localID:97623ed1-4732-4bf2-8d4b-ae7aced5443b
         brandId:
           type: string
-          description: Identificador da marca reportada pelo participante do Open Finance
+          description: Brand identifier reported by the Open Finance participant
           example: cbanco
           minLength: 1
           maxLength: 50
@@ -1614,8 +1666,8 @@ components:
           $ref: '#/components/schemas/PaginationKey'
     LegacyId:
       description: >-
-        Array de chave e valor com a chave de identificação do recurso no sistema
-        de origem (legado), permitindo chaves compostas
+        Key-value array with the resource identification key in the source
+        (legacy) system, allowing composite keys
       type: array
       items:
         type: object
@@ -1624,11 +1676,11 @@ components:
           - value
         properties:
           key:
-            description: Nome do campo do identificador no sistema de origem
+            description: Name of the identifier field in the source system
             type: string
             example: internalResourceId
           value:
-            description: Valor do campo do identificador no sistema de origem
+            description: Value of the identifier field in the source system
             type: string
             example: '1234'
         additionalProperties: false
@@ -1636,56 +1688,56 @@ components:
       maxItems: 10
     FromTransactionDate:
       description: |
-        Data inicial de filtragem.
+        Initial filtering date.
 
-        [Restrição] Deve obrigatoriamente ser enviado caso o campo toTransactionDate seja informado. Caso não seja informado, deve ser assumido o dia atual.
+        [Restriction] Must be mandatorily sent if the toTransactionDate field is informed. If not informed, the current day must be assumed.
       type: string
       maxLength: 10
       format: date
       example: '2021-05-21'
     FromTransactionDateMaxLimited:
       description: |
-        Data inicial de filtragem. O período máximo utilizado no filtro é de 7 dias inclusive (D-6).
+        Initial filtering date. The maximum period used in the filter is 7 days inclusive (D-6).
 
-        [Restrição] Deve obrigatoriamente ser enviado caso o campo toTransactionDate seja informado. Caso não seja informado, deve ser assumido o dia atual.
+        [Restriction] Must be mandatorily sent if the toTransactionDate field is informed. If not informed, the current day must be assumed.
       type: string
       maxLength: 10
       format: date
       example: '2021-05-21'
     ToTransactionDate:
       description: |
-        Data final de filtragem.
+        Final filtering date.
 
-        [Restrição] Deve obrigatoriamente ser enviado caso o campo fromTransactionDate seja informado. Caso não seja informado, deve ser assumido o dia atual.
+        [Restriction] Must be mandatorily sent if the fromTransactionDate field is informed. If not informed, the current day must be assumed.
       type: string
       maxLength: 10
       format: date
       example: '2021-05-21'
     ToTransactionDateMaxLimited:
       description: |
-        Data final de filtragem. O período máximo utilizado no filtro é de 7 dias inclusive (D-6).
+        Final filtering date. The maximum period used in the filter is 7 days inclusive (D-6).
 
-        [Restrição] Deve obrigatoriamente ser enviado caso o campo fromTransactionDate seja informado. Caso não seja informado, deve ser assumido o dia atual.
+        [Restriction] Must be mandatorily sent if the fromTransactionDate field is informed. If not informed, the current day must be assumed.
       type: string
       maxLength: 10
       format: date
       example: '2021-05-21'
     PaginationKey:
       description: >-
-        Identificador de rechamada, utilizado para evitar a contagem de chamadas
-        ao endpoint durante a paginação.
+        Re-call identifier, used to avoid counting calls
+        to the endpoint during pagination.
       type: string
       maxLength: 2048
       pattern: '[\w\W\s]*'
     Page:
-      description: Número da página que está sendo requisitada (o valor da primeira página é 1).
+      description: Page number being requested (the value of the first page is 1).
       type: integer
       default: 1
       minimum: 1
       maximum: 2147483647
       format: int32
     PageSize:
-      description: Quantidade total de registros por páginas.
+      description: Total number of records per page.
       type: integer
       default: 25
       minimum: 1
@@ -1693,55 +1745,55 @@ components:
       maximum: 1000
   responses:
     ResponseCreditFixedIncomesProductList:
-      description: Dados obtidos com sucesso.
+      description: Data successfully obtained.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ResponseCreditFixedIncomesProductList'
     ResponseCreditFixedIncomesProductIdentification:
-      description: Dados obtidos com sucesso.
+      description: Data successfully obtained.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ResponseCreditFixedIncomesProductIdentification'
     ResponseCreditFixedIncomesBalances:
-      description: Dados obtidos com sucesso.
+      description: Data successfully obtained.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ResponseCreditFixedIncomesBalances'
     ResponseCreditFixedIncomesTransactions:
-      description: Dados obtidos com sucesso.
+      description: Data successfully obtained.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ResponseCreditFixedIncomesTransactions'
     ResponseCreditFixedIncomesTransactionsCurrent:
-      description: Dados obtidos com sucesso.
+      description: Data successfully obtained.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ResponseCreditFixedIncomesTransactionsCurrent'
     BadRequest:
-      description: 'A requisição foi malformada, omitindo atributos obrigatórios, seja no payload ou através de atributos na URL.'
+      description: 'The request was malformed, omitting mandatory attributes, either in the payload or through attributes in the URL.'
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseErrorMetaSingle'
     Forbidden:
-      description: O token tem escopo incorreto ou uma política de segurança foi violada
+      description: The token has incorrect scope or a security policy has been violated
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseErrorMetaSingle'
     GatewayTimeout:
-      description: GATEWAY TIMEOUT - A requisição não foi atendida dentro do tempo limite estabelecido
+      description: GATEWAY TIMEOUT - The request was not answered within the established timeout
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseErrorMetaSingle'
     InternalServerError:
-      description: Ocorreu um erro no gateway da API ou no microsserviço
+      description: An error occurred in the API gateway or microservice
       content:
         application/json; charset=utf-8:
           schema:
@@ -1753,73 +1805,73 @@ components:
           schema:
             $ref: '#/components/schemas/ResponseErrorMetaSingle'
     MethodNotAllowed:
-      description: O consumidor tentou acessar o recurso com um método não suportado
+      description: The consumer tried to access the resource with an unsupported method
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseErrorMetaSingle'
     NotAcceptable:
-      description: A solicitação continha um cabeçalho Accept diferente dos tipos de mídia permitidos ou um conjunto de caracteres diferente de UTF-8
+      description: The request contained an Accept header different from the allowed media types or a character set other than UTF-8
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseErrorMetaSingle'
     NotFound:
-      description: O recurso solicitado não existe ou não foi implementado
+      description: The requested resource does not exist or has not been implemented
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseErrorMetaSingle'
     TooManyRequests:
-      description: 'A operação foi recusada, pois muitas solicitações foram feitas dentro de um determinado período ou o limite global de requisições concorrentes foi atingido'
+      description: 'The operation was refused because too many requests were made within a certain period or the global limit of concurrent requests was reached'
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseErrorMetaSingle'
     Unauthorized:
-      description: Cabeçalho de autenticação ausente/inválido ou token inválido
+      description: Missing/invalid authentication header or invalid token
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseErrorMetaSingle'
     UnprocessableEntity:
-      description: 'A sintaxe da requisição esta correta, mas não foi possível processar as instruções presentes.'
+      description: 'The request syntax is correct, but it was not possible to process the instructions present.'
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseErrorMetaSingle'
     SiteIsOverloaded:
-      description: 'O site está sobrecarregado e a operação foi recusada, pois foi atingido o limite máximo de TPS global, neste momento.'
+      description: 'The site is overloaded and the operation was refused because the global TPS maximum limit was reached at this time.'
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseErrorMetaSingle'
     Default:
-      description: Erro inesperado.
+      description: Unexpected error.
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseErrorMetaSingle'
     BadRequestWithAdditionalProperties:
-      description: 'A requisição foi malformada, omitindo atributos obrigatórios, seja no payload ou através de atributos na URL.'
+      description: 'The request was malformed, omitting mandatory attributes, either in the payload or through attributes in the URL.'
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     ForbiddenWithAdditionalProperties:
-      description: O token tem escopo incorreto ou uma política de segurança foi violada
+      description: The token has incorrect scope or a security policy has been violated
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     GatewayTimeoutWithAdditionalProperties:
-      description: GATEWAY TIMEOUT - A requisição não foi atendida dentro do tempo limite estabelecido
+      description: GATEWAY TIMEOUT - The request was not answered within the established timeout
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     InternalServerErrorWithAdditionalProperties:
-      description: Ocorreu um erro no gateway da API ou no microsserviço
+      description: An error occurred in the API gateway or microservice
       content:
         application/json; charset=utf-8:
           schema:
@@ -1831,49 +1883,49 @@ components:
           schema:
             $ref: '#/components/schemas/ResponseError'
     MethodNotAllowedWithAdditionalProperties:
-      description: O consumidor tentou acessar o recurso com um método não suportado
+      description: The consumer tried to access the resource with an unsupported method
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     NotAcceptableWithAdditionalProperties:
-      description: A solicitação continha um cabeçalho Accept diferente dos tipos de mídia permitidos ou um conjunto de caracteres diferente de UTF-8
+      description: The request contained an Accept header different from the allowed media types or a character set other than UTF-8
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     NotFoundWithAdditionalProperties:
-      description: O recurso solicitado não existe ou não foi implementado
+      description: The requested resource does not exist or has not been implemented
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     TooManyRequestsWithAdditionalProperties:
-      description: 'A operação foi recusada, pois muitas solicitações foram feitas dentro de um determinado período ou o limite global de requisições concorrentes foi atingido'
+      description: 'The operation was refused because too many requests were made within a certain period or the global limit of concurrent requests was reached'
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     UnauthorizedWithAdditionalProperties:
-      description: Cabeçalho de autenticação ausente/inválido ou token inválido
+      description: Missing/invalid authentication header or invalid token
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     UnprocessableEntityWithAdditionalProperties:
-      description: 'A sintaxe da requisição esta correta, mas não foi possível processar as instruções presentes.'
+      description: 'The request syntax is correct, but it was not possible to process the instructions present.'
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     DefaultWithAdditionalProperties:
-      description: Erro inesperado.
+      description: Unexpected error.
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     SiteIsOverloadedWithAdditionalProperties:
-      description: 'O site está sobrecarregado e a operação foi recusada, pois foi atingido o limite máximo de TPS global, neste momento.'
+      description: 'The site is overloaded and the operation was refused because the global TPS maximum limit was reached at this time.'
       content:
         application/json; charset=utf-8:
           schema:

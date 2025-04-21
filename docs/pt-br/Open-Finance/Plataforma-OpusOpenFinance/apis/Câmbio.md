@@ -31,6 +31,11 @@ Existem *endpoints* para:
 
 ## *Open API Specification* da API
 
-A documentação da API de Câmbio a ser construída na *camada de integração* pode ser encontrada [aqui][API-Câmbio].
+A documentação da API de Câmbio a ser construída na *camada de integração* pode ser encontrada [**aqui**][API-Câmbio].
+
+Para fazer o download do arquivo YAML/OAS que contém a especificação da API clique [**aqui**][OAS].
+
+Clique [**aqui**](open-data-accounts.json){:download="open-data-accounts.json"} para fazer o download do arquivo exemplo.
 
 [API-Câmbio]: ../../../../swagger-ui/index.html?api=Câmbio
+[OAS]: (exchange-1-0-0.yml){:download="exchange-1-0-0.yml"}

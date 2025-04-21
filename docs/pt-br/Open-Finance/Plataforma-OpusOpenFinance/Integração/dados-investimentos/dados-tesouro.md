@@ -23,4 +23,4 @@ Em linhas gerais, existem *endpoints* para:
 
 A documentação da API de títulos do tesouro direto a ser construída na *camada de integração* pode ser encontrada [aqui][API-Tesouro-Direto].
 
-[API-Tesouro-Direto]: ../../../../../swagger-ui/index.html?api=data-treasure-titles
+[API-Tesouro-Direto]: ../../../../../swagger-ui/index.html?api=data-treasury-bonds

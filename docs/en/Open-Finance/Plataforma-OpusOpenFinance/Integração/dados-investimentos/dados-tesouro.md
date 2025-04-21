@@ -7,7 +7,7 @@ lang: "en"
 alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Integração/dados-investimentos/dados-tesouro/"
 ---
 
-# Direct Treasury Bonds API
+# Treasury Bonds API
 
 Integration layer API that returns data on *treasury bonds* held by the client at the Data Transmitting Institution.
 
@@ -24,7 +24,7 @@ In general, there are *endpoints* for:
 
 ## *Open API Specification* of the API
 
-The documentation for the treasury bonds API to be built in the integration layer can be found [here][API-Treasure-Bonds]
+The documentation for the treasury bonds API to be built in the integration layer can be found [here][API-Treasury-Bonds]
 
-[API-Treasure-Bonds]: ../../../../../swagger-ui/index.html?api=en-data-treasure-titles
+[API-Treasury-Bonds]: ../../../../../swagger-ui/index.html?api=en-data-treasury-bonds
 [OOF-Investimentos]: ../OOF-Investimento.html

@@ -12,7 +12,7 @@ alternate_lang: "/docs/en/Open-Finance/Plataforma-OpusOpenFinance/Integração/O
 
 Todas as modalidades de investimento são passíveis de compartilhamento de dados no escopo do *Open Finance Brasil*.
 
-O consentimento para compartilhamento de dados efetuado pelo cliente é realizado por agrupamento de produtos. Isso significa que, se o cliente conceder um consentimento de compartilhamento de dados para "*Investimentos*" todas as modalidades estarão incluídas.
+O consentimento para compartilhamento de dados efetuado pelo cliente é realizado por agrupamento de produtos. Isso significa que, se o cliente conceder um consentimento de compartilhamento de dados para "*Investimentos*", todas as modalidades estarão incluídas.
 
 As diferentes modalidades de investimento são:
 
@@ -37,7 +37,7 @@ Todas as APIs compartilham algumas características importantes definidas pelo r
 
 - Investimentos ativos em um período de até 12 meses anterior ao inicio da vigência do consentimento
 - Investimentos que venceram, foram resgatados ou tiveram sua titularidade ou custódia transferida em um período de até 12 meses anterior ao inicio da vigência do consentimento
-- Investimento contratados durante o período de vigência do consentimento
+- Investimentos contratados durante o período de vigência do consentimento
 - Investimentos que venceram, foram resgatados ou tiveram sua titularidade ou custódia transferida durante o período de vigência do consentimento
 
 **Recursos que não devem ser incluídos no compartilhamento:**
