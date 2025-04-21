@@ -1,22 +1,13 @@
 openapi: 3.0.0
 info:
-  title: API Exchange - Open Finance Brasil
+  title: API OpenData Exchange - Open Finance Brasil
   description: |
-    API de Câmbio do Open Finance Brasil – Fase 4.
+    API de Câmbio da fase OpenData do Open Finance Brasil.
     API que retorna informações de Câmbio.
   version: 1.0.1
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
-  contact:
-    name: Governança do Open Finance Brasil – Especificações
-    email: gt-interfaces@openbankingbr.org
-    url: 'https://openbanking-brasil.github.io/areadesenvolvedor/'
-servers:
-  - url: 'https://api.banco.com.br/open-banking/opendata-exchange/v1'
-    description: Servidor de Produção
-  - url: 'https://apih.banco.com.br/open-banking/opendata-exchange/v1'
-    description: Servidor de Homologação
 tags:
   - name: Exchange Online Rate
     description: Operações para obter as informações de Câmbio para taxa online.

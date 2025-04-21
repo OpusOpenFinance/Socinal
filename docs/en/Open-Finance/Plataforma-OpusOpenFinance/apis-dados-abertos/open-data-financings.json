@@ -1,0 +1,328 @@
+{
+  "data": [
+    {
+      "participant": {
+        "brand": "MyBank Brand",
+        "name": "MyBank Company Loans Division",
+        "cnpjNumber": "12345678900012",
+        "urlComplementaryList": "https://mybank.com.br/open-banking/complementary-list"
+      },
+      "type": "FINANCIAMENTO_AQUISICAO_BENS_VEICULOS_AUTOMOTORES",
+      "fees": {
+        "services": [
+          {
+            "name": "Vehicle Appraisal Fee",
+            "code": "VAF001",
+            "chargingTriggerInfo": "Charged at the time of vehicle appraisal request.",
+            "prices": [
+              {
+                "interval": "1_FAIXA",
+                "value": "150.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.250000"
+                }
+              },
+              {
+                "interval": "2_FAIXA",
+                "value": "175.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.350000"
+                }
+              },
+              {
+                "interval": "3_FAIXA",
+                "value": "200.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.200000"
+                }
+              },
+              {
+                "interval": "4_FAIXA",
+                "value": "225.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.200000"
+                }
+              }
+            ],
+            "minimum": {
+              "value": "100.00",
+              "currency": "BRL"
+            },
+            "maximum": {
+              "value": "300.00",
+              "currency": "BRL"
+            }
+          },
+          {
+            "name": "Contract Registration Fee",
+            "code": "CRF002",
+            "chargingTriggerInfo": "Charged upon contract formalization.",
+            "prices": [
+              {
+                "interval": "1_FAIXA",
+                "value": "50.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.300000"
+                }
+              },
+              {
+                "interval": "2_FAIXA",
+                "value": "55.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.300000"
+                }
+              },
+              {
+                "interval": "3_FAIXA",
+                "value": "60.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.200000"
+                }
+              },
+              {
+                "interval": "4_FAIXA",
+                "value": "65.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.200000"
+                }
+              }
+            ],
+            "minimum": {
+              "value": "40.00",
+              "currency": "BRL"
+            },
+            "maximum": {
+              "value": "80.00",
+              "currency": "BRL"
+            }
+          }
+        ]
+      },
+      "interestRates": [
+        {
+          "referentialRateIndexer": "PRE_FIXADO",
+          "rate": "0.000000",
+          "applications": [
+            {
+              "interval": "1_FAIXA",
+              "indexer": {
+                "rate": "0.080000"
+              },
+              "customers": {
+                "rate": "0.250000"
+              }
+            },
+            {
+              "interval": "2_FAIXA",
+              "indexer": {
+                "rate": "0.090000"
+              },
+              "customers": {
+                "rate": "0.300000"
+              }
+            },
+            {
+              "interval": "3_FAIXA",
+              "indexer": {
+                "rate": "0.100000"
+              },
+              "customers": {
+                "rate": "0.250000"
+              }
+            },
+            {
+              "interval": "4_FAIXA",
+              "indexer": {
+                "rate": "0.110000"
+              },
+              "customers": {
+                "rate": "0.200000"
+              }
+            }
+          ],
+          "minimumRate": "0.075000",
+          "maximumRate": "0.125000"
+        },
+        {
+          "referentialRateIndexer": "POS_FIXADO_TR_TBF",
+          "rate": "1.000000",
+          "applications": [
+            {
+              "interval": "1_FAIXA",
+              "indexer": {
+                "rate": "0.000000"
+              },
+              "customers": {
+                "rate": "0.250000"
+              }
+            },
+            {
+              "interval": "2_FAIXA",
+              "indexer": {
+                "rate": "0.000000"
+              },
+              "customers": {
+                "rate": "0.300000"
+              }
+            },
+            {
+              "interval": "3_FAIXA",
+              "indexer": {
+                "rate": "0.000000"
+              },
+              "customers": {
+                "rate": "0.250000"
+              }
+            },
+            {
+              "interval": "4_FAIXA",
+              "indexer": {
+                "rate": "0.000000"
+              },
+              "customers": {
+                "rate": "0.200000"
+              }
+            }
+          ],
+          "minimumRate": "0.020000",
+          "maximumRate": "0.050000"
+        }
+      ],
+      "requiredWarranties": [
+        "ALIENACAO_FIDUCIARIA",
+        "GARANTIA_FIDEJUSSORIA"
+      ],
+      "termsConditions": "https://mybank.com.br/personal-financing-terms-conditions"
+    },
+    {
+      "participant": {
+        "brand": "MyBank Brand for Business",
+        "name": "MyBank Company Business Loans",
+        "cnpjNumber": "98765432100019",
+        "urlComplementaryList": "https://mybank.com.br/business/complementary-list"
+      },
+      "type": "FINANCIAMENTO_RURAL_INVESTIMENTO",
+      "fees": {
+        "services": [
+          {
+            "name": "Rural Credit Analysis Fee",
+            "code": "RCAF001",
+            "chargingTriggerInfo": "Charged upon rural credit analysis request.",
+            "prices": [
+              {
+                "interval": "1_FAIXA",
+                "value": "300.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.400000"
+                }
+              },
+              {
+                "interval": "2_FAIXA",
+                "value": "350.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.300000"
+                }
+              },
+              {
+                "interval": "3_FAIXA",
+                "value": "400.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.150000"
+                }
+              },
+              {
+                "interval": "4_FAIXA",
+                "value": "450.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.150000"
+                }
+              }
+            ],
+            "minimum": {
+              "value": "250.00",
+              "currency": "BRL"
+            },
+            "maximum": {
+              "value": "500.00",
+              "currency": "BRL"
+            }
+          }
+        ]
+      },
+      "interestRates": [
+        {
+          "referentialRateIndexer": "CREDITO_RURAL_TCR_PRE",
+          "rate": "0.000000",
+          "applications": [
+            {
+              "interval": "1_FAIXA",
+              "indexer": {
+                "rate": "0.050000"
+              },
+              "customers": {
+                "rate": "0.300000"
+              }
+            },
+            {
+              "interval": "2_FAIXA",
+              "indexer": {
+                "rate": "0.060000"
+              },
+              "customers": {
+                "rate": "0.300000"
+              }
+            },
+            {
+              "interval": "3_FAIXA",
+              "indexer": {
+                "rate": "0.070000"
+              },
+              "customers": {
+                "rate": "0.200000"
+              }
+            },
+            {
+              "interval": "4_FAIXA",
+              "indexer": {
+                "rate": "0.080000"
+              },
+              "customers": {
+                "rate": "0.200000"
+              }
+            }
+          ],
+          "minimumRate": "0.045000",
+          "maximumRate": "0.095000"
+        }
+      ],
+      "requiredWarranties": [
+        "HIPOTECA",
+        "PENHOR"
+      ],
+      "termsConditions": "https://mybank.com.br/business-rural-financing-terms"
+    }
+  ],
+  "links": {
+    "self": "https://api.mybank.com.br/open-banking/opendata-financings/v1/personal-financings",
+    "first": "https://api.mybank.com.br/open-banking/opendata-financings/v1/personal-financings?page=1",
+    "prev": null,
+    "next": "https://api.mybank.com.br/open-banking/opendata-financings/v1/personal-financings?page=2",
+    "last": "https://api.mybank.com.br/open-banking/opendata-financings/v1/personal-financings?page=10"
+  },
+  "meta": {
+    "totalRecords": 200,
+    "totalPages": 10
+  }
+}

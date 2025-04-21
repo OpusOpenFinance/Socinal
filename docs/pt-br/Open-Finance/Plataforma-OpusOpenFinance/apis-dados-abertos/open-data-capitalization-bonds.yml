@@ -1,21 +1,11 @@
 openapi: 3.0.0
 info:
-  title: API Capitalization-bonds - Open Finance Brasil
-  description: |
-    As APIs descritas neste documento é referente a API de Capitalização da fase OpenInsurance do Open Finance Brasil.
+  title: API OpenData Capitalization-bonds - Open Finance Brasil
+  description: As APIs descritas neste documento é referente a API de Capitalização da fase OpenData do Open Finance Brasil.
   version: 2.0.0
   license:
     name: Apache 2.0
     url: "https://www.apache.org/licenses/LICENSE-2.0"
-  contact:
-    name: Governança do Open Finance Brasil – Especificações
-    email: gt-interfaces@openbankingbr.org
-    url: "https://openbanking-brasil.github.io/areadesenvolvedor/"
-servers:
-  - url: "https://api.banco.com.br/open-banking/opendata-capitalization/v2"
-    description: Servidor de Produção
-  - url: "https://apih.banco.com.br/open-banking/opendata-capitalization/v2"
-    description: Servidor de Homologação
 tags:
   - name: Capitalization Bonds
     description: Operações para consulta das informações de Titulos de Capitalização
@@ -263,8 +253,7 @@ components:
           example: "https://ACME.com/capitalizacao/tradicional/pdf/condicoes_gerais"
         targetAudience:
           type: string
-          description: |
-            Público alvo do produto da sociedade seguradora participante do OPIN.
+          description: Público alvo do produto da sociedade seguradora participante do OPIN.
           enum:
             - PESSOA_NATURAL
             - PESSOA_JURIDICA

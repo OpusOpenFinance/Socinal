@@ -1,29 +1,28 @@
 openapi: 3.0.0
 info:
-  title: API OpenData Channels do Open Finance Brasil
-  description: A API descrita neste documento é referente as API Channels da fase OpenData do Open Finance Brasil.
+  title: Open Finance Brasil OpenData Channels API
+  description: The API described in this document refers to the Channels API of the OpenData phase of Open Finance Brasil.
   version: '2.0.1'
-  contact:
-    url: 'https://servicedesk.openbankingbrasil.org.br/Login.jsp?navLanguage=pt-BR'
+  license:
+    name: Apache 2.0
+    url: "https://www.apache.org/licenses/LICENSE-2.0"
 tags:
   - name: Channels
-    description: Operações para listagem de canais de atendimento
-servers:
-  - url: http://api.banco.com.br/open-banking/channels/v2
+    description: Operations for listing service channels
 paths:
   /banking-agents:
     get:
       tags:
         - Channels
-      summary: Obtém a lista de correspondentes bancários da instituição financeira.
-      description: "Método para obter a lista de correspondentes bancários da instituição financeira."
+      summary: Obtains the list of banking correspondents of the financial institution.
+      description: "Method to obtain the list of banking correspondents of the financial institution."
       operationId: "getBankingAgents"
       parameters:
         - $ref: "#/components/parameters/page"
         - $ref: "#/components/parameters/pageSize"
       responses:
         '200':
-          description: Lista de correspondentes bancários obtida com sucesso.
+          description: List of banking correspondents successfully obtained.
           content:
             application/json:
               schema:
@@ -48,15 +47,15 @@ paths:
     get:
       tags:
         - "Channels"
-      summary: Obtém a lista de dependências próprias da instituição financeira.
-      description: "Método para obter a lista de dependências próprias da instituição financeira."
+      summary: Obtains the list of proprietary branches of the financial institution.
+      description: "Method to obtain the list of proprietary branches of the financial institution."
       operationId: "getBranches"
       parameters:
         - $ref: "#/components/parameters/page"
         - $ref: "#/components/parameters/pageSize"
       responses:
         '200':
-          description: Lista de dependências próprias obtida com sucesso.
+          description: List of proprietary branches successfully obtained.
           content:
             application/json:
               schema:
@@ -81,15 +80,15 @@ paths:
     get:
       tags:
         - "Channels"
-      summary: Obtém a lista de canais eletrônicos de atendimento da instituição financeira.
-      description: "Método para obter a lista de canais eletrônicos de atendimento da instituição financeira."
+      summary: Obtains the list of electronic service channels of the financial institution.
+      description: "Method to obtain the list of electronic service channels of the financial institution."
       operationId: "getElectronicChannels"
       parameters:
         - $ref: "#/components/parameters/page"
         - $ref: "#/components/parameters/pageSize"
       responses:
         '200':
-          description: Lista de canais eletrônicos de atendimento obtida com sucesso.
+          description: List of electronic service channels successfully obtained.
           content:
             application/json:
               schema:
@@ -114,15 +113,15 @@ paths:
     get:
       tags:
         - "Channels"
-      summary: "Obtém a lista de canais telefônicos de atendimento da instituição financeira."
-      description: "Método para obter a lista de canais telefônicos de atendimento da instituição financeira."
+      summary: "Obtains the list of telephone service channels of the financial institution."
+      description: "Method to obtain the list of telephone service channels of the financial institution."
       operationId: "getPhoneChannels"
       parameters:
         - $ref: "#/components/parameters/page"
         - $ref: "#/components/parameters/pageSize"
       responses:
         '200':
-          description: Lista de canais telefônicos de atendimento obtida com sucesso.
+          description: List of telephone service channels successfully obtained.
           content:
             application/json:
               schema:
@@ -147,15 +146,15 @@ paths:
     get:
       tags:
         - "Channels"
-      summary: "Obtém a lista de terminais compartilhados de autoatendimento."
-      description: "Método para obter a lista de terminais compartilhados de autoatendimento da instituição financeira."
+      summary: "Obtains the list of shared automated teller machines."
+      description: "Method to obtain the list of shared automated teller machines of the financial institution."
       operationId: "getSharedAutomatedTellerMachines"
       parameters:
         - $ref: "#/components/parameters/page"
         - $ref: "#/components/parameters/pageSize"
       responses:
         '200':
-          description: Lista de terminais compartilhados de autoatendimento obtida com sucesso.
+          description: List of shared automated teller machines successfully obtained.
           content:
             application/json:
               schema:
@@ -187,7 +186,7 @@ components:
       properties:
         data:
           type: array
-          items: 
+          items:
             $ref: '#/components/schemas/BankingAgentsData'
           minItems: 1
         links:
@@ -196,7 +195,7 @@ components:
           $ref: '#/components/schemas/Meta'
     BankingAgentsData:
       type: object
-      description: Conjunto de informações referente aos correspondentes bancários da Instituição
+      description: Set of information regarding the Banking Agents of the Institution
       properties:
         participant:
           $ref: '#/components/schemas/BankingAgentsParticipant'
@@ -206,7 +205,7 @@ components:
             $ref: '#/components/schemas/BankingAgent'
           minItems: 1
     BankingAgentsParticipant:
-      description: Conjunto de informações relativas ao participante do produto de Open Finance
+      description: Set of information regarding the participant of the Open Finance product
       type: object
       required:
         - brand
@@ -222,19 +221,19 @@ components:
           maxLength: 80
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          description: Nome da marca selecionada pela Organização proprietário da dependência (titular).
-          example: Organização A
+          description: Brand name selected by the Organization that owns the branch (holder).
+          example: Organização A # Organization A
         name:
           type: string
           maxLength: 80
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          description: Nome da Instituição, pertencente à marca, responsável pelo Correspondente Bancário no país.
-          example: 'Empresa da Organização A'
+          description: Name of the Institution, belonging to the brand, responsible for the Banking Correspondent in the country.
+          example: 'Empresa da Organização A' # 'Company of Organization A'
         cnpjNumber:
           type: string
           pattern: '^\d{14}$'
-          description: Número completo do CNPJ da instituição
+          description: Full CNPJ number of the institution
           maxLength: 14
           minLength: 14
           example: "50685362000135"
@@ -246,15 +245,15 @@ components:
       properties:
         name:
           type: string
-          description: Nome do contratante do serviço de correspondente
+          description: Name of the contracting party of the correspondent service
           maxLength: 100
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: Empresa Contratante
+          example: Empresa Contratante # Contracting Company
         cnpjNumber:
           type: string
           pattern: '^\d{14}$'
-          description: Número completo do CNPJ da instituição
+          description: Full CNPJ number of the institution
           maxLength: 14
           minLength: 14
           example: "50685362000135"
@@ -267,7 +266,7 @@ components:
       properties:
         data:
           type: array
-          description: Conjunto de informações referente as dependências próprias da instituição.
+          description: Set of information regarding the institution's own branches.
           minItems: 1
           items:
             $ref: '#/components/schemas/BranchesData'
@@ -296,15 +295,15 @@ components:
           items:
             $ref: '#/components/schemas/BranchPhone'
           minItems: 1
-          description: Lista de telefones da Dependência
+          description: Branch phones list
         services:
           type: array
-          description: Traz a relação de serviços disponbilizados pelo Canal de Atendimento
+          description: Brings the list of services offered by the Service Channel
           items:
             $ref: '#/components/schemas/BranchService'
           minItems: 1
     BranchesParticipant:
-      description: Conjunto de informações relativas ao participante do produto de Open Finance
+      description: Set of information regarding the participant of the Open Finance product
       type: object
       required:
         - brand
@@ -318,33 +317,33 @@ components:
       properties:
         brand:
           type: string
-          description: Nome da Marca reportada pelo participante do Open Finance. O conceito a que se refere a 'marca' é em essência uma promessa da empresa em fornecer uma série específica de atributos, benefícios e serviços uniformes aos clientes.
+          description: Brand Name reported by the Open Finance participant. The concept referred to by 'brand' is essentially a company's promise to provide a specific series of uniform attributes, benefits and services to customers.
           maxLength: 80
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: Organização A
+          example: Organização A # Organization A
         name:
           type: string
           maxLength: 80
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: Empresa A1
+          example: Empresa A1 # Company A1
         cnpjNumber:
           type: string
           minLength: 14
           maxLength: 14
           pattern: '^\d{14}$'
           description: |
-            Número completo do CNPJ da instituição responsável pela dependência - o CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica.
-            Deve-se ter apenas os números do CNPJ, sem máscara
+            Full CNPJ number of the institution responsible for the branch - the CNPJ corresponds to the registration number in the Corporate Taxpayer Registry.
+            Only the CNPJ numbers must be provided, without mask
           example: '45086338000178'
         urlComplementaryList:
           type: string
-          description: | 
-            URL do link que conterá a lista complementar com os nomes e CNPJs agrupados sob o mesmo cnpjNumber. Os contidos nessa lista possuem as mesmas características para produtos e serviços. 
-            Endereço eletrônico de acesso ao canal. Será obrigatoriamente preenchido se houver lista complementar com os nomes e CNPJs a ser disponibilizada. 
-            
-            Restrição: Será obrigatoriamente preenchido se houver lista complementar com os nomes e CNPJs a ser disponibilizada
+          description: |
+            URL of the link that will contain the complementary list with the names and CNPJs grouped under the same cnpjNumber. Those contained in this list have the same characteristics for products and services.
+            Electronic address for accessing the channel. It will be mandatory if there is a complementary list with the names and CNPJs to be made available.
+
+            Restriction: It will be mandatory if there is a complementary list with the names and CNPJs to be made available
           maxLength: 1024
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
@@ -358,7 +357,7 @@ components:
       properties:
         data:
           type: array
-          description: Conjunto de informações referente aos canais eletrônicos de atendimento da instituição
+          description: Set of information regarding the electronic service channels of the institution
           minItems: 1
           items:
             $ref: '#/components/schemas/ElectronicChannelsData'
@@ -381,10 +380,10 @@ components:
           items:
             $ref: '#/components/schemas/ElectronicChannelService'
           minItems: 1
-          description: "Traz a relação de serviços disponbilizados pelo Canal de Atendimento"
+          description: "Brings the list of services offered by the Service Channel"
     ElectronicChannelsParticipant:
       type: object
-      description: Conjunto de informações relativas ao participante do produto de Open Finance
+      description: Set of information regarding the participant of the Open Finance product
       required:
         - brand
         - name
@@ -397,32 +396,32 @@ components:
       properties:
         brand:
           type: string
-          description: Nome da marca selecionada pela Organização proprietária da dependência (titular).
-          example: "Marca A"
+          description: Brand name selected by the Organization that owns the branch (holder).
+          example: "Marca A" # "Brand A"
           maxLength: 80
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
         name:
           type: string
-          description: Nome da marca selecionada pela Organização proprietária da dependência (titular).
-          example: "Empresa da Marca A"
+          description: Brand name selected by the Organization that owns the branch (holder).
+          example: "Empresa da Marca A" # "Company of Brand A"
           maxLength: 80
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
         cnpjNumber:
             type: string
             pattern: '^\d{14}$'
-            description: Número completo do CNPJ da instituição
+            description: Full CNPJ number of the institution
             maxLength: 14
             minLength: 14
             example: "50685362000135"
         urlComplementaryList:
           type: string
-          description: | 
-            URL do link que conterá a lista complementar com os nomes e CNPJs agrupados sob o mesmo cnpjNumber. Os contidos nessa lista possuem as mesmas características para produtos e serviços. 
-            Endereço eletrônico de acesso ao canal. Será obrigatoriamente preenchido se houver lista complementar com os nomes e CNPJs a ser disponibilizada. 
-            
-            Restrição: Será obrigatoriamente preenchido se houver lista complementar com os nomes e CNPJs a ser disponibilizada
+          description: |
+            URL of the link that will contain the complementary list with the names and CNPJs grouped under the same cnpjNumber. Those contained in this list have the same characteristics for products and services.
+            Electronic address for accessing the channel. It will be mandatory if there is a complementary list with the names and CNPJs to be made available.
+
+            Restriction: It will be mandatory if there is a complementary list with the names and CNPJs to be made available
           maxLength: 1024
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
@@ -441,22 +440,22 @@ components:
           items:
             $ref: '#/components/schemas/BankingAgentLocation'
           minItems: 1
-          description: Relação de informações referentes as localizações do correspondente bancário
+          description: List of information regarding the locations of the banking correspondent
         services:
           type: array
           items:
             $ref: '#/components/schemas/BankingAgentService'
           minItems: 1
-          description: "Traz a relação de serviços disponbilizados pelo Canal de Atendimento"
+          description: "Brings the list of services offered by the Service Channel"
         contractors:
           type: array
           items:
             $ref: '#/components/schemas/BankingAgentsContractor'
           minItems: 1
-          description: Relação de informações de um contratante do serviço de correspondente.
+          description: List of information of a contracting party of the correspondent service.
     BankingAgentIdentification:
       type: object
-      description: Lojas do correspondente bancário
+      description: Stores of the banking correspondent
       required:
         - cnpjNumber
         - corporationName
@@ -468,26 +467,26 @@ components:
       properties:
         corporationName:
           type: string
-          description: Nome da loja do correspondente bancário
+          description: Store name of the banking correspondent
           maxLength: 100
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: Empresa Correspondente A
+          example: Empresa Correspondente A # Correspondent Company A
         groupName:
           type: string
-          description: Nome do grupo do correspondente bancário
+          description: Group name of the banking correspondent
           maxLength: 100
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: Grupo Master
+          example: Grupo Master # Master Group
         isUnderestablishment:
           type: boolean
-          description: Indicador do Correspondente Bancário ser um Substabelecimento (são empresas  que foram contratadas por um correspondente bancário para prestar serviços. A empresa substabelecida é tratada como um correspondente do banco e tem praticamente os mesmos direitos e obrigações que possui o correspondente direto)
+          description: Indicator of whether the Banking Correspondent is a Subestablishment (these are companies that were hired by a banking correspondent to provide services. The sub-established company is treated as a bank correspondent and has practically the same rights and obligations as the direct correspondent)
           example: true
         cnpjNumber:
           type: string
           pattern: '^\d{14}$'
-          description: Número completo do CNPJ da instituição
+          description: Full CNPJ number of the institution
           maxLength: 14
           minLength: 14
           example: "50685362000135"
@@ -506,7 +505,7 @@ components:
             $ref: '#/components/schemas/Phone'
     BankingAgentPostalAddress:
       type: object
-      description: Informação referente ao endereço postal
+      description: Postal address information
       required:
         - address
         - districtName
@@ -522,42 +521,42 @@ components:
       properties:
         address:
           type: string
-          description: "Deverá trazer toda a informação referente ao endereço da dependência informada: Tipo de logradouro + Nome do logradouro + Número do Logradouro (se não existir usar ' s/n') + complemento (se houver), como, p.ex.: 'R Diamatina, 59, bloco 35, fundos' 'Praça da Boa Vontade s/n'"
+          description: "Should bring all the information regarding the address of the reported branch: Type of street + Street name + Street number (if it does not exist, use 's/n') + complement (if any), such as, for example: 'R Diamantina, 59, bloco 35, fundos' 'Praça da Boa Vontade s/n'"
           maxLength: 150
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
           example: 'Av Naburo Ykesaki, 1270'
         additionalInfo:
           type: string
-          description: "Alguns logradouros ainda necessitam ser especificados por meio de complemento"
+          description: "Some addresses still need to be specified by means of a complement"
           maxLength: 30
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: Informações Adicionais
+          example: Informações Adicionais # Additional Information
         districtName:
           type: string
-          description: "Bairro é uma comunidade ou região localizada em uma cidade ou município de acordo com as suas subdivisões geográficas. p.ex: 'Paraíso'"
+          description: "Neighborhood is a community or region located in a city or municipality according to its geographical subdivisions. ex: 'Paraíso'"
           maxLength: 50
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: 'Centro'
+          example: 'Centro' # 'Center'
         townName:
           type: string
-          description: "Localidade: O nome da localidade corresponde à designação da cidade ou município no qual o endereço está localizado. p.ex. 'São Paulo'"
+          description: "Locality: The name of the locality corresponds to the designation of the city or municipality in which the address is located. ex. 'São Paulo'"
           maxLength: 50
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
           example: 'Marília'
         ibgeCode:
           type: string
-          description: "Código IBGE do município"
+          description: "IBGE code of the municipality"
           maxLength: 7
           minLength: 7
           pattern: ^\d{7}$
           example: '3515890'
         countrySubDivision:
           type: string
-          description: "Enumeração referente a cada sigla da unidade da federação que identifica o estado ou o distrito federal, no qual o endereço está localizado. p.ex. 'AC'. São consideradas apenas as siglas para os estados brasileiros"
+          description: "Enumeration referring to each abbreviation of the federation unit that identifies the state or the federal district, in which the address is located. ex. 'AC'. Only the abbreviations for the Brazilian states are considered"
           enum:
             - AC
             - AL
@@ -589,21 +588,21 @@ components:
           example: 'SP'
         postCode:
           type: string
-          description: "Código de Endereçamento Postal"
+          description: "Postal Code"
           pattern: '^\d{8}$'
           maxLength: 8
           minLength: 8
           example: '17500001'
         country:
           type: string
-          description: "Nome do país"
+          description: "Country name"
           maxLength: 80
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: 'Brasil'
+          example: 'Brasil' # 'Brazil'
         countryCode:
           type: string
-          description: Código do país de acordo com a ISO 3166-1 alpha-3
+          description: Country code according to ISO 3166-1 alpha-3
           minLength: 3
           maxLength: 3
           pattern: '^([A-Z]{3})$'
@@ -612,10 +611,10 @@ components:
           $ref: '#/components/schemas/GeographicCoordinates'
     BankingAgentAvailability:
       type: object
-      description: Horário de funcionamento das operações
+      description: Operating hours
       properties:
         standards:
-          description: Lista disponibilidade padrão da dependência por dias da semana
+          description: Standard availability list of the branch by weekdays
           type: array
           items:
             type: object
@@ -625,33 +624,33 @@ components:
               weekday:
                 type: string
                 enum:
-                  - DOMINGO
-                  - SEGUNDA_FEIRA
-                  - TERCA_FEIRA
-                  - QUARTA_FEIRA
-                  - QUINTA_FEIRA
-                  - SEXTA_FEIRA
-                  - SABADO
-                description: Dia da semana de abertura
+                  - DOMINGO # SUNDAY
+                  - SEGUNDA_FEIRA # MONDAY
+                  - TERCA_FEIRA # TUESDAY
+                  - QUARTA_FEIRA # WEDNESDAY
+                  - QUINTA_FEIRA # THURSDAY
+                  - SEXTA_FEIRA # FRIDAY
+                  - SABADO # SATURDAY
+                description: Opening weekday
               openingTime:
                 type: string
-                description: Horário de abertura (UTC)
+                description: Opening time (UTC)
                 maxLength: 13
                 pattern: ^(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
               closingTime:
                 type: string
-                description: Horário de fechamento (UTC)
+                description: Closing time (UTC)
                 maxLength: 13
                 pattern: ^(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
         exception:
           type: string
-          description: Em campo texto devem ser registradas todas as Exceções para o não atendimento
+          description: In the text field, all exceptions for non-attendance must be recorded
           maxLength: 2000
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: Exceto feriados municipais, nacionais e estaduais
+          example: Exceto feriados municipais, nacionais e estaduais # Except municipal, national and state holidays
         isPublicAccessAllowed:
-          description: Indica se a instalação da Dependência tem acesso restrito a clientes
+          description: Indicates whether the Branch facility has restricted access to customers
           type: boolean
           example: false
     BankingAgentService:
@@ -663,52 +662,52 @@ components:
         name:
           type: string
           enum:
-            - RECEPCAO_ENCAMINHAMENTO_PROPOSTAS_ABERTURA_CONTAS_DEPOSITOS_VISTA_PRAZO_POUPANCA_MANTIDOS_INSTITUICAO_CONTRATANTE
-            - REALIZACAO_RECEBIMENTOS_PAGAMENTOS_TRANSFERENCIAS_ELETRONICAS_VISANDO_MOVIMENTACAO_CONTAS_DEPOSITOS_TITULARIDADE_CLIENTES_MANTIDAS_INSTITUICAO_CONTRATANTE
-            - RECEBIMENTOS_PAGAMENTOS_QUALQUER_NATUREZA_OUTRAS_ATIVIDADES_DECORRENTES_EXECUCAO_CONTRATOS_CONVENIOS_PRESTACAO_SERVICOS
-            - EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGAMENTO_CURSADAS_INTERMEDIO_INSTITUICAO_CONTRATANTE_SOLICITACAO_CLIENTES_USUARIOS
-            - RECEPCAO_ENCAMINHAMENTO_PROPOSTAS_OPERACAO_CREDITO_ARRENDAMENTO_MERCANTIL_CONCESSAO_INSTITUICAO_CONTRATANTE
-            - RECEBIMENTOS_PAGAMENTOS_RELACIONADOS_LETRAS_CAMBIO_ACEITE_INSTITUICAO_CONTRATANTE
-            - RECEPCAO_ENCAMINHAMENTO_PROPOSTAS_FORNECIMENTO_CARTAO_CREDITO_RESPONSABILIDADE_INSTITUICAO_CONTRATANTE
-            - REALIZACAO_OPERACOES_CAMBIO_RESPONSABILIDADE_INSTITUICAO_CONTRATANTE
-            - OUTROS
-          description: "Relação dos Nomes de serviços prestados pelo Correspondente"
+            - RECEPCAO_ENCAMINHAMENTO_PROPOSTAS_ABERTURA_CONTAS_DEPOSITOS_VISTA_PRAZO_POUPANCA_MANTIDOS_INSTITUICAO_CONTRATANTE # RECEPTION_FORWARDING_PROPOSALS_OPENING_ACCOUNTS_DEPOSITS_SIGHT_TERM_SAVINGS_HELD_CONTRACTING_INSTITUTION
+            - REALIZACAO_RECEBIMENTOS_PAGAMENTOS_TRANSFERENCIAS_ELETRONICAS_VISANDO_MOVIMENTACAO_CONTAS_DEPOSITOS_TITULARIDADE_CLIENTES_MANTIDAS_INSTITUICAO_CONTRATANTE # CARRYING_OUT_RECEIPTS_PAYMENTS_ELECTRONIC_TRANSFERS_AIMING_MOVEMENT_ACCOUNTS_DEPOSITS_OWNERSHIP_CUSTOMERS_MAINTAINED_CONTRACTING_INSTITUTION
+            - RECEBIMENTOS_PAGAMENTOS_QUALQUER_NATUREZA_OUTRAS_ATIVIDADES_DECORRENTES_EXECUCAO_CONTRATOS_CONVENIOS_PRESTACAO_SERVICOS # RECEIPTS_PAYMENTS_ANY_NATURE_OTHER_ACTIVITIES_DERIVING_EXECUTION_CONTRACTS_AGREEMENTS_PROVISION_SERVICES
+            - EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGAMENTO_CURSADAS_INTERMEDIO_INSTITUICAO_CONTRATANTE_SOLICITACAO_CLIENTES_USUARIOS # ACTIVE_PASSIVE_EXECUTION_PAYMENT_ORDERS_PROCESSED_INTERMEDIATE_CONTRACTING_INSTITUTION_REQUEST_CUSTOMERS_USERS
+            - RECEPCAO_ENCAMINHAMENTO_PROPOSTAS_OPERACAO_CREDITO_ARRENDAMENTO_MERCANTIL_CONCESSAO_INSTITUICAO_CONTRATANTE # RECEPTION_FORWARDING_PROPOSALS_CREDIT_OPERATION_LEASING_GRANTING_CONTRACTING_INSTITUTION
+            - RECEBIMENTOS_PAGAMENTOS_RELACIONADOS_LETRAS_CAMBIO_ACEITE_INSTITUICAO_CONTRATANTE # RECEIPTS_PAYMENTS_RELATED_EXCHANGE_LETTERS_ACCEPTANCE_CONTRACTING_INSTITUTION
+            - RECEPCAO_ENCAMINHAMENTO_PROPOSTAS_FORNECIMENTO_CARTAO_CREDITO_RESPONSABILIDADE_INSTITUICAO_CONTRATANTE # RECEPTION_FORWARDING_PROPOSALS_SUPPLY_CREDIT_CARD_RESPONSIBILITY_CONTRACTING_INSTITUTION
+            - REALIZACAO_OPERACOES_CAMBIO_RESPONSABILIDADE_INSTITUICAO_CONTRATANTE # CARRYING_OUT_EXCHANGE_OPERATIONS_RESPONSIBILITY_CONTRACTING_INSTITUTION
+            - OUTROS # OTHERS
+          description: "List of Service Names provided by the Correspondent"
         code:
           type: string
           enum:
-            - RECEBE_ENCAMINHA_PROPOSTAS_ABERTURA_CONTAS
-            - REALIZA_RECEBIMENTOS_PAGAMENTOS_TRANSFERENCIAS_ELETRONICAS
-            - RECEBIMENTOS_PAGAMENTOS_QUALQUER_NATUREZA_EXECUCAO_CONTRATOS_CONVENIO
-            - EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGAMENTO
-            - RECEBE_ENCAMINHA_PROPOSTAS_CREDITO_ARRENDAMENTO_MERCANTIL
-            - RECEBE_PAGAMENTOS_RELACIONADOS_LETRAS_CAMBIO_ACEITE_INSTITUICAO
-            - RECEBE_ENCAMINHA_PROPOSTAS_FORNECIMENTO_CARTAO_CREDITO
-            - REALIZA_OPERACOES_CAMBIO
-            - OUTROS
+            - RECEBE_ENCAMINHA_PROPOSTAS_ABERTURA_CONTAS # RECEIVES_FORWARDS_ACCOUNT_OPENING_PROPOSALS
+            - REALIZA_RECEBIMENTOS_PAGAMENTOS_TRANSFERENCIAS_ELETRONICAS # PERFORMS_RECEIPTS_PAYMENTS_ELECTRONIC_TRANSFERS
+            - RECEBIMENTOS_PAGAMENTOS_QUALQUER_NATUREZA_EXECUCAO_CONTRATOS_CONVENIO # RECEIPTS_PAYMENTS_ANY_NATURE_EXECUTION_CONTRACTS_AGREEMENT
+            - EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGAMENTO # ACTIVE_PASSIVE_EXECUTION_PAYMENT_ORDERS
+            - RECEBE_ENCAMINHA_PROPOSTAS_CREDITO_ARRENDAMENTO_MERCANTIL # RECEIVES_FORWARDS_CREDIT_LEASING_PROPOSALS
+            - RECEBE_PAGAMENTOS_RELACIONADOS_LETRAS_CAMBIO_ACEITE_INSTITUICAO # RECEIVES_PAYMENTS_RELATED_EXCHANGE_LETTERS_ACCEPTANCE_INSTITUTION
+            - RECEBE_ENCAMINHA_PROPOSTAS_FORNECIMENTO_CARTAO_CREDITO # RECEIVES_FORWARDS_CREDIT_CARD_SUPPLY_PROPOSALS
+            - REALIZA_OPERACOES_CAMBIO # PERFORMS_EXCHANGE_OPERATIONS
+            - OUTROS # OTHERS
           description: ">
-            Relação dos Códigos relativos aos serviços prestados pelo Correspondente
-            \n* `RECEBE_ENCAMINHA_PROPOSTAS_ABERTURA_CONTAS` - Recepção e encaminhamento de propostas de abertura de contas
-            \n* `REALIZA_RECEBIMENTOS_PAGAMENTOS_TRANSFERENCIAS_ELETRONICAS` - Realização de recebimentos, pagamentos e transferências eletrônicas
-            \n* `RECEBIMENTOS_PAGAMENTOS_QUALQUER_NATUREZA_EXECUCAO_CONTRATOS_CONVENIO` - Recebimentos e pagamentos de qualquer natureza
-            \n* `EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGAMENTO` - Execução ativa e passiva de ordens de pagamento
-            \n* `RECEBE_ENCAMINHA_PROPOSTAS_CREDITO_ARRENDAMENTO_MERCANTIL` - Recepção e encaminhamento de propostas de operações de crédito e de arrendamento mercantil
-            \n* `RECEBE_PAGAMENTOS_RELACIONADOS_LETRAS_CAMBIO_ACEITE_INSTITUICAO` - Recebimento e pagamentos relacionados a letras de câmbio de aceite da instituição
-            \n* `RECEBE_ENCAMINHA_PROPOSTAS_FORNECIMENTO_CARTAO_CREDITO` - Recepção e encaminhamento de propostas de fornecimento de cartões de crédito
-            \n* `REALIZA_OPERACOES_CAMBIO` - Realização de operações de câmbio
-            \n* `OUTROS` - Outros"
+            List of Codes related to the services provided by the Correspondent
+            \n* `RECEBE_ENC encaminha_PROPOSTAS_ABERTURA_CONTAS` - Reception and forwarding of account opening proposals
+            \n* `REALIZA_RECEBIMENTOS_PAGAMENTOS_TRANSFERENCIAS_ELETRONICAS` - Carrying out receipts, payments and electronic transfers
+            \n* `RECEBIMENTOS_PAGAMENTOS_QUALQUER_NATUREZA_EXECUCAO_CONTRATOS_CONVENIO` - Receipts and payments of any nature
+            \n* `EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGAMENTO` - Active and passive execution of payment orders
+            \n* `RECEBE_ENC encaminha_PROPOSTAS_CREDITO_ARRENDAMENTO_MERCANTIL` - Reception and forwarding of proposals for credit and leasing operations
+            \n* `RECEBE_PAGAMENTOS_RELACIONADOS_LETRAS_CAMBIO_ACEITE_INSTITUICAO` - Receipt and payments related to exchange letters accepted by the institution
+            \n* `RECEBE_ENC encaminha_PROPOSTAS_FORNECIMENTO_CARTAO_CREDITO` - Reception and forwarding of proposals for the supply of credit cards
+            \n* `REALIZA_OPERACOES_CAMBIO` - Carrying out exchange operations
+            \n* `OUTROS` - Others"
         additionalInfo:
           type: string
-          description: Campo aberto para detalhamento
+          description: Open field for detailing
           maxLength: 2000
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: Informações Adicionais
+          example: Informações Adicionais # Additional Information
       required:
         - name
         - code
     BranchPostalAddress:
       type: object
-      description: Informação referente ao endereço postal
+      description: Postal address information
       required:
         - address
         - districtName
@@ -724,42 +723,42 @@ components:
       properties:
         address:
           type: string
-          description: "Deverá trazer toda a informação referente ao endereço da dependência informada: Tipo de logradouro + Nome do logradouro + Número do Logradouro (se não existir usar ' s/n') + complemento (se houver), como, p.ex.: 'R Diamatina, 59, bloco 35, fundos' 'Praça da Boa Vontade s/n'"
+          description: "Should bring all the information regarding the address of the reported branch: Type of street + Street name + Street number (if it does not exist, use 's/n') + complement (if any), such as, for example: 'R Diamantina, 59, bloco 35, fundos' 'Praça da Boa Vontade s/n'"
           maxLength: 150
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
           example: 'Av Naburo Ykesaki, 1270'
         additionalInfo:
           type: string
-          description: "Alguns logradouros ainda necessitam ser especificados por meio de complemento"
+          description: "Some addresses still need to be specified by means of a complement"
           maxLength: 30
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: Informações Adicionais
+          example: Informações Adicionais # Additional Information
         districtName:
           type: string
-          description: "Bairro é uma comunidade ou região localizada em uma cidade ou município de acordo com as suas subdivisões geográficas. p.ex: 'Paraíso'"
+          description: "Neighborhood is a community or region located in a city or municipality according to its geographical subdivisions. ex: 'Paraíso'"
           maxLength: 50
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: 'Centro'
+          example: 'Centro' # 'Center'
         townName:
           type: string
-          description: "Localidade: O nome da localidade corresponde à designação da cidade ou município no qual o endereço está localizado. p.ex. 'São Paulo'"
+          description: "Locality: The name of the locality corresponds to the designation of the city or municipality in which the address is located. ex. 'São Paulo'"
           maxLength: 50
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
           example: 'Marília'
         ibgeCode:
           type: string
-          description: "Código IBGE do município"
+          description: "IBGE code of the municipality"
           maxLength: 7
           minLength: 7
           pattern: ^\d{7}$
           example: '3515890'
         countrySubDivision:
           type: string
-          description: "Enumeração referente a cada sigla da unidade da federação que identifica o estado ou o distrito federal, no qual o endereço está localizado. p.ex. 'AC'. São consideradas apenas as siglas para os estados brasileiros"
+          description: "Enumeration referring to each abbreviation of the federation unit that identifies the state or the federal district, in which the address is located. ex. 'AC'. Only the abbreviations for the Brazilian states are considered"
           enum:
             - AC
             - AL
@@ -791,21 +790,21 @@ components:
           example: 'SP'
         postCode:
           type: string
-          description: "Código de Endereçamento Postal"
+          description: "Postal Code"
           pattern: '^\d{8}$'
           maxLength: 8
           minLength: 8
           example: '17500001'
         country:
           type: string
-          description: "Nome do país"
+          description: "Country name"
           maxLength: 80
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: 'Brasil'
+          example: 'Brasil' # 'Brazil'
         countryCode:
           type: string
-          description: Código do país de acordo com a ISO 3166-1 alpha-3
+          description: Country code according to ISO 3166-1 alpha-3
           pattern: '^([A-Z]{3})$'
           maxLength: 3
           minLength: 3
@@ -818,33 +817,33 @@ components:
         type:
           type: string
           enum:
-            - FIXO
-            - MOVEL
+            - FIXO # LANDLINE
+            - MOVEL # MOBILE
           example: "FIXO"
-          description: "Identificação do Tipo de telefone da dependência. p.ex.FIXO, MOVEL."
+          description: "Identification of the Branch phone Type. ex.FIXO, MOVEL."
         countryCallingCode:
           type: string
           maxLength: 4
           minLength: 1
           pattern: ^\d{1,4}$
           example: "55"
-          description: "Número de DDI (Discagem Direta Internacional) para  telefone de acesso ao Canal - se houver. p.ex. '55'"
+          description: "DDI (Direct Dialing International) number for accessing the Channel - if any. ex. '55'"
         areaCode:
           type: string
           maxLength: 2
           minLength: 2
           pattern: ^\d{2}$
           example: "19"
-          description: "Número de DDD (Discagem Direta à Distância) do telefone da dependência - se houver. p.ex. '19'"
+          description: "DDD (Direct Distance Dialing) number of the branch phone - if any. ex. '19'"
         number:
           type: string
           maxLength: 11
           minLength: 8
           pattern: '^([0-9]{8,11})$'
           example: "35721199"
-          description: "Número de telefone da dependência - se houver"
+          description: "Branch phone number - if any"
     BranchIdentification:
-      description: Identificação das dependência próprias
+      description: Branch Identification
       type: object
       x-regulatory-required:
         - type
@@ -855,51 +854,51 @@ components:
         type:
           type: string
           enum:
-            - AGENCIA
-            - POSTO_ATENDIMENTO
-            - POSTO_ATENDIMENTO_ELETRONICO
-            - UNIDADE_ADMINISTRATIVA_DESMEMBRADA
+            - AGENCIA # BRANCH
+            - POSTO_ATENDIMENTO # SERVICE_POINT
+            - POSTO_ATENDIMENTO_ELETRONICO # ELECTRONIC_SERVICE_POINT
+            - UNIDADE_ADMINISTRATIVA_DESMEMBRADA # DECENTRALIZED_ADMINISTRATIVE_UNIT
           description: " >
-            Tipo da dependência, segundo a regulamentação do Bacen,  na Resolução Nº 4072, de 26 de abril de 2012:
-            Dependência de instituições financeiras e demais instituições, autorizadas a funcionar pelo Banco Central do Brasil, destinada à prática das atividades para as quais a instituição esteja regularmente habilitada.
-            \n* `AGENCIA`: Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito, no exercício de atividades da instituição, não podendo ser móvel ou transitória;
-            \n* `POSTO_ATENDIMENTO`: Posto de Atendimento é a dependência subordinada a agência  ou à sede da instituição financeira, destinada ao atendimento ao público no exercício de uma ou mais de suas atividades, podendo ser fixo ou móvel. Segundo Art.15. Os Postos de Atendimento Bancário (PAB), Postos Avançados de Atendimento (PAA), Postos de Atendimento Transitórios (PAT), Postos de Compra de Ouro (PCO), Postos de Atendimento Cooperativo (PAC), Postos de Atendimento de Microcrédito (PAM), Postos Bancários de Arrecadação e Pagamento (PAP) e os Postos de Câmbio atualmente em funcionamento serão considerados PA.
-            \n* `POSTO_ATENDIMENTO_ELETRONICO`: Posto de Atendimento Eletrônico é a dependência constituída por um ou mais terminais de autoatendimento, subordinada a agência ou à sede da instituição, destinada à prestação de serviços por meio eletrônico, podendo ser fixo ou móvel, permanente ou transitório
-            \n* `UNIDADE_ADMINISTRATIVA_DESMEMBRADA `: Unidade Administrativa Desmembrada (UAD) segundo a Resolução 4072 , BCB, 2012, no Art. 8º \"... é dependência destinada à execução de atividades administrativas da instituição, vedado o atendimento ao público\""
+            Branch type, according to Bacen regulation, in Resolution No. 4072, of April 26, 2012:
+            Branch of financial institutions and other institutions, authorized to operate by the Central Bank of Brazil, intended for the practice of activities for which the institution is duly qualified.
+            \n* `AGENCIA`: Branch is the branch intended to serve customers, the general public and members of credit unions, in the exercise of the institution's activities, and cannot be mobile or temporary;
+            \n* `POSTO_ATENDIMENTO`: Service Point is the branch subordinated to the agency or headquarters of the financial institution, intended to serve the public in the exercise of one or more of its activities, and may be fixed or mobile. According to Art. 15. Banking Service Stations (PAB), Advanced Service Stations (PAA), Temporary Service Stations (PAT), Gold Purchase Stations (PCO), Cooperative Service Stations (PAC), Microcredit Service Stations (PAM), Banking Collection and Payment Stations (PAP) and Exchange Stations currently in operation will be considered PA.
+            \n* `POSTO_ATENDIMENTO_ELETRONICO`: Electronic Service Point is the branch consisting of one or more ATMs, subordinated to the agency or headquarters of the institution, intended to provide services electronically, and may be fixed or mobile, permanent or temporary
+            \n* `UNIDADE_ADMINISTRATIVA_DESMEMBRADA `: Decentralized Administrative Unit (UAD) according to Resolution 4072, BCB, 2012, in Art. 8º \"... is a branch intended for the execution of administrative activities of the institution, public service is prohibited\""
         code:
           type: string
           maxLength: 4
           minLength: 4
           pattern: '^(\d{4})$'
-          description: Código identificador da dependência
+          description: Branch identifier code
           example: '0001'
         checkDigit:
           type: string
           maxLength: 1
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          description: Dígito verificador do código da dependência
-          example: '1' 
+          description: Check digit of the branch code
+          example: '1'
         name:
           type: string
           maxLength: 100
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          description: Nome da dependência
-          example: Dependência X
+          description: Branch name
+          example: Dependência X # Branch X
         relatedBranch:
           type: string
           maxLength: 4
           minLength: 4
           pattern: ^\d{4}$
-          description: Código da agência vinculada ao Posto de Atendimento - se aplicável
+          description: Agency code linked to the Service Point - if applicable
           example: '0001'
         openingDate:
           type: string
           maxLength: 10
           minLength: 10
           pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$
-          description: Data de abertura da dependência (uma string com data conforme especificação RFC-3339. p.ex. 2014-03-19)
+          description: Branch opening date (a string with date according to RFC-3339 specification. e.g. 2014-03-19)
           example: '2023-10-16'
       required:
         - type
@@ -908,11 +907,11 @@ components:
         - name
     BranchAvailability:
       type: object
-      description: Horário de funcionamento das operações
+      description: Operating hours
       properties:
         standards:
           type: array
-          description: Lista disponibilidade padrão da depêndencia por dias da semana
+          description: Standard availability list of the branch by weekdays
           items:
             type: object
             required:
@@ -923,22 +922,22 @@ components:
               weekday:
                 type: string
                 enum:
-                  - DOMINGO
-                  - SEGUNDA_FEIRA
-                  - TERCA_FEIRA
-                  - QUARTA_FEIRA
-                  - QUINTA_FEIRA
-                  - SEXTA_FEIRA
-                  - SABADO
-                description: Dia da semana de abertura da dependência bancária
+                  - DOMINGO # SUNDAY
+                  - SEGUNDA_FEIRA # MONDAY
+                  - TERCA_FEIRA # TUESDAY
+                  - QUARTA_FEIRA # WEDNESDAY
+                  - QUINTA_FEIRA # THURSDAY
+                  - SEXTA_FEIRA # FRIDAY
+                  - SABADO # SATURDAY
+                description: Day of the week the bank branch opens
               openingTime:
                 type: string
-                description: Horário de abertura da dependência bancária (UTC)
+                description: Bank branch opening time (UTC)
                 maxLength: 13
                 pattern: ^(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
               closingTime:
                 type: string
-                description: Horário de fechamento da dependência bancária (UTC)
+                description: Bank branch closing time (UTC)
                 maxLength: 13
                 pattern: ^(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
           minItems: 1
@@ -947,11 +946,11 @@ components:
           maxLength: 2000
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          description: Em campo texto devem ser registradas todas as Exceções para o não atendimento
-          example: Exceto feriados municipais, estaduais e nacionais
+          description: In the text field, all Exceptions for non-attendance must be recorded
+          example: Exceto feriados municipais, estaduais e nacionais # Except municipal, state and national holidays
         isPublicAccessAllowed:
           type: boolean
-          description: Indica se a instalação da Dependência tem acesso restrito a clientes
+          description: Indicates whether the Branch facility has restricted access to customers
           example: true
       required:
         - standards
@@ -964,64 +963,64 @@ components:
         name:
           type: string
           enum:
-            - ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA
-            - SAQUE_MOEDA_EM_ESPECIE
-            - RECEBIMENTOS_PAGAMENTOS_QUALQUER_NATUREZA
-            - TRANSFERENCIAS_ELETRONICAS_VISANDO_MOVIMENTACAO_CONTAS_DEPOSITOS_OU_PAGAMENTO_TITULARIDADE_CLIENTES
-            - CONSULTA_SALDOS_EXTRATOS_CONTAS_DEPOSITOS_CONTAS_PAGAMENTOS
-            - APLICACOES_RESGATES_INVESTIMENTOS
-            - EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGAMENTO_SOLICITACAO_CLIENTES_USUARIOS
-            - DEPOSITOS_MOEDA_ESPECIE_CHEQUE
-            - OPERACOES_CREDITO_BEM_COMO_OUTROS_SERVICOS_PRESTADOS_ACOMPANHAMENTO_OPERACAO
-            - CARTAO_CREDITO
-            - SEGUROS
-            - OPERACOES_ARRENDAMENTO_MERCANTIL
-            - ABERTURA_CONTA_PAGAMENTO_POS_PAGA
-            - COMPRA_VENDA_MOEDA_ESTRANGEIRA_ESPECIE
-            - COMPRA_VENDA_CHEQUE_CHEQUE_VIAGEM_BEM_COMO_CARGA_MOEDA_ESTRANGEIRA_CARTAO_PRE_PAGO
-            - COMPRA_VENDA_OURO
-            - OUTROS_PRODUTOS_SERVICOS
-            - CANCELAMENTO
-            - INFORMACOES
-            - RECLAMACOES
-          description: Nome dos Serviços efetivamente prestados pelo Canal de Atendimento
+            - ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA # OPENING_ACCOUNTS_DEPOSITS_OR_PRE_PAID_PAYMENT
+            - SAQUE_MOEDA_EM_ESPECIE # WITHDRAWAL_CASH
+            - RECEBIMENTOS_PAGAMENTOS_QUALQUER_NATUREZA # RECEIPTS_PAYMENTS_ANY_NATURE
+            - TRANSFERENCIAS_ELETRONICAS_VISANDO_MOVIMENTACAO_CONTAS_DEPOSITOS_OU_PAGAMENTO_TITULARIDADE_CLIENTES # ELECTRONIC_TRANSFERS_AIMING_MOVEMENT_ACCOUNTS_DEPOSITS_OR_PAYMENT_OWNERSHIP_CUSTOMERS
+            - CONSULTA_SALDOS_EXTRATOS_CONTAS_DEPOSITOS_CONTAS_PAGAMENTOS # BALANCE_INQUIRY_STATEMENTS_ACCOUNTS_DEPOSITS_PAYMENTS_ACCOUNTS
+            - APLICACOES_RESGATES_INVESTIMENTOS # APPLICATIONS_REDEMPTIONS_INVESTMENTS
+            - EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGAMENTO_SOLICITACAO_CLIENTES_USUARIOS # ACTIVE_PASSIVE_EXECUTION_PAYMENT_ORDERS_CUSTOMER_USER_REQUEST
+            - DEPOSITOS_MOEDA_ESPECIE_CHEQUE # DEPOSITS_CASH_CHECK
+            - OPERACOES_CREDITO_BEM_COMO_OUTROS_SERVICOS_PRESTADOS_ACOMPANHAMENTO_OPERACAO # CREDIT_OPERATIONS_AS_WELL_AS_OTHER_SERVICES_PROVIDED_OPERATION_MONITORING
+            - CARTAO_CREDITO # CREDIT_CARD
+            - SEGUROS # INSURANCE
+            - OPERACOES_ARRENDAMENTO_MERCANTIL # LEASING_OPERATIONS
+            - ABERTURA_CONTA_PAGAMENTO_POS_PAGA # OPENING_POST_PAID_PAYMENT_ACCOUNT
+            - COMPRA_VENDA_MOEDA_ESTRANGEIRA_ESPECIE # PURCHASE_SALE_FOREIGN_CURRENCY_CASH
+            - COMPRA_VENDA_CHEQUE_CHEQUE_VIAGEM_BEM_COMO_CARGA_MOEDA_ESTRANGEIRA_CARTAO_PRE_PAGO # PURCHASE_SALE_CHECK_TRAVELERS_CHECK_AS_WELL_AS_FOREIGN_CURRENCY_LOAD_PRE_PAID_CARD
+            - COMPRA_VENDA_OURO # PURCHASE_SALE_GOLD
+            - OUTROS_PRODUTOS_SERVICOS # OTHER_PRODUCTS_SERVICES
+            - CANCELAMENTO # CANCELLATION
+            - INFORMACOES # INFORMATION
+            - RECLAMACOES # COMPLAINTS
+          description: Name of Services actually provided by the Service Channel
         code:
           type: string
           enum:
-            - ABRE_CONTA_DEPOSITO_OU_PRE_PAGA
-            - SAQUE_MOEDA_ESPECIE
-            - RECEBE_PAGA_QUALQUER_NATUREZA
-            - TRANSFERENCIAS_ELETRONICAS_MOVIMENTA_CONTAS_DEPOSITOS_OU_PAGTO_TITULARES_CLIENTES
-            - CONSULTA_SALDOS_EXTRATOS_CONTAS_DEPOSITOS_PAGTOS
-            - APLICA_RESGATA_INVESTIMENTOS
-            - EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGTO
-            - DEPOSITO_MOEDA_ESPECIE_CHEQUE
-            - OPERA_CREDITO_OUTROS_SERVICOS_ACOMPANHA_OPERACAO
-            - CARTAO_CREDITO
-            - SEGUROS
-            - OPERA_ARRENDAMENTO_MERCANTIL
-            - ABERTURA_CONTA_PAGAMENTO_POS_PAGA
-            - COMPRA_VENDA_MOEDA_ESTRANGEIRA_ESPECIE
-            - COMPRA_VENDA_CHEQUE_CHEQUE_VIAGEM_CARGA_MOEDA_ESTRANGEIRA_CARTAO_PRE_PAGO
-            - COMPRA_VENDA_OURO
-            - OUTROS_PRODUTOS_SERVICOS
-            - CANCELAMENTO
-            - INFORMACOES
-            - RECLAMACOES
-          description: Código dos Serviços efetivamente prestados pelo Canal de Atendimento
+            - ABRE_CONTA_DEPOSITO_OU_PRE_PAGA # OPENS_DEPOSIT_OR_PRE_PAID_ACCOUNT
+            - SAQUE_MOEDA_ESPECIE # WITHDRAWAL_CASH
+            - RECEBE_PAGA_QUALQUER_NATUREZA # RECEIVES_PAYS_ANY_NATURE
+            - TRANSFERENCIAS_ELETRONICAS_MOVIMENTA_CONTAS_DEPOSITOS_OU_PAGTO_TITULARES_CLIENTES # ELECTRONIC_TRANSFERS_MOVES_ACCOUNTS_DEPOSITS_OR_PAYMENT_HOLDERS_CUSTOMERS
+            - CONSULTA_SALDOS_EXTRATOS_CONTAS_DEPOSITOS_PAGTOS # BALANCE_INQUIRY_STATEMENTS_ACCOUNTS_DEPOSITS_PAYMENTS
+            - APLICA_RESGATA_INVESTIMENTOS # APPLIES_RESCUES_INVESTMENTS
+            - EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGTO # ACTIVE_PASSIVE_EXECUTION_PAYMENT_ORDERS
+            - DEPOSITO_MOEDA_ESPECIE_CHEQUE # DEPOSIT_CASH_CHECK
+            - OPERA_CREDITO_OUTROS_SERVICOS_ACOMPANHA_OPERACAO # OPERATES_CREDIT_OTHER_SERVICES_MONITORS_OPERATION
+            - CARTAO_CREDITO # CREDIT_CARD
+            - SEGUROS # INSURANCE
+            - OPERA_ARRENDAMENTO_MERCANTIL # OPERATES_LEASING
+            - ABERTURA_CONTA_PAGAMENTO_POS_PAGA # OPENING_POST_PAID_PAYMENT_ACCOUNT
+            - COMPRA_VENDA_MOEDA_ESTRANGEIRA_ESPECIE # PURCHASE_SALE_FOREIGN_CURRENCY_CASH
+            - COMPRA_VENDA_CHEQUE_CHEQUE_VIAGEM_CARGA_MOEDA_ESTRANGEIRA_CARTAO_PRE_PAGO # PURCHASE_SALE_CHECK_TRAVELERS_CHECK_LOAD_FOREIGN_CURRENCY_PRE_PAID_CARD
+            - COMPRA_VENDA_OURO # PURCHASE_SALE_GOLD
+            - OUTROS_PRODUTOS_SERVICOS # OTHER_PRODUCTS_SERVICES
+            - CANCELAMENTO # CANCELLATION
+            - INFORMACOES # INFORMATION
+            - RECLAMACOES # COMPLAINTS
+          description: Code of Services actually provided by the Service Channel
         additionalInfo:
           type: string
-          description: Texto livre para complementar informação relativa ao Serviço disponível, quando for selecionada a opção 'OUTROS_PRODUTOS_SERVICOS'
+          description: Free text to complement information regarding the available Service, when the option 'OUTROS_PRODUTOS_SERVICOS' is selected
           maxLength: 2000
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: Informações Adicionais
+          example: Informações Adicionais # Additional Information
       required:
       - code
       - name
     ElectronicChannelIdentification:
       type: object
-      description: Identificação dos canais eletrônicos para atendimento
+      description: Identification of electronic channels for service
       required:
         - type
         - urls
@@ -1032,29 +1031,29 @@ components:
         type:
           type: string
           enum:
-            - INTERNET_BANKING
-            - MOBILE_BANKING
-            - SAC
-            - OUVIDORIA
-            - CHAT
-            - OUTROS
-          description: "Tipo de canal de atendimento eletrônico"
+            - INTERNET_BANKING # INTERNET_BANKING
+            - MOBILE_BANKING # MOBILE_BANKING
+            - SAC # SAC (Customer Service)
+            - OUVIDORIA # OMBUDSMAN
+            - CHAT # CHAT
+            - OUTROS # OTHERS
+          description: "Type of electronic service channel"
           example: "CHAT"
         additionalInfo:
           type: string
           description: |
-            Campo de texto livre para descrever complementação de informações necessárias. De preenchimento obrigatório para  o tipo de canal de atendimento 'OUTROS'
-            Restrição: Preenchimento obrigatório para o tipo de canal de atendimento 'OUTROS'
+            Free text field to describe complementary information needed. Mandatory to fill in for the 'OTHERS' service channel type
+            Restriction: Mandatory to fill in for the 'OTHERS' service channel type
           minLength: 1
           maxLength: 300
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: Informações Adicionais
+          example: Informações Adicionais # Additional Information
         urls:
           type: array
           items:
             $ref: '#/components/schemas/ElectronicChannelUrl'
           minItems: 1
-          description: URLs dos canais eletrônicos de atendimento
+          description: URLs of electronic service channels
           example: [ "https://empresaa1.com/internet-banking", "https://empresaa1.com/sac", "https://empresaa1.com/ouvidoria"]
     ElectronicChannelUrl:
       type: string
@@ -1073,92 +1072,92 @@ components:
         name:
           type: string
           enum:
-            - ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA
-            - SAQUE_MOEDA_EM_ESPECIE
-            - RECEBIMENTOS_PAGAMENTOS_QUALQUER_NATUREZA
-            - TRANSFERENCIAS_ELETRONICAS_VISANDO_MOVIMENTACAO_CONTAS_DEPOSITOS_OU_PAGAMENTO_TITULARIDADE_CLIENTES
-            - CONSULTA_SALDOS_EXTRATOS_CONTAS_DEPOSITOS_CONTAS_PAGAMENTOS
-            - APLICACOES_RESGATES_INVESTIMENTOS
-            - EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGAMENTO_SOLICITACAO_CLIENTES_USUARIOS
-            - DEPOSITOS_MOEDA_ESPECIE_CHEQUE
-            - OPERACOES_CREDITO_BEM_COMO_OUTROS_SERVICOS_PRESTADOS_ACOMPANHAMENTO_OPERACAO
-            - CARTAO_CREDITO
-            - SEGUROS
-            - OPERACOES_ARRENDAMENTO_MERCANTIL
-            - ABERTURA_CONTA_PAGAMENTO_POS_PAGA
-            - COMPRA_VENDA_MOEDA_ESTRANGEIRA_ESPECIE
-            - COMPRA_VENDA_CHEQUE_CHEQUE_VIAGEM_BEM_COMO_CARGA_MOEDA_ESTRANGEIRA_CARTAO_PRE_PAGO
-            - COMPRA_VENDA_OURO
-            - OUTROS_PRODUTOS_SERVICOS
-            - CANCELAMENTO
-            - INFORMACOES
-            - RECLAMACOES
-          description: "Nome dos Serviços efetivamente prestados pelo Canal de Atendimento"
-          example: "ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA"
+            - ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA # OPENING_ACCOUNTS_DEPOSITS_OR_PRE_PAID_PAYMENT
+            - SAQUE_MOEDA_EM_ESPECIE # WITHDRAWAL_CASH
+            - RECEBIMENTOS_PAGAMENTOS_QUALQUER_NATUREZA # RECEIPTS_PAYMENTS_ANY_NATURE
+            - TRANSFERENCIAS_ELETRONICAS_VISANDO_MOVIMENTACAO_CONTAS_DEPOSITOS_OU_PAGAMENTO_TITULARIDADE_CLIENTES # ELECTRONIC_TRANSFERS_AIMING_MOVEMENT_ACCOUNTS_DEPOSITS_OR_PAYMENT_OWNERSHIP_CUSTOMERS
+            - CONSULTA_SALDOS_EXTRATOS_CONTAS_DEPOSITOS_CONTAS_PAGAMENTOS # BALANCE_INQUIRY_STATEMENTS_ACCOUNTS_DEPOSITS_PAYMENTS_ACCOUNTS
+            - APLICACOES_RESGATES_INVESTIMENTOS # APPLICATIONS_REDEMPTIONS_INVESTMENTS
+            - EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGAMENTO_SOLICITACAO_CLIENTES_USUARIOS # ACTIVE_PASSIVE_EXECUTION_PAYMENT_ORDERS_CUSTOMER_USER_REQUEST
+            - DEPOSITOS_MOEDA_ESPECIE_CHEQUE # DEPOSITS_CASH_CHECK
+            - OPERACOES_CREDITO_BEM_COMO_OUTROS_SERVICOS_PRESTADOS_ACOMPANHAMENTO_OPERACAO # CREDIT_OPERATIONS_AS_WELL_AS_OTHER_SERVICES_PROVIDED_OPERATION_MONITORING
+            - CARTAO_CREDITO # CREDIT_CARD
+            - SEGUROS # INSURANCE
+            - OPERACOES_ARRENDAMENTO_MERCANTIL # LEASING_OPERATIONS
+            - ABERTURA_CONTA_PAGAMENTO_POS_PAGA # OPENING_POST_PAID_PAYMENT_ACCOUNT
+            - COMPRA_VENDA_MOEDA_ESTRANGEIRA_ESPECIE # PURCHASE_SALE_FOREIGN_CURRENCY_CASH
+            - COMPRA_VENDA_CHEQUE_CHEQUE_VIAGEM_BEM_COMO_CARGA_MOEDA_ESTRANGEIRA_CARTAO_PRE_PAGO # PURCHASE_SALE_CHECK_TRAVELERS_CHECK_AS_WELL_AS_FOREIGN_CURRENCY_LOAD_PRE_PAID_CARD
+            - COMPRA_VENDA_OURO # PURCHASE_SALE_GOLD
+            - OUTROS_PRODUTOS_SERVICOS # OTHER_PRODUCTS_SERVICES
+            - CANCELAMENTO # CANCELLATION
+            - INFORMACOES # INFORMATION
+            - RECLAMACOES # COMPLAINTS
+          description: "Name of Services actually provided by the Service Channel"
+          example: "ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA" # Example kept in Portuguese as requested.
         code:
           type: string
           enum:
-            - ABRE_CONTA_DEPOSITO_OU_PRE_PAGA
-            - SAQUE_MOEDA_ESPECIE
-            - RECEBE_PAGA_QUALQUER_NATUREZA
-            - TRANSFERENCIAS_ELETRONICAS_MOVIMENTA_CONTAS_DEPOSITOS_OU_PAGTO_TITULARES_CLIENTES
-            - CONSULTA_SALDOS_EXTRATOS_CONTAS_DEPOSITOS_PAGTOS
-            - APLICA_RESGATA_INVESTIMENTOS
-            - EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGTO
-            - DEPOSITO_MOEDA_ESPECIE_CHEQUE
-            - OPERA_CREDITO_OUTROS_SERVICOS_ACOMPANHA_OPERACAO
-            - CARTAO_CREDITO
-            - SEGUROS
-            - OPERA_ARRENDAMENTO_MERCANTIL
-            - ABERTURA_CONTA_PAGAMENTO_POS_PAGA
-            - COMPRA_VENDA_MOEDA_ESTRANGEIRA_ESPECIE
-            - COMPRA_VENDA_CHEQUE_CHEQUE_VIAGEM_CARGA_MOEDA_ESTRANGEIRA_CARTAO_PRE_PAGO
-            - COMPRA_VENDA_OURO
-            - OUTROS_PRODUTOS_SERVICOS
-            - CANCELAMENTO
-            - INFORMACOES
-            - RECLAMACOES
-          description: "Código dos Serviços efetivamente prestados pelo Canal de Atendimento"
-          example: "ABRE_CONTA_DEPOSITO_OU_PRE_PAGA"
+            - ABRE_CONTA_DEPOSITO_OU_PRE_PAGA # OPENS_DEPOSIT_OR_PRE_PAID_ACCOUNT
+            - SAQUE_MOEDA_ESPECIE # WITHDRAWAL_CASH
+            - RECEBE_PAGA_QUALQUER_NATUREZA # RECEIVES_PAYS_ANY_NATURE
+            - TRANSFERENCIAS_ELETRONICAS_MOVIMENTA_CONTAS_DEPOSITOS_OU_PAGTO_TITULARES_CLIENTES # ELECTRONIC_TRANSFERS_MOVES_ACCOUNTS_DEPOSITS_OR_PAYMENT_HOLDERS_CUSTOMERS
+            - CONSULTA_SALDOS_EXTRATOS_CONTAS_DEPOSITOS_PAGTOS # BALANCE_INQUIRY_STATEMENTS_ACCOUNTS_DEPOSITS_PAYMENTS
+            - APLICA_RESGATA_INVESTIMENTOS # APPLIES_RESCUES_INVESTMENTS
+            - EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGTO # ACTIVE_PASSIVE_EXECUTION_PAYMENT_ORDERS
+            - DEPOSITO_MOEDA_ESPECIE_CHEQUE # DEPOSIT_CASH_CHECK
+            - OPERA_CREDITO_OUTROS_SERVICOS_ACOMPANHA_OPERACAO # OPERATES_CREDIT_OTHER_SERVICES_MONITORS_OPERATION
+            - CARTAO_CREDITO # CREDIT_CARD
+            - SEGUROS # INSURANCE
+            - OPERA_ARRENDAMENTO_MERCANTIL # OPERATES_LEASING
+            - ABERTURA_CONTA_PAGAMENTO_POS_PAGA # OPENING_POST_PAID_PAYMENT_ACCOUNT
+            - COMPRA_VENDA_MOEDA_ESTRANGEIRA_ESPECIE # PURCHASE_SALE_FOREIGN_CURRENCY_CASH
+            - COMPRA_VENDA_CHEQUE_CHEQUE_VIAGEM_CARGA_MOEDA_ESTRANGEIRA_CARTAO_PRE_PAGO # PURCHASE_SALE_CHECK_TRAVELERS_CHECK_LOAD_FOREIGN_CURRENCY_PRE_PAID_CARD
+            - COMPRA_VENDA_OURO # PURCHASE_SALE_GOLD
+            - OUTROS_PRODUTOS_SERVICOS # OTHER_PRODUCTS_SERVICES
+            - CANCELAMENTO # CANCELLATION
+            - INFORMACOES # INFORMATION
+            - RECLAMACOES # COMPLAINTS
+          description: "Code of Services actually provided by the Service Channel"
+          example: "ABRE_CONTA_DEPOSITO_OU_PRE_PAGA" # Example kept in Portuguese as requested.
         additionalInfo:
           type: string
-          description: "Texto livre para complementar informação relativa ao Serviço disponível, quando for selecionada a opção 'OUTROS_PRODUTOS_SERVICOS'"
+          description: "Free text to complement information regarding the available Service, when the option 'OUTROS_PRODUTOS_SERVICOS' is selected"
           maxLength: 2000
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: Informações Adicionais
+          example: Informações Adicionais # Additional Information
     Phone:
       type: object
-      description: Lista de telefones do agente bancária
+      description: List of banking agent phones
       properties:
         type:
           type: string
           enum:
-            - FIXO
-            - MOVEL
+            - FIXO # LANDLINE
+            - MOVEL # MOBILE
           example: "FIXO"
-          description: "Identificação do Tipo de telefone da dependência. p.ex.FIXO, MOVEL."
+          description: "Identification of the Branch phone Type. ex.FIXO, MOVEL."
         countryCallingCode:
           type: string
           maxLength: 4
           minLength: 1
           pattern: ^\d{1,4}$
           example: "55"
-          description: "Número de DDI (Discagem Direta Internacional) para  telefone de acesso ao Canal - se houver. p.ex. '55'"
+          description: "DDI (Direct Dialing International) number for accessing the Channel - if any. ex. '55'"
         areaCode:
           type: string
           maxLength: 2
           minLength: 2
           pattern: ^\d{2}$
           example: "19"
-          description: "Número de DDD (Discagem Direta à Distância) do telefone da dependência - se houver. p.ex. '19'"
+          description: "DDD (Direct Distance Dialing) number of the branch phone - if any. ex. '19'"
         number:
           type: string
           maxLength: 11
           minLength: 8
           pattern: '^([0-9]{8,11})$'
           example: "35721199"
-          description: "Número de telefone da dependência - se houver"
+          description: "Branch phone number - if any"
     ResponseSharedAutomatedTellerMachinesList:
       type: object
       required:
@@ -1168,7 +1167,7 @@ components:
       properties:
         data:
           type: array
-          description: Conjunto de informações referente aos terminais compartilhados de autoatendimento da instituição
+          description: Set of information regarding the shared automated teller machines of the institution
           minItems: 1
           items:
             $ref: '#/components/schemas/SharedAutomatedTellerMachinesData'
@@ -1193,26 +1192,26 @@ components:
             $ref: '#/components/schemas/SharedAutomatedTellerMachinesServices'
     SharedAutomatedTellerMachinesParticipant:
       type: object
-      description: Conjunto de informações relativas ao participante do produto de Open Finance
+      description: Set of information regarding the participant of the Open Finance product
       properties:
         brand:
           type: string
           maxLength: 80
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          description: Nome da marca selecionada pela Organização
-          example: Organização A
+          description: Brand name selected by the Organization
+          example: Organização A # Organization A
         name:
           type: string
-          description: Nome da Instituição, pertencente à Marca.
+          description: Name of the Institution, belonging to the Brand.
           maxLength: 80
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: 'Empresa da Organização A'
+          example: 'Empresa da Organização A' # 'Company of Organization A'
         cnpjNumber:
           type: string
           pattern: '^\d{14}$'
-          description: Número completo do CNPJ da instituição
+          description: Full CNPJ number of the institution
           maxLength: 14
           minLength: 14
           example: "50685362000135"
@@ -1222,84 +1221,84 @@ components:
           minLength: 1
           maxLength: 1024
           description: |
-            URL de link para lista complementar com os nomes e CNPJs agrupados para o caso instituições ofertantes de produtos e serviços com as mesmas características.
+            URL link to complementary list with names and CNPJs grouped for institutions offering products and services with the same characteristics.
           example: 'https://empresadaorganizacaoa.com/complementarylist'
     SharedAutomatedTellerMachinesServices:
       type: object
-      description: Traz a relação de serviços disponibilizados pelo Canal de Atendimento
+      description: Brings the list of services offered by the Service Channel
       properties:
         name:
           type: string
           enum:
-            - ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA
-            - SAQUE_MOEDA_EM_ESPECIE
-            - RECEBIMENTOS_PAGAMENTOS_QUALQUER_NATUREZA
-            - TRANSFERENCIAS_ELETRONICAS_VISANDO_MOVIMENTACAO
-            - CONTAS_DEPOSITOS_OU_PAGAMENTO_TITULARIDADE_CLIENTES
-            - CONSULTA_SALDOS_EXTRATOS_CONTAS_DEPOSITOS_E_CONTAS
-            - PAGAMENTOS
-            - APLICACOES_RESGATES_INVESTIMENTOS
-            - EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGAMENTO_SOLICITACAO
-            - CLIENTES_USUARIOS
-            - DEPOSITOS_MOEDA_ESPECIE_CHEQUE
-            - OPERACOES_CREDITO_BEM_COMO_OUTROS_SERVICOS_PRESTADOS_ACOMPANHAMENTO_OPERACAO
-            - CARTAO_CREDITO
-            - SEGUROS
-            - OPERACOES_ARRENDAMENTO_MERCANTIL
-            - ABERTURA_CONTA_PAGAMENTO_POS_PAGA
-            - COMPRA_VENDA_MOEDA_ESTRANGEIRA_ESPECIE
-            - COMPRA_VENDA_CHEQUE_CHEQUE_VIAGEM_BEM_COMO_CARGA_MOEDA_ESTRANGEIRA_CARTAO_PRE_PAGO
-            - COMPRA_VENDA_OURO
-            - OUTROS_PRODUTOS_SERVICOS
-            - CANCELAMENTO
-            - INFORMACOES
-            - RECLAMACOES
-          description: "Nome dos Serviços efetivamente prestados pelo Terminal de Autoatendimento Compartilhado informado"
-          example: OUTROS_PRODUTOS_SERVICOS
+            - ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA # OPENING_ACCOUNTS_DEPOSITS_OR_PRE_PAID_PAYMENT
+            - SAQUE_MOEDA_EM_ESPECIE # WITHDRAWAL_CASH
+            - RECEBIMENTOS_PAGAMENTOS_QUALQUER_NATUREZA # RECEIPTS_PAYMENTS_ANY_NATURE
+            - TRANSFERENCIAS_ELETRONICAS_VISANDO_MOVIMENTACAO # ELECTRONIC_TRANSFERS_AIMING_MOVEMENT
+            - CONTAS_DEPOSITOS_OU_PAGAMENTO_TITULARIDADE_CLIENTES # ACCOUNTS_DEPOSITS_OR_PAYMENT_OWNERSHIP_CUSTOMERS
+            - CONSULTA_SALDOS_EXTRATOS_CONTAS_DEPOSITOS_E_CONTAS # BALANCE_INQUIRY_STATEMENTS_ACCOUNTS_DEPOSITS_AND_ACCOUNTS
+            - PAGAMENTOS # PAYMENTS
+            - APLICACOES_RESGATES_INVESTIMENTOS # APPLICATIONS_REDEMPTIONS_INVESTMENTS
+            - EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGAMENTO_SOLICITACAO # ACTIVE_PASSIVE_EXECUTION_PAYMENT_ORDERS_REQUEST
+            - CLIENTES_USUARIOS # CUSTOMERS_USERS
+            - DEPOSITOS_MOEDA_ESPECIE_CHEQUE # DEPOSITS_CASH_CHECK
+            - OPERACOES_CREDITO_BEM_COMO_OUTROS_SERVICOS_PRESTADOS_ACOMPANHAMENTO_OPERACAO # CREDIT_OPERATIONS_AS_WELL_AS_OTHER_SERVICES_PROVIDED_OPERATION_MONITORING
+            - CARTAO_CREDITO # CREDIT_CARD
+            - SEGUROS # INSURANCE
+            - OPERACOES_ARRENDAMENTO_MERCANTIL # LEASING_OPERATIONS
+            - ABERTURA_CONTA_PAGAMENTO_POS_PAGA # OPENING_POST_PAID_PAYMENT_ACCOUNT
+            - COMPRA_VENDA_MOEDA_ESTRANGEIRA_ESPECIE # PURCHASE_SALE_FOREIGN_CURRENCY_CASH
+            - COMPRA_VENDA_CHEQUE_CHEQUE_VIAGEM_BEM_COMO_CARGA_MOEDA_ESTRANGEIRA_CARTAO_PRE_PAGO # PURCHASE_SALE_CHECK_TRAVELERS_CHECK_AS_WELL_AS_FOREIGN_CURRENCY_LOAD_PRE_PAID_CARD
+            - COMPRA_VENDA_OURO # PURCHASE_SALE_GOLD
+            - OUTROS_PRODUTOS_SERVICOS # OTHER_PRODUCTS_SERVICES
+            - CANCELAMENTO # CANCELLATION
+            - INFORMACOES # INFORMATION
+            - RECLAMACOES # COMPLAINTS
+          description: "Name of Services actually provided by the Shared ATM informed"
+          example: OUTROS_PRODUTOS_SERVICOS # Example kept in Portuguese as requested.
         code:
           type: string
           enum:
-            - ABRE_CONTA_DEPOSITO_OU_PRE_PAGA
-            - SAQUE_MOEDA_ESPECIE
-            - RECEBE_PAGA_QUALQUER_NATUREZA
-            - TRANSFERENCIAS_ELETRONICAS_MOVIMENTA_CONTAS_DEPOSITOS_OU_PAGA_TITULARES_CLIENTES
-            - CONSULTA_SALDOS_EXTRATOS_CONTAS_DEPOSITOS
-            - PAGAMENTOS
-            - APLICA_RESGATA_INVESTIMENTOS
-            - EXECUTA_ATIVA_PASSIVA_ORDENS_PAGAMENTO
-            - DEPOSITA_MOEDA_ESPECIE_CHEQUE
-            - OPERA_CREDITO_OUTROS_SERVICOS_ACOMPANHA_OPERACAO
-            - CARTAO_CREDITO
-            - SEGUROS
-            - OPERA_ARRENDAMENTO_MERCANTIL
-            - ABERTURA_CONTA_PAGAMENTO_POS_PAGA
-            - COMPRA_VENDE_MOEDA_ESTRANGEIRA_ESPECIE
-            - COMPRA_VENDE_CHEQUE_CHEQUE_VIAGEM_CARGA_MOEDA_ESTRANGEIRA_CARTAO_PRE_PAGO
-            - COMPRA_VENDE_OURO
-            - OUTROS_PRODUTOS_SERVICOS
-            - CANCELAMENTO
-            - INFORMACOES
-            - RECLAMACOES
-          description: "Código dos Serviços efetivamente prestados pelo Terminal de Autoatendimento Compartilhado informado"
-          example: OUTROS_PRODUTOS_SERVICOS
+            - ABRE_CONTA_DEPOSITO_OU_PRE_PAGA # OPENS_DEPOSIT_OR_PRE_PAID_ACCOUNT
+            - SAQUE_MOEDA_ESPECIE # WITHDRAWAL_CASH
+            - RECEBE_PAGA_QUALQUER_NATUREZA # RECEIVES_PAYS_ANY_NATURE
+            - TRANSFERENCIAS_ELETRONICAS_MOVIMENTA_CONTAS_DEPOSITOS_OU_PAGA_TITULARES_CLIENTES # ELECTRONIC_TRANSFERS_MOVES_ACCOUNTS_DEPOSITS_OR_PAYS_HOLDERS_CUSTOMERS
+            - CONSULTA_SALDOS_EXTRATOS_CONTAS_DEPOSITOS # BALANCE_INQUIRY_STATEMENTS_ACCOUNTS_DEPOSITS
+            - PAGAMENTOS # PAYMENTS
+            - APLICA_RESGATA_INVESTIMENTOS # APPLIES_RESCUES_INVESTMENTS
+            - EXECUTA_ATIVA_PASSIVA_ORDENS_PAGAMENTO # EXECUTES_ACTIVE_PASSIVE_PAYMENT_ORDERS
+            - DEPOSITA_MOEDA_ESPECIE_CHEQUE # DEPOSITS_CASH_CHECK
+            - OPERA_CREDITO_OUTROS_SERVICOS_ACOMPANHA_OPERACAO # OPERATES_CREDIT_OTHER_SERVICES_MONITORS_OPERATION
+            - CARTAO_CREDITO # CREDIT_CARD
+            - SEGUROS # INSURANCE
+            - OPERA_ARRENDAMENTO_MERCANTIL # OPERATES_LEASING
+            - ABERTURA_CONTA_PAGAMENTO_POS_PAGA # OPENING_POST_PAID_PAYMENT_ACCOUNT
+            - COMPRA_VENDE_MOEDA_ESTRANGEIRA_ESPECIE # PURCHASE_SELLS_FOREIGN_CURRENCY_CASH
+            - COMPRA_VENDE_CHEQUE_CHEQUE_VIAGEM_CARGA_MOEDA_ESTRANGEIRA_CARTAO_PRE_PAGO # PURCHASE_SELLS_CHECK_TRAVELERS_CHECK_LOAD_FOREIGN_CURRENCY_PRE_PAID_CARD
+            - COMPRA_VENDE_OURO # PURCHASE_SELLS_GOLD
+            - OUTROS_PRODUTOS_SERVICOS # OTHER_PRODUCTS_SERVICES
+            - CANCELAMENTO # CANCELLATION
+            - INFORMACOES # INFORMATION
+            - RECLAMACOES # COMPLAINTS
+          description: "Code of Services actually provided by the Shared ATM informed"
+          example: OUTROS_PRODUTOS_SERVICOS # Example kept in Portuguese as requested.
         additionalInfo:
           type: string
-          description: Texto livre para complementar informação relativa ao Serviço disponível, quando for preenchida a opção 'OUTROS_PRODUTOS_SERVICOS'
+          description: Free text to complement information regarding the available Service, when the option 'OUTROS_PRODUTOS_SERVICOS' is filled in
           maxLength: 2000
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: Informações Adicionais
+          example: Informações Adicionais # Additional Information
     SharedAutomatedTellerMachinesIdentification:
       type: object
-      description: Identificação dos terminais de autoatendimento compartilhados
+      description: Identification of shared automated teller machines
       properties:
         ownerName:
           type: string
           maxLength: 100
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          description: "Nome do proprietário do terminal de Autoatendimento Compartilhado"
-          example: "João da Silva Santos"
+          description: "Name of the owner of the Shared Automated Teller Machine"
+          example: "João da Silva Santos" # Example kept in Portuguese as requested.
     ####################
     ## Phone ElectronicChannels ##
     ####################
@@ -1313,7 +1312,7 @@ components:
       properties:
         data:
           type: array
-          description: Conjunto de informações referente aos canais telefônicos de atendimento da instituição
+          description: Set of information regarding the telephone service channels of the institution
           minItems: 1
           items:
             $ref: '#/components/schemas/PhoneChannelsData'
@@ -1337,10 +1336,10 @@ components:
           items:
             $ref: '#/components/schemas/PhoneChannelService'
           minItems: 1
-          description: Traz a relação de serviços disponbilizados pelo Canal de Atendimento
+          description: Brings the list of services offered by the Service Channel
     PhoneChannelsParticipant:
       type: object
-      description: Conjunto de informações relativas ao participante do produto de Open Finance
+      description: Set of information regarding the participant of the Open Finance product
       required:
         - brand
         - name
@@ -1356,29 +1355,29 @@ components:
           pattern: '^(?!\s)[\w\W\s]*[^\s]$'
           minLength: 1
           maxLength: 80
-          description: "Nome da Marca reportada pelo participante do Open Finance. O conceito a que se refere a 'marca' utilizada está em definição pelos participantes."
-          example: "Marca A"
+          description: "Brand Name reported by the Open Finance participant. The concept referred to by 'brand' used is under definition by the participants."
+          example: "Marca A" # "Brand A"
         name:
           type: string
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
           minLength: 1
           maxLength: 80
-          description: "Nome da Instituição, pertencente à organização, responsável pelo Canal Telefônico."
-          example: "Empresa da Marca A"
+          description: "Name of the Institution, belonging to the organization, responsible for the Telephone Channel."
+          example: "Empresa da Marca A" # "Company of Brand A"
         cnpjNumber:
           type: string
           pattern: '^\d{14}$'
-          description: Número completo do CNPJ da instituição
+          description: Full CNPJ number of the institution
           maxLength: 14
           minLength: 14
           example: "50685362000135"
         urlComplementaryList:
           type: string
-          description: | 
-            URL do link que conterá a lista complementar com os nomes e CNPJs agrupados sob o mesmo cnpjNumber. Os contidos nessa lista possuem as mesmas características para produtos e serviços. 
-            Endereço eletrônico de acesso ao canal. Será obrigatoriamente preenchido se houver lista complementar com os nomes e CNPJs a ser disponibilizada. 
-            
-            Restrição: Será obrigatoriamente preenchido se houver lista complementar com os nomes e CNPJs a ser disponibilizada
+          description: |
+            URL of the link that will contain the complementary list with the names and CNPJs grouped under the same cnpjNumber. Those contained in this list have the same characteristics for products and services.
+            Electronic address for accessing the channel. It will be mandatory if there is a complementary list with the names and CNPJs to be made available.
+
+            Restriction: It will be mandatory if there is a complementary list with the names and CNPJs to be made available
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
           minLength: 1
           maxLength: 1024
@@ -1386,7 +1385,7 @@ components:
     #### PhoneChannelIdentification ####
     PhoneChannelIdentification:
       type: object
-      description: Identificação dos canais telefônicos de atendimento
+      description: Identification of telephone service channels
       required:
         - type
       x-regulatory-required:
@@ -1395,30 +1394,30 @@ components:
         type:
           type: string
           enum:
-            - CENTRAL_TELEFONICA
-            - SAC
-            - OUVIDORIA
-            - OUTROS
+            - CENTRAL_TELEFONICA # TELEPHONE_CENTRAL
+            - SAC # SAC (Customer Service)
+            - OUVIDORIA # OMBUDSMAN
+            - OUTROS # OTHERS
           description: "
-            Tipo de canal telefônico de atendimento:
+            Type of telephone service channel:
               \n* `CENTRAL_TELEFONICA`
               \n* `SAC`
               \n* `OUVIDORIA`
               \n* `OUTROS`"
-          example: "OUVIDORIA"
+          example: "OUVIDORIA" # Example kept in Portuguese as requested.
         additionalInfo:
           type: string
-          description: Campo de texto livre para descrever informações complementateres sobre canais telefônicos. De preenchimento obrigatório quando o tipo de canal de atendimento telefônico selecionado for "OUTROS"
+          description: Free text field to describe complementary information about telephone channels. Mandatory to fill in when the selected telephone service channel type is "OTHERS"
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
           minLength: 1
           maxLength: 300
-          example: Informações Adicionais
+          example: Informações Adicionais # Additional Information
         phones:
           type: array
           items:
             $ref: '#/components/schemas/PhoneChannelPhone'
           minItems: 1
-          description: "Lista de telefones do Canal de Atendimento"
+          description: "List of phones of the Service Channel"
     #### PhoneChannelPhone ####
     PhoneChannelPhone:
       type: object
@@ -1435,28 +1434,28 @@ components:
           minLength: 1
           pattern: '^\d{1,4}$'
           example: "55"
-          description: "Número de DDI (Discagem Direta Internacional) para telefone de acesso ao Canal - se houver."
+          description: "DDI (Direct Dialing International) number for telephone access to the Channel - if any."
         areaCode:
           type: string
           maxLength: 2
           minLength: 2
           pattern: '^(\d{2})$'
           example: "19"
-          description: "Número de DDD (Discagem Direta à Distância) para telefone de acesso ao Canal - se houver."
+          description: "DDD (Direct Distance Dialing) number for telephone access to the Channel - if any."
         number:
           type: string
           maxLength: 11
           minLength: 8
           pattern: '^([0-9]{8,11})$'
           example: "08007787788"
-          description: "Número de telefone de acesso ao canal."
+          description: "Telephone number to access the channel."
         additionalInfo:
           type: string
-          description: Informações adicionais referente ao canal telefônico de atendimento
+          description: Additional information regarding the telephone service channel
           maxLength: 300
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: Informações Adicionais
+          example: Informações Adicionais # Additional Information
     #### PhoneChannelService ####
     PhoneChannelService:
       type: object
@@ -1470,71 +1469,71 @@ components:
         name:
           type: string
           enum:
-            - ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA
-            - SAQUE_MOEDA_EM_ESPECIE
-            - RECEBIMENTOS_PAGAMENTOS_QUALQUER_NATUREZA
-            - TRANSFERENCIAS_ELETRONICAS_VISANDO_MOVIMENTACAO_CONTAS_DEPOSITOS_OU_PAGAMENTO_TITULARIDADE_CLIENTES
-            - CONSULTA_SALDOS_EXTRATOS_CONTAS_DEPOSITOS_CONTAS_PAGAMENTOS
-            - APLICACOES_RESGATES_INVESTIMENTOS
-            - EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGAMENTO_SOLICITACAO_CLIENTES_USUARIOS
-            - DEPOSITOS_MOEDA_ESPECIE_CHEQUE
-            - OPERACOES_CREDITO_BEM_COMO_OUTROS_SERVICOS_PRESTADOS_ACOMPANHAMENTO_OPERACAO
-            - CARTAO_CREDITO
-            - SEGUROS
-            - OPERACOES_ARRENDAMENTO_MERCANTIL
-            - ABERTURA_CONTA_PAGAMENTO_POS_PAGA
-            - COMPRA_VENDA_MOEDA_ESTRANGEIRA_ESPECIE
-            - COMPRA_VENDA_CHEQUE_CHEQUE_VIAGEM_BEM_COMO_CARGA_MOEDA_ESTRANGEIRA_CARTAO_PRE_PAGO
-            - COMPRA_VENDA_OURO
-            - OUTROS_PRODUTOS_SERVICOS
-            - CANCELAMENTO
-            - INFORMACOES
-            - RECLAMACOES
-          description: "Nome dos Serviços efetivamente prestados pelo Canal de Atendimento"
+            - ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA # OPENING_ACCOUNTS_DEPOSITS_OR_PRE_PAID_PAYMENT
+            - SAQUE_MOEDA_EM_ESPECIE # WITHDRAWAL_CASH
+            - RECEBIMENTOS_PAGAMENTOS_QUALQUER_NATUREZA # RECEIPTS_PAYMENTS_ANY_NATURE
+            - TRANSFERENCIAS_ELETRONICAS_VISANDO_MOVIMENTACAO_CONTAS_DEPOSITOS_OU_PAGAMENTO_TITULARIDADE_CLIENTES # ELECTRONIC_TRANSFERS_AIMING_MOVEMENT_ACCOUNTS_DEPOSITS_OR_PAYMENT_OWNERSHIP_CUSTOMERS
+            - CONSULTA_SALDOS_EXTRATOS_CONTAS_DEPOSITOS_CONTAS_PAGAMENTOS # BALANCE_INQUIRY_STATEMENTS_ACCOUNTS_DEPOSITS_PAYMENTS_ACCOUNTS
+            - APLICACOES_RESGATES_INVESTIMENTOS # APPLICATIONS_REDEMPTIONS_INVESTMENTS
+            - EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGAMENTO_SOLICITACAO_CLIENTES_USUARIOS # ACTIVE_PASSIVE_EXECUTION_PAYMENT_ORDERS_CUSTOMER_USER_REQUEST
+            - DEPOSITOS_MOEDA_ESPECIE_CHEQUE # DEPOSITS_CASH_CHECK
+            - OPERACOES_CREDITO_BEM_COMO_OUTROS_SERVICOS_PRESTADOS_ACOMPANHAMENTO_OPERACAO # CREDIT_OPERATIONS_AS_WELL_AS_OTHER_SERVICES_PROVIDED_OPERATION_MONITORING
+            - CARTAO_CREDITO # CREDIT_CARD
+            - SEGUROS # INSURANCE
+            - OPERACOES_ARRENDAMENTO_MERCANTIL # LEASING_OPERATIONS
+            - ABERTURA_CONTA_PAGAMENTO_POS_PAGA # OPENING_POST_PAID_PAYMENT_ACCOUNT
+            - COMPRA_VENDA_MOEDA_ESTRANGEIRA_ESPECIE # PURCHASE_SALE_FOREIGN_CURRENCY_CASH
+            - COMPRA_VENDA_CHEQUE_CHEQUE_VIAGEM_BEM_COMO_CARGA_MOEDA_ESTRANGEIRA_CARTAO_PRE_PAGO # PURCHASE_SALE_CHECK_TRAVELERS_CHECK_AS_WELL_AS_FOREIGN_CURRENCY_LOAD_PRE_PAID_CARD
+            - COMPRA_VENDA_OURO # PURCHASE_SALE_GOLD
+            - OUTROS_PRODUTOS_SERVICOS # OTHER_PRODUCTS_SERVICES
+            - CANCELAMENTO # CANCELLATION
+            - INFORMACOES # INFORMATION
+            - RECLAMACOES # COMPLAINTS
+          description: "Name of Services actually provided by the Service Channel"
         code:
           type: string
           enum:
-            - ABRE_CONTA_DEPOSITO_OU_PRE_PAGA
-            - SAQUE_MOEDA_ESPECIE
-            - RECEBE_PAGA_QUALQUER_NATUREZA
-            - TRANSFERENCIAS_ELETRONICAS_MOVIMENTA_CONTAS_DEPOSITOS_OU_PAGTO_TITULARES_CLIENTES
-            - CONSULTA_SALDOS_EXTRATOS_CONTAS_DEPOSITOS_PAGTOS
-            - APLICA_RESGATA_INVESTIMENTOS
-            - EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGTO
-            - DEPOSITO_MOEDA_ESPECIE_CHEQUE
-            - OPERA_CREDITO_OUTROS_SERVICOS_ACOMPANHA_OPERACAO
-            - CARTAO_CREDITO
-            - SEGUROS
-            - OPERA_ARRENDAMENTO_MERCANTIL
-            - ABERTURA_CONTA_PAGAMENTO_POS_PAGA
-            - COMPRA_VENDA_MOEDA_ESTRANGEIRA_ESPECIE
-            - COMPRA_VENDA_CHEQUE_CHEQUE_VIAGEM_CARGA_MOEDA_ESTRANGEIRA_CARTAO_PRE_PAGO
-            - COMPRA_VENDA_OURO
-            - OUTROS_PRODUTOS_SERVICOS
-            - CANCELAMENTO
-            - INFORMACOES
-            - RECLAMACOES
-          description: "Código dos Serviços efetivamente prestados pelo Canal de Atendimento"
+            - ABRE_CONTA_DEPOSITO_OU_PRE_PAGA # OPENS_DEPOSIT_OR_PRE_PAID_ACCOUNT
+            - SAQUE_MOEDA_ESPECIE # WITHDRAWAL_CASH
+            - RECEBE_PAGA_QUALQUER_NATUREZA # RECEIVES_PAYS_ANY_NATURE
+            - TRANSFERENCIAS_ELETRONICAS_MOVIMENTA_CONTAS_DEPOSITOS_OU_PAGTO_TITULARES_CLIENTES # ELECTRONIC_TRANSFERS_MOVES_ACCOUNTS_DEPOSITS_OR_PAYMENT_HOLDERS_CUSTOMERS
+            - CONSULTA_SALDOS_EXTRATOS_CONTAS_DEPOSITOS_PAGTOS # BALANCE_INQUIRY_STATEMENTS_ACCOUNTS_DEPOSITS_PAYMENTS
+            - APLICA_RESGATA_INVESTIMENTOS # APPLIES_RESCUES_INVESTMENTS
+            - EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGTO # ACTIVE_PASSIVE_EXECUTION_PAYMENT_ORDERS
+            - DEPOSITO_MOEDA_ESPECIE_CHEQUE # DEPOSIT_CASH_CHECK
+            - OPERA_CREDITO_OUTROS_SERVICOS_ACOMPANHA_OPERACAO # OPERATES_CREDIT_OTHER_SERVICES_MONITORS_OPERATION
+            - CARTAO_CREDITO # CREDIT_CARD
+            - SEGUROS # INSURANCE
+            - OPERA_ARRENDAMENTO_MERCANTIL # OPERATES_LEASING
+            - ABERTURA_CONTA_PAGAMENTO_POS_PAGA # OPENING_POST_PAID_PAYMENT_ACCOUNT
+            - COMPRA_VENDA_MOEDA_ESTRANGEIRA_ESPECIE # PURCHASE_SALE_FOREIGN_CURRENCY_CASH
+            - COMPRA_VENDA_CHEQUE_CHEQUE_VIAGEM_CARGA_MOEDA_ESTRANGEIRA_CARTAO_PRE_PAGO # PURCHASE_SALE_CHECK_TRAVELERS_CHECK_LOAD_FOREIGN_CURRENCY_PRE_PAID_CARD
+            - COMPRA_VENDA_OURO # PURCHASE_SALE_GOLD
+            - OUTROS_PRODUTOS_SERVICOS # OTHER_PRODUCTS_SERVICES
+            - CANCELAMENTO # CANCELLATION
+            - INFORMACOES # INFORMATION
+            - RECLAMACOES # COMPLAINTS
+          description: "Code of Services actually provided by the Service Channel"
         additionalInfo:
           type: string
-          description: "Texto livre para complementar informação relativa ao Serviço disponível, quando for selecionada a opção 'OUTROS_PRODUTOS_SERVICOS'"
+          description: "Free text to complement information regarding the available Service, when the option 'OUTROS_PRODUTOS_SERVICOS' is selected"
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
           minLength: 1
           maxLength: 2000
-          example: Informações Adicionais
+          example: Informações Adicionais # Additional Information
     GeographicCoordinates:
       type: object
-      description: Informação referente a geolocalização informada.
+      description: Information regarding the reported geolocation.
       properties:
         latitude:
-          description: Informação da latitude referente a geolocalização informada.
+          description: Latitude information regarding the reported geolocation.
           type: string
           pattern: ^-?\d{1,2}\.\d{1,9}$
           maxLength: 13
           minLength: 4
           example: '-90.8365180'
         longitude:
-          description: Informação da longitude referente a geolocalização informada.
+          description: Longitude information regarding the reported geolocation.
           type: string
           pattern: ^-?\d{1,3}\.\d{1,8}$
           maxLength: 13
@@ -1542,54 +1541,54 @@ components:
           example: '-180.836519'
     Links:
       type: object
-      description: Referências para outros recursos da API requisitada
+      description: References to other API resources requested
       properties:
         self:
           type: string
           format: url
-          description: URL da página atualmente requisitada
+          description: URL of the currently requested page
           maxLength: 2000
           minLength: 5
           example: "https://api.banco.com.br/open-banking/channels/v2/resource"
         first:
           type: string
           format: url
-          description: URL da primeira página de registros
+          description: URL of the first page of records
           maxLength: 2000
           minLength: 5
           example: "https://api.banco.com.br/open-banking/channels/v2/resource"
         prev:
           type: string
           format: url
-          description: URL da página anterior de registros
+          description: URL of the previous page of records
           maxLength: 2000
           minLength: 5
           example: "https://api.banco.com.br/open-banking/channels/v2/resource"
         next:
           type: string
           format: url
-          description: URL da próxima página de registros
+          description: URL of the next page of records
           maxLength: 2000
           minLength: 5
           example: "https://api.banco.com.br/open-banking/channels/v2/resource"
         last:
           type: string
           format: url
-          description: URL da última página de registros
+          description: URL of the last page of records
           maxLength: 2000
           minLength: 5
           example: "https://api.banco.com.br/open-banking/channels/v2/resource"
     Meta:
       type: object
-      description: Meta informações referente à API requisitada
+      description: Meta information regarding the requested API
       properties:
         totalRecords:
           type: integer
-          description: Total de registros encontrados
+          description: Total records found
           example: 1
         totalPages:
           type: integer
-          description: Total de páginas para os registros encontrados
+          description: Total pages for the records found
           example: 1
       required:
         - totalRecords
@@ -1598,91 +1597,91 @@ components:
 #### ATM specific schemas because of optional NA values ####
     SharedAutomatedTellerMachinesAvailability:
       type: object
-      description: Horário de funcionamento das operações
+      description: Operating hours
       properties:
         standards:
           type: array
-          description: Lista disponibilidade padrão dos terminais de autoatendimento compartilhados por dias da semana
+          description: Standard availability list of shared automated teller machines by weekdays
           items:
             type: object
             properties:
               weekday:
                 type: string
                 enum:
-                  - DOMINGO
-                  - SEGUNDA_FEIRA
-                  - TERCA_FEIRA
-                  - QUARTA_FEIRA
-                  - QUINTA_FEIRA
-                  - SEXTA_FEIRA
-                  - SABADO
-                description: Dia da semana de abertura
-                example: SEGUNDA_FEIRA
+                  - DOMINGO # SUNDAY
+                  - SEGUNDA_FEIRA # MONDAY
+                  - TERCA_FEIRA # TUESDAY
+                  - QUARTA_FEIRA # WEDNESDAY
+                  - QUINTA_FEIRA # THURSDAY
+                  - SEXTA_FEIRA # FRIDAY
+                  - SABADO # SATURDAY
+                description: Opening weekday
+                example: SEGUNDA_FEIRA # Example kept in Portuguese as requested.
               openingTime:
                 type: string
-                description: Horário de abertura (UTC)
+                description: Opening time (UTC)
                 maxLength: 13
                 pattern: ^(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
                 example: '10:00:57Z'
               closingTime:
                 type: string
-                description: Horário de fechamento (UTC)
+                description: Closing time (UTC)
                 maxLength: 13
                 pattern: ^(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
                 example: '16:00:57Z'
         exception:
           type: string
-          description: Em campo texto devem ser registradas todas as Exceções para o não atendimento
+          description: In the text field, all exceptions for non-attendance must be recorded
           maxLength: 2000
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: Exceto feriados municipais, nacionais e estaduais
+          example: Exceto feriados municipais, nacionais e estaduais # Except municipal, national and state holidays
         isPublicAccessAllowed:
           type: boolean
-          description: Indica se o terminal de autoatendimento compartilhado tem acesso restrito a clientes
+          description: Indicates whether the shared automated teller machine has restricted access to customers
           example: false
     SharedAutomatedTellerMachinesPostalAddress:
       type: object
-      description: Informação referente ao endereço postal
+      description: Postal address information
       properties:
         address:
           type: string
-          description: "Deverá trazer toda a informação referente ao endereço da dependência informada: Tipo de logradouro + Nome do logradouro + Número do Logradouro (se não existir usar ' s/n') + complemento (se houver), como, p.ex.: 'R Diamatina, 59, bloco 35, fundos' 'Praça da Boa Vontade s/n'"
+          description: "Should bring all the information regarding the address of the reported branch: Type of street + Street name + Street number (if it does not exist, use 's/n') + complement (if any), such as, for example: 'R Diamantina, 59, bloco 35, fundos' 'Praça da Boa Vontade s/n'"
           maxLength: 150
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
           example: 'Av Naburo Ykesaki, 1270'
         additionalInfo:
           type: string
-          description: "Complemento"
+          description: "Complement"
           maxLength: 30
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: Informações Adicionais
+          example: Informações Adicionais # Additional Information
         districtName:
           type: string
-          description: "Bairro é uma comunidade ou região localizada em uma cidade ou município de acordo com as suas subdivisões geográficas. p.ex: 'Paraíso'"
+          description: "Neighborhood is a community or region located in a city or municipality according to its geographical subdivisions. ex: 'Paraíso'"
           maxLength: 50
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: 'Centro'
+          example: 'Centro' # 'Center'
         townName:
           type: string
-          description: "Localidade: O nome da localidade corresponde à designação da cidade ou município no qual o endereço está localizado. p.ex. 'São Paulo'"
+          description: "Locality: The name of the locality corresponds to the designation of the city or municipality in which the address is located. ex. 'São Paulo'"
           maxLength: 50
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
           example: 'Marília'
         ibgeCode:
           type: string
-          description: "Código IBGE do município"
+          description: "IBGE code of the municipality"
           maxLength: 7
           minLength: 7
           pattern: \d{7}
           example: '3515890'
         countrySubDivision:
           type: string
-          description: "Enumeração referente a cada sigla da unidade da federação que identifica o estado ou o distrito federal, no qual o endereço está localizado. p.ex. 'AC'. São consideradas apenas as siglas para os estados brasileiros"
+          description: "Enumeration referring to each abbreviation of the federation unit that identifies the state or the federal district, in which the address is located. ex. 'AC'. Only the abbreviations for the Brazilian states are considered"
           enum:
             - AC
             - AL
@@ -1714,21 +1713,21 @@ components:
           example: 'SP'
         postCode:
           type: string
-          description: "Código de Endereçamento Postal"
+          description: "Postal Code"
           pattern: '^\d{8}$'
           maxLength: 8
           minLength: 8
           example: '17500001'
         country:
           type: string
-          description: "Nome do país"
+          description: "Country name"
           maxLength: 80
           minLength: 1
           pattern: ^(?!\s)[\w\W\s]*[^\s]$
-          example: 'Brasil'
+          example: 'Brasil' # 'Brazil'
         countryCode:
           type: string
-          description: Código do país de acordo com a ISO 3166-1 alpha-3
+          description: Country code according to ISO 3166-1 alpha-3
           pattern: '^([A-Z]{3})$'
           maxLength: 3
           minLength: 3
@@ -1752,28 +1751,28 @@ components:
               - detail
             properties:
               code:
-                description: Código de erro específico do endpoint
+                description: Specific endpoint error code
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 255
               title:
-                description: Título legível por humanos deste erro específico
+                description: Human-readable title for this specific error
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 255
               detail:
-                description: Descrição legível por humanos deste erro específico
+                description: Human-readable description of this specific error
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 2048
         meta:
           type: object
-          description: Meta informações referente à API requisitada
+          description: Meta information regarding the requested API
           required:
             - requestDateTime
           properties:
             requestDateTime:
-              description: Data e hora da consulta, conforme especificação RFC-3339, formato UTC.
+              description: Date and time of the query, according to RFC-3339 specification, UTC format.
               type: string
               format: date-time
               minLength: 20
@@ -1797,28 +1796,28 @@ components:
               - detail
             properties:
               code:
-                description: Código de erro específico do endpoint
+                description: Specific endpoint error code
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 255
               title:
-                description: Título legível por humanos deste erro específico
+                description: Human-readable title for this specific error
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 255
               detail:
-                description: Descrição legível por humanos deste erro específico
+                description: Human-readable description of this specific error
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 2048
         meta:
           type: object
-          description: Meta informações referente à API requisitada
+          description: Meta information regarding the requested API
           required:
             - requestDateTime
           properties:
             requestDateTime:
-              description: Data e hora da consulta, conforme especificação RFC-3339, formato UTC.
+              description: Date and time of the query, according to RFC-3339 specification, UTC format.
               type: string
               format: date-time
               minLength: 20
@@ -1829,7 +1828,7 @@ components:
     page:
       name: page
       in: query
-      description: Número da página que está sendo requisitada (o valor da primeira página é 1).
+      description: Page number being requested (the value of the first page is 1).
       schema:
         type: integer
         format: int32
@@ -1839,7 +1838,7 @@ components:
     pageSize:
       name: page-size
       in: query
-      description: Quantidade total de registros por páginas.
+      description: Total number of records per page.
       schema:
         type: integer
         format: int32
@@ -1848,43 +1847,43 @@ components:
         maximum: 1000
   responses:
     BadRequest:
-      description: A requisição foi malformada, omitindo atributos obrigatórios, seja no payload ou através de atributos na URL.
+      description: The request was malformed, omitting mandatory attributes, either in the payload or through attributes in the URL.
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     NotFound:
-      description: O recurso solicitado não existe ou não foi implementado.
+      description: The requested resource does not exist or has not been implemented.
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     MethodNotAllowed:
-      description: O consumidor tentou acessar o recurso com um método não suportado.
+      description: The consumer tried to access the resource with an unsupported method.
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     TooManyRequests:
-      description: A operação foi recusada, pois muitas solicitações foram feitas dentro de um determinado período ou o limite de requisições concorrentes foi atingido.
+      description: The operation was refused because too many requests were made within a certain period or the concurrent request limit was reached.
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     InternalServerError:
-      description: Ocorreu um erro no gateway da API ou no microsserviço.
+      description: An error occurred in the API gateway or microservice.
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     GatewayTimeout:
-      description: GATEWAY TIMEOUT - A requisição não foi atendida dentro do tempo limite estabelecido.
+      description: GATEWAY TIMEOUT - The request was not answered within the established timeout.
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
     SiteIsOverloaded:
-      description: O site está sobrecarregado e a operação foi recusada, pois foi atingido o limite máximo de TPS global, neste momento.
+      description: The site is overloaded and the operation was refused because the global maximum TPS limit was reached at this moment.
       content:
         application/json; charset=utf-8:
           schema:

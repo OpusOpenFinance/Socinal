@@ -3,10 +3,9 @@ info:
   title: API OpenData Invoice Financings do Open Finance Brasil
   description: A API descrita neste documento é referente as API Invoice Financings da fase OpenData do Open Finance Brasil.
   version: 1.0.1
-  contact:
-    url: 'https://servicedesk.openbankingbrasil.org.br/Login.jsp?navLanguage=pt-BR'
-servers:
-  - url: 'http://api.banco.com.br/open-banking/opendata-invoicefinancings/v1'
+  license:
+    name: Apache 2.0
+    url: "https://www.apache.org/licenses/LICENSE-2.0"
 tags:
   - name: Invoice Financings
     description: Operações para listagem de Direitos Creditórios Descontados.
@@ -854,4 +853,3 @@ components:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/ResponseError'
-        

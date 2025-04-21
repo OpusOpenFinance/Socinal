@@ -11,6 +11,9 @@ lang_names:
   pt-br: Português
   en: English
 
+markdown: kramdown  # Garante kramdown como processador de markdown
+highlighter: rouge  # Garante rouge para syntax highlighting
+
 remote_theme: null  # Deve estar assim para usar o template local
 
 theme: "just-the-docs"

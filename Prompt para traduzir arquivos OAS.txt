@@ -11,19 +11,42 @@ Tradução Linha a Linha: Traduza linha por linha, mantendo o número de linhas 
 Caracteres de Escape: Preserve caracteres de escape (\) em campos de texto longo.
 Tratamento de ENUMs:
 Não traduza chaves (elementos) de ENUMs.
-Para ENUMs em português, adicione tradução em inglês como comentário C (/* Tradução em Inglês */) na mesma linha.
+Para ENUMs em português, adicione tradução em inglês como comentário YAML "#" na mesma linha. NÃO UTILIZE NENHUM PREFIXO (como "English:", por exemplo), coloque diretamente a tradução no comentário.
 Não comente ENUMs já em inglês.
-Mantenha o campo example em português, mas pode incluir a tradução como comentário.
+Mantenha o campo example em português, mas inclua a tradução como comentário, utilizando as mesmas regras de tradução de ENUMs.
 Tradução de description, summary, info: Traduza para inglês com precisão técnica. Não inclua o texto original em português como comentário.
 Substitua completamente o texto em português nos campos description, summary e info pela tradução em inglês. Remova todo o texto original em português desses campos. Não inclua o texto original em português como comentário ou de qualquer outra forma nos campos traduzidos.
 Restrições: Não consulte fontes externas. Use apenas o arquivo OAS de entrada e seu conhecimento técnico.
 Relatório de Alterações de Linhas: Inclua relatório detalhando adições ou remoções de linhas. Se inalterado, informe: "Número de linhas inalterado em relação ao arquivo original."
 Traduções Longas: Divida a saída em partes se necessário, indicando linha de continuação.
 Apóstrofos: Se apóstrofo dentro de string delimitada por apóstrofos, use aspas como delimitadores externos.
-Exemplos em Português: Para campos example (fora de ENUMs), adicione comentário com tradução para inglês (/* Tradução em Inglês */) após o valor do exemplo.
 Observações Adicionais:
 
 Lembre-se de manter a indentação (espaços em branco no início das linhas) para que a estrutura do arquivo YML seja preservada.
 Nunca gere saída com texto em português e comentários em inglês em description ou summary.
 Nunca inclua trechos do arquivo em português na saída.
-Agora, traduza o seguinte arquivo OAS (Português -> Inglês):
+
+--------------------
+Gere um arquivo JSON de exemplo EM INGLÊS utilizando a API que você acabou de traduzir.
+Esses arquivo de exemplo deve ser o mais abrangente possíveis, colocando todas as opções de elementos possível.
+Utilize como nome da instituição financeira exemplo o nome "MyBank".
+
+--------------------
+Gere um arquivo JSON de exemplo EM PORTUGUÊS utilizando a API que você acabou de traduzir.
+Esses arquivo de exemplo deve ser o mais abrangente possíveis, colocando todas as opções de elementos possível.
+Utilize como nome da instituição financeira exemplo o nome "Banco Exemplo".
+
+--------------------
+
+Aja como um tradutor técnico do idioma português para o idioma inglês, especialista em informática, especialmente desenvolvimento de software e infraestrutura distribuída em nuvem.
+Tenho uma documentação em português e quero que você a traduza para inglês em partes.
+A documentação está dividida em arquivos markdown e vou lhe passar arquivo a arquivo para traduzir.
+Considere  o que traduzir para não traduzir o que não deve ser traduzido.
+Entretanto, preciso que você gere a saída em formato markdown conforme o original para eu poder copiar de volta para minha documentação. Lembre-se de preservar os links do documento original no markdown de resultado.
+Dado que estou construindo o site de documentação utilizando o Jekyll, e essa é uma documentação com versões em Português brasileiro (pt-br) e Inglês (en), as páginas em markdown tem um cabeçalho (front matter) que também deve ser adaptada na tradução. Por exemplo, onde aparece lang: "pt-br" você deve trocar por lang: "en".
+De maneira análoga, onde aparece, por exemplo:
+alternate_lang: "/docs/en/Open-Finance/Plataforma-OpusOpenFinance/PlataformaOOF/"
+o novo pathname deve trocar "en" por "pt-br", mantendo os outros elementos do path, como diretório e nome do arquivo (dado que estou fazendo o espelhamento do site em português para o inglês).
+O campo "title" deve naturalmente ser traduzido.
+Ainda para lhe dar contexto, a documentação se refere a um software que realiza a interface entre bancos/instituições financeiras e o ecossistema Open Finance Brasil, tratando de todos os aspectos regulatórios e determinações do Banco Central do Brasil.
+
