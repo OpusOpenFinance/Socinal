@@ -1,22 +1,13 @@
 openapi: 3.0.0
 info:
-  title: API Pension - Open Finance Brasil
+  title: API OpenData Pension - Open Finance Brasil
   description: |
-    API de Previdência do Open Finance Brasil – Fase 4.
+    API de Previdência da fase OpenData do Open Finance Brasil.
     API que retorna informações de Previdência.
   version: 2.0.0
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
-  contact:
-    name: Governança do Open Finance Brasil – Especificações
-    email: gt-interfaces@openbankingbr.org
-    url: 'https://openbanking-brasil.github.io/areadesenvolvedor/'
-servers:
-  - url: 'https://api.banco.com.br/open-banking/opendata-pension/v2'
-    description: Servidor de Produção
-  - url: 'https://apih.banco.com.br/open-banking/opendata-pension/v2'
-    description: Servidor de Homologação
 tags:
   - name: Risk Coverages
     description: Operações relacionadas à Previdência com Coberturas de Risco.
@@ -899,11 +890,11 @@ components:
           $ref: '#/components/schemas/CnpjNumber'
         urlComplementaryList:
           description: |
-            Espera-se que valor de retorno, após acesso ao link ‘urlComplementaryList’, deve ser array de objeto com a estrutura abaixo:
+            Espera-se que valor de retorno, após acesso ao link 'urlComplementaryList', deve ser array de objeto com a estrutura abaixo:
 
-            - ‘name’ com o valor contido no campo ‘LegalEntityName’ conforme cadastro no diretório;
+            - 'name' com o valor contido no campo 'LegalEntityName' conforme cadastro no diretório;
 
-            - ‘cnpjNumber’ com o valor contido no campo CNPJ (‘RegistrationNumber’) correspondente a esta instituição;
+            - 'cnpjNumber' com o valor contido no campo CNPJ ('RegistrationNumber') correspondente a esta instituição;
 
             - Ambos do tipo string;
 
@@ -1006,7 +997,24 @@ components:
       example: PESSOA_NATURAL
     EnumProductModality:
       type: string
-      description: <ol><li>Funeral</li><li>Prestamista (exceto Habitacional e Rural)</li><li>Viagem</li><li>Educacional</li><li>Dotal (Misto e Puro)</li><li>Acidentes Pessoais</li><li>Vida</li><li>Perda do Certificado de Habilitação de Voo – PCHV</li><li>Doenças Graves ou Doença Terminal</li><li>Desemprego/ Perda de Renda</li><li>Eventos Aleatórios</li><li>Pecúlio</li><li>Pensão prazo certo</li><li>Pensão menores 21 anos</li><li>Pensão menores 24 anos</li><li>Pensão cônjuge vitalícia</li><li>Pensão cônjuge temporária</li></ol>
+      description: |
+        Funeral
+        Prestamista (exceto Habitacional e Rural)
+        Viagem
+        Educacional
+        Dotal (Misto e Puro)
+        Acidentes Pessoais
+        Vida
+        Perda do Certificado de Habilitação de Voo - PCHV
+        Doenças Graves ou Doença Terminal
+        Desemprego/ Perda de Renda
+        Eventos Aleatórios
+        Pecúlio
+        Pensão prazo certo
+        Pensão menores 21 anos
+        Pensão menores 24 anos
+        Pensão cônjuge vitalícia
+        Pensão cônjuge temporária
       enum:
         - FUNERAL
         - PRESTAMISTA

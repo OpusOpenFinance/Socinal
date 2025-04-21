@@ -1,32 +1,28 @@
 openapi: 3.0.0
 info:
-  title: API Capitalization-bonds - Open Finance Brasil
-  description: |
-    As APIs descritas neste documento é referente a API de Capitalização da fase OpenInsurance do Open Finance Brasil.
+  title: OpenData Capitalization-bonds API - Open Finance Brasil
+  description: >-
+    The APIs described in this document refer to the Capitalization API of the OpenData phase of Open Finance Brasil.
+    Throughout this documentation, you will find references to SUSEP and OPIN.
+    SUSEP is the Superintendence of Private Insurance, a Brazilian government agency that regulates and supervises
+    the capitalization market, and is essential to ensure legal and regulatory compliance of the financial products described in this API.
+    OPIN is the Open Insurance Brazil ecosystem, and this API interoperates with the Capitalization Title API of OPIN,
+    as per Central Bank regulatory demand in Joint Resolution No. 5, Art. 1.
   version: 2.0.0
   license:
     name: Apache 2.0
     url: "https://www.apache.org/licenses/LICENSE-2.0"
-  contact:
-    name: Governança do Open Finance Brasil – Especificações
-    email: gt-interfaces@openbankingbr.org
-    url: "https://openbanking-brasil.github.io/areadesenvolvedor/"
-servers:
-  - url: "https://api.banco.com.br/open-banking/opendata-capitalization/v2"
-    description: Servidor de Produção
-  - url: "https://apih.banco.com.br/open-banking/opendata-capitalization/v2"
-    description: Servidor de Homologação
 tags:
   - name: Capitalization Bonds
-    description: Operações para consulta das informações de Titulos de Capitalização
+    description: Operations to query Capitalization Bonds information
 paths:
   /bonds:
     get:
       tags:
         - Capitalization Bonds
-      summary: Conjunto de informações dos Títulos de Capitalização de uma instituição
+      summary: Set of information on an institution's Capitalization Bonds
       operationId: capitalizationBondsGetProducts
-      description: Método para obter a lista de todos os títulos de Capitalização de uma instituição
+      description: Method to obtain the list of all Capitalization Bonds of an institution
       parameters:
         - $ref: "#/components/parameters/page"
         - $ref: "#/components/parameters/pageSize"
@@ -64,17 +60,17 @@ components:
               - detail
             properties:
               code:
-                description: Código de erro específico do endpoint
+                description: Specific endpoint error code
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 255
               title:
-                description: Título legível por humanos deste erro específico
+                description: Human-readable title for this specific error
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 255
               detail:
-                description: Descrição legível por humanos deste erro específico
+                description: Human-readable description for this specific error
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 2048
@@ -92,7 +88,7 @@ components:
           $ref: "#/components/schemas/Participant"
         society:
           type: object
-          description: Objeto que representa a empresa regulada pela SUSEP que oferta produtos definidos em OPIN.
+          description: Object that represents the company regulated by SUSEP that offers products defined in OPIN.
           required:
             - name
             - cnpjNumber
@@ -104,32 +100,32 @@ components:
           properties:
             name:
               type: string
-              description: Nome da Sociedade Seguradora.
+              description: Insurance Company Name.
               minLength: 1
               maxLength: 80
               example: Society A1
             cnpjNumber:
               type: string
-              description: CNPJ da sociedade seguradora participante do OPIN.
+              description: Insurance company CNPJ participating in OPIN.
               pattern: '^\d{14}$'
               example: "13456789000112"
             products:
               type: array
               minItems: 1
-              description: Lista de produtos da sociedade seguradora participante do OPIN.
+              description: List of products from the insurance company participating in OPIN.
               items:
                 $ref: "#/components/schemas/Products"
             brand:
               type: string
-              description: Nome da Marca reportada pelo participante do Open Insurance. O conceito a que se refere a 'marca' é em essência uma promessa da empresa em fornecer uma série específica de atributos, benefícios e serviços uniformes aos clientes.
+              description: Brand Name reported by the Open Insurance participant. The concept referred to by 'brand' is essentially a company's promise to provide a specific series of uniform attributes, benefits, and services to customers.
               maxLength: 80
               pattern: '^(?!\s)[\w\W\s]*[^\s]$'
-              example: Marca no OPIN
+              example: Marca no OPIN # Brand in OPIN
           additionalProperties: false
       additionalProperties: false
     Participant:
       type: object
-      description: Conjunto de informações relativas ao participante do produto de Open Finance
+      description: Set of information regarding the Open Finance product participant
       required:
         - brand
         - name
@@ -141,35 +137,35 @@ components:
       properties:
         brand:
           type: string
-          description: "Nome da marca reportada pelo participante do Open Finance. O conceito a que se refere a 'marca' é em essência uma promessa da empresa em fornecer uma série específica de atributos, benefícios e serviços uniformes aos clientes."
+          description: "Brand name reported by the Open Finance participant. The concept referred to by 'brand' is essentially a company's promise to provide a specific series of uniform attributes, benefits, and services to customers."
           minLength: 1
           maxLength: 80
           pattern: '^(?!\s)[\w\W\s]*[^\s]$'
-          example: Organização
+          example: Organização # Organization
         name:
           type: string
-          description: Nome do participante do Open Finance.
+          description: Name of the Open Finance participant.
           minLength: 1
           maxLength: 80
           pattern: '^(?!\s)[\w\W\s]*[^\s]$'
-          example: Organização A1
+          example: Organização A1 # Organization A1
         cnpjNumber:
           type: string
-          description: "O CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica. Deve-se ter apenas os números do CNPJ, sem máscara."
+          description: "The CNPJ corresponds to the registration number in the National Registry of Legal Entities. Only the CNPJ numbers must be provided, without mask."
           pattern: '^\d{14}$'
           example: "13456789000112"
         urlComplementaryList:
           type: string
           description: |
-            Espera-se que valor de retorno, após acesso ao link ‘urlComplementaryList’, deve ser array de objeto com a estrutura abaixo:
+            It is expected that the return value, after accessing the ‘urlComplementaryList’ link, must be an array of objects with the structure below:
 
-            - ‘name’ com o valor contido no campo ‘LegalEntityName’ conforme cadastro no diretório;
+            - ‘name’ with the value contained in the ‘LegalEntityName’ field as registered in the directory;
 
-            - 'cnpjNumber' com o valor contido no campo CNPJ (‘RegistrationNumber’) correspondente a esta instituição;
+            - 'cnpjNumber' with the value contained in the CNPJ (‘RegistrationNumber’) field corresponding to this institution;
 
-            - Ambos do tipo string;
+            - Both of string type;
 
-            - Ambos obrigatórios.
+            - Both mandatory.
           maxLength: 1024
           pattern: '^(?!\s)[\w\W\s]*[^\s]$'
           example: "https://empresaa1.com/companies"
@@ -197,13 +193,13 @@ components:
       properties:
         name:
           type: string
-          description: "Nome comercial do produto, pelo qual é identificado nos canais de distribuição e atendimento da sociedade."
+          description: "Commercial name of the product, by which it is identified in the company's distribution and service channels."
           minLength: 1
           maxLength: 80
           example: ACMEcap
         code:
           type: string
-          description: Código único a ser definido pela sociedade.
+          description: Unique code to be defined by the company.
           minLength: 1
           maxLength: 100
           example: 01234589_cap
@@ -215,19 +211,19 @@ components:
           $ref: "#/components/schemas/TermsAndConditions"
         quotas:
           type: array
-          description: Informações relativas às taxas da cotas praticadas para cada parcela.
+          description: Information regarding quota rates applied for each installment.
           minItems: 1
           items:
             $ref: "#/components/schemas/CapitalizationBondsProductQuota"
         validity:
           type: integer
           format: int32
-          description: Período entre a data de início e a data final para constituição do capital a ser pago ao(s) titular(es) do direito de resgate. Prazo de vigência do título de capitalização em meses (Resolução CNSP 384/20).
+          description: Period between the start date and the end date for building up the capital to be paid to the holder(s) of the redemption right. Term of validity of the capitalization bond in months (CNSP Resolution 384/20).
           maximum: 2147483647
           example: 48
         serieSize:
           type: integer
-          description: Os títulos de capitalização com sorteio devem ser estruturados em séries, ou seja, em sequências ou em grupos de títulos submetidos às mesmas condições e características, à exceção do valor do pagamento.
+          description: Capitalization bonds with draws must be structured in series, that is, in sequences or groups of bonds subject to the same conditions and characteristics, except for the payment amount.
           maximum: 2147483647
           example: 5000000
         capitalizationPeriod:
@@ -238,74 +234,73 @@ components:
           $ref: "#/components/schemas/ContributionPayment"
         finalRedemptionRate:
           type: string
-          description: Valor percentual (%) de resgate final permitido.
+          description: Percentage value (%) of final redemption allowed.
           pattern: '^(\d{1}\.\d{6})$|^(-1.000000)$'
           maxLength: 9
           minLength: 8
           example: "0.019800"
         draws:
           type: array
-          description: Informações relativas aos Sorteios
+          description: Information regarding Draws
           minItems: 1
           items:
             $ref: "#/components/schemas/CapitalizationBondsProductPrizeDraw"
         additionalDetails:
           type: string
-          description: Campo livre para preenchimento das informações adicionais referente ao produto da sociedade seguradora participante do OPIN. Pode-se incluir URL.
+          description: Free field to fill in additional information regarding the product of the insurance company participating in OPIN. URL can be included.
           maxLength: 1024
           example: "https://ACME.exemplo/capitalizacao/tradicional/pdf/condicoes_gerais"
         minimumRequirementDetails:
           type: string
           format: url
           description: |
-            Campo livre para preenchimento das informações adicionais referente ao requerimento mínimo. Pode-se incluir URL.
+            Free field to fill in additional information regarding the minimum requirement. URL can be included.
           maxLength: 1024
           example: "https://ACME.com/capitalizacao/tradicional/pdf/condicoes_gerais"
         targetAudience:
           type: string
-          description: |
-            Público alvo do produto da sociedade seguradora participante do OPIN.
+          description: Target audience of the product of the insurance company participating in OPIN.
           enum:
-            - PESSOA_NATURAL
-            - PESSOA_JURIDICA
-            - PESSOA_NATURAL_JURIDICA
-          example: PESSOA_NATURAL
+            - PESSOA_NATURAL # Natural Person
+            - PESSOA_JURIDICA # Legal Entity
+            - PESSOA_NATURAL_JURIDICA # Natural or Legal Person
+          example: PESSOA_NATURAL # Natural Person
     EnumCapitalizationBondsProductModality:
       type: string
       description: |
-        Modalidades de capitalização permitidas pela Susep para comercialização: 
+        Capitalization modalities allowed by Susep for commercialization:
 
-          1.Tradicional: A modalidade tradicional tem por objetivo restituir ao titular, ao final do prazo de vigência, no mínimo, o valor total das contribuições efetuadas pelo subscritor, desde que todas as contribuições previstas tenham sido realizadas nas datas programadas. (Res CNSP 384/20)
+          1.Tradicional: The traditional modality aims to return to the holder, at the end of the term, at least the total value of contributions made by the subscriber, provided that all scheduled contributions have been made on the scheduled dates. (CNSP Resolution 384/20)
 
-          2.Instrumento de Garantia: A modalidade tem por objetivo propiciar que a provisão matemática para capitalização do título de capitalização seja utilizada para assegurar o cumprimento de obrigação assumida em contrato principal pelo titular perante terceiro. (Res CNSP 384/20)
+          2.Instrumento de Garantia: The modality aims to enable the mathematical provision for capitalization of the capitalization bond to be used to ensure compliance with an obligation assumed in a main contract by the holder to a third party. (CNSP Resolution 384/20)
 
-          3.Compra Programada: A modalidade compra programada garante o valor de resgate em moeda corrente nacional, sendo disponibilizada ao assim desejar e sem qualquer outro custo, pelo recebimento do bem e/ou serviço referenciado no subsidiado por acordos comerciais celebrados com indústrias, atacadistas, empresas comerciais ou prestadores de serviço. (Res CNSP 384/20)
+          3.Compra Programada: The programmed purchase modality guarantees the redemption value in national currency, being made available if desired and without any other cost, for receiving the good and/or service referenced in the subsidized by commercial agreements entered into with industries, wholesalers, commercial companies or service providers. (CNSP Resolution 384/20)
 
-          4.Popular: A modalidade popular tem por objetivo propiciar a capitalização da contribuição e a participação do titular em sorteios, sem que haja devolução integral do valor pago. (Res CNSP 384/20)
+          4.Popular: The popular modality aims to provide for the capitalization of the contribution and the holder's participation in draws, without full return of the amount paid. (CNSP Resolution 384/20)
 
-          5.Incentivo: A modalidade incentivo tem por objetivo a vinculação a um evento promocional de caráter comercial instituído pelo subscritor para alavancar a venda de seu(s) produto(s) ou serviços ou para fidelizar seus clientes. (Res CNSP 384/20)
+          5.Incentivo: The incentive modality aims to link to a commercial promotional event established by the subscriber to leverage the sale of their product(s) or services or to retain their customers. (CNSP Resolution 384/20)
 
-          6.Filantropia Premiável: A modalidade filantropia premiável é destinada ao subscritor interessado em contribuir com entidades beneficentes de assistências sociais, certificadas nos termos da legislação vigente, e participar de sorteio(s). (Res CNSP 384/20)
+          6.Filantropia Premiável: The philanthropy awardable modality is intended for the subscriber interested in contributing to social welfare charities, certified under current legislation, and participating in draw(s). (CNSP Resolution 384/20)
       enum:
-        - TRADICIONAL
-        - INSTRUMENTO_GARANTIA
-        - COMPRA_PROGRAMADA
-        - POPULAR
-        - INCENTIVO
-        - FILANTROPIA_PREMIAVEL
-      example: TRADICIONAL
+        - TRADICIONAL # Traditional
+        - INSTRUMENTO_GARANTIA # Guarantee Instrument
+        - COMPRA_PROGRAMADA # Programmed Purchase
+        - POPULAR # Popular
+        - INCENTIVO # Incentive
+        - FILANTROPIA_PREMIAVEL # Philanthropy Awardable
+      example: TRADICIONAL # Traditional
     EnumCapitalizationBondsProductCostType:
       type: string
       description: |
-        Pagamento efetuado ao subscritor à sociedade de capitalização para aquisição do título de capitalização, podendo ser única, periódica ou mensal.
+        Payment made by the subscriber to the capitalization company for the acquisition of the capitalization bond, which may be single, periodic or monthly.
       enum:
-        - PAGAMENTO_UNICO
-        - PAGAMENTO_MENSAL
-        - PAGAMENTO_PERIODICO
-      example: PAGAMENTO_UNICO
+        - PAGAMENTO_UNICO # Single Payment
+        - PAGAMENTO_MENSAL # Monthly Payment
+        - PAGAMENTO_PERIODICO # Periodic Payment
+      example: PAGAMENTO_UNICO # Single Payment
     TermsAndConditions:
       type: object
-      description: Informações relativas aos termos e condições.
+      description: Information regarding terms and conditions.
       required:
         - termsRegulations
       x-regulatory-required:
@@ -314,7 +309,7 @@ components:
       properties:
         susepProcessNumber:
           type: string
-          description: "Sequência numérica utilizada para consulta dos processos eletrônicos na SUSEP, com caracteres especiais, conforme campo de consulta no site da SUSEP (XXXXX.XXXXXX/XXXX-XX)<br>Observação&#58; Mascaras da SUSEP – Serão permitidos todas as máscaras de Produtos. Limitar pelos códigos das Máscaras."
+          description: "Numeric sequence used to query electronic processes at SUSEP, with special characters, as per the query field on the SUSEP website (XXXXX.XXXXXX/XXXX-XX)<br>Note&#58; SUSEP Masks – All Product masks will be allowed. Limit by Mask codes."
           minLength: 2
           maxLength: 30
           pattern: '^\d{5}\.\d{6}\/\d{4}-\d{2}$|^\d{2}\.\d{6}\/\d{2}-\d{2}$|^\d{3}-\d{5}\/\d{2}$|^\d{5}\.\d{6}\/\d{2}-\d{2}$'
@@ -322,7 +317,7 @@ components:
         termsRegulations:
           type: string
           format: url
-          description: Campo aberto para representar as Condições Gerais, Condições Especiais e Condições ou Cláusulas Particulares de um mesmo produto, conforme Circular SUSEP 321/06. Pode-se incluir URL que apresenta esse termos e condições.
+          description: Open field to represent the General Conditions, Special Conditions and Specific Conditions or Clauses of the same product, according to SUSEP Circular 321/06. URL that presents these terms and conditions can be included.
           maxLength: 1024
           example: "https://openinsurance.com.br/aaa"
       additionalProperties: false
@@ -342,33 +337,33 @@ components:
         quota:
           type: number
           format: integer
-          description: Número da parcela.
+          description: Installment number.
           maximum: 2147483647
           example: 10
         capitalizationQuota:
           type: string
-          description: Percentual da contribuição destinado à constituição de capital referente ao direito de resgate. (Resolução CNSP 384/20).
+          description: Percentage of the contribution allocated to the constitution of capital related to the redemption right. (CNSP Resolution 384/20).
           maxLength: 9
           minLength: 8
           pattern: '^(\d{1}\.\d{6})$|^(-1.000000)$'
           example: "0.019800"
         raffleQuota:
           type: string
-          description: Percentual da contribuição destinado a custear os sorteios, se previstos no plano. (Resolução CNSP 384/20).
+          description: Percentage of the contribution intended to cover the costs of draws, if provided for in the plan. (CNSP Resolution 384/20).
           maxLength: 9
           minLength: 8
           pattern: '^(\d{1}\.\d{6})$|^(-1.000000)$'
           example: "0.019800"
         chargingQuota:
           type: string
-          description: Percentual da contribuição destinado aos custos de despesas com corretagem, colocação e administração do título de capitalização, emissão, divulgação, lucro da sociedade de capitalização e eventuais despesas relativas ao custeio da contemplação obrigatória e da distribuição de bônus. (Resolução CNSP 384/20).
+          description: Percentage of the contribution allocated to cover the costs of expenses with brokerage, placement and administration of the capitalization bond, issuance, advertising, profit of the capitalization company and any expenses related to the cost of mandatory consideration and bonus distribution. (CNSP Resolution 384/20).
           maxLength: 9
           minLength: 8
           pattern: '^(\d{1}\.\d{6})$|^(-1.000000)$'
           example: "0.019800"
       additionalProperties: false
     CapitalizationBondsProductCapitalizationPeriod:
-      description: Informações relativas ao período de capitalização.
+      description: Information regarding the capitalization period.
       type: object
       required:
         - interestRate
@@ -386,7 +381,7 @@ components:
         interestRate:
           type: string
           pattern: '^(\d{1}\.\d{6})$|^(-1.000000)$'
-          description: "Taxa que remunera a parte da mensalidade destinada a formar o Capital, ou seja, a Provisão Matemática de Resgate, também chamada de saldo de capitalização. Em porcentagem ao mês (% a.m.)."
+          description: "Rate that remunerates the portion of the monthly payment intended to form the Capital, that is, the Mathematical Provision for Redemption, also called capitalization balance. As a percentage per month (% p.m.)."
           maxLength: 9
           minLength: 8
           example: "0.019800"
@@ -395,18 +390,18 @@ components:
         updateIndexAdditionalInfo:
           type: string
           description: |
-            Campo livre para preenchimento das informações adicionais referente ao índice utilizado na atualização dos pagamentos mensais. 
+            Free field to fill in additional information regarding the index used to update monthly payments.
 
-            [Restrição] Obrigatório quando "updateIndex" for igual 'OUTROS'.
+            [Restriction] Mandatory when "updateIndex" is equal to 'OUTROS'.
           maxLength: 200
-          example: Informações adicionais
+          example: Informações adicionais # Additional Information
         contributionAmount:
           type: array
           items:
             $ref: "#/components/schemas/CapitalizationPeriodContributionAmount"
           minItems: 1
         earlyRedemptions:
-          description: Informações relativas ao resgate antecipado.
+          description: Information regarding early redemption.
           minItems: 1
           type: array
           items:
@@ -418,12 +413,12 @@ components:
               quota:
                 type: number
                 format: integer
-                description: Parcela relativa ao Resgate Antecipado
+                description: Installment related to Early Redemption
                 maximum: 2147483647
                 example: 10
               rate:
                 type: string
-                description: Taxa relativa ao Resgate Antecipado
+                description: Rate related to Early Redemption
                 maxLength: 9
                 minLength: 8
                 pattern: '^(\d{1}\.\d{6})$|^(-1.000000)$'
@@ -431,7 +426,7 @@ components:
             additionalProperties: false
         redemptionPercentageEndTerm:
           type: string
-          description: "Percentual mínimo da soma das contribuições efetuadas que poderá ser resgatado ao final da vigência, tendo como condição os pagamentos das parcelas nos respectivos vencimentos."
+          description: "Minimum percentage of the sum of contributions made that may be redeemed at the end of the term, conditional on payments of installments on their respective due dates."
           maxLength: 9
           minLength: 8
           pattern: '^(\d{1}\.\d{6})$|^(-1.000000)$'
@@ -439,7 +434,7 @@ components:
         gracePeriodRedemption:
           type: number
           format: integer
-          description: "Intervalo de tempo mínimo entre contratação e resgate do direito, em meses."
+          description: "Minimum time interval between contracting and redemption of the right, in months."
           maximum: 2147483647
           example: 48
       additionalProperties: false
@@ -450,14 +445,14 @@ components:
         - IGPM
         - INPC
         - TR
-        - INDICE_REMUNERACAO_DEPOSITOS_POUPANCA
-        - OUTROS
+        - INDICE_REMUNERACAO_DEPOSITOS_POUPANCA # SAVINGS_DEPOSIT_REMUNERATION_INDEX
+        - OUTROS # OTHERS
       example: IPCA
       description: |
-        Índice utilizado na atualização dos pagamentos mensais (para títulos com mais de 12 meses de vigência) (não aplicável a pagamento único).
+        Index used in updating monthly payments (for bonds with more than 12 months of validity) (not applicable to single payment).
     CapitalizationPeriodContributionAmount:
       type: object
-      description: Informações sobre a contribuição financeira em reais (R$),  abrangendo periodicidade, valor mínimo, valor máximo e montante pago.
+      description: Information about the financial contribution in reais (R$), covering periodicity, minimum value, maximum value and amount paid.
       required:
         - minimum
         - maximum
@@ -471,53 +466,53 @@ components:
         periodicity:
           type: string
           description: |
-            Intervalo de tempo regular previsto entre os sorteios. Na integração entre os sistemas OFB e OPIN, a correspondência do item 'PERIODICO' no OPIN está relacionada ao item 'OUTROS' no OFB. 
-            Detalhes adicionais sobre esse cenário podem ser descritos no campo 'periodicityAdditionalInfo'.
+            Regular time interval foreseen between draws. In the integration between the OFB and OPIN systems, the correspondence of the 'PERIODICO' item in OPIN is related to the 'OUTROS' item in OFB.
+            Additional details about this scenario can be described in the 'periodicityAdditionalInfo' field.
           enum:
-            - UNICO
-            - DIARIO
-            - SEMANAL
-            - QUINZENAL
-            - MENSAL
-            - BIMESTRAL
-            - TRIMESTRAL
-            - QUADRIMESTRAL
-            - SEMESTRAL
-            - ANUAL
-            - OUTROS
-          example: UNICO
+            - UNICO # UNIQUE
+            - DIARIO # DAILY
+            - SEMANAL # WEEKLY
+            - QUINZENAL # BIWEEKLY
+            - MENSAL # MONTHLY
+            - BIMESTRAL # BIMONTHLY
+            - TRIMESTRAL # QUARTERLY
+            - QUADRIMESTRAL # QUADRIMONTHLY
+            - SEMESTRAL # SEMIANNUAL
+            - ANUAL # ANNUAL
+            - OUTROS # OTHERS
+          example: UNICO # UNIQUE
         periodicityAdditionalInfo:
           type: string
           description: |
-            Campo livre para preenchimento das informações adicionais referente ao intervalo de tempo regular previsto entre os sorteios.
+            Free field to fill in additional information regarding the regular time interval foreseen between draws.
 
-            [Restrição] Obrigatório quando "periodicity" for igual 'OUTROS'.
+            [Restriction] Mandatory when "periodicity" is equal to 'OUTROS'.
           maxLength: 200
-          example: Informações adicionais
+          example: Informações adicionais # Additional Information
         minimum:
           type: string
           pattern: '^(\d{1,16}\.\d{2,4})$'
           description: |
-            Valor mínimo. Para a modalidade 'TRADICIONAL' o valor mínimo correspondente ao pagamento efetuado pelo subscritor à sociedade de capitalização.
+            Minimum value. For the 'TRADICIONAL' modality, the minimum value corresponds to the payment made by the subscriber to the capitalization company.
           maxLength: 21
           example: "1.2222"
         maximum:
           type: string
           pattern: '^(\d{1,16}\.\d{2,4})$'
           description: |
-            Valor máximo. Para a modalidade 'TRADICIONAL' o valor máximo correspondente ao pagamento efetuado pelo subscritor à sociedade de capitalização.
+            Maximum value. For the 'TRADICIONAL' modality, the maximum value corresponds to the payment made by the subscriber to the capitalization company.
           maxLength: 21
           example: "1.2222"
         allowedValue:
           type: number
           format: double
           description: |
-            Valor permitido. Para a modalidade 'TRADICIONAL' o valor permitido correspondente ao pagamento efetuado pelo subscritor à sociedade de capitalização.
+            Allowed value. For the 'TRADICIONAL' modality, the allowed value corresponds to the payment made by the subscriber to the capitalization company.
           example: 5000
       additionalProperties: false
     LatePayment:
       type: object
-      description: Informações relativas ao atraso de pagamento.
+      description: Information regarding late payment.
       required:
         - suspensionMonths
       x-regulatory-required:
@@ -527,18 +522,18 @@ components:
         suspensionMonths:
           type: integer
           description: |
-            Prazo máximo (contínuo ou intermitente) em meses que o título fica suspenso por atraso de pagamento, antes de ser cancelado, exceto pagamento único, 
-            conforme as diretrizes do manual da SUSEP
+            Maximum period (continuous or intermittent) in months that the bond is suspended due to late payment, before being canceled, except for single payment,
+            according to the guidelines of the SUSEP manual
           example: 10
         periodExtensionOption:
           type: boolean
           description: |
-            Alteração do prazo de vigência original, pela suspensão, exceto pagamento único.
+            Change in the original term of validity, due to suspension, except for single payment.
           example: true
       additionalProperties: false
     ContributionPayment:
       type: object
-      description: Informações relativas ao pagamento da contribuição.
+      description: Information regarding contribution payment.
       x-regulatory-required:
         - paymentMethod
         - updateIndex
@@ -548,37 +543,37 @@ components:
         paymentMethodAdditionalInfo:
           type: string
           description: |
-            Campo livre para preenchimento das informações adicionais referente ao meio de Pagamento utilizado para pagamento da contribuição.
+            Free field to fill in additional information regarding the Payment method used to pay the contribution.
 
-            [Restrição] Obrigatório quando "paymentMethod" for igual 'OUTROS'.
+            [Restriction] Mandatory when "paymentMethod" is equal to 'OUTROS'.
           maxLength: 200
-          example: Informações adicionais
+          example: Informações adicionais # Additional Information
         updateIndex:
           $ref: "#/components/schemas/CapitalizationBondsProductUpdateIndex"
         updateIndexAdditionalInfo:
           type: string
           description: |
-            Campo livre para preenchimento das informações adicionais referente ao índice utilizado na atualização dos pagamentos mensais.
+            Free field to fill in additional information regarding the index used to update monthly payments.
 
-            [Restrição] Obrigatório quando "updateIndex" for igual 'OUTROS'.
+            [Restriction] Mandatory when "updateIndex" is equal to 'OUTROS'.
           maxLength: 200
-          example: Informações adicionais
+          example: Informações adicionais # Additional Information
       additionalProperties: false
     CapitalizationBondsProductPaymentMethod:
       type: string
       enum:
-        - CARTAO_CREDITO
-        - CARTAO_DEBITO
-        - DEBITO_CONTA_CORRENTE
-        - DEBITO_CONTA_POUPANCA
-        - BOLETO_BANCARIO
+        - CARTAO_CREDITO # CREDIT_CARD
+        - CARTAO_DEBITO # DEBIT_CARD
+        - DEBITO_CONTA_CORRENTE # CURRENT_ACCOUNT_DEBIT
+        - DEBITO_CONTA_POUPANCA # SAVINGS_ACCOUNT_DEBIT
+        - BOLETO_BANCARIO # BANK_SLIP
         - PIX
-        - CONSIGNACAO_FOLHA_PAGAMENTO
-        - PAGAMENTO_PONTOS
-        - OUTROS
-      example: CARTAO_CREDITO
+        - CONSIGNACAO_FOLHA_PAGAMENTO # PAYROLL_DEDUCTION
+        - PAGAMENTO_PONTOS # POINTS_PAYMENT
+        - OUTROS # OTHERS
+      example: CARTAO_CREDITO # CREDIT_CARD
       description: |
-        Modo de pagamento utilizado para realizar o pagamento da contribuição.
+        Payment method used to make the contribution payment.
     CapitalizationBondsProductPrizeDraw:
       type: object
       required:
@@ -597,64 +592,64 @@ components:
         timeInterval:
           type: string
           description: |
-            Período de tempo regular estabelecido entre as ocorrências dos sorteios.
+            Regular time period established between draw occurrences.
           enum:
-            - UNICO
-            - DIÁRIO
-            - SEMANAL
-            - QUINZENAL
-            - MENSAL
-            - BIMESTRAL
-            - TRIMESTRAL
-            - QUADRIMESTRAL
-            - SEMESTRAL
-            - ANUAL
-            - OUTROS
-          example: UNICO
+            - UNICO # UNIQUE
+            - DIÁRIO # DAILY
+            - SEMANAL # WEEKLY
+            - QUINZENAL # BIWEEKLY
+            - MENSAL # MONTHLY
+            - BIMESTRAL # BIMONTHLY
+            - TRIMESTRAL # QUARTERLY
+            - QUADRIMESTRAL # QUADRIMONTHLY
+            - SEMESTRAL # SEMIANNUAL
+            - ANUAL # ANNUAL
+            - OUTROS # OTHERS
+          example: UNICO # UNIQUE
         timeIntervalAdditionalInfo:
           type: string
           description: |
-            Campo livre para preenchimento das informações adicionais referente ao intervalo de tempo regular previsto entre os sorteios.
+            Free field to fill in additional information regarding the regular time interval foreseen between draws.
 
-            [Restrição] Obrigatório quando "timeInterval" for igual 'OUTROS'.
+            [Restriction] Mandatory when "timeInterval" is equal to 'OUTROS'.
           maxLength: 200
-          example: Informações adicionais
+          example: Informações adicionais # Additional Information
         quantity:
           type: integer
-          description: Número da quantidade de sorteios previstos ao longo da vigência.
+          description: Number of draws foreseen throughout the term.
           example: 10000
         prizeMultiplier:
           type: number
           format: integer
-          description: "Valor dos sorteios representado por múltiplo do valor de contribuição. Por exemplo: 5 vezes valor da contribuição"
+          description: "Draw value represented by a multiple of the contribution value. For example: 5 times the contribution value"
           maximum: 2147483647
           example: 5
         earlySettlementRaffle:
           description: |
-            Modelo de sorteio que acarreta, ao título contemplado, o seu resgate total obrigatório (Resolução Normativa 384/20).
+            Draw model that entails, for the contemplated bond, its mandatory total redemption (Normative Resolution 384/20).
           type: boolean
           example: true
         mandatoryContemplation:
           type: boolean
           description: |
-            Indicador da possibilidade de realização de sorteio com previsão de que o título sorteado seja obrigatoriamente um título comercializado, desde que atingidos os requisitos definidos nas condições gerais do plano.
+            Indicator of the possibility of holding a draw with a provision that the drawn bond is mandatorily a commercialized bond, provided that the requirements defined in the general conditions of the plan are met.
           example: true
         ruleDescription:
           type: string
-          description: "Campo aberto para complementar a regra dos sorteios do produto, a ser feita para cada participante."
+          description: "Open field to complement the draw rules of the product, to be made for each participant."
           maxLength: 200
-          example: Sorteios próprios às terças-feiras. Toda quarta-feira sorteios através da loteria federal.
+          example: Sorteios próprios às terças-feiras. Toda quarta-feira sorteios através da loteria federal. # Own draws on Tuesdays. Every Wednesday draws through the federal lottery.
         minimumContemplationProbability:
           type: string
           pattern: '^(\d{1}\.\d{6})$|^(-1.000000)$'
-          description: Percentual da probabilidade mínima de contemplação nos sorteios.
+          description: Percentage of the minimum probability of consideration in draws.
           maxLength: 9
           minLength: 8
           example: "0.019800"
       additionalProperties: false
     Links:
       type: object
-      description: Referências para outros recursos da API requisitada.
+      description: References to other resources of the requested API.
       required:
         - self
       properties:
@@ -662,36 +657,36 @@ components:
           type: string
           format: url
           maxLength: 2000
-          description: URI completo que gerou a resposta atual.
+          description: Full URI that generated the current response.
           example: "https://api.banco.com.br/open-banking/api/v2/resource"
         first:
           type: string
           format: url
           maxLength: 2000
-          description: URI da primeira página que originou essa lista de resultados. Restrição - Obrigatório quando não for a primeira página da resposta
+          description: URI of the first page that originated this list of results. Restriction - Mandatory when it is not the first page of the response
           example: "https://api.banco.com.br/open-banking/api/v2/resource"
         prev:
           type: string
           format: url
           maxLength: 2000
-          description: "URI da página anterior dessa lista de resultados. Restrição - \tObrigatório quando não for a primeira página da resposta"
+          description: "URI of the previous page of this list of results. Restriction - \tMandatory when it is not the first page of the response"
           example: "https://api.banco.com.br/open-banking/api/v2/resource"
         next:
           type: string
           format: url
           maxLength: 2000
-          description: URI da próxima página dessa lista de resultados. Restrição - Obrigatório quando não for a última página da resposta
+          description: URI of the next page of this list of results. Restriction - Mandatory when it is not the last page of the response
           example: "https://api.banco.com.br/open-banking/api/v2/resource"
         last:
           type: string
           format: url
           maxLength: 2000
-          description: URI da última página dessa lista de resultados. Restrição - Obrigatório quando não for a última página da resposta
+          description: URI of the last page of this list of results. Restriction - Mandatory when it is not the last page of the response
           example: "https://api.banco.com.br/open-banking/api/v2/resource"
       additionalProperties: false
     OpenDataMeta:
       type: object
-      description: Meta informações referente à API requisitada.
+      description: Meta information regarding the requested API.
       required:
         - totalRecords
         - totalPages
@@ -699,19 +694,19 @@ components:
         totalRecords:
           type: integer
           format: int32
-          description: Número total de registros no resultado
+          description: Total number of records in the result
           example: 10
         totalPages:
           type: integer
           format: int32
-          description: Número total de páginas no resultado
+          description: Total number of pages in the result
           example: 1
       additionalProperties: false
   parameters:
     page:
       name: page
       in: query
-      description: Número da página que está sendo requisitada (o valor da primeira página é 1).
+      description: Page number being requested (the value of the first page is 1).
       schema:
         type: integer
         default: 1
@@ -721,7 +716,7 @@ components:
     pageSize:
       name: page-size
       in: query
-      description: Quantidade total de registros por páginas.
+      description: Total number of records per page.
       schema:
         type: integer
         default: 25
@@ -730,7 +725,7 @@ components:
         maximum: 1000
   responses:
     OKResponseCapitalizationBondsProductsList:
-      description: Dados de título(s) de capitalização obtidos com sucesso.
+      description: Capitalization bond(s) data successfully obtained.
       content:
         application/json:
           schema:
@@ -742,7 +737,7 @@ components:
             properties:
               data:
                 type: array
-                description: Conjunto de informações do Título de Capitalização
+                description: Set of Capitalization Bond information
                 items:
                   $ref: "#/components/schemas/CapitalizationBondsProductIdentificationData"
                 minItems: 1
@@ -752,37 +747,37 @@ components:
                 $ref: "#/components/schemas/OpenDataMeta"
             additionalProperties: false
     BadRequest:
-      description: "A requisição foi malformada, omitindo atributos obrigatórios, seja no payload ou através de atributos na URL."
+      description: "The request was malformed, omitting mandatory attributes, either in the payload or through attributes in the URL."
       content:
         application/json; charset=utf-8:
           schema:
             $ref: "#/components/schemas/SchemaResponse"
     InternalServerError:
-      description: Ocorreu um erro no gateway da API ou no microsserviço
+      description: An error occurred in the API gateway or microservice
       content:
         application/json; charset=utf-8:
           schema:
            $ref: "#/components/schemas/SchemaResponse"
     MethodNotAllowed:
-      description: O consumidor tentou acessar o recurso com um método não suportado
+      description: The consumer tried to access the resource with an unsupported method
       content:
         application/json; charset=utf-8:
           schema:
             $ref: "#/components/schemas/SchemaResponse"
     NotFound:
-      description: O recurso solicitado não existe ou não foi implementado
+      description: The requested resource does not exist or has not been implemented
       content:
         application/json; charset=utf-8:
           schema:
             $ref: "#/components/schemas/SchemaResponse"
     TooManyRequests:
-      description: "A operação foi recusada, pois muitas solicitações foram feitas dentro de um determinado período ou o limite de requisições concorrentes foi atingido."
+      description: "The operation was refused because too many requests were made within a certain period or the concurrent request limit was reached."
       content:
         application/json; charset=utf-8:
           schema:
             $ref: "#/components/schemas/SchemaResponse"
     SiteIsOverloaded:
-      description: "O site está sobrecarregado e a operação foi recusada, pois foi atingido o limite máximo de TPS global, neste momento."
+      description: "The site is overloaded and the operation was refused because the global TPS maximum limit was reached at this time."
       content:
         application/json; charset=utf-8:
           schema:
@@ -802,30 +797,29 @@ components:
                     - detail
                   properties:
                     code:
-                      description: Código de erro específico do endpoint
+                      description: Specific endpoint error code
                       type: string
                       pattern: '[\w\W\s]*'
                       maxLength: 255
                     title:
-                      description: Título legível por humanos deste erro específico
+                      description: Human-readable title for this specific error
                       type: string
                       pattern: '[\w\W\s]*'
                       maxLength: 255
                     detail:
-                      description: Descrição legível por humanos deste erro específico
+                      description: Human-readable description for this specific error
                       type: string
                       pattern: '[\w\W\s]*'
                       maxLength: 2048
               meta:
                 type: object
-                description: Meta informações referente à API requisitada.
+                description: Meta information regarding the requested API.
                 required:
                   - requestDateTime
                 properties:
                   requestDateTime:
-                    description: "Data e hora da consulta, conforme especificação RFC-3339, formato UTC."
+                    description: "Date and time of consultation, according to RFC-3339 specification, UTC format."
                     type: string
                     maxLength: 20
                     format: date-time
                     example: "2021-05-21T08:30:00Z"
-  

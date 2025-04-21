@@ -1,0 +1,85 @@
+{
+  "data": [
+    {
+      "participant": {
+        "brand": "MyBank",
+        "name": "MyBank Corp.",
+        "cnpjNumber": "12345678000190",
+        "urlComplementaryList": "https://www.mybank.com/complementary-list"
+      },
+      "feeName": "TAXA_DESCONTO_MODALIDADE_CREDITO",
+      "code": "MDR_CREDITO",
+      "prices": [
+        {
+          "interval": "1_FAIXA",
+          "value": "0.021000",
+          "customerRate": "0.550000"
+        },
+        {
+          "interval": "2_FAIXA",
+          "value": "0.026000",
+          "customerRate": "0.200000"
+        },
+        {
+          "interval": "3_FAIXA",
+          "value": "0.031000",
+          "customerRate": "0.150000"
+        },
+        {
+          "interval": "4_FAIXA",
+          "value": "0.036000",
+          "customerRate": "0.100000"
+        }
+      ],
+      "chargingTriggerInfo": "Credit transactions, both in sight and installment",
+      "minimum": "0.016000",
+      "maximum": "0.041000"
+    },
+    {
+      "participant": {
+        "brand": "MyBank",
+        "name": "MyBank Corp.",
+        "cnpjNumber": "12345678000190",
+        "urlComplementaryList": "https://www.mybank.com/complementary-list"
+      },
+      "feeName": "TAXA_DESCONTO_MODALIDADE_DEBITO",
+      "code": "MDR_DEBITO",
+      "prices": [
+        {
+          "interval": "1_FAIXA",
+          "value": "0.011000",
+          "customerRate": "0.650000"
+        },
+        {
+          "interval": "2_FAIXA",
+          "value": "0.013000",
+          "customerRate": "0.250000"
+        },
+        {
+          "interval": "3_FAIXA",
+          "value": "0.015000",
+          "customerRate": "0.050000"
+        },
+        {
+          "interval": "4_FAIXA",
+          "value": "0.017000",
+          "customerRate": "0.050000"
+        }
+      ],
+      "chargingTriggerInfo": "Debit transactions",
+      "minimum": "0.009000",
+      "maximum": "0.021000"
+    }
+  ],
+  "links": {
+    "self": "https://api.mybank.com/open-banking/acquiring/v1/personals?page=1&page-size=25",
+    "first": "https://api.mybank.com/open-banking/acquiring/v1/personals?page=1&page-size=25",
+    "prev": null,
+    "next": "https://api.mybank.com/open-banking/acquiring/v1/personals?page=2&page-size=25",
+    "last": "https://api.mybank.com/open-banking/acquiring/v1/personals?page=2&page-size=25"
+  },
+  "meta": {
+    "totalRecords": 2,
+    "totalPages": 1
+  }
+}

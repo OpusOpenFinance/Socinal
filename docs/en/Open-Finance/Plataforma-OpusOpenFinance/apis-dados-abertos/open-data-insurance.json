@@ -1,0 +1,325 @@
+{
+  "data": [
+    {
+      "participant": {
+        "brand": "MyBank Participant Brand",
+        "name": "MyBank Participant",
+        "cnpjNumber": "12345678000190",
+        "urlComplementaryList": "https://mybank.com/participants"
+      },
+      "society": {
+        "name": "MyBank Insurance Society",
+        "cnpjNumber": "98765432000101",
+        "brand": "MyBank Insurance Brand",
+        "products": [
+          {
+            "name": "MyBank Personal Accident Product",
+            "code": "PA001",
+            "category": "TRADICIONAL",
+            "modality": "ACIDENTES_PESSOAIS",
+            "coverages": [
+              {
+                "type": "INVALIDEZ_PERMANENTE_TOTAL_PARCIAL",
+                "typeAdditionalInfos": [
+                  "Specific conditions for partial disability"
+                ],
+                "attributes": {
+                  "indemnityPaymentMethods": [
+                    "PAGAMENTO_CAPITAL_SEGURADO_VALOR_MONETARIO",
+                    "REEMBOLSO_DESPESAS"
+                  ],
+                  "indemnityPaymentFrequencies": [
+                    "DIARIA_OU_PARCELA"
+                  ],
+                  "minValue": {
+                    "amount": "1000.00",
+                    "currency": "BRL"
+                  },
+                  "maxValue": {
+                    "amount": "500000.00",
+                    "currency": "BRL"
+                  },
+                  "indemnifiablePeriods": [
+                    "QUANTIDADE_DETERMINADA_DE_PARCELAS",
+                    "ATE_FIM_CICLO_DETERMINADO"
+                  ],
+                  "maximumQtyIndemnifiableInstallments": 12,
+                  "gracePeriod": {
+                    "amount": 30,
+                    "unit": "DIAS",
+                    "details": "Grace period after policy start"
+                  },
+                  "differentiatedGracePeriod": "Specific grace period for certain conditions",
+                  "deductibleDays": 7,
+                  "differentiatedDeductibleDays": 10,
+                  "deductible": {
+                    "amount": "500.00",
+                    "currency": "BRL"
+                  },
+                  "differentiatedDeductible": {
+                    "amount": "750.00",
+                    "currency": "BRL"
+                  },
+                  "excludedRisks": [
+                    "ATO_RECONHECIMENTO_PERIGOSO",
+                    "SUICIDIO"
+                  ],
+                  "excludedRisksURL": "https://mybank.com/excluded-risks",
+                  "allowApartPurchase": true
+                }
+              }
+            ],
+            "assistanceTypes": [
+              "FUNERAL",
+              "TELEMEDICINA",
+              "OUTROS"
+            ],
+            "assistanceTypesAdditionalInfos": [
+              "Specific Pet Assistance",
+              "Home Repair Assistance"
+            ],
+            "additionalServices": [
+              "SORTEIO",
+              "SERVICOS_ASSISTENCIAS_COMPLEMENTARES_PAGO"
+            ],
+            "termsAndConditions": [
+              {
+                "susepProcessNumber": "15414.123456/2024-99",
+                "detail": "https://mybank.com/terms-conditions-pa"
+              }
+            ],
+            "globalCapital": true,
+            "terms": [
+              "TEMPORARIA_PRAZO_FIXO",
+              "VITALICIA"
+            ],
+            "pmbacRemuneration": {
+              "interestRate": "0.025000",
+              "updateIndexes": [
+                "IPCA-IBGE",
+                "IGPM-FGV"
+              ]
+            },
+            "benefitRecalculation": {
+              "criterias": [
+                "INDICE",
+                "VARIAVEL_ACORDO_CRITERIO_ESPECIFICO"
+              ],
+              "updateIndexes": [
+                "IPCA",
+                "INPC"
+              ]
+            },
+            "ageAdjustment": {
+              "criterias": [
+                "APOS_PERIODO_ANOS",
+                "MUDANCA_FAIXA_ETARIA"
+              ],
+              "frequency": 5
+            },
+            "financialRegimes": [
+              "CAPITALIZACAO",
+              "REPARTICAO_SIMPLES"
+            ],
+            "reclaim": {
+              "table": [
+                {
+                  "initialMonthRange": 1,
+                  "finalMonthRange": 6,
+                  "percentage": "0.050000"
+                },
+                {
+                  "initialMonthRange": 7,
+                  "finalMonthRange": 12,
+                  "percentage": "0.100000"
+                }
+              ],
+              "gracePeriod": {
+                "amount": 60,
+                "unit": "DIAS",
+                "details": "Reclaim grace period details"
+              },
+              "differenciatedPercentage": "https://mybank.com/reclaim-percentage-details"
+            },
+            "otherGuaranteedValues": [
+              "BENEFICIO_PROLONGADO",
+              "SALDAMENTO"
+            ],
+            "allowPortability": false,
+            "portabilityGraceTime": {
+              "amount": 120,
+              "unit": "DIAS"
+            },
+            "indemnityPaymentMethods": [
+              "UNICO",
+              "SOB_FORMA_RENDA"
+            ],
+            "indemnityPaymentIncomes": [
+              "CERTA",
+              "VITALICIA_REVERSIVEL_MINIMO_GARANTIDO"
+            ],
+            "premiumPayment": {
+              "paymentMethods": [
+                "CARTAO_CREDITO",
+                "BOLETO_BANCARIO",
+                "OUTROS"
+              ],
+              "paymentMethodAdittionalInfo": "Specific payment method details for 'Others'",
+              "frequencies": [
+                "MENSAL",
+                "ANUAL",
+                "FRACIONADO"
+              ],
+              "contributionTax": "Tax distribution information available at [URL]"
+            },
+            "minimumRequirement": {
+              "contractType": "INDIVIDUAL",
+              "contractingMinRequirement": "https://mybank.com/minimum-requirements"
+            },
+            "targetAudience": "PESSOA_NATURAL_JURIDICA"
+          },
+          {
+            "name": "MyBank Life Insurance Product",
+            "code": "LIFE002",
+            "category": "MICROSSEGURO",
+            "modality": "VIDA",
+            "coverages": [
+              {
+                "type": "MORTE",
+                "attributes": {
+                  "indemnityPaymentMethods": [
+                    "PAGAMENTO_CAPITAL_SEGURADO_VALOR_MONETARIO"
+                  ],
+                  "indemnityPaymentFrequencies": [
+                    "INDENIZACAO_UNICA"
+                  ],
+                  "minValue": {
+                    "amount": "50000.00",
+                    "currency": "BRL"
+                  },
+                  "maxValue": {
+                    "amount": "1000000.00",
+                    "currency": "BRL"
+                  },
+                  "indemnifiablePeriods": [
+                    "QUANTIDADE_DETERMINADA_DE_PARCELAS"
+                  ],
+                  "maximumQtyIndemnifiableInstallments": 6,
+                  "gracePeriod": {
+                    "amount": 60,
+                    "unit": "MESES",
+                    "details": "Standard grace period"
+                  },
+                  "deductibleDays": 0,
+                  "deductible": {
+                    "amount": "0.00",
+                    "currency": "BRL"
+                  },
+                  "excludedRisks": [
+                    "OPERACAOES_GUERRA",
+                    "MATERIAL_NUCLEAR"
+                  ],
+                  "allowApartPurchase": false
+                }
+              },
+              {
+                "type": "INVALIDEZ_PERMANENTE_TOTAL_PARCIAL",
+                "attributes": {
+                  "indemnityPaymentMethods": [
+                    "PRESTACAO_SERVICOS"
+                  ],
+                  "indemnityPaymentFrequencies": [
+                    "DIARIA_OU_PARCELA"
+                  ],
+                  "minValue": {
+                    "amount": "10000.00",
+                    "currency": "BRL"
+                  },
+                  "maxValue": {
+                    "amount": "200000.00",
+                    "currency": "BRL"
+                  },
+                   "indemnifiablePeriods": [
+                    "ATE_FIM_CICLO_DETERMINADO"
+                  ],
+                  "maximumQtyIndemnifiableInstallments": 24,
+                  "gracePeriod": {
+                    "amount": 90,
+                    "unit": "DIAS",
+                    "details": "Extended grace period"
+                  },
+                  "deductibleDays": 15,
+                  "deductible": {
+                    "amount": "1000.00",
+                    "currency": "BRL"
+                  },
+                  "excludedRisks": [
+                    "DOENCAS_LESOES_PREEXISTENTES"
+                  ],
+                  "allowApartPurchase": true
+                }
+              }
+            ],
+            "assistanceTypes": [
+              "DECESSO",
+              "ORIENTACAO_JURIDICA"
+            ],
+            "additionalServices": [
+              "SERVICOS_ASSISTENCIA_COMPLEMENTARES_GRATUITO"
+            ],
+            "termsAndConditions": [
+              {
+                "susepProcessNumber": "15414.654321/2024-88",
+                "detail": "https://mybank.com/terms-conditions-life"
+              }
+            ],
+            "globalCapital": false,
+            "terms": [
+              "TEMPORARIA_INTERMITENTE"
+            ],
+            "financialRegimes": [
+              "REPARTICAO_CAPITAIS"
+            ],
+            "allowPortability": true,
+            "portabilityGraceTime": {
+              "amount": 30,
+              "unit": "MESES"
+            },
+            "indemnityPaymentMethods": [
+              "UNICO"
+            ],
+            "indemnityPaymentIncomes": [
+              "TEMPORARIA"
+            ],
+            "premiumPayment": {
+              "paymentMethods": [
+                "DEBITO_CONTA_CORRENTE",
+                "PIX"
+              ],
+              "frequencies": [
+                "MENSAL",
+                "SEMESTRAL"
+              ],
+              "contributionTax": "Refer to Annex III for tax details"
+            },
+             "minimumRequirement": {
+              "contractType": "COLETIVO",
+              "contractingMinRequirement": "https://mybank.com/collective-minimum-requirements"
+            },
+            "targetAudience": "PESSOA_JURIDICA"
+          }
+        ]
+      }
+    }
+  ],
+  "links": {
+    "self": "https://api.mybank.com/opendata/insurance/v2/personals?page=1&page-size=25",
+    "first": "https://api.mybank.com/opendata/insurance/v2/personals?page=1&page-size=25",
+    "next": "https://api.mybank.com/opendata/insurance/v2/personals?page=2&page-size=25",
+    "last": "https://api.mybank.com/opendata/insurance/v2/personals?page=5&page-size=25"
+  },
+  "meta": {
+    "totalRecords": 2,
+    "totalPages": 5
+  }
+}

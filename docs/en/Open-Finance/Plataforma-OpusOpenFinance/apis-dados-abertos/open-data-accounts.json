@@ -1,0 +1,479 @@
+{
+  "data": [
+    {
+      "participant": {
+        "brand": "MyBank",
+        "name": "MyBank S.A.",
+        "cnpjNumber": "12345678000190",
+        "urlComplementaryList": "https://mybank.com.br/complementary-list"
+      },
+      "type": "CONTA_DEPOSITO_A_VISTA",
+      "fees": {
+        "priorityServices": [
+          {
+            "name": "TRANSFERENCIA_TED_PESSOAL_OU_PRESENCIAL",
+            "code": "TED_PESSOAL",
+            "chargingTriggerInfo": "TED bank transfer carried out in person.",
+            "prices": [
+              {
+                "interval": "1_FAIXA",
+                "value": "10.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.250000"
+                }
+              },
+              {
+                "interval": "2_FAIXA",
+                "value": "12.50",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.250000"
+                }
+              },
+              {
+                "interval": "3_FAIXA",
+                "value": "15.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.250000"
+                }
+              },
+              {
+                "interval": "4_FAIXA",
+                "value": "17.50",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.250000"
+                }
+              }
+            ],
+            "minimum": {
+              "value": "8.00",
+              "currency": "BRL"
+            },
+            "maximum": {
+              "value": "20.00",
+              "currency": "BRL"
+            }
+          }
+        ],
+        "otherServices": [
+          {
+            "name": "Debit Card Second Issue",
+            "code": "2_VIA_CARTAO_DEBITO",
+            "chargingTriggerInfo": "Fee charged for issuing a second copy of a debit card.",
+            "prices": [
+              {
+                "interval": "1_FAIXA",
+                "value": "15.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.250000"
+                }
+              },
+              {
+                "interval": "2_FAIXA",
+                "value": "17.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.250000"
+                }
+              },
+              {
+                "interval": "3_FAIXA",
+                "value": "19.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.250000"
+                }
+              },
+              {
+                "interval": "4_FAIXA",
+                "value": "21.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.250000"
+                }
+              }
+            ],
+            "minimum": {
+              "value": "12.00",
+              "currency": "BRL"
+            },
+            "maximum": {
+              "value": "25.00",
+              "currency": "BRL"
+            }
+          }
+        ]
+      },
+      "serviceBundles": [
+        {
+          "name": "Essential Checking Account Package",
+          "services": [
+            {
+              "code": "SAQUE_TERMINAL",
+              "chargingTriggerInfo": "Withdrawal at ATM for checking account.",
+              "eventLimitQuantity": "4",
+              "freeEventQuantity": "4"
+            }
+          ],
+          "prices": [
+            {
+              "interval": "1_FAIXA",
+              "monthlyFee": "0.00",
+              "currency": "BRL",
+              "customers": {
+                "rate": "0.250000"
+              }
+            },
+            {
+              "interval": "2_FAIXA",
+              "monthlyFee": "0.00",
+              "currency": "BRL",
+              "customers": {
+                "rate": "0.250000"
+              }
+            },
+            {
+              "interval": "3_FAIXA",
+              "monthlyFee": "0.00",
+              "currency": "BRL",
+              "customers": {
+                "rate": "0.250000"
+              }
+            },
+            {
+              "interval": "4_FAIXA",
+              "monthlyFee": "0.00",
+              "currency": "BRL",
+              "customers": {
+                "rate": "0.250000"
+              }
+            }
+          ],
+          "minimum": {
+            "value": "0.00",
+            "currency": "BRL"
+          },
+          "maximum": {
+            "value": "0.00",
+            "currency": "BRL"
+          }
+        }
+      ],
+      "openingClosingChannels": [
+        "DEPENDENCIAS_PROPRIAS",
+        "INTERNET_BANKING",
+        "MOBILE_BANKING",
+        "CENTRAL_TELEFONICA",
+        "CHAT",
+        "CORRESPONDENTES_BANCARIOS"
+      ],
+      "openingClosingChannelsAdditionalInfo": "Account opening and closing available through all channels.",
+      "transactionMethods": [
+        "MOVIMENTACAO_ELETRONICA",
+        "MOVIMENTACAO_CHEQUE",
+        "MOVIMENTACAO_CARTAO",
+        "MOVIMENTACAO_PRESENCIAL"
+      ],
+      "termsConditions": {
+        "minimumBalance": {
+          "value": "0.00",
+          "currency": "BRL"
+        },
+        "elegibilityCriteriaInfo": "Available for individuals over 18 years old with valid CPF and proof of residence.",
+        "closingProcessInfo": "https://mybank.com.br/checking-account-closure"
+      },
+      "incomeRate": {
+        "savingAccount": "Quarterly remuneration of 0.5% + TR as per current legal determination",
+        "prepaidPaymentAccount": "2% Yield p.m."
+      }
+    },
+    {
+      "participant": {
+        "brand": "MyBank",
+        "name": "MyBank S.A.",
+        "cnpjNumber": "12345678000190",
+        "urlComplementaryList": "https://mybank.com.br/complementary-list"
+      },
+      "type": "CONTA_POUPANCA",
+      "fees": {
+        "priorityServices": [
+          {
+            "name": "FORNECIMENTO_EXTRATO_MENSAL_CONTA_DEPOSITOS_A_VISTA_E_POUPANCA_PRESENCIAL_OU_PESSOAL",
+            "code": "EXTRATO_MES_P",
+            "chargingTriggerInfo": "Monthly savings account statement provided in person.",
+            "prices": [
+              {
+                "interval": "1_FAIXA",
+                "value": "5.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.250000"
+                }
+              },
+              {
+                "interval": "2_FAIXA",
+                "value": "6.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.250000"
+                }
+              },
+              {
+                "interval": "3_FAIXA",
+                "value": "7.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.250000"
+                }
+              },
+              {
+                "interval": "4_FAIXA",
+                "value": "8.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.250000"
+                }
+              }
+            ],
+            "minimum": {
+              "value": "4.00",
+              "currency": "BRL"
+            },
+            "maximum": {
+              "value": "9.00",
+              "currency": "BRL"
+            }
+          }
+        ],
+        "otherServices": [
+          {
+            "name": "Withdrawal at Banking Correspondent",
+            "code": "SAQUE_CORRESPONDENTE",
+            "chargingTriggerInfo": "Fee charged for withdrawals made at banking correspondents.",
+            "prices": [
+              {
+                "interval": "1_FAIXA",
+                "value": "7.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.250000"
+                }
+              },
+              {
+                "interval": "2_FAIXA",
+                "value": "8.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.250000"
+                }
+              },
+              {
+                "interval": "3_FAIXA",
+                "value": "9.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.250000"
+                }
+              },
+              {
+                "interval": "4_FAIXA",
+                "value": "10.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.250000"
+                }
+              }
+            ],
+            "minimum": {
+              "value": "6.00",
+              "currency": "BRL"
+            },
+            "maximum": {
+              "value": "12.00",
+              "currency": "BRL"
+            }
+          }
+        ]
+      },
+      "serviceBundles": [
+        {
+          "name": "Essential Savings Account Package",
+          "services": [
+            {
+              "code": "SAQUE_TERMINAL",
+              "chargingTriggerInfo": "Withdrawal at ATM for savings account.",
+              "eventLimitQuantity": "2",
+              "freeEventQuantity": "2"
+            }
+          ],
+          "prices": [
+            {
+              "interval": "1_FAIXA",
+              "monthlyFee": "0.00",
+              "currency": "BRL",
+              "customers": {
+                "rate": "0.250000"
+              }
+            },
+            {
+              "interval": "2_FAIXA",
+              "monthlyFee": "0.00",
+              "currency": "BRL",
+              "customers": {
+                "rate": "0.250000"
+              }
+            },
+            {
+              "interval": "3_FAIXA",
+              "monthlyFee": "0.00",
+              "currency": "BRL",
+              "customers": {
+                "rate": "0.250000"
+              }
+            },
+            {
+              "interval": "4_FAIXA",
+              "monthlyFee": "0.00",
+              "currency": "BRL",
+              "customers": {
+                "rate": "0.250000"
+              }
+            }
+          ],
+          "minimum": {
+            "value": "0.00",
+            "currency": "BRL"
+          },
+          "maximum": {
+            "value": "0.00",
+            "currency": "BRL"
+          }
+        }
+      ],
+      "openingClosingChannels": [
+        "DEPENDENCIAS_PROPRIAS",
+        "INTERNET_BANKING",
+        "MOBILE_BANKING",
+        "CENTRAL_TELEFONICA",
+        "CHAT",
+        "CORRESPONDENTES_BANCARIOS"
+      ],
+      "openingClosingChannelsAdditionalInfo": "Account opening and closing available through all channels, including banking correspondents.",
+      "transactionMethods": [
+        "MOVIMENTACAO_ELETRONICA",
+        "MOVIMENTACAO_CARTAO",
+        "MOVIMENTACAO_PRESENCIAL"
+      ],
+      "termsConditions": {
+        "minimumBalance": {
+          "value": "50.00",
+          "currency": "BRL"
+        },
+        "elegibilityCriteriaInfo": "Available for individuals over 16 years old with valid CPF.",
+        "closingProcessInfo": "https://mybank.com.br/savings-account-closure"
+      },
+      "incomeRate": {
+        "savingAccount": "Monthly remuneration as per rule: If Selic > 8.5% p.a., 0.5% + TR; If Selic <= 8.5% p.a., 70% of Selic/year + TR.",
+        "prepaidPaymentAccount": "2% Yield p.m."
+      }
+    },
+    {
+      "participant": {
+        "brand": "MyBank",
+        "name": "MyBank S.A.",
+        "cnpjNumber": "12345678000190",
+        "urlComplementaryList": "https://mybank.com.br/complementary-list"
+      },
+      "type": "CONTA_PAGAMENTO_PRE_PAGA",
+      "fees": {
+        "priorityServices": [],
+        "otherServices": [
+          {
+            "name": "Mobile Recharge",
+            "code": "RECARGA_CELULAR",
+            "chargingTriggerInfo": "Fee charged for mobile recharge service.",
+            "prices": [
+              {
+                "interval": "1_FAIXA",
+                "value": "1.00",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.250000"
+                }
+              },
+              {
+                "interval": "2_FAIXA",
+                "value": "1.20",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.250000"
+                }
+              },
+              {
+                "interval": "3_FAIXA",
+                "value": "1.40",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.250000"
+                }
+              },
+              {
+                "interval": "4_FAIXA",
+                "value": "1.60",
+                "currency": "BRL",
+                "customers": {
+                  "rate": "0.250000"
+                }
+              }
+            ],
+            "minimum": {
+              "value": "0.80",
+              "currency": "BRL"
+            },
+            "maximum": {
+              "value": "2.00",
+              "currency": "BRL"
+            }
+          }
+        ]
+      },
+      "serviceBundles": [],
+      "openingClosingChannels": [
+        "INTERNET_BANKING",
+        "MOBILE_BANKING",
+        "CHAT"
+      ],
+      "openingClosingChannelsAdditionalInfo": "Account opening and closing exclusively digital: Internet Banking, Mobile Banking and Chat.",
+      "transactionMethods": [
+        "MOVIMENTACAO_ELETRONICA",
+        "MOVIMENTACAO_CARTAO"
+      ],
+      "termsConditions": {
+        "minimumBalance": {
+          "value": "0.00",
+          "currency": "BRL"
+        },
+        "elegibilityCriteriaInfo": "Available for individuals over 16 years old with valid CPF and email.",
+        "closingProcessInfo": "https://mybank.com.br/prepaid-account-closure"
+      },
+      "incomeRate": {
+        "savingAccount": "Monthly remuneration as per rule: If Selic > 8.5% p.a., 0.5% + TR; If Selic <= 8.5% p.a., 70% of Selic/year + TR.",
+        "prepaidPaymentAccount": "5% Yield p.m. on balance."
+      }
+    }
+  ],
+  "links": {
+    "self": "https://api.mybank.com.br/open-banking/opendata-accounts/v1/personal-accounts",
+    "first": "https://api.mybank.com.br/open-banking/opendata-accounts/v1/personal-accounts?page=1&page-size=25",
+    "next": "https://api.mybank.com.br/open-banking/opendata-accounts/v1/personal-accounts?page=2&page-size=25",
+    "last": "https://api.mybank.com.br/open-banking/opendata-accounts/v1/personal-accounts?page=5&page-size=25"
+  },
+  "meta": {
+    "totalRecords": 50,
+    "totalPages": 5
+  }
+}

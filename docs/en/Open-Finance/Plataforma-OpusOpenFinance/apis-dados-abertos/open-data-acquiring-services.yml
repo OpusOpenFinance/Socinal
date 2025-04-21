@@ -1,35 +1,26 @@
 openapi: 3.0.0
 info:
-  title: API Acquiring Services - Open Finance Brasil
+  title: Acquiring Services API - Open Finance Brasil
   description: |
-    API de Credenciamento do Open Finance Brasil – Fase 4.
-    API que retorna informações de Credenciamento.
+    Open Finance Brasil Acquiring API – Phase 4.
+    API that returns Acquiring information.
   version: 1.0.1
   license:
     name: Apache 2.0
     url: 'https://www.apache.org/licenses/LICENSE-2.0'
-  contact:
-    name: Governança do Open Finance Brasil – Especificações
-    email: gt-interfaces@openbankingbr.org
-    url: 'https://openbanking-brasil.github.io/areadesenvolvedor/'
-servers:
-  - url: 'https://api.banco.com.br/open-banking/opendata-acquiring-services/v1'
-    description: Servidor de Produção
-  - url: 'https://apih.banco.com.br/open-banking/opendata-acquiring-services/v1'
-    description: Servidor de Homologação
 tags:
   - name: PersonalAcquiringServices
-    description: Operações para obter as informações de Credenciamento para Pessoa Física.
+    description: Operations to obtain Acquiring information for individuals.
   - name: BusinessAcquiringServices
-    description: Operações para obter as informações de Credenciamento para Pessoa Jurídica.
+    description: Operations to obtain Acquiring information for legal entities.
 paths:
   /personals:
     get:
       tags:
         - PersonalAcquiringServices
-      summary: Conjunto de informações de Credenciamento para Pessoa Física.
+      summary: Set of Acquiring information for individuals.
       operationId: getPersonalAcquiringServices
-      description: Método para disponibilizar as taxas e tarifas por serviços.
+      description: Method to make fees and charges available per services.
       parameters:
         - $ref: '#/components/parameters/page'
         - $ref: '#/components/parameters/pageSize'
@@ -52,9 +43,9 @@ paths:
     get:
       tags:
         - BusinessAcquiringServices
-      summary: Conjunto de informações de Credenciamento para Pessoa Jurídica.
+      summary: Set of Acquiring information for legal entities.
       operationId: getBusinessAcquiringServices
-      description: Método para disponibilizar as taxas e tarifas por serviços.
+      description: Method to make fees and charges available per services.
       parameters:
         - $ref: '#/components/parameters/page'
         - $ref: '#/components/parameters/pageSize'
@@ -93,7 +84,7 @@ components:
       additionalProperties: false
     Links:
       type: object
-      description: Referências para outros recusos da API requisitada.
+      description: References to other resources of the requested API.
       required:
         - self
       properties:
@@ -101,36 +92,36 @@ components:
           type: string
           format: url
           maxLength: 2000
-          description: URI completo que gerou a resposta atual.
+          description: Full URI that generated the current response.
           example: 'https://api.banco.com.br/open-banking/api/v1/resource'
         first:
           type: string
           format: url
           maxLength: 2000
-          description: URI da primeira página que originou essa lista de resultados. Restrição - Obrigatório quando não for a primeira página da resposta
+          description: URI of the first page that originated this list of results. Restriction - Mandatory when it is not the first page of the response
           example: 'https://api.banco.com.br/open-banking/api/v1/resource'
         prev:
           type: string
           format: url
           maxLength: 2000
-          description: "URI da página anterior dessa lista de resultados. Restrição - \tObrigatório quando não for a primeira página da resposta"
+          description: "URI of the previous page of this list of results. Restriction - Mandatory when it is not the first page of the response"
           example: 'https://api.banco.com.br/open-banking/api/v1/resource'
         next:
           type: string
           format: url
           maxLength: 2000
-          description: URI da próxima página dessa lista de resultados. Restrição - Obrigatório quando não for a última página da resposta
+          description: URI of the next page of this list of results. Restriction - Mandatory when it is not the last page of the response
           example: 'https://api.banco.com.br/open-banking/api/v1/resource'
         last:
           type: string
           format: url
           maxLength: 2000
-          description: URI da última página dessa lista de resultados. Restrição - Obrigatório quando não for a última página da resposta
+          description: URI of the last page of this list of results. Restriction - Mandatory when it is not the last page of the response
           example: 'https://api.banco.com.br/open-banking/api/v1/resource'
       additionalProperties: false
     OpenDataMeta:
       type: object
-      description: Meta informações referente à API requisitada.
+      description: Meta information regarding the requested API.
       required:
         - totalRecords
         - totalPages
@@ -138,17 +129,17 @@ components:
         totalRecords:
           type: integer
           format: int32
-          description: Número total de registros no resultado
+          description: Total number of records in the result
           example: 1
         totalPages:
           type: integer
           format: int32
-          description: Número total de páginas no resultado
+          description: Total number of pages in the result
           example: 1
       additionalProperties: false
     AcquiringParticipant:
       type: object
-      description: Conjunto de informações relativas ao participante do produto de Open Finance
+      description: Set of information regarding the Open Finance product participant
       required:
         - brand
         - name
@@ -156,33 +147,33 @@ components:
       properties:
         brand:
           type: string
-          description: 'Nome da marca reportada pelo participante do Open Finance. O conceito a que se refere a ''marca'' é em essência uma promessa da empresa em fornecer uma série específica de atributos, benefícios e serviços uniformes aos clientes.'
+          description: 'Brand name reported by the Open Finance participant. The concept referred to by ''brand'' is essentially a company''s promise to provide a specific series of uniform attributes, benefits, and services to customers.'
           pattern: '[\w\W\s]*'
           maxLength: 80
-          example: Organização
+          example: Organização # Organization
         name:
           type: string
-          description: Nome do participante do Open Finance.
+          description: Name of the Open Finance participant.
           pattern: '[\w\W\s]*'
           maxLength: 80
-          example: Organização A1
+          example: Organização A1 # Organization A1
         cnpjNumber:
           type: string
-          description: 'O CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica. Deve-se ter apenas os números do CNPJ, sem máscara.'
+          description: 'The CNPJ corresponds to the registration number in the National Registry of Legal Entities. Only the CNPJ numbers must be provided, without masking.'
           pattern: '^\d{14}$'
           example: '13456789000112'
         urlComplementaryList:
           type: string
           description: |
-            Espera-se que valor de retorno, após acesso ao link ‘urlComplementaryList’, deve ser array de objeto com a estrutura abaixo:
+            It is expected that the return value, after accessing the ‘urlComplementaryList’ link, must be an array of object with the structure below:
 
-            - ‘name’ com o valor contido no campo ‘LegalEntityName’ conforme cadastro no diretório;
+            - ‘name’ with the value contained in the ‘LegalEntityName’ field as registered in the directory;
 
-            - 'cnpjNumber' com o valor contido no campo CNPJ (‘RegistrationNumber’) correspondente a esta instituição;
+            - 'cnpjNumber' with the value contained in the CNPJ (‘RegistrationNumber’) corresponding to this institution;
 
-            - Ambos do tipo string;
+            - Both of string type;
 
-            - Ambos obrigatórios.
+            - Both mandatory.
           maxLength: 1024
           pattern: '^(https?:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)$'
           example: 'https://empresaa1.com/companies'
@@ -190,32 +181,32 @@ components:
     EnumAcquiringServicesFeeName:
       type: string
       description: |
-        Nome da tarifa cobrada sobre o serviço de credenciamento, para pessoa física/jurídica.
-          1. Taxa de Desconto na Modalidade Crédito
-          2. Taxa de Desconto na Modalidade Débito
+        Name of the fee charged on the acquiring service, for individuals/legal entities.
+          1. Discount Rate in Credit Modality
+          2. Discount Rate in Debit Modality
       enum:
-        - TAXA_DESCONTO_MODALIDADE_CREDITO
-        - TAXA_DESCONTO_MODALIDADE_DEBITO
-      example: TAXA_DESCONTO_MODALIDADE_CREDITO
+        - TAXA_DESCONTO_MODALIDADE_CREDITO # DISCOUNT_RATE_CREDIT_MODALITY
+        - TAXA_DESCONTO_MODALIDADE_DEBITO  # DISCOUNT_RATE_DEBIT_MODALITY
+      example: TAXA_DESCONTO_MODALIDADE_CREDITO # DISCOUNT_RATE_CREDIT_MODALITY
     EnumAcquiringServicesCode:
       type: string
-      description: Sigla da Tarifa cobrada sobre o Serviço de Credenciamento informado.
+      description: Acronym of the Fee charged on the reported Acquiring Service.
       enum:
-        - MDR_CREDITO
-        - MDR_DEBITO
-      example: MDR_CREDITO
+        - MDR_CREDITO # MDR_CREDIT
+        - MDR_DEBITO # MDR_DEBIT
+      example: MDR_CREDITO # MDR_CREDIT
     EnumAcquiringServicesInterval:
       type: string
-      description: Identificação do intervalo a ser exibido.
+      description: Identification of the interval to be displayed.
       enum:
-        - 1_FAIXA
-        - 2_FAIXA
-        - 3_FAIXA
-        - 4_FAIXA
-      example: 1_FAIXA
+        - 1_FAIXA # 1ST_RANGE
+        - 2_FAIXA # 2ND_RANGE
+        - 3_FAIXA # 3RD_RANGE
+        - 4_FAIXA # 4TH_RANGE
+      example: 1_FAIXA # 1ST_RANGE
     Price:
       type: object
-      description: '4 Faixas de igual tamanho, com suas respectivas medianas e percentuais de clientes.'
+      description: '4 ranges of equal size, with their respective medians and customer percentages.'
       required:
         - interval
         - value
@@ -229,18 +220,18 @@ components:
           minLength: 8
           maxLength: 8
           pattern: '^\d{1}\.\d{6}$'
-          description: Mediana referente a taxa de desconto de débito ou crédito a cada intervalo.
+          description: Median referring to the debit or credit discount rate for each interval.
         customerRate:
           type: string
           example: '0.019800'
           minLength: 8
           maxLength: 8
           pattern: '^\d{1}\.\d{6}$'
-          description: Percentual de cliente em cada intervalo.
+          description: Percentage of customers in each interval.
       additionalProperties: false
     AcquiringServicesContractData:
       type: object
-      description: Conjunto de informações referentes às informações de credenciamento
+      description: Set of information regarding acquiring information
       required:
         - participant
         - feeName
@@ -263,38 +254,38 @@ components:
           items:
             $ref: '#/components/schemas/Price'
           example:
-            - interval: 1_FAIXA
+            - interval: 1_FAIXA # 1ST_RANGE
               value: '0.020300'
               customerRate: '0.500000'
-            - interval: 2_FAIXA
+            - interval: 2_FAIXA # 2ND_RANGE
               value: '0.030600'
               customerRate: '0.100000'
-            - interval: 3_FAIXA
+            - interval: 3_FAIXA # 3RD_RANGE
               value: '0.034300'
               customerRate: '0.300000'
-            - interval: 4_FAIXA
+            - interval: 4_FAIXA # 4TH_RANGE
               value: '0.246800'
               customerRate: '0.100000'
         chargingTriggerInfo:
           type: string
           minLength: 1
           maxLength: 200
-          example: Recebimento através de transação de cartão.
+          example: Recebimento através de transação de cartão. # Receipt through card transaction.
           description: |
-            Descrição do Fator gerador de cobrança que incide sobre o serviço de credenciamento.
+            Description of the Charging Triggering Factor that affects the acquiring service.
         minimum:
           type: string
           minLength: 8
           maxLength: 8
           pattern: '^\d{1}\.\d{6}$'
-          description: Valor mínimo
+          description: Minimum value
           example: '0.019800'
         maximum:
           type: string
           minLength: 8
           maxLength: 8
           pattern: '^\d{1}\.\d{6}$'
-          description: Valor máximo
+          description: Maximum value
           example: '0.019800'
       additionalProperties: false
     OpenDataResponseError:
@@ -314,17 +305,17 @@ components:
               - detail
             properties:
               code:
-                description: Código de erro específico do endpoint
+                description: Endpoint specific error code
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 255
               title:
-                description: Título legível por humanos deste erro específico
+                description: Human-readable title for this specific error
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 255
               detail:
-                description: Descrição legível por humanos deste erro específico
+                description: Human-readable description of this specific error
                 type: string
                 pattern: '[\w\W\s]*'
                 maxLength: 2048
@@ -336,7 +327,7 @@ components:
     page:
       name: page
       in: query
-      description: Número da página que está sendo requisitada (o valor da primeira página é 1).
+      description: Page number that is being requested (the value of the first page is 1).
       schema:
         type: integer
         default: 1
@@ -346,7 +337,7 @@ components:
     pageSize:
       name: page-size
       in: query
-      description: Quantidade total de registros por páginas.
+      description: Total number of records per page.
       schema:
         type: integer
         default: 25
@@ -355,43 +346,43 @@ components:
         maximum: 1000
   responses:
     OKResponseAcquiringServices:
-      description: Dados de operações de credenciamento obtidos com sucesso.
+      description: Acquiring operations data successfully obtained.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/OKResponseAcquiringServices'
     BadRequest:
-      description: 'A requisição foi malformada, omitindo atributos obrigatórios, seja no payload ou através de atributos na URL.'
+      description: 'The request was malformed, omitting mandatory attributes, either in the payload or through URL attributes.'
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/OpenDataResponseError'
     NotFound:
-      description: O recurso solicitado não existe ou não foi implementado
+      description: The requested resource does not exist or has not been implemented
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/OpenDataResponseError'
     MethodNotAllowed:
-      description: O consumidor tentou acessar o recurso com um método não suportado
+      description: The consumer attempted to access the resource with an unsupported method
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/OpenDataResponseError'
     TooManyRequests:
-      description: 'A operação foi recusada, pois muitas solicitações foram feitas dentro de um determinado período ou o limite de requisições concorrentes foi atingido.'
+      description: 'The operation was refused because too many requests were made within a certain period or the concurrent request limit was reached.'
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/OpenDataResponseError'
     InternalServerError:
-      description: Ocorreu um erro no gateway da API ou no microsserviço
+      description: An error occurred in the API gateway or microservice
       content:
         application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/OpenDataResponseError'
     SiteIsOverloaded:
-      description: 'O site está sobrecarregado e a operação foi recusada, pois foi atingido o limite máximo de TPS global, neste momento.'
+      description: 'The site is overloaded and the operation was refused because the global maximum TPS limit was reached at this time.'
       content:
         application/json; charset=utf-8:
           schema:
@@ -411,28 +402,28 @@ components:
                     - detail
                   properties:
                     code:
-                      description: Código de erro específico do endpoint
+                      description: Endpoint specific error code
                       type: string
                       pattern: '[\w\W\s]*'
                       maxLength: 255
                     title:
-                      description: Título legível por humanos deste erro específico
+                      description: Human-readable title for this specific error
                       type: string
                       pattern: '[\w\W\s]*'
                       maxLength: 255
                     detail:
-                      description: Descrição legível por humanos deste erro específico
+                      description: Human-readable description of this specific error
                       type: string
                       pattern: '[\w\W\s]*'
                       maxLength: 2048
               meta:
                 type: object
-                description: Meta informações referente à API requisitada.
+                description: Meta information regarding the requested API.
                 required:
                   - requestDateTime
                 properties:
                   requestDateTime:
-                    description: 'Data e hora da consulta, conforme especificação RFC-3339, formato UTC.'
+                    description: 'Date and time of consultation, according to RFC-3339 specification, UTC format.'
                     type: string
                     maxLength: 20
                     format: date-time

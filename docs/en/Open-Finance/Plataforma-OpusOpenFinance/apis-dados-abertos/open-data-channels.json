@@ -1,0 +1,180 @@
+{
+  "data": [
+    {
+      "participant": {
+        "brand": "MyBank Brand",
+        "name": "MyBank Company",
+        "cnpjNumber": "12345678000190"
+      },
+      "bankingAgents": [
+        {
+          "identification": {
+            "corporationName": "MyBank Agent Store A",
+            "groupName": "MyBank Agent Group Alpha",
+            "isUnderestablishment": true,
+            "cnpjNumber": "98765432000101"
+          },
+          "locations": [
+            {
+              "postalAddress": {
+                "address": "Main Street, 123, Suite 456",
+                "additionalInfo": "Next to the park",
+                "districtName": "Downtown",
+                "townName": "Anytown",
+                "ibgeCode": "1234567",
+                "countrySubDivision": "SP",
+                "postCode": "01001000",
+                "country": "Brazil",
+                "countryCode": "BRA",
+                "geographicCoordinates": {
+                  "latitude": "-23.5489",
+                  "longitude": "-46.6388"
+                }
+              },
+              "availability": {
+                "standards": [
+                  {
+                    "weekday": "SEGUNDA_FEIRA",
+                    "openingTime": "10:00:00Z",
+                    "closingTime": "16:00:00Z"
+                  },
+                  {
+                    "weekday": "TERCA_FEIRA",
+                    "openingTime": "10:00:00Z",
+                    "closingTime": "16:00:00Z"
+                  },
+                  {
+                    "weekday": "QUARTA_FEIRA",
+                    "openingTime": "10:00:00Z",
+                    "closingTime": "16:00:00Z"
+                  },
+                  {
+                    "weekday": "QUINTA_FEIRA",
+                    "openingTime": "10:00:00Z",
+                    "closingTime": "16:00:00Z"
+                  },
+                  {
+                    "weekday": "SEXTA_FEIRA",
+                    "openingTime": "10:00:00Z",
+                    "closingTime": "16:00:00Z"
+                  }
+                ],
+                "exception": "Closed on public holidays",
+                "isPublicAccessAllowed": true
+              },
+              "phones": [
+                {
+                  "type": "FIXO",
+                  "countryCallingCode": "55",
+                  "areaCode": "11",
+                  "number": "55551212"
+                },
+                {
+                  "type": "MOVEL",
+                  "countryCallingCode": "55",
+                  "areaCode": "11",
+                  "number": "999991212"
+                }
+              ]
+            },
+             {
+              "postalAddress": {
+                "address": "Secondary Avenue, 456, Building B",
+                "additionalInfo": "Near the train station",
+                "districtName": "Uptown",
+                "townName": "Otherville",
+                "ibgeCode": "7654321",
+                "countrySubDivision": "RJ",
+                "postCode": "20000000",
+                "country": "Brazil",
+                "countryCode": "BRA",
+                "geographicCoordinates": {
+                  "latitude": "-22.9068",
+                  "longitude": "-43.1729"
+                }
+              },
+              "availability": {
+                "standards": [
+                  {
+                    "weekday": "SEGUNDA_FEIRA",
+                    "openingTime": "09:00:00Z",
+                    "closingTime": "17:00:00Z"
+                  },
+                  {
+                    "weekday": "TERCA_FEIRA",
+                    "openingTime": "09:00:00Z",
+                    "closingTime": "17:00:00Z"
+                  },
+                  {
+                    "weekday": "QUARTA_FEIRA",
+                    "openingTime": "09:00:00Z",
+                    "closingTime": "17:00:00Z"
+                  },
+                  {
+                    "weekday": "QUINTA_FEIRA",
+                    "openingTime": "09:00:00Z",
+                    "closingTime": "17:00:00Z"
+                  },
+                  {
+                    "weekday": "SEXTA_FEIRA",
+                    "openingTime": "09:00:00Z",
+                    "closingTime": "17:00:00Z"
+                  },
+                  {
+                    "weekday": "SABADO",
+                    "openingTime": "09:00:00Z",
+                    "closingTime": "13:00:00Z"
+                  }
+                ],
+                "exception": "Open on Saturdays until 1 PM",
+                "isPublicAccessAllowed": true
+              },
+              "phones": [
+                {
+                  "type": "FIXO",
+                  "countryCallingCode": "55",
+                  "areaCode": "21",
+                  "number": "33334444"
+                }
+              ]
+            }
+          ],
+          "services": [
+            {
+              "name": "RECEPCAO_ENCAMINHAMENTO_PROPOSTAS_ABERTURA_CONTAS_DEPOSITOS_VISTA_PRAZO_POUPANCA_MANTIDOS_INSTITUICAO_CONTRATANTE",
+              "code": "RECEBE_ENCAMINHA_PROPOSTAS_ABERTURA_CONTAS",
+              "additionalInfo": "Account opening services available"
+            },
+            {
+              "name": "REALIZACAO_RECEBIMENTOS_PAGAMENTOS_TRANSFERENCIAS_ELETRONICAS_VISANDO_MOVIMENTACAO_CONTAS_DEPOSITOS_TITULARIDADE_CLIENTES_MANTIDAS_INSTITUICAO_CONTRATANTE",
+              "code": "REALIZA_RECEBIMENTOS_PAGAMENTOS_TRANSFERENCIAS_ELETRONICAS",
+              "additionalInfo": "Electronic transfers and payments"
+            },
+             {
+              "name": "OUTROS",
+              "code": "OUTROS",
+              "additionalInfo": "Other unspecified services may be available"
+            }
+          ],
+          "contractors": [
+            {
+              "name": "MyBank Contractor Company Ltd.",
+              "cnpjNumber": "00112233000144"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "links": {
+    "self": "https://api.mybank.com.br/open-banking/channels/v2/banking-agents",
+    "first": "https://api.mybank.com.br/open-banking/channels/v2/banking-agents?page=1&page-size=25",
+    "prev": null,
+    "next": "https://api.mybank.com.br/open-banking/channels/v2/banking-agents?page=2&page-size=25",
+    "last": "https://api.mybank.com.br/open-banking/channels/v2/banking-agents?page=10&page-size=25"
+  },
+  "meta": {
+    "totalRecords": 200,
+    "totalPages": 10
+  }
+}

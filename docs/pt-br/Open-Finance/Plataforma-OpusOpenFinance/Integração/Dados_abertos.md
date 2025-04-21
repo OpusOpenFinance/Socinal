@@ -9,18 +9,30 @@ alternate_lang: "/docs/en/Open-Finance/Plataforma-OpusOpenFinance/Integração/D
 
 # Introdução
 
-O perfil de dados abertos, ou fase 1 + 4A, corresponde aos dados públicos que as instituições participantes do Open Finance devem divulgar ao ecossistema. Para saber mais informações sobre o perfil de dados abertos, [veja aqui][Perfis-Open-Finance-Brasil].
-O perfil de dados abertos também exige uma integração com o produto, entretanto funciona de maneira muito mais simples. A proposta do perfil de dados abertos é ter informações não sigilosas do participante divulgadas publicamente. Para tal, não se faz necessário uma integração super sofisticada.
+O perfil de dados abertos corresponde aos dados públicos que as instituições participantes do Open Finance devem divulgar ao ecossistema. Para saber mais informações sobre o perfil de dados abertos, [veja aqui][Perfis-Open-Finance-Brasil].
+O perfil de dados abertos é exigido para todos os participantes do ecossistema, e os dados devem ser acessíveis através de APIs. A Plataforma Opus Open Finance implementa a totalidade dessas APIs.
 
 ## Integração
 
-A integração do perfil de dados abertos não exige conexão com os sistemas de retaguarda do cliente. O que nós sugerimos é a construção de um arquivo JSON estático ou dinâmico para integrar ao produto. A integração é feita a partir da camada dos conetores e, portanto, cada uma das APIs regulatórias de dados abertos terá seu conector correspondente. Dessa forma, é necessário escrever um JSON para cada uma das APIs disponíveis. Claro, apenas os produtos que as instituições oferecem.
+A integração do perfil de dados abertos não exige conexão com os sistemas de retaguarda do cliente, uma vez que raramente as instituições financeiras mantém essas informações estruturadas e armazenadas em um repositório central. Além disso, as informações referentes aos dados abertos - canais de atendimento e produtos financeiros ofertados pela instituição - normalmente não mudam com muita frequência.
+
+Dessa forma, embora a plataforma tenha sido construída mantendo um padrão de arquitetura que permite a integração com sistemas de retaguarda que eventualmente mantém essas informações, a forma mais prática e simples de publicar esses dados no Open FInance é disponibilizando arquivos estáticos já no formato JSON. Assim, para responder às requisições recebidas via API, a plataforma simplesmente copiará o arquivo JSON diretamente para a mensagem de resposta a ser enviada para o requisitante.
+
+Portanto, em uma implantação padrão será necessária apenas a criação de uma arquivo JSON para cada tipo de requisição. Naturalmente, serão necessários arquivos JSON  apenas para aqueles produtos financeiros oferecidos pela instituição.
+
+A Plataforma Opus Open Finance possui um parâmetro de configuração para indicar a localização desses arquivos estáticos, e esse parâmetro será configurado durante o processo de implantação da solução.
+
+{: .importante}
+>Caso sua instituição possua um sistema de cadastro estruturado de seus canais de atendimento e produtos financeiros oferecidos ao mercado, há duas possibilidades de integração:
+>
+>1. Alterar o sistema em questão para gerar arquivos JSON no formato exigido pelo regulatório (ou desenvolver um programa específico que extraia essas informações e gere esse arquivo). Essa é a opção mais simples e, portanto, a recomendada;
+>2. Integrar diretamente a Plataforma Opus Open Finance ao sistema de retaguarda desenvolvendo conectores especializados. Nesse caso, durante o processo de implantação será fornecida documentação específica para a construção desses conectores.
 
 ## APIs de dados abertos
 
 ### Canais de atendimento
 
-A API de canais de atendimento disponibiliza quais as informações dos canais de atendimento da instituição, como:
+A API de canais de atendimento disponibiliza informações sobre os canais de atendimento da instituição. Os canais de atendimento previstos na regulação são:
 
 1. Agências físicas
 2. Canais de atendimento eletrônico
@@ -30,7 +42,7 @@ A API de canais de atendimento disponibiliza quais as informações dos canais d
 
 ### Produtos
 
-As APIs de produtos são referentes aos produtos que a instituição oferece, elas podem ser:
+As APIs de produtos são referentes aos produtos que a instituição oferece. Tipos possíveis:
 
 1. Contas
 2. Empréstimos
@@ -40,37 +52,46 @@ As APIs de produtos são referentes aos produtos que a instituição oferece, el
 6. Cartão de crédito
 7. Investimento
 8. Seguros
-9. Credenciamento
+9. Adquirência/Credenciamento
 10. Títulos de capitalização
 11. Previdência
 12. Câmbio
 
 ## Arquivo JSON para integração
 
-Como explicado no tópico integração, a integração é feita através do conector que pega os dados de um JSON estático ou dinâmico. Para construir esse arquivo, basta se apoiar nos campos de "response" esperados nas especificações da tabela abaixo. Uma vez que o arquivo foi construído e respeita todos os modelos dos produtos oferecidos pela instituição, é necessário construir o conector e plugá-lo ao produto. Tabela de especificações:
+São apresentadas abaixo as APIs regulatórias referentes a Dados Abertos e exemplos de arquivos JSON para o atendimento às chamadas dessas APIs.
 
-|API                               |Link Open API          |
-|----------------------------------|:---------------------:|
-|Canais de atendimento             |[Link][Channels]       |
-|Contas                            |[Link][Accounts]       |
-|Empréstimos                       |[Link][Loans]          |
-|Financiamentos                    |[Link][Financings]     |
-|Direitos Creditórios descontados  |[Link][Unarranged]     |
-|Adiantamento a depositantes       |[Link][Inv-financings] |
-|Cartão de crédito                 |[Link][Credit]         |
-|Investimentos                     |[Link][Investments]    |
-|Seguros                           |[Link][Insurance]      |
-|Credenciamento                    |[Link][Acquiring]      |
-|Títulos de capitalização          |[Link][Capitalization] |
-|Previdência                       |[Link][Pension]        |
-|Câmbio                            |[Link][Exchanges]      |
+{: .importante}
+>As APIs são apresentadas aqui apenas para ilustrar o cenário completo do atendimento às exigências regulatórias referentes a Dados Abertos. Além disso, na descrição de cada API são apresentados os possíveis valores válidos para todas as chaves do JSON de resposta.
+>
+>A Plataforma Opus Open Finance **já implementa** essas APIs e, portanto, não é necessário construí-las.
+>
+>Para integrar nossa solução será necessário apenas construir arquivos JSON de resposta a cada API, e os exemplos apresentados são ótimos pontos de partida para essa construção.
+>
+>Voltamos a ressaltar que é necessário disponibilizar arquivos JSON apenas para os produtos financeiros efetivamente oferecidos pela instituição.
+
+|API                               |Link Open API          |Link Exemplo JSON           |
+|----------------------------------|:---------------------:|:--------------------------:|
+|Canais de atendimento             |[Link][Channels]       |[JSON][Channels-JSON]       |
+|Contas                            |[Link][Accounts]       |[JSON][Accounts-JSON]       |
+|Empréstimos                       |[Link][Loans]          |[JSON][Loans-JSON]          |
+|Financiamentos                    |[Link][Financings]     |[JSON][Financings-JSON]     |
+|Adiantamento a depositantes       |[Link][Unarranged]     |[JSON][Unarranged-JSON]     |
+|Direitos creditórios descontados  |[Link][Inv-financings] |[JSON][Inv-financings-JSON] |
+|Cartão de crédito                 |[Link][CreditCard]     |[JSON][CreditCard-JSON]     |
+|Investimentos                     |[Link][Investments]    |[JSON][Investments-JSON]    |
+|Seguros                           |[Link][Insurance]      |[JSON][Insurance-JSON]      |
+|Adquirência/Credenciamento        |[Link][Acquiring]      |[JSON][Acquiring-JSON]      |
+|Títulos de capitalização          |[Link][Capitalization] |[JSON][Capitalization-JSON] |
+|Previdência                       |[Link][Pension]        |[JSON][Pension-JSON]        |
+|Câmbio                            |[Link][Exchange]       |[JSON][Exchange-JSON]       |
 
 [Acquiring]: ../../../../swagger-ui/index.html?api=open-data-acquiring
 [Accounts]: ../../../../swagger-ui/index.html?api=open-data-accounts
 [Capitalization]: ../../../../swagger-ui/index.html?api=open-data-capitalization
 [Channels]: ../../../../swagger-ui/index.html?api=open-data-channels
-[Credit]: ../../../../swagger-ui/index.html?api=open-data-credit-cards
-[Exchanges]: ../../../../swagger-ui/index.html?api=open-data-exchanges
+[CreditCard]: ../../../../swagger-ui/index.html?api=open-data-credit-cards
+[Exchange]: ../../../../swagger-ui/index.html?api=open-data-exchange
 [Financings]: ../../../../swagger-ui/index.html?api=open-data-financings
 [Insurance]: ../../../../swagger-ui/index.html?api=open-data-insurance
 [Investments]: ../../../../swagger-ui/index.html?api=open-data-investments
@@ -78,5 +99,19 @@ Como explicado no tópico integração, a integração é feita através do cone
 [Loans]: ../../../../swagger-ui/index.html?api=open-data-loans
 [Pension]: ../../../../swagger-ui/index.html?api=open-data-pension
 [Unarranged]: ../../../../swagger-ui/index.html?api=open-data-unarranged
+
+[Channels-JSON]: ../apis-dados-abertos/DadosAbertos-Channels
+[Accounts-JSON]: ../apis-dados-abertos/DadosAbertos-Accounts
+[Loans-JSON]: ../apis-dados-abertos/DadosAbertos-Loans
+[Financings-JSON]: ../apis-dados-abertos/DadosAbertos-Financings
+[Unarranged-JSON]: ../apis-dados-abertos/DadosAbertos-Unarranged
+[Inv-financings-JSON]: ../apis-dados-abertos/DadosAbertos-Invoice
+[CreditCard-JSON]: ../apis-dados-abertos/DadosAbertos-CreditCard
+[Investments-JSON]: ../apis-dados-abertos/DadosAbertos-Investments
+[Insurance-JSON]: ../apis-dados-abertos/DadosAbertos-Insurance
+[Acquiring-JSON]: ../apis-dados-abertos/DadosAbertos-Acquiring
+[Capitalization-JSON]: ../apis-dados-abertos/DadosAbertos-Capitalization
+[Pension-JSON]: ../apis-dados-abertos/DadosAbertos-Pension
+[Exchange-JSON]: ../apis-dados-abertos/DadosAbertos-Exchange
 
 [Perfis-Open-Finance-Brasil]: ../../Open-Finance-Brasil/PerfisOFB/Dados-abertos.html
