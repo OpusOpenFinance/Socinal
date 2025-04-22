@@ -23,6 +23,11 @@ A API de Gestão de Consentimentos torna possível a aplicações da instituiç�
 
 ## *Open API Specification*
 
-As definições da API em formato Open API Specification podem ser encontradas [aqui][API-backoffice].
+As definições da API em formato Open API Specification podem ser encontradas [**aqui**][API-backoffice].
+
+Para fazer o download do arquivo YAML/OAS que contém a especificação da API clique [**aqui**](../apis/oas-oof-dados.yml){:download="oas-oof-dados.yml"}.
+
+{: .destaque}
+Alguns navegadores internet, como *Chrome*, ocasionalmente sinalizam como *não segura* a operação de *download* de arquivos YAML, exigindo o desbloqueio manual pelo usuário. Eses arquivos, entretanto, tem conteúdo do tipo texto e não apresentam risco por si.
 
 [API-backoffice]: ../../../../swagger-ui/index.html?api=OAS-back-dados

@@ -26,6 +26,11 @@ Existem *endpoints* para:
 
 ## *Open API Specification* da API
 
-A documentação da API de cartão de crédito a ser construída na *camada de integração* pode ser encontrada [aqui][API-Cartão-de-crédito].
+A documentação da API de cartão de crédito a ser construída na *camada de integração* pode ser encontrada [**aqui**][API-Cartão-de-crédito].
+
+Para fazer o download do arquivo YAML/OAS que contém a especificação da API clique [**aqui**](credit-cards-2-3-1.yml){:download="credit-cards-2-3-1.yml"}.
+
+{: .destaque}
+Alguns navegadores internet, como *Chrome*, ocasionalmente sinalizam como *não segura* a operação de *download* de arquivos YAML, exigindo o desbloqueio manual pelo usuário. Eses arquivos, entretanto, tem conteúdo do tipo texto e não apresentam risco por si.
 
 [API-Cartão-de-crédito]: ../../../../swagger-ui/index.html?api=Cartão-de-crédito

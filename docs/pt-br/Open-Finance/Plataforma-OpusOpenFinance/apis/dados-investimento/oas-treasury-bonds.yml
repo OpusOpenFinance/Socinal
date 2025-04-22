@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: API Treasure Titles - Integration Layer - OPUS Open Finance Brasil
+  title: API Treasury Bonds - Integration Layer - OPUS Open Finance Brasil
   description: |
     API de informações de operações de Títulos do Tesouro Direto Open Finance Brasil – Fase 4. 
     API que retorna informações de operações de investimento do tipo Títulos do Tesouro Direto mantidas nas 
@@ -39,7 +39,7 @@ paths:
               $ref: '#/components/schemas/RequestWithConsentAndRequestMetaAndPagination'
       responses:
         '200':
-          $ref: '#/components/responses/OkResponseTreasureTitlesProductList'
+          $ref: '#/components/responses/OkResponseTreasureTitlesProductList'  # Treasury Bonds
         '400':
           $ref: '#/components/responses/BadRequestWithAdditionalProperties'
         '401':
@@ -71,7 +71,7 @@ paths:
       tags:
         - Product Identification
       summary: Obtém os dados da operação de Títulos do Tesouro Direto identificada por investmentId.
-      operationId: treasureTitlesGetInvestmentsInvestmentId
+      operationId: treasureTitlesGetInvestmentsInvestmentIdn
       description: Obtém os dados da operação de Títulos do Tesouro Direto identificada por investmentId.
       requestBody:
         required: true
@@ -1182,7 +1182,7 @@ components:
                   - BANK_FIXED_INCOME
                   - CREDIT_FIXED_INCOME
                   - VARIABLE_INCOME
-                  - TREASURE_TITLE
+                  - TREASURE_TITLE  # TREASURY_BONDS
                   - FUND
                 example: PAYMENT
               resourceLegacyId:
@@ -1272,7 +1272,7 @@ components:
               - CREDIT_FIXED_INCOMES_READ
               - FUNDS_READ
               - VARIABLE_INCOMES_READ
-              - TREASURE_TITLES_READ
+              - TREASURE_TITLES_READ  # TREASURY_BONDS_READ
               - EXCHANGES_READ
               - RESOURCES_READ
           minItems: 1

@@ -28,9 +28,16 @@ Additionally, it is necessary to implement another regulatory API for verifying 
 
 ## *Open API Specification* of the API
 
-The documentation for the Accounts API to be built in the *integration layer* can be found [here][API-Contas].
+The documentation for the Accounts API to be built in the *integration layer* can be found [**here**][API-Contas].
 
-The documentation for the *common* API can be found [here][API-Common].
+The documentation for the *common* API can be found [**here**][API-Common].
+
+To download the YAML/OAS file containing the Accounts API specification, click [**here**](en-accounts-2-4-1.yml){:download="en-accounts-2-4-1.yml"}.
+
+To download the YAML/OAS file containing the *common* API specification, click [**here**](en-opus-commons-1-0-0.yml){:download="en-opus-commons-1-0-0.yml"}.
+
+{: .highlight}
+Some internet browsers, such as *Chrome*, may occasionally flag the download operation of YAML files as *not secure*, requiring manual unlocking by the user. However, these files are text-based and do not pose any risk.
 
 [API-Contas]: ../../../../swagger-ui/index.html?api=en-Contas
 [API-Common]: ../../../../swagger-ui/index.html?api=Opus-Commons

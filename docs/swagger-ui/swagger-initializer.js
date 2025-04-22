@@ -37,7 +37,7 @@ window.onload = () => {
     "data-funds": "../pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/dados-investimento/oas-funds.yml",
     "data-bank-fixed-incomes": "../pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/dados-investimento/oas-bank-fixed-incomes.yml",
     "data-credit-fixed-incomes": "../pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/dados-investimento/oas-credit-fixed-incomes.yml",
-    "data-treasure-titles": "../pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/dados-investimento/oas-treasure-titles.yml",
+    "data-treasury-bonds": "../pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/dados-investimento/oas-treasury-bonds.yml",
     "data-variable-incomes": "../pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/dados-investimento/oas-variable-incomes.yml",
     // -----------------
     // APIs em inglês.
@@ -72,7 +72,7 @@ window.onload = () => {
     "en-data-funds": "../en/Open-Finance/Plataforma-OpusOpenFinance/apis/dados-investimento/oas-funds.yml",
     "en-data-bank-fixed-incomes": "../en/Open-Finance/Plataforma-OpusOpenFinance/apis/dados-investimento/oas-bank-fixed-incomes.yml",
     "en-data-credit-fixed-incomes": "../en/Open-Finance/Plataforma-OpusOpenFinance/apis/dados-investimento/oas-credit-fixed-incomes.yml",
-    "en-data-treasure-titles": "../en/Open-Finance/Plataforma-OpusOpenFinance/apis/dados-investimento/oas-treasure-titles.yml",
+    "en-data-treasury-bonds": "../en/Open-Finance/Plataforma-OpusOpenFinance/apis/dados-investimento/oas-treasury-bonds.yml",
     "en-data-variable-incomes": "../en/Open-Finance/Plataforma-OpusOpenFinance/apis/dados-investimento/oas-variable-incomes.yml",
     // Adicione outras APIs aqui. As linhas são terminadas por "," mesmo qdo é o último item...
   };

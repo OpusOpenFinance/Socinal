@@ -21,6 +21,11 @@ In general, there are *endpoints* for:
 
 ## *Open API Specification* of the API
 
-The documentation for the credit fixed income API to be built in the integration layer can be found [here][API-Credit-Fixed-Income]
+The documentation for the credit fixed income API to be built in the integration layer can be found [**here**][API-Credit-Fixed-Income]
+
+To download the YAML/OAS file containing the API specification, click [**here**](../../apis/dados-investimento/oas-credit-fixed-incomes.yml){:download="oas-credit-fixed-incomes.yml"}.
+
+{: .highlight}
+Some internet browsers, such as *Chrome*, may occasionally flag the download operation of YAML files as *not secure*, requiring manual unlocking by the user. However, these files are text-based and do not pose any risk.
 
 [API-Credit-Fixed-Income]: ../../../../../swagger-ui/index.html?api=en-data-credit-fixed-incomes

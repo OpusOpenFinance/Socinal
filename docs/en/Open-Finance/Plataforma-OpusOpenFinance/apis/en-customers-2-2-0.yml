@@ -2070,7 +2070,7 @@ components:
                   - BANK_FIXED_INCOME
                   - CREDIT_FIXED_INCOME
                   - VARIABLE_INCOME
-                  - TREASURE_TITLE
+                  - TREASURE_TITLE  # TREASURY_BONDS
                   - FUND
                 example: PAYMENT
               resourceLegacyId:
@@ -2160,7 +2160,7 @@ components:
               - CREDIT_FIXED_INCOMES_READ
               - FUNDS_READ
               - VARIABLE_INCOMES_READ
-              - TREASURE_TITLES_READ
+              - TREASURE_TITLES_READ  # TREASURY_BONDS_READ
               - EXCHANGES_READ
               - RESOURCES_READ
           minItems: 1

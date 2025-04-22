@@ -23,6 +23,11 @@ The Consent Management API allows financial institution applications to extract 
 
 ## *Open API Specification*
 
-The definitions of the API in Open API Specification format can be found [here][API-backoffice].
+The definitions of the API in Open API Specification format can be found [**here**][API-backoffice].
+
+To download the YAML/OAS file containing the API specification, click [**here**](../apis/en-oas-oof-dados.yml){:download="en-oas-oof-dados.yml"}.
+
+{: .highlight}
+Some internet browsers, such as *Chrome*, may occasionally flag the download operation of YAML files as *not secure*, requiring manual unlocking by the user. However, these files are text-based and do not pose any risk.
 
 [API-backoffice]: ../../../../swagger-ui/index.html?api=en-OAS-back-dados

@@ -7,7 +7,7 @@ lang: "en"
 alternate_lang: "/docs/pt-br/Open-Finance/Plataforma-OpusOpenFinance/Integração/dados-investimentos/dados-tesouro/"
 ---
 
-# Direct Treasury Bonds API
+# Treasury Bonds API
 
 Integration layer API that returns data on *treasury bonds* held by the client at the Data Transmitting Institution.
 
@@ -24,7 +24,12 @@ In general, there are *endpoints* for:
 
 ## *Open API Specification* of the API
 
-The documentation for the treasury bonds API to be built in the integration layer can be found [here][API-Treasure-Bonds]
+The documentation for the treasury bonds API to be built in the integration layer can be found [**here**][API-Treasury-Bonds]
 
-[API-Treasure-Bonds]: ../../../../../swagger-ui/index.html?api=en-data-treasure-titles
+To download the YAML/OAS file containing the API specification, click [**here**](../../apis/dados-investimento/oas-treasury-bonds.yml){:download="oas-treasury-bonds.yml"}.
+
+{: .highlight}
+Some internet browsers, such as *Chrome*, may occasionally flag the download operation of YAML files as *not secure*, requiring manual unlocking by the user. However, these files are text-based and do not pose any risk.
+
+[API-Treasury-Bonds]: ../../../../../swagger-ui/index.html?api=en-data-treasury-bonds
 [OOF-Investimentos]: ../OOF-Investimento.html

@@ -26,6 +26,11 @@ There are endpoints for:
 
 ## *Open API Specification* of the API
 
-The documentation for the Credit Card API to be built in the *integration layer* can be found [here][API-Cartão-de-crédito].
+The documentation for the Credit Card API to be built in the *integration layer* can be found [**here**][API-Cartão-de-crédito].
+
+To download the YAML/OAS file containing the API specification, click [**here**](en-credit-cards-2-3-1.yml){:download="en-credit-cards-2-3-1.yml"}.
+
+{: .highlight}
+Some internet browsers, such as *Chrome*, may occasionally flag the download operation of YAML files as *not secure*, requiring manual unlocking by the user. However, these files are text-based and do not pose any risk.
 
 [API-Cartão-de-crédito]: ../../../../swagger-ui/index.html?api=en-Cartão-de-crédito

@@ -16,8 +16,8 @@ tags:
     description: 'Method to obtain the list of Credit Fixed Income products (Debenture, CRI, and CRA)'
   - name: Variable Incomes
     description: Method to obtain the list of information on Variable Income products (Stocks and Index Funds)
-  - name: Treasure Titles
-    description: Method to obtain information on Direct Treasury Bonds
+  - name: Treasure Titles # Treasury Bonds
+    description: Method to obtain information on Treasury Bonds (Tesouro Direto)
 paths:
   /funds:
     get:
@@ -122,10 +122,10 @@ paths:
   /treasure-titles:
     get:
       tags:
-        - Treasure Titles
-      summary: Set of information for Direct Treasury Bonds
+        - Treasure Titles  # Treasury Bonds
+      summary: Set of information for Treasury Bonds (Tesouro Direto)
       operationId: investmentsGetTreasure
-      description: Method to obtain information on Direct Treasury Bonds
+      description: Method to obtain information on Treasury Bonds (Tesouro Direto)
       parameters:
         - $ref: '#/components/parameters/page'
         - $ref: '#/components/parameters/pageSize'
@@ -892,20 +892,20 @@ components:
     EnumInvestmentsFundProductAnbimaCategory:
       type: string
       description: |
-        As per ANBIMA classification
+        As per ANBIMA classification (ANBIMA is the Brazilian association for self-regulation of financial and capital markets):
 
-        – Fixed Income
+        - Fixed Income
 
-        – Stocks
+        - Stocks
 
-        – Multi-market
+        - Multi-market
 
-        – Exchange
+        - Exchange
       enum:
-        - RENDA_FIXA # FIXED_INCOME
-        - ACOES # STOCKS
+        - RENDA_FIXA   # FIXED_INCOME
+        - ACOES        # STOCKS
         - MULTIMERCADO # MULTI_MARKET
-        - CAMBIAL # EXCHANGE
+        - CAMBIAL      # EXCHANGE
       example: MULTIMERCADO # MULTI_MARKET
     EnumInvestmentsFundTaxation:
       type: string
@@ -913,14 +913,14 @@ components:
       enum:
         - CURTO_PRAZO # SHORT_TERM
         - LONGO_PRAZO # LONG_TERM
-        - VARIAVEL # VARIABLE
+        - VARIAVEL    # VARIABLE
       example: CURTO_PRAZO # SHORT_TERM
     EnumInvestmentsTreasureInvestmentType:
       type: string
-      description: Specifies the type of asset traded:<br><br><ol><li>Direct Treasury</li></ol>
+      description: Specifies the type of asset traded, Treasury Bonds (Tesouro Direto)
       enum:
-        - TESOURO_DIRETO # DIRECT_TREASURY
-      example: TESOURO_DIRETO # DIRECT_TREASURY
+        - TESOURO_DIRETO # TREASURY_BONDS (TESOURO DIRETO)
+      example: TESOURO_DIRETO # TREASURY_BONDS (TESOURO DIRETO)
     EnumInvestmentsVariableIncomeInvestmentType:
       type: string
       description: Specifies the type of asset traded:<br><br><ol><li>Stocks</li><li>Index fund</li></ol>
@@ -1145,7 +1145,7 @@ components:
           schema:
             $ref: '#/components/schemas/OKResponseInvestmentsVariableIncome'
     OKResponseInvestmentsTreasure:
-      description: Direct treasury bond data successfully obtained.
+      description: Treasury bonds (Tesouro Direto) bond data successfully obtained.
       content:
         application/json:
           schema:

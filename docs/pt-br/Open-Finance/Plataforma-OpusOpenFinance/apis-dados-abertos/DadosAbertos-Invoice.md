@@ -13,7 +13,7 @@ Este é um exemplo de arquivo JSON de resposta da API ***OpenData Invoice Financ
 
 Clique [**aqui**](open-data-invoice-financings.json){:download="open-data-invoice-financings.json"} para fazer o download do arquivo exemplo.
 
-Para os possíveis valores de cada campo consulte a [API associada][Link-API].
+Para os possíveis valores de cada chave JSON consulte a [API associada][Link-API].
 
 ```json
 {% include_relative open-data-invoice-financings.json %}

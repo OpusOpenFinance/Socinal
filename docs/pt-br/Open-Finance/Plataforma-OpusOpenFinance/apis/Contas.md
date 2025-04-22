@@ -30,10 +30,13 @@ Além disso, é necessário implementar uma outra API regulatória para a verifi
 
 A documentação das APIs a serem construídas na *camada de integração* podem ser encontradas na tabela abaixo:
 
-|API            |Link               |
-|---------------|:-----------------:|
-|Contas         |[Link][API-Contas] |
-|Common         |[Link][API-Common] |
+|API            |Link                   |YAML/OAS                                |
+|:-------------:|:---------------------:|:--------------------------------------:|
+|    Contas     |[**Link**][API-Contas] |[**Download**](accounts-2-4-1.yml){:download="accounts-2-4-1.yml"}      |
+|    Common     |[**Link**][API-Common] |[**Download**](opus-commons-1-0-0.yml){:download="opus-commons-1-0-0.yml"}  |
+
+{: .destaque}
+Alguns navegadores internet, como *Chrome*, ocasionalmente sinalizam como *não segura* a operação de *download* de arquivos YAML, exigindo o desbloqueio manual pelo usuário. Eses arquivos, entretanto, tem conteúdo do tipo texto e não apresentam risco por si.
 
 [API-Contas]: ../../../../swagger-ui/index.html?api=Contas
 [API-Common]: ../../../../swagger-ui/index.html?api=Opus-Commons

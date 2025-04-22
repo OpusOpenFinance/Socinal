@@ -25,6 +25,11 @@ There are *endpoints* for:
 
 ## *Open API Specification* of the API
 
-The documentation for the Invoice Financing API to be built in the *integration layer* can be found [here][API-Direitos-Creditórios].
+The documentation for the Invoice Financing API to be built in the *integration layer* can be found [**here**][API-Direitos-Creditórios].
+
+To download the YAML/OAS file containing the API specification, click [**here**](en-invoice-financings-2-3-0.yml){:download="en-invoice-financings-2-3-0.yml"}.
+
+{: .highlight}
+Some internet browsers, such as *Chrome*, may occasionally flag the download operation of YAML files as *not secure*, requiring manual unlocking by the user. However, these files are text-based and do not pose any risk.
 
 [API-Direitos-Creditórios]: ../../../../swagger-ui/index.html?api=en-Direitos-Creditórios

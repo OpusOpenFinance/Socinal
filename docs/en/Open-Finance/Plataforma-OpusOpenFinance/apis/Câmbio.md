@@ -31,6 +31,11 @@ There are endpoints for:
 
 ## *Open API Specification* of the API
 
-The documentation for the Foreign Exchange API to be built in the *integration layer* can be found [here][API-Câmbio].
+The documentation for the Foreign Exchange API to be built in the *integration layer* can be found [**here**][API-Câmbio].
+
+To download the YAML/OAS file containing the API specification, click [**here**](en-exchange-1-0-0.yml){:download="en-exchange-1-0-0.yml"}.
+
+{: .highlight}
+Some internet browsers, such as *Chrome*, may occasionally flag the download operation of YAML files as *not secure*, requiring manual unlocking by the user. However, these files are text-based and do not pose any risk.
 
 [API-Câmbio]: ../../../../swagger-ui/index.html?api=en-Câmbio
