@@ -33,9 +33,9 @@ Existem *endpoints* para:
 
 A documentação da API de Câmbio a ser construída na *camada de integração* pode ser encontrada [**aqui**][API-Câmbio].
 
-Para fazer o download do arquivo YAML/OAS que contém a especificação da API clique [**aqui**][OAS].
+Para fazer o download do arquivo YAML/OAS que contém a especificação da API clique [**aqui**](exchange-1-0-0.yml){:download="exchange-1-0-0.yml"}.
 
-Clique [**aqui**](open-data-accounts.json){:download="open-data-accounts.json"} para fazer o download do arquivo exemplo.
+{: .destaque}
+Alguns navegadores internet, como *Chrome*, ocasionalmente sinalizam como *não segura* a operação de *download* de arquivos YAML, exigindo o desbloqueio manual pelo usuário. Eses arquivos, entretanto, tem conteúdo do tipo texto e não apresentam risco por si.
 
 [API-Câmbio]: ../../../../swagger-ui/index.html?api=Câmbio
-[OAS]: (exchange-1-0-0.yml){:download="exchange-1-0-0.yml"}

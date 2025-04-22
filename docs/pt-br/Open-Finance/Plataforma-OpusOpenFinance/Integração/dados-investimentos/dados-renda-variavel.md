@@ -21,6 +21,11 @@ Em linhas gerais, existem *endpoints* para:
 
 ## *Open API Specification* da API
 
-A documentação da API de renda variável a ser construída na *camada de integração* pode ser encontrada [aqui][API-Renda-Variável].
+A documentação da API de renda variável a ser construída na *camada de integração* pode ser encontrada [**aqui**][API-Renda-Variável].
+
+Para fazer o download do arquivo YAML/OAS que contém a especificação da API clique [**aqui**](../../apis/dados-investimento/oas-variable-incomes.yml){:download="oas-variable-incomes.yml"}.
+
+{: .destaque}
+Alguns navegadores internet, como *Chrome*, ocasionalmente sinalizam como *não segura* a operação de *download* de arquivos YAML, exigindo o desbloqueio manual pelo usuário. Eses arquivos, entretanto, tem conteúdo do tipo texto e não apresentam risco por si.
 
 [API-Renda-Variável]: ../../../../../swagger-ui/index.html?api=data-variable-incomes
