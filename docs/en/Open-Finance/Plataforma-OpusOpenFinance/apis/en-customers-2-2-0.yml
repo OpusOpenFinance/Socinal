@@ -396,8 +396,8 @@ components:
         type:
           type: string
           enum:
-            - REPRESENTANTE_LEGAL /* Legal Representative */
-            - PROCURADOR          /* Attorney */
+            - REPRESENTANTE_LEGAL # Legal Representative 
+            - PROCURADOR          # Attorney 
           description: |
             Type of representative.
             Legal representative - Full Civil Name of the Natural Person who represents an entity or a company and is named in its articles of incorporation, that is, in the articles of association or bylaws.
@@ -838,9 +838,9 @@ components:
         subtype:
           type: string
           enum:
-            - INDIVIDUAL          /* Individual */
-            - CONJUNTA_SIMPLES    /* Joint Simple */
-            - CONJUNTA_SOLIDARIA  /* Joint and Several */
+            - INDIVIDUAL          # Individual 
+            - CONJUNTA_SIMPLES    # Joint Simple 
+            - CONJUNTA_SOLIDARIA  # Joint and Several 
           description: |
             Account subtype (see Enum):
             Individual account - has a single holder
@@ -950,9 +950,9 @@ components:
     EnumAccountTypeCustomers:
       type: string
       enum:
-        - CONTA_DEPOSITO_A_VISTA   /* DEMAND_DEPOSIT_ACCOUNT */
-        - CONTA_POUPANCA           /* SAVINGS_ACCOUNT */
-        - CONTA_PAGAMENTO_PRE_PAGA /* PREPAID_PAYMENT_ACCOUNT */
+        - CONTA_DEPOSITO_A_VISTA   # DEMAND_DEPOSIT_ACCOUNT 
+        - CONTA_POUPANCA           # SAVINGS_ACCOUNT 
+        - CONTA_PAGAMENTO_PRE_PAGA # PREPAID_PAYMENT_ACCOUNT 
       description: |
         Account types. Traditional modalities provided for by Resolution 4,753, not including linked accounts, accounts of residents abroad, accounts in foreign currency and correspondent electronic currency account. See Enum:
 
@@ -1005,15 +1005,15 @@ components:
       type: string
       description: Identification of the Customer's Phone Type.
       enum:
-        - FIXO   /* LANDLINE */
-        - MOVEL  /* MOBILE */
-        - OUTRO  /* OTHER */
+        - FIXO   # LANDLINE 
+        - MOVEL  # MOBILE 
+        - OUTRO  # OTHER 
       example: FIXO
     EnumFiliationType:
       type: string
       enum:
-        - MAE /* MOTHER */
-        - PAI /* FATHER */
+        - MAE # MOTHER 
+        - PAI # FATHER 
       example: PAI
       description: Type of filiation.
     EnumInformedRevenueFrequency:
@@ -1022,75 +1022,75 @@ components:
         Brings the frequency or period of the revenue informed.
         "Revenue is calculated from all the benefits that the company achieved with its economic activity in a given period. These benefits are the organization's income or earnings through its sales or services provided".
       enum:
-        - DIARIA     /* DAILY */
-        - SEMANAL    /* WEEKLY */
-        - QUINZENAL  /* BIWEEKLY */
-        - MENSAL     /* MONTHLY */
-        - BIMESTRAL  /* BIMONTHLY */
-        - TRIMESTRAL /* QUARTERLY */
-        - SEMESTRAL  /* SEMIANNUAL */
-        - ANUAL      /* ANNUAL */
-        - OUTROS     /* OTHERS */
+        - DIARIA     # DAILY 
+        - SEMANAL    # WEEKLY 
+        - QUINZENAL  # BIWEEKLY 
+        - MENSAL     # MONTHLY 
+        - BIMESTRAL  # BIMONTHLY 
+        - TRIMESTRAL # QUARTERLY 
+        - SEMESTRAL  # SEMIANNUAL 
+        - ANUAL      # ANNUAL 
+        - OUTROS     # OTHERS 
       example: DIARIA
     EnumInformedIncomeFrequency:
       type: string
       enum:
-        - DIARIA     /* DAILY */
-        - SEMANAL    /* WEEKLY */
-        - QUINZENAL  /* BIWEEKLY */
-        - MENSAL     /* MONTHLY */
-        - BIMESTRAL  /* BIMONTHLY */
-        - TRIMESTRAL /* QUARTERLY */
-        - SEMESTRAL  /* SEMIANNUAL */
-        - ANUAL      /* ANNUAL */
-        - OUTROS     /* OTHERS */
+        - DIARIA     # DAILY 
+        - SEMANAL    # WEEKLY 
+        - QUINZENAL  # BIWEEKLY 
+        - MENSAL     # MONTHLY 
+        - BIMESTRAL  # BIMONTHLY 
+        - TRIMESTRAL # QUARTERLY 
+        - SEMESTRAL  # SEMIANNUAL 
+        - ANUAL      # ANNUAL 
+        - OUTROS     # OTHERS 
       description: Brings the frequency or period of the income informed.
     EnumMaritalStatusCode:
       type: string
       enum:
-        - SOLTEIRO               /* SINGLE */
-        - CASADO                 /* MARRIED */
-        - VIUVO                  /* WIDOWED */
-        - SEPARADO_JUDICIALMENTE /* JUDICIALLY_SEPARATED */
-        - DIVORCIADO             /* DIVORCED */
-        - UNIAO_ESTAVEL          /* CIVIL_UNION */
-        - OUTRO                  /* OTHER */
+        - SOLTEIRO               # SINGLE 
+        - CASADO                 # MARRIED 
+        - VIUVO                  # WIDOWED 
+        - SEPARADO_JUDICIALMENTE # JUDICIALLY_SEPARATED 
+        - DIVORCIADO             # DIVORCED 
+        - UNIAO_ESTAVEL          # CIVIL_UNION 
+        - OUTRO                  # OTHER 
       example: OUTRO
       description: |
         Customer marital status.
     EnumOccupationMainCodeType:
       type: string
       enum:
-        - RECEITA_FEDERAL /* National Classification of Economic Activities - Brazilian Federal Revenue Service */
-        - CBO             /* Brazilian Classification of Occupations - Ministry of Labor */
-        - OUTRO           /* OTHER */
+        - RECEITA_FEDERAL # National Classification of Economic Activities - Brazilian Federal Revenue Service 
+        - CBO             # Brazilian Classification of Occupations - Ministry of Labor 
+        - OUTRO           # OTHER 
       example: RECEITA_FEDERAL
       description: |
         Brings the list of codes related to occupation.
     EnumPartiesParticipationDocumentType:
       type: string
       enum:
-        - CPF                      /* CPF */
-        - PASSAPORTE               /* PASSPORT */
-        - OUTRO_DOCUMENTO_VIAGEM   /* OTHER_TRAVEL_DOCUMENT */
-        - CNPJ                     /* CNPJ */
+        - CPF                      # CPF 
+        - PASSAPORTE               # PASSPORT 
+        - OUTRO_DOCUMENTO_VIAGEM   # OTHER_TRAVEL_DOCUMENT 
+        - CNPJ                     # CNPJ 
       description: |
         Type of document informed.
     EnumPersonalOtherDocumentType:
       type: string
       enum:
-        - CNH     /* DRIVER_LICENSE */
-        - RG      /* ID_CARD */
-        - NIF     /* TIN */
-        - RNE     /* FOREIGNER_ID_CARD */
-        - OUTROS  /* OTHERS */
+        - CNH     # DRIVER_LICENSE 
+        - RG      # ID_CARD 
+        - NIF     # TIN 
+        - RNE     # FOREIGNER_ID_CARD 
+        - OUTROS  # OTHERS 
       description: |
         List of Codes of other natural person documents.
     EnumProcuratorsTypePersonal:
       type: string
       enum:
-        - REPRESENTANTE_LEGAL /* LEGAL_REPRESENTATIVE */
-        - PROCURADOR          /* ATTORNEY */
+        - REPRESENTANTE_LEGAL # LEGAL_REPRESENTATIVE 
+        - PROCURADOR          # ATTORNEY 
       example: PROCURADOR
       description: |
         Type of representative.
@@ -1099,26 +1099,26 @@ components:
     EnumProductServiceType:
       type: string
       enum:
-        - CONTA_DEPOSITO_A_VISTA   /* DEMAND_DEPOSIT_ACCOUNT */
-        - CONTA_POUPANCA           /* SAVINGS_ACCOUNT */
-        - CONTA_PAGAMENTO_PRE_PAGA /* PREPAID_PAYMENT_ACCOUNT */
-        - CARTAO_CREDITO           /* CREDIT_CARD */
-        - OPERACAO_CREDITO         /* CREDIT_OPERATION */
-        - SEGURO                   /* INSURANCE */
-        - PREVIDENCIA              /* PENSION_PLAN */
-        - INVESTIMENTO             /* INVESTMENT */
-        - OPERACOES_CAMBIO         /* EXCHANGE_OPERATIONS */
-        - CONTA_SALARIO            /* SALARY_ACCOUNT */
-        - CREDENCIAMENTO           /* ACCREDITATION */
-        - OUTROS                   /* OTHERS */
+        - CONTA_DEPOSITO_A_VISTA   # DEMAND_DEPOSIT_ACCOUNT 
+        - CONTA_POUPANCA           # SAVINGS_ACCOUNT 
+        - CONTA_PAGAMENTO_PRE_PAGA # PREPAID_PAYMENT_ACCOUNT 
+        - CARTAO_CREDITO           # CREDIT_CARD 
+        - OPERACAO_CREDITO         # CREDIT_OPERATION 
+        - SEGURO                   # INSURANCE 
+        - PREVIDENCIA              # PENSION_PLAN 
+        - INVESTIMENTO             # INVESTMENT 
+        - OPERACOES_CAMBIO         # EXCHANGE_OPERATIONS 
+        - CONTA_SALARIO            # SALARY_ACCOUNT 
+        - CREDENCIAMENTO           # ACCREDITATION 
+        - OUTROS                   # OTHERS 
       example: SEGURO
       description: List with the list of products and services with current contract.
     EnumSex:
       type: string
       enum:
-        - FEMININO  /* FEMALE */
-        - MASCULINO /* MALE */
-        - OUTRO     /* OTHER */
+        - FEMININO  # FEMALE 
+        - MASCULINO # MALE 
+        - OUTRO     # OTHER 
       example: FEMININO
       description: |
         "Set of anatomophysiological characteristics that distinguish men and women: Male sex; female sex".
@@ -1342,8 +1342,8 @@ components:
         personType:
           type: string
           enum:
-            - PESSOA_NATURAL  /* NATURAL_PERSON */
-            - PESSOA_JURIDICA /* LEGAL_PERSON */
+            - PESSOA_NATURAL  # NATURAL_PERSON 
+            - PESSOA_JURIDICA # LEGAL_PERSON 
           description: Indicates whether the person of the involved party is a natural or legal person
         type:
           type: string
@@ -1352,8 +1352,8 @@ components:
             The administrator is responsible for performing all administrative functions of the company. He is the one who runs the day-to-day business, signing documents, legally liable for the company, taking out loans and other management actions. Despite being at the forefront of the company, he is called a partner because he also has his share of participation in the Share Capital.
             Partner has no involvement in the administrative activities of the company.
           enum:
-            - SOCIO         /* PARTNER */
-            - ADMINISTRADOR /* ADMINISTRATOR */
+            - SOCIO         # PARTNER 
+            - ADMINISTRADOR # ADMINISTRATOR 
         civilName:
           type: string
           maxLength: 70

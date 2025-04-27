@@ -5,10 +5,6 @@ Documentação Plataforma Opus Open Finance - Todo list
 Troca de nome de arquivo: de "oas-treasure-titles.yml" para "oas-treasury-bonds".
 ------------------------------------------------------------------------------------
 
-0) Trocar /* */ por # nos YAML em inglês.
-0,5) Colocar links para download dos arquivos YAML.
-
-
 1) Fazer a documentação da construção do aplicativo e Web.
 2) A API opus-commons deve ser listada na seção sobre a construção de conectores.
 3) Criar páginas para JSONs em Integração/Conectores-Pagto.md (olhar esquema em apis-dados-abertos/Accounts.md)

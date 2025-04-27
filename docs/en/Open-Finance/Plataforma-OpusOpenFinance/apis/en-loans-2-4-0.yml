@@ -271,8 +271,8 @@ components:
         - SAC
         - PRICE
         - SAM
-        - SEM_SISTEMA_AMORTIZACAO /* NO_AMORTIZATION_SYSTEM */
-        - OUTROS                  /* OTHERS */
+        - SEM_SISTEMA_AMORTIZACAO # NO_AMORTIZATION_SYSTEM 
+        - OUTROS                  # OTHERS 
       example: SAC
     EnumContractCalculation:
       type: string
@@ -291,29 +291,29 @@ components:
         - Fixed
         - Percentage"
       enum:
-        - MINIMO      /* MINIMUM */
-        - MAXIMO      /* MAXIMUM */
-        - FIXO        /* FIXED */
-        - PERCENTUAL  /* PERCENTAGE */
+        - MINIMO      # MINIMUM 
+        - MAXIMO      # MAXIMUM 
+        - FIXO        # FIXED 
+        - PERCENTUAL  # PERCENTAGE 
       example: MINIMO
     EnumContractFeeChargeType:
       type: string
       description: Type of charge for the fee agreed in the contract.
       enum:
-        - UNICA        /* UNIQUE */
-        - POR_PARCELA  /* PER_INSTALLMENT */
+        - UNICA        # UNIQUE 
+        - POR_PARCELA  # PER_INSTALLMENT 
       example: UNICA
     EnumContractFinanceChargeType:
       type: string
       description: Type of charge agreed in the contract.
       enum:
-        - JUROS_REMUNERATORIOS_POR_ATRASO /* REMUNERATORY_INTEREST_FOR_LATE_PAYMENT */
-        - MULTA_ATRASO_PAGAMENTO          /* FINE_FOR_LATE_PAYMENT */
-        - JUROS_MORA_ATRASO               /* DEFAULT_INTEREST_FOR_LATE_PAYMENT */
-        - IOF_CONTRATACAO                 /* IOF_CONTRACT */
-        - IOF_POR_ATRASO                  /* IOF_FOR_LATE_PAYMENT */
-        - SEM_ENCARGO                     /* NO_CHARGE */
-        -   OUTROS                        /* OTHERS */
+        - JUROS_REMUNERATORIOS_POR_ATRASO # REMUNERATORY_INTEREST_FOR_LATE_PAYMENT 
+        - MULTA_ATRASO_PAGAMENTO          # FINE_FOR_LATE_PAYMENT 
+        - JUROS_MORA_ATRASO               # DEFAULT_INTEREST_FOR_LATE_PAYMENT 
+        - IOF_CONTRATACAO                 # IOF_CONTRACT 
+        - IOF_POR_ATRASO                  # IOF_FOR_LATE_PAYMENT 
+        - SEM_ENCARGO                     # NO_CHARGE 
+        -   OUTROS                        # OTHERS 
       example: JUROS_REMUNERATORIOS_POR_ATRASO
     EnumContractInstalmentPeriodicity:
       type: string
@@ -321,15 +321,15 @@ components:
         "Information regarding the regular periodicity of installments. (See Enum)
         no regular periodicity, weekly, biweekly, monthly, bimonthly, quarterly, semiannual, annual"
       enum:
-        - SEM_PERIODICIDADE_REGULAR /* NO_REGULAR_PERIODICITY */
-        - SEMANAL                   /* WEEKLY */
-        - QUINZENAL                 /* BIWEEKLY */
-        - MENSAL                    /* MONTHLY */
-        - BIMESTRAL                 /* BIMONTHLY */
-        - TRIMESTRAL                /* QUARTERLY */
-        - SEMESTRAL                 /* SEMIANNUAL */
-        - ANUAL                     /* ANNUAL */
-        - OUTROS                    /* OTHERS */
+        - SEM_PERIODICIDADE_REGULAR # NO_REGULAR_PERIODICITY 
+        - SEMANAL                   # WEEKLY 
+        - QUINZENAL                 # BIWEEKLY 
+        - MENSAL                    # MONTHLY 
+        - BIMESTRAL                 # BIMONTHLY 
+        - TRIMESTRAL                # QUARTERLY 
+        - SEMESTRAL                 # SEMIANNUAL 
+        - ANUAL                     # ANNUAL 
+        - OUTROS                    # OTHERS 
       example: SEMANAL
     EnumContractInterestRateType:
       type: string
@@ -338,46 +338,46 @@ components:
         - SIMPLE (applied/charged always on the initial capital, which is the borrowed/invested value. There is no charge of interest on interest accumulated in the previous period(s). Example: in a loan of R\$1,000, with a simple interest rate of 8% p.a., lasting 2 years, the total interest will be R\$80 in the first year and R\$ 80 in the second year. At the end of the contract, the borrower will return the principal and the simple interest for each year: R\$1,000+R\$80+R\$80=R\$1,160)
         - COMPOUND (for each period of the contract (daily, monthly, annual, etc.), there is a “new capital” for charging the contracted interest rate. This “new capital” is the sum of the capital and the interest charged in the previous period. Example: in a loan of R\$1,000, with a compound interest rate of 8% p.a., lasting 2 years, the total interest will be R\$80 in the first year. In the second year, the interest will be added to the capital (R\$1,000 + R\$ 80 = R\$ 1,080), resulting in interest of R\$ 86 (8% of R\$ 1,080))"
       enum:
-        - SIMPLES   /* SIMPLE */
-        - COMPOSTO  /* COMPOUND */
+        - SIMPLES   # SIMPLE 
+        - COMPOSTO  # COMPOUND 
       example: SIMPLES
     EnumContractReferentialRateIndexerSubType:
       type: string
       description: |
         "Subtypes of benchmark rates or indexers, as per Annex 5: Benchmark Rate or Indexer (Indx), of Document 3040"
       enum:
-        - SEM_SUB_TIPO_INDEXADOR     /* NO_INDEXER_SUBTYPE */
-        - PRE_FIXADO                 /* PRE_FIXED */
-        - TR_TBF                     /* TR_TBF */
-        - TJLP                       /* TJLP */
-        - LIBOR                      /* LIBOR */
-        - TLP                        /* TLP */
-        - OUTRAS_TAXAS_POS_FIXADAS   /* OTHER_POST_FIXED_RATES */
-        - CDI                        /* CDI */
-        - SELIC                      /* SELIC */
-        - OUTRAS_TAXAS_FLUTUANTES    /* OTHER_FLOATING_RATES */
-        - IGPM                       /* IGPM */
-        - IPCA                       /* IPCA */
-        - IPCC                       /* IPCC */
-        - OUTROS_INDICES_PRECO       /* OTHER_PRICE_INDEXES */
-        - TCR_PRE                    /* TCR_PRE */
-        - TCR_POS                    /* TCR_POS */
-        - TRFC_PRE                   /* TRFC_PRE */
-        - TRFC_POS                   /* TRFC_POS */
-        - OUTROS_INDEXADORES         /* OTHER_INDEXERS */
+        - SEM_SUB_TIPO_INDEXADOR     # NO_INDEXER_SUBTYPE 
+        - PRE_FIXADO                 # PRE_FIXED 
+        - TR_TBF                     # TR_TBF 
+        - TJLP                       # TJLP 
+        - LIBOR                      # LIBOR 
+        - TLP                        # TLP 
+        - OUTRAS_TAXAS_POS_FIXADAS   # OTHER_POST_FIXED_RATES 
+        - CDI                        # CDI 
+        - SELIC                      # SELIC 
+        - OUTRAS_TAXAS_FLUTUANTES    # OTHER_FLOATING_RATES 
+        - IGPM                       # IGPM 
+        - IPCA                       # IPCA 
+        - IPCC                       # IPCC 
+        - OUTROS_INDICES_PRECO       # OTHER_PRICE_INDEXES 
+        - TCR_PRE                    # TCR_PRE 
+        - TCR_POS                    # TCR_POS 
+        - TRFC_PRE                   # TRFC_PRE 
+        - TRFC_POS                   # TRFC_POS 
+        - OUTROS_INDEXADORES         # OTHER_INDEXERS 
       example: TJLP
     EnumContractReferentialRateIndexerType:
       type: string
       description: |
         "Types of benchmark rates or indexers, as per Annex 5: Benchmark Rate or Indexer (Indx), of Document 3040"
       enum:
-        - SEM_TIPO_INDEXADOR    /* NO_INDEXER_TYPE */
-        - PRE_FIXADO            /* PRE_FIXED */
-        - POS_FIXADO            /* POST_FIXED */
-        - FLUTUANTES            /* FLOATING */
-        - INDICES_PRECOS        /* PRICE_INDEXES */
-        - CREDITO_RURAL         /* RURAL_CREDIT */
-        - OUTROS_INDEXADORES    /* OTHER_INDEXERS */
+        - SEM_TIPO_INDEXADOR    # NO_INDEXER_TYPE 
+        - PRE_FIXADO            # PRE_FIXED 
+        - POS_FIXADO            # POST_FIXED 
+        - FLUTUANTES            # FLOATING 
+        - INDICES_PRECOS        # PRICE_INDEXES 
+        - CREDITO_RURAL         # RURAL_CREDIT 
+        - OUTROS_INDEXADORES    # OTHER_INDEXERS 
       example: PRE_FIXADO
     EnumContractTaxPeriodicity:
       type: string
@@ -386,8 +386,8 @@ components:
         a.m - per month
         a.a. - per year"
       enum:
-        - AM /* PER_MONTH */
-        - AA /* PER_YEAR */
+        - AM # PER_MONTH 
+        - AA # PER_YEAR 
       example: AA
     EnumContractTaxType:
       type: string
@@ -396,105 +396,105 @@ components:
         - NOMINAL (nominal rate is an interest rate in which the reference unit does not coincide with the time unit of capitalization. It is always provided in annual terms, and its capitalization periods can be daily, monthly, quarterly or semi-annually. e.g. A rate of 12% per year with monthly capitalization)
         - EFFECTIVE (It is the interest rate in which the reference unit coincides with the time unit of capitalization. As the time units of measurement of the interest rate and capitalization periods are the same, simple examples are used such as 1% per month, 60% per year)"
       enum:
-        - NOMINAL   /* NOMINAL */
-        - EFETIVA   /* EFFECTIVE */
+        - NOMINAL   # NOMINAL 
+        - EFETIVA   # EFFECTIVE 
       example: EFETIVA
     EnumContractProductSubTypeLoans:
       type: string
       description: 'Subtype of Loan credit modalities contracted, as per circular 4.015 and description of DOC3040 of the SCR).'
       enum:
         - HOME_EQUITY
-        - CHEQUE_ESPECIAL                   /* OVERDRAFT */
-        - CONTA_GARANTIDA                   /* GUARANTEED_ACCOUNT */
-        - CAPITAL_GIRO_TETO_ROTATIVO        /* WORKING_CAPITAL_REVOLVING_LIMIT */
-        - CREDITO_PESSOAL_SEM_CONSIGNACAO   /* UNCONSIGNED_PERSONAL_CREDIT */
-        - CREDITO_PESSOAL_COM_CONSIGNACAO   /* CONSIGNED_PERSONAL_CREDIT */
-        - MICROCREDITO_PRODUTIVO_ORIENTADO  /* ORIENTED_PRODUCTIVE_MICROCREDIT */
-        - CAPITAL_GIRO_PRAZO_VENCIMENTO_ATE_365_DIAS   /* WORKING_CAPITAL_TERM_MATURITY_UP_TO_365_DAYS */
-        - CAPITAL_GIRO_PRAZO_VENCIMENTO_SUPERIOR_365_DIAS /* WORKING_CAPITAL_TERM_MATURITY_OVER_365_DAYS */
+        - CHEQUE_ESPECIAL                   # OVERDRAFT 
+        - CONTA_GARANTIDA                   # GUARANTEED_ACCOUNT 
+        - CAPITAL_GIRO_TETO_ROTATIVO        # WORKING_CAPITAL_REVOLVING_LIMIT 
+        - CREDITO_PESSOAL_SEM_CONSIGNACAO   # UNCONSIGNED_PERSONAL_CREDIT 
+        - CREDITO_PESSOAL_COM_CONSIGNACAO   # CONSIGNED_PERSONAL_CREDIT 
+        - MICROCREDITO_PRODUTIVO_ORIENTADO  # ORIENTED_PRODUCTIVE_MICROCREDIT 
+        - CAPITAL_GIRO_PRAZO_VENCIMENTO_ATE_365_DIAS   # WORKING_CAPITAL_TERM_MATURITY_UP_TO_365_DAYS 
+        - CAPITAL_GIRO_PRAZO_VENCIMENTO_SUPERIOR_365_DIAS # WORKING_CAPITAL_TERM_MATURITY_OVER_365_DAYS 
       example: CREDITO_PESSOAL_COM_CONSIGNACAO
     EnumContractProductTypeLoans:
       type: string
       description: 'Type of credit modality contracted, as per circular 4.015 and description of DOC3040 of the SCR).'
       enum:
-        - EMPRESTIMOS /* LOANS */
+        - EMPRESTIMOS # LOANS 
       example: EMPRESTIMOS
     EnumWarrantySubType:
       type: string
       description: |
         Denomination/Identification of the subtype of the guarantee that endorses the Credit Operation Modality contracted (Doc 3040, Annex 12).
       enum:
-        - ACOES_DEBENTURES                                          /* SHARES_DEBENTURES */
-        - ACORDOS_COMPENSACAO_LIQUIDACAO_OBRIGACOES                 /* COMPENSATION_AGREEMENTS_SETTLEMENT_OBLIGATIONS */
-        - APLICACOES_FINANCEIRAS_RENDA_FIXA                        /* FIXED_INCOME_FINANCIAL_APPLICATIONS */
-        - APLICACOES_FINANCEIRAS_RENDA_VARIAVEL                    /* VARIABLE_INCOME_FINANCIAL_APPLICATIONS */
-        - APOLICES_CREDITO_EXPORTACAO                             /* EXPORT_CREDIT_POLICIES */
-        - CCR_CONVENIO_CREDITOS_RECIPROCOS                          /* CCR_RECIPROCAL_CREDIT_AGREEMENT */
-        - CHEQUES                                                   /* CHECKS */
-        - CIVIL                                                     /* CIVIL */
-        - DIREITOS_SOBRE_ALUGUEIS                                   /* RIGHTS_OVER_RENTS */
-        - DEPOSITOS_A_VISTA_A_PRAZO_POUPANCA_OURO_TITULOS_PUBLICOS_FEDERAIS_ART_36 /* DEMAND_DEPOSITS_TERM_SAVINGS_GOLD_FEDERAL_PUBLIC_SECURITIES_ART_36 */
-        - DEPOSITO_TITULOS_EMITIDOS_ENTIDADES_ART_23                /* DEPOSIT_SECURITIES_ISSUED_ENTITIES_ART_23 */
-        - DUPLICATAS                                                /* DRAFTS */
-        - EMD_ENTIDADES_MULTILATERAIS_DESENVOLVIMENTO_ART_37        /* EMD_MULTILATERAL_DEVELOPMENT_ENTITIES_ART_37 */
-        - EQUIPAMENTOS                                              /* EQUIPMENT */
-        - ESTADUAL_OU_DISTRITAL                                     /* STATE_OR_DISTRICT */
-        - FATURA_CARTAO_CREDITO                                     /* CREDIT_CARD_INVOICE */
-        - FEDERAL                                                   /* FEDERAL */
-        - FCVS_FUNDO_COMPENSACAO_VARIACOES_SALARIAIS                /* FCVS_SALARY_VARIATION_COMPENSATION_FUND */
-        - FGI_FUNDO_GARANTIDOR_INVESTIMENTOS                        /* FGI_INVESTMENT_GUARANTEE_FUND */
-        - FGPC_FUNDO_GARANTIA_PROMOCAO_COMPETIT                     /* FGPC_GUARANTEE_FUND_COMPETIT_PROMOTION */
-        - FGTS_FUNDO_GARANTIA_TEMPO_SERVICO                         /* FGTS_SEVERANCE_PAYMENT_GUARANTEE_FUND */
-        - FUNDO_GARANTIDOR_AVAL                                     /* GUARANTEE_FUND_GUARANTEE */
-        - GARANTIA_PRESTADA_FGPC_LEI_9531_ART_37                    /* GUARANTEE_PROVIDED_FGPC_LAW_9531_ART_37 */
-        - GARANTIA_PRESTADA_FUNDOS_QUAISQUER_OUTROS_MECANISMOS_COBERTURA_RISCO_CREDITO_ART_37 /* GUARANTEE_PROVIDED_FUNDS_ANY_OTHER_CREDIT_RISK_COVERAGE_MECHANISMS_ART_37 */
-        - GARANTIA_PRESTADA_TESOURO_NACIONAL_OU_BACEN_ART_37_BENS_DIREITOS_INTEGRANTES_PATRIMONIO_AFETACAO /* GUARANTEE_PROVIDED_NATIONAL_TREASURY_OR_BACEN_ART_37_ASSETS_RIGHTS_INTEGRATING_AFFECTED_ASSETS */
-        - IMOVEIS                                                   /* REAL_ESTATE */
-        - IMOVEIS_RESIDENCIAIS                                      /* RESIDENTIAL_REAL_ESTATE */
-        - MITIGADORAS                                               /* MITIGATING */
-        - MUNICIPAL                                                 /* MUNICIPAL */
-        - NAO_MITIGADORAS                                           /* NON_MITIGATING */
-        - NOTAS_PROMISSORIAS_OUTROS_DIREITOS_CREDITO                /* PROMISSORY_NOTES_OTHER_CREDIT_RIGHTS */
-        - OUTRAS                                                    /* OTHERS */
-        - OUTROS                                                    /* OTHERS */
-        - OUTROS_BENS                                               /* OTHER_ASSETS */
-        - OUTROS_GRAUS                                              /* OTHER_DEGREES */
-        - OUTROS_IMOVEIS                                            /* OTHER_REAL_ESTATE */
-        - OUTROS_SEGUROS_ASSEMELHADOS                               /* OTHER_SIMILAR_INSURANCE */
-        - PESSOA_FISICA                                             /* NATURAL_PERSON */
-        - PESSOA_FISICA_EXTERIOR                                    /* FOREIGN_NATURAL_PERSON */
-        - PESSOA_JURIDICA                                           /* LEGAL_PERSON */
-        - PESSOA_JURIDICA_EXTERIOR                                  /* FOREIGN_LEGAL_PERSON */
-        - PRIMEIRO_GRAU_BENS_DIREITOS_INTEGRANTES_PATRIMONIO_AFETACAO /* FIRST_DEGREE_ASSETS_RIGHTS_INTEGRATING_AFFECTED_ASSETS */
-        - PRIMEIRO_GRAU_IMOVEIS_RESIDENCIAIS                        /* FIRST_DEGREE_RESIDENTIAL_REAL_ESTATE */
-        - PRIMEIRO_GRAU_OUTROS                                      /* FIRST_DEGREE_OTHERS */
-        - PROAGRO                                                   /* PROAGRO */
-        - PRODUTOS_AGROPECUARIOS_COM_WARRANT                        /* AGRICULTURAL_PRODUCTS_WITH_WARRANT */
-        - PRODUTOS_AGROPECUARIOS_SEM_WARRANT                        /* AGRICULTURAL_PRODUCTS_WITHOUT_WARRANT */
-        - SBCE_SOCIEDADE_BRASILEIRA_CREDITO_EXPORTAÇÃO              /* SBCE_BRAZILIAN_EXPORT_CREDIT_COMPANY */
-        - SEGURO_RURAL                                              /* RURAL_INSURANCE */
-        - SEM_SUB_TIPO_GARANTIA                                     /* NO_WARRANTY_SUBTYPE */
-        - TRIBUTOS_RECEITAS_ORCAMENTARIAS                           /* TAXES_BUDGET_REVENUES */
-        - VEICULOS                                                  /* VEHICLES */
-        - VEICULOS_AUTOMOTORES                                      /* MOTOR_VEHICLES */
+        - ACOES_DEBENTURES                                          # SHARES_DEBENTURES 
+        - ACORDOS_COMPENSACAO_LIQUIDACAO_OBRIGACOES                 # COMPENSATION_AGREEMENTS_SETTLEMENT_OBLIGATIONS 
+        - APLICACOES_FINANCEIRAS_RENDA_FIXA                        # FIXED_INCOME_FINANCIAL_APPLICATIONS 
+        - APLICACOES_FINANCEIRAS_RENDA_VARIAVEL                    # VARIABLE_INCOME_FINANCIAL_APPLICATIONS 
+        - APOLICES_CREDITO_EXPORTACAO                             # EXPORT_CREDIT_POLICIES 
+        - CCR_CONVENIO_CREDITOS_RECIPROCOS                          # CCR_RECIPROCAL_CREDIT_AGREEMENT 
+        - CHEQUES                                                   # CHECKS 
+        - CIVIL                                                     # CIVIL 
+        - DIREITOS_SOBRE_ALUGUEIS                                   # RIGHTS_OVER_RENTS 
+        - DEPOSITOS_A_VISTA_A_PRAZO_POUPANCA_OURO_TITULOS_PUBLICOS_FEDERAIS_ART_36 # DEMAND_DEPOSITS_TERM_SAVINGS_GOLD_FEDERAL_PUBLIC_SECURITIES_ART_36 
+        - DEPOSITO_TITULOS_EMITIDOS_ENTIDADES_ART_23                # DEPOSIT_SECURITIES_ISSUED_ENTITIES_ART_23 
+        - DUPLICATAS                                                # DRAFTS 
+        - EMD_ENTIDADES_MULTILATERAIS_DESENVOLVIMENTO_ART_37        # EMD_MULTILATERAL_DEVELOPMENT_ENTITIES_ART_37 
+        - EQUIPAMENTOS                                              # EQUIPMENT 
+        - ESTADUAL_OU_DISTRITAL                                     # STATE_OR_DISTRICT 
+        - FATURA_CARTAO_CREDITO                                     # CREDIT_CARD_INVOICE 
+        - FEDERAL                                                   # FEDERAL 
+        - FCVS_FUNDO_COMPENSACAO_VARIACOES_SALARIAIS                # FCVS_SALARY_VARIATION_COMPENSATION_FUND 
+        - FGI_FUNDO_GARANTIDOR_INVESTIMENTOS                        # FGI_INVESTMENT_GUARANTEE_FUND 
+        - FGPC_FUNDO_GARANTIA_PROMOCAO_COMPETIT                     # FGPC_GUARANTEE_FUND_COMPETIT_PROMOTION 
+        - FGTS_FUNDO_GARANTIA_TEMPO_SERVICO                         # FGTS_SEVERANCE_PAYMENT_GUARANTEE_FUND 
+        - FUNDO_GARANTIDOR_AVAL                                     # GUARANTEE_FUND_GUARANTEE 
+        - GARANTIA_PRESTADA_FGPC_LEI_9531_ART_37                    # GUARANTEE_PROVIDED_FGPC_LAW_9531_ART_37 
+        - GARANTIA_PRESTADA_FUNDOS_QUAISQUER_OUTROS_MECANISMOS_COBERTURA_RISCO_CREDITO_ART_37 # GUARANTEE_PROVIDED_FUNDS_ANY_OTHER_CREDIT_RISK_COVERAGE_MECHANISMS_ART_37 
+        - GARANTIA_PRESTADA_TESOURO_NACIONAL_OU_BACEN_ART_37_BENS_DIREITOS_INTEGRANTES_PATRIMONIO_AFETACAO # GUARANTEE_PROVIDED_NATIONAL_TREASURY_OR_BACEN_ART_37_ASSETS_RIGHTS_INTEGRATING_AFFECTED_ASSETS 
+        - IMOVEIS                                                   # REAL_ESTATE 
+        - IMOVEIS_RESIDENCIAIS                                      # RESIDENTIAL_REAL_ESTATE 
+        - MITIGADORAS                                               # MITIGATING 
+        - MUNICIPAL                                                 # MUNICIPAL 
+        - NAO_MITIGADORAS                                           # NON_MITIGATING 
+        - NOTAS_PROMISSORIAS_OUTROS_DIREITOS_CREDITO                # PROMISSORY_NOTES_OTHER_CREDIT_RIGHTS 
+        - OUTRAS                                                    # OTHERS 
+        - OUTROS                                                    # OTHERS 
+        - OUTROS_BENS                                               # OTHER_ASSETS 
+        - OUTROS_GRAUS                                              # OTHER_DEGREES 
+        - OUTROS_IMOVEIS                                            # OTHER_REAL_ESTATE 
+        - OUTROS_SEGUROS_ASSEMELHADOS                               # OTHER_SIMILAR_INSURANCE 
+        - PESSOA_FISICA                                             # NATURAL_PERSON 
+        - PESSOA_FISICA_EXTERIOR                                    # FOREIGN_NATURAL_PERSON 
+        - PESSOA_JURIDICA                                           # LEGAL_PERSON 
+        - PESSOA_JURIDICA_EXTERIOR                                  # FOREIGN_LEGAL_PERSON 
+        - PRIMEIRO_GRAU_BENS_DIREITOS_INTEGRANTES_PATRIMONIO_AFETACAO # FIRST_DEGREE_ASSETS_RIGHTS_INTEGRATING_AFFECTED_ASSETS 
+        - PRIMEIRO_GRAU_IMOVEIS_RESIDENCIAIS                        # FIRST_DEGREE_RESIDENTIAL_REAL_ESTATE 
+        - PRIMEIRO_GRAU_OUTROS                                      # FIRST_DEGREE_OTHERS 
+        - PROAGRO                                                   # PROAGRO 
+        - PRODUTOS_AGROPECUARIOS_COM_WARRANT                        # AGRICULTURAL_PRODUCTS_WITH_WARRANT 
+        - PRODUTOS_AGROPECUARIOS_SEM_WARRANT                        # AGRICULTURAL_PRODUCTS_WITHOUT_WARRANT 
+        - SBCE_SOCIEDADE_BRASILEIRA_CREDITO_EXPORTAÇÃO              # SBCE_BRAZILIAN_EXPORT_CREDIT_COMPANY 
+        - SEGURO_RURAL                                              # RURAL_INSURANCE 
+        - SEM_SUB_TIPO_GARANTIA                                     # NO_WARRANTY_SUBTYPE 
+        - TRIBUTOS_RECEITAS_ORCAMENTARIAS                           # TAXES_BUDGET_REVENUES 
+        - VEICULOS                                                  # VEHICLES 
+        - VEICULOS_AUTOMOTORES                                      # MOTOR_VEHICLES 
       example: NOTAS_PROMISSORIAS_OUTROS_DIREITOS_CREDITO
     EnumWarrantyType:
       type: string
       description: 'Denomination/Identification of the type of guarantee that endorses the Credit Operation Modality contracted (Doc 3040, Annex 12)'
       enum:
-        - CESSAO_DIREITOS_CREDITORIOS         /* ASSIGNMENT_OF_CREDIT_RIGHTS */
-        - CAUCAO                              /* CAUTION */
-        - PENHOR                              /* PLEDGE */
-        - ALIENACAO_FIDUCIARIA                /* FIDUCIARY_ASSIGNMENT */
-        - HIPOTECA                            /* MORTGAGE */
-        - OPERACOES_GARANTIDAS_PELO_GOVERNO     /* GOVERNMENT_GUARANTEED_OPERATIONS */
-        - OUTRAS_GARANTIAS_NAO_FIDEJUSSORIAS  /* OTHER_NON_FIDEJUSSORY_WARRANTIES */
-        - SEGUROS_ASSEMELHADOS                /* SIMILAR_INSURANCE */
-        - GARANTIA_FIDEJUSSORIA               /* FIDEJUSSORY_GUARANTEE */
-        - BENS_ARRENDADOS                     /* LEASED_ASSETS */
-        - GARANTIAS_INTERNACIONAIS            /* INTERNATIONAL_WARRANTIES */
-        - OPERACOES_GARANTIDAS_OUTRAS_ENTIDADES /* OPERATIONS_GUARANTEED_BY_OTHER_ENTITIES */
-        - ACORDOS_COMPENSACAO                 /* COMPENSATION_AGREEMENTS */
+        - CESSAO_DIREITOS_CREDITORIOS         # ASSIGNMENT_OF_CREDIT_RIGHTS 
+        - CAUCAO                              # CAUTION 
+        - PENHOR                              # PLEDGE 
+        - ALIENACAO_FIDUCIARIA                # FIDUCIARY_ASSIGNMENT 
+        - HIPOTECA                            # MORTGAGE 
+        - OPERACOES_GARANTIDAS_PELO_GOVERNO     # GOVERNMENT_GUARANTEED_OPERATIONS 
+        - OUTRAS_GARANTIAS_NAO_FIDEJUSSORIAS  # OTHER_NON_FIDEJUSSORY_WARRANTIES 
+        - SEGUROS_ASSEMELHADOS                # SIMILAR_INSURANCE 
+        - GARANTIA_FIDEJUSSORIA               # FIDEJUSSORY_GUARANTEE 
+        - BENS_ARRENDADOS                     # LEASED_ASSETS 
+        - GARANTIAS_INTERNACIONAIS            # INTERNATIONAL_WARRANTIES 
+        - OPERACOES_GARANTIDAS_OUTRAS_ENTIDADES # OPERATIONS_GUARANTEED_BY_OTHER_ENTITIES 
+        - ACORDOS_COMPENSACAO                 # COMPENSATION_AGREEMENTS 
       example: CESSAO_DIREITOS_CREDITORIOS
     LoansBalloonPayment:
       type: object
@@ -868,11 +868,11 @@ components:
           type: string
           description: Type of total term of the contract referring to the credit modality informed.
           enum:
-            - DIA                 /* DAY */
-            - SEMANA              /* WEEK */
-            - MES                 /* MONTH */
-            - ANO                 /* YEAR */
-            - SEM_PRAZO_TOTAL     /* NO_TOTAL_TERM */
+            - DIA                 # DAY 
+            - SEMANA              # WEEK 
+            - MES                 # MONTH 
+            - ANO                 # YEAR 
+            - SEM_PRAZO_TOTAL     # NO_TOTAL_TERM 
           example: MES
         totalNumberOfInstalments:
           type: number
@@ -885,11 +885,11 @@ components:
         typeContractRemaining:
           type: string
           enum:
-            - DIA                       /* DAY */
-            - SEMANA                    /* WEEK */
-            - MES                       /* MONTH */
-            - ANO                       /* YEAR */
-            - SEM_PRAZO_REMANESCENTE    /* NO_REMAINING_TERM */
+            - DIA                       # DAY 
+            - SEMANA                    # WEEK 
+            - MES                       # MONTH 
+            - ANO                       # YEAR 
+            - SEM_PRAZO_REMANESCENTE    # NO_REMAINING_TERM 
           description: |
             Type of remaining term of the contract referring to the credit modality informed.
         contractRemainingNumber:

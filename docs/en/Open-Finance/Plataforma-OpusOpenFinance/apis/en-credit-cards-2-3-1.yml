@@ -646,12 +646,12 @@ components:
         lineName:
           type: string
           enum:
-            - CREDITO_A_VISTA              /* On demand credit */
-            - CREDITO_PARCELADO            /* Installment credit */
-            - SAQUE_CREDITO_BRASIL         /* Credit withdrawal Brazil */
-            - SAQUE_CREDITO_EXTERIOR       /* Credit withdrawal abroad */
-            - EMPRESTIMO_CARTAO_CONSIGNADO /* Payroll loan card */
-            - OUTROS                       /* Others */
+            - CREDITO_A_VISTA              # On demand credit 
+            - CREDITO_PARCELADO            # Installment credit 
+            - SAQUE_CREDITO_BRASIL         # Credit withdrawal Brazil 
+            - SAQUE_CREDITO_EXTERIOR       # Credit withdrawal abroad 
+            - EMPRESTIMO_CARTAO_CONSIGNADO # Payroll loan card 
+            - OUTROS                       # Others 
           example: CREDITO_A_VISTA
         lineNameAdditionalInfo:
           type: string
@@ -1063,14 +1063,14 @@ components:
 
         [Restriction] Mandatory to fill in if Transaction Type selected is 'FEE'.
       enum:
-        - ANUIDADE                       /* Annuity */
-        - SAQUE_CARTAO_BRASIL            /* Card withdrawal Brazil */
-        - SAQUE_CARTAO_EXTERIOR          /* Card withdrawal abroad */
-        - AVALIACAO_EMERGENCIAL_CREDITO  /* Emergency credit assessment */
-        - EMISSAO_SEGUNDA_VIA            /* Second issue */
-        - TARIFA_PAGAMENTO_CONTAS        /* Account payment fee */
+        - ANUIDADE                       # Annuity 
+        - SAQUE_CARTAO_BRASIL            # Card withdrawal Brazil 
+        - SAQUE_CARTAO_EXTERIOR          # Card withdrawal abroad 
+        - AVALIACAO_EMERGENCIAL_CREDITO  # Emergency credit assessment 
+        - EMISSAO_SEGUNDA_VIA            # Second issue 
+        - TARIFA_PAGAMENTO_CONTAS        # Account payment fee 
         - SMS
-        - OUTRA                          /* Other */
+        - OUTRA                          # Other 
       example: ANUIDADE
     EnumCreditCardAccountsBillingValueType:
       type: string
@@ -1086,9 +1086,9 @@ components:
 
          OUTRO_VALOR_PAGO_FATURA: Other cases
       enum:
-        - VALOR_PAGAMENTO_FATURA_PARCELADO /* Invoice payment amount with installment */
-        - VALOR_PAGAMENTO_FATURA_REALIZADO /* Invoice payment amount made */
-        - OUTRO_VALOR_PAGO_FATURA          /* Other amount paid on invoice */
+        - VALOR_PAGAMENTO_FATURA_PARCELADO # Invoice payment amount with installment 
+        - VALOR_PAGAMENTO_FATURA_REALIZADO # Invoice payment amount made 
+        - OUTRO_VALOR_PAGO_FATURA          # Other amount paid on invoice 
     EnumCreditCardAccountsConsolidationType:
       type: string
       description: |
@@ -1098,8 +1098,8 @@ components:
 
         INDIVIDUAL: Used when each payment method (paymentMethod) has its segregated limit.
       enum:
-        - CONSOLIDADO /* CONSOLIDATED */
-        - INDIVIDUAL  /* INDIVIDUAL */
+        - CONSOLIDADO # CONSOLIDATED 
+        - INDIVIDUAL  # INDIVIDUAL 
       example: CONSOLIDADO
     EnumCreditCardAccountsFinanceChargeType:
       type: string
@@ -1112,11 +1112,11 @@ components:
         - IOF
         - Others
       enum:
-        - JUROS_REMUNERATORIOS_ATRASO_PAGAMENTO_FATURA /* Remuneratory interest for late payment of invoice */
-        - MULTA_ATRASO_PAGAMENTO_FATURA                /* Fine for late payment of invoice */
-        - JUROS_MORA_ATRASO_PAGAMENTO_FATURA           /* Default interest for late payment of invoice */
+        - JUROS_REMUNERATORIOS_ATRASO_PAGAMENTO_FATURA # Remuneratory interest for late payment of invoice 
+        - MULTA_ATRASO_PAGAMENTO_FATURA                # Fine for late payment of invoice 
+        - JUROS_MORA_ATRASO_PAGAMENTO_FATURA           # Default interest for late payment of invoice 
         - IOF
-        - OUTROS                                       /* Others */
+        - OUTROS                                       # Others 
     EnumCreditCardAccountsLineLimitType:
       type: string
       description: |
@@ -1126,8 +1126,8 @@ components:
 
         LIMITE_CREDITO_MODALIDADE_OPERACAO: Credit limit per operation modality of this card account (observe lineName and list the institution's applicable ones).
       enum:
-        - LIMITE_CREDITO_TOTAL               /* TOTAL_CREDIT_LIMIT */
-        - LIMITE_CREDITO_MODALIDADE_OPERACAO /* CREDIT_LIMIT_OPERATION_MODALITY */
+        - LIMITE_CREDITO_TOTAL               # TOTAL_CREDIT_LIMIT 
+        - LIMITE_CREDITO_MODALIDADE_OPERACAO # CREDIT_LIMIT_OPERATION_MODALITY 
       example: LIMITE_CREDITO_TOTAL
     EnumCreditCardAccountNetwork:
       type: string
@@ -1140,10 +1140,10 @@ components:
         - AMERICAN_EXPRESS
         - DINERS_CLUB
         - HIPERCARD
-        - BANDEIRA_PROPRIA      /* PROPRIETARY BRAND */
-        - CHEQUE_ELETRONICO     /* ELECTRONIC CHECK */
+        - BANDEIRA_PROPRIA      # PROPRIETARY BRAND 
+        - CHEQUE_ELETRONICO     # ELECTRONIC CHECK 
         - ELO
-        - OUTRAS                /* OTHERS */
+        - OUTRAS                # OTHERS 
       example: VISA
     EnumCreditCardAccountsOtherCreditType:
       type: string
@@ -1152,10 +1152,10 @@ components:
 
         [Restriction] Mandatory to fill in if the selected transaction type is 'CREDIT_OPERATIONS_CONTRACTED_CARD'.
       enum:
-        - CREDITO_ROTATIVO        /* Revolving credit */
-        - PARCELAMENTO_FATURA     /* Invoice installment */
-        - EMPRESTIMO              /* Loan */
-        - OUTROS                  /* Others */
+        - CREDITO_ROTATIVO        # Revolving credit 
+        - PARCELAMENTO_FATURA     # Invoice installment 
+        - EMPRESTIMO              # Loan 
+        - OUTROS                  # Others 
       example: CREDITO_ROTATIVO
     EnumCreditCardAccountsPaymentMode:
       type: string
@@ -1166,9 +1166,9 @@ components:
         - Payroll deduction
         - PIX
       enum:
-        - DEBITO_CONTA_CORRENTE /* Debit in checking account */
-        - BOLETO_BANCARIO       /* Bank payment slip */
-        - AVERBACAO_FOLHA       /* Payroll deduction */
+        - DEBITO_CONTA_CORRENTE # Debit in checking account 
+        - BOLETO_BANCARIO       # Bank payment slip 
+        - AVERBACAO_FOLHA       # Payroll deduction 
         - PIX
     EnumCreditCardAccountsPaymentType:
       type: string
@@ -1177,21 +1177,21 @@ components:
 
         [Restriction] Mandatory to fill in if Transaction Type selected is 'PAYMENT'.
       enum:
-        - A_VISTA  /* SPOT */
-        - A_PRAZO  /* TERM */
+        - A_VISTA  # SPOT 
+        - A_PRAZO  # TERM 
       example: A_VISTA
     EnumCreditCardAccountsProductType:
       type: string
       description: 'Category attributed to a payment card, under a certain denomination, which adds a set of advantages to it, differentiating it according to the cardholder profile.'
       enum:
-        - CLASSIC_NACIONAL           /* NATIONAL CLASSIC */
-        - CLASSIC_INTERNACIONAL      /* INTERNATIONAL CLASSIC */
+        - CLASSIC_NACIONAL           # NATIONAL CLASSIC 
+        - CLASSIC_INTERNACIONAL      # INTERNATIONAL CLASSIC 
         - GOLD
         - PLATINUM
         - INFINITE
         - ELECTRON
-        - STANDARD_NACIONAL          /* NATIONAL STANDARD */
-        - STANDARD_INTERNACIONAL     /* INTERNATIONAL STANDARD */
+        - STANDARD_NACIONAL          # NATIONAL STANDARD 
+        - STANDARD_INTERNACIONAL     # INTERNATIONAL STANDARD 
         - ELETRONIC
         - BLACK
         - REDESHOP
@@ -1199,28 +1199,28 @@ components:
         - GREEN
         - BLUE
         - BLUEBOX
-        - PROFISSIONAL_LIBERAL     /* LIBERAL_PROFESSIONAL */
-        - CHEQUE_ELETRONICO        /* ELECTRONIC_CHECK */
-        - CORPORATIVO              /* CORPORATE */
-        - EMPRESARIAL              /* BUSINESS */
-        - COMPRAS                  /* PURCHASES */
-        - BASICO_NACIONAL          /* NATIONAL_BASIC */
-        - BASICO_INTERNACIONAL     /* INTERNATIONAL_BASIC */
+        - PROFISSIONAL_LIBERAL     # LIBERAL_PROFESSIONAL 
+        - CHEQUE_ELETRONICO        # ELECTRONIC_CHECK 
+        - CORPORATIVO              # CORPORATE 
+        - EMPRESARIAL              # BUSINESS 
+        - COMPRAS                  # PURCHASES 
+        - BASICO_NACIONAL          # NATIONAL_BASIC 
+        - BASICO_INTERNACIONAL     # INTERNATIONAL_BASIC 
         - NANQUIM
         - GRAFITE
-        - MAIS                     /* MORE */
-        - OUTROS                   /* OTHERS */
+        - MAIS                     # MORE 
+        - OUTROS                   # OTHERS 
       example: OUTROS
     EnumCreditCardTransactionType:
       type: string
       description: Brings the Transaction types
       enum:
-        - PAGAMENTO                            /* PAYMENT */
-        - TARIFA                               /* FEE */
-        - OPERACOES_CREDITO_CONTRATADAS_CARTAO /* CREDIT_OPERATIONS_CONTRACTED_CARD */
-        - ESTORNO                              /* REVERSAL */
+        - PAGAMENTO                            # PAYMENT 
+        - TARIFA                               # FEE 
+        - OPERACOES_CREDITO_CONTRATADAS_CARTAO # CREDIT_OPERATIONS_CONTRACTED_CARD 
+        - ESTORNO                              # REVERSAL 
         - CASHBACK
-        - OUTROS                               /* OTHERS */
+        - OUTROS                               # OTHERS 
       example: CASHBACK
     EnumCreditDebitIndicator:
       type: string
@@ -1229,8 +1229,8 @@ components:
         Debit (in the statement) In a bank statement, debits, marked with the letter “D” next to the registered amount, inform the money outflows in the current account.
         Credit (in the statement) In a bank statement, credits, marked with the letter “C” next to the registered amount, inform the money inflows in the current account.
       enum:
-        - CREDITO  /* CREDIT */
-        - DEBITO   /* DEBIT */
+        - CREDITO  # CREDIT 
+        - DEBITO   # DEBIT 
       example: DEBITO
     Meta:
       type: object

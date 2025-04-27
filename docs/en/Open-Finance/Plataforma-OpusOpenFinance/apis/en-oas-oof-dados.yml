@@ -699,7 +699,7 @@ components:
         additionalInformation:
           description: Additional information entered by the payer user in Automatic Payment consents
           type: string
-          example: Minha recorrência /* My recurrence */
+          example: Minha recorrência # My recurrence 
           pattern: '[\w\W\s]*'
           maxLength: 140
         tppName:
@@ -888,8 +888,8 @@ components:
     EnumPaymentPersonType:
       type: string
       enum:
-        - PESSOA_NATURAL /* NATURAL_PERSON */
-        - PESSOA_JURIDICA /* LEGAL_PERSON */
+        - PESSOA_NATURAL # NATURAL_PERSON 
+        - PESSOA_JURIDICA # LEGAL_PERSON 
       example: PESSOA_NATURAL
       description: |
         Holder, natural or legal person to whom the receiving party (creditor) data refers.
@@ -1093,7 +1093,7 @@ components:
           type: string
           maxLength: 140
           pattern: '[\w\W\s]*'
-          example: Pagamento da nota RSTO035-002. /* Payment of invoice RSTO035-002. */
+          example: Pagamento da nota RSTO035-002. # Payment of invoice RSTO035-002. 
           description: |
             Must be filled in whenever the payer user enters any additional information in a payment, to be sent to the receiving party.
         creditorAccount:
@@ -1250,8 +1250,8 @@ components:
     EnumPaymentCancellationFromType:
       type: string
       enum:
-        - INICIADORA /* INITIATOR */
-        - DETENTORA /* HOLDER */
+        - INICIADORA # INITIATOR 
+        - DETENTORA # HOLDER 
       example: INICIADORA
       description: |
         Field used to inform the means by which the cancellation was carried out.
@@ -1264,9 +1264,9 @@ components:
     EnumPaymentCancellationReasonType:
       type: string
       enum:
-        - CANCELADO_PENDENCIA /* CANCELED_PENDENCY */
-        - CANCELADO_AGENDAMENTO /* CANCELED_SCHEDULE */
-        - CANCELADO_MULTIPLAS_ALCADAS /* CANCELED_MULTIPLE_APPROVALS */
+        - CANCELADO_PENDENCIA # CANCELED_PENDENCY 
+        - CANCELADO_AGENDAMENTO # CANCELED_SCHEDULE 
+        - CANCELADO_MULTIPLAS_ALCADAS # CANCELED_MULTIPLE_APPROVALS 
       example: CANCELADO_PENDENCIA
       description: |
         The filling of this field for return must occur by the account holder from the status in which the payment is at the time of the cancellation request (e.g. Payment Status = PDNG, field must be filled with enum CANCELADO_PENDENCIA)
@@ -1592,8 +1592,8 @@ components:
           description: Maximum value to be transacted per year, from the date defined in the `/data/startDateTime` field.
     PaymentPersonTypeEnum:
       enum:
-        - PESSOA_NATURAL /* NATURAL_PERSON */
-        - PESSOA_JURIDICA /* LEGAL_PERSON */
+        - PESSOA_NATURAL # NATURAL_PERSON 
+        - PESSOA_JURIDICA # LEGAL_PERSON 
       type: string
     PaymentTypeEnum:
       enum:
@@ -1604,13 +1604,13 @@ components:
       properties:
         name:
           type: string
-          example: Nome da permissão /* Permission name */
+          example: Nome da permissão # Permission name 
         title:
           type: string
-          example: Nome inteligível para a permissão /* Intelligible name for the permission */
+          example: Nome inteligível para a permissão # Intelligible name for the permission 
         description:
           type: string
-          example: Descrição do que essa permissão permite /* Description of what this permission allows */
+          example: Descrição do que essa permissão permite # Description of what this permission allows 
     RequestRevokeOobConsent:
       required:
         - data
@@ -1805,7 +1805,7 @@ components:
         additionalInformation:
           maxLength: 140
           type: string
-          example: Risco de fraude identificado /* Fraud risk identified */
+          example: Risco de fraude identificado # Fraud risk identified 
         code:
           allOf:
             - $ref: "#/components/schemas/RevocationReasonCodeEnum"
@@ -1830,7 +1830,7 @@ components:
         additionalInformation:
           type: string
           pattern: '[\w\W\s]*'
-          example: Contrato entre iniciadora e detentora interrompido /* Contract between initiator and holder interrupted */
+          example: Contrato entre iniciadora e detentora interrompido # Contract between initiator and holder interrupted 
           maxLength: 2048
         cancelledFrom:
           $ref: "#/components/schemas/EnumEnrollmentCancelledFrom"
@@ -1855,7 +1855,7 @@ components:
         additionalInformation:
           type: string
           pattern: '[\w\W\s]*'
-          example: Contrato entre iniciadora e detentora interrompido /* Contract between initiator and holder interrupted */
+          example: Contrato entre iniciadora e detentora interrompido # Contract between initiator and holder interrupted 
           maxLength: 2048
         cancelledFrom:
           $ref: "#/components/schemas/EnumEnrollmentCancelledFrom"
@@ -1869,7 +1869,7 @@ components:
         additionalInformation:
           maxLength: 140
           type: string
-          example: Risco de fraude identificado /* Fraud risk identified */
+          example: Risco de fraude identificado # Fraud risk identified 
         code:
           allOf:
             - $ref: "#/components/schemas/RejectedReasonCodeEnum"
@@ -1883,11 +1883,11 @@ components:
       type: string
     EnrollmentRevocationReasonCodeEnum:
       enum:
-        - REVOGADO_VALIDADE_EXPIRADA /* REVOKED_VALIDITY_EXPIRED */
-        - REVOGADO_MANUALMENTE /* REVOKED_MANUALLY */
-        - REVOGADO_FALHA_INFRAESTRUTURA /* REVOKED_INFRASTRUCTURE_FAILURE */
-        - REVOGADO_SEGURANCA_INTERNA /* REVOKED_INTERNAL_SECURITY */
-        - REVOGADO_OUTRO /* REVOKED_OTHER */
+        - REVOGADO_VALIDADE_EXPIRADA # REVOKED_VALIDITY_EXPIRED 
+        - REVOGADO_MANUALMENTE # REVOKED_MANUALLY 
+        - REVOGADO_FALHA_INFRAESTRUTURA # REVOKED_INFRASTRUCTURE_FAILURE 
+        - REVOGADO_SEGURANCA_INTERNA # REVOKED_INTERNAL_SECURITY 
+        - REVOGADO_OUTRO # REVOKED_OTHER 
       type: string
     RevokePaymentConsentData:
       type: object
@@ -1926,17 +1926,17 @@ components:
       type: string
     EnrollmentRejectedReasonCodeEnum:
       enum:
-        - REJEITADO_TEMPO_EXPIRADO_RISK_SIGNALS /* REJECTED_TIME_EXPIRED_RISK_SIGNALS */
-        - REJEITADO_TEMPO_EXPIRADO_ACCOUNT_HOLDER_VALIDATION /* REJECTED_TIME_EXPIRED_ACCOUNT_HOLDER_VALIDATION */
-        - REJEITADO_TEMPO_EXPIRADO_ENROLLMENT /* REJECTED_TIME_EXPIRED_ENROLLMENT */
-        - REJEITADO_MAXIMO_CHALLENGES_ATINGIDO /* REJECTED_MAXIMUM_CHALLENGES_REACHED */
-        - REJEITADO_MANUALMENTE /* REJECTED_MANUALLY */
-        - REJEITADO_DISPOSITIVO_INCOMPATIVEL /* REJECTED_INCOMPATIBLE_DEVICE */
-        - REJEITADO_FALHA_INFRAESTRUTURA /* REJECTED_INFRASTRUCTURE_FAILURE */
-        - REJEITADO_SEGURANCA_INTERNA /* REJECTED_INTERNAL_SECURITY */
-        - REJEITADO_FALHA_HYBRID_FLOW /* REJECTED_HYBRID_FLOW_FAILURE */
-        - REJEITADO_FALHA_FIDO /* REJECTED_FIDO_FAILURE */
-        - REJEITADO_OUTRO /* REJECTED_OTHER */
+        - REJEITADO_TEMPO_EXPIRADO_RISK_SIGNALS # REJECTED_TIME_EXPIRED_RISK_SIGNALS 
+        - REJEITADO_TEMPO_EXPIRADO_ACCOUNT_HOLDER_VALIDATION # REJECTED_TIME_EXPIRED_ACCOUNT_HOLDER_VALIDATION 
+        - REJEITADO_TEMPO_EXPIRADO_ENROLLMENT # REJECTED_TIME_EXPIRED_ENROLLMENT 
+        - REJEITADO_MAXIMO_CHALLENGES_ATINGIDO # REJECTED_MAXIMUM_CHALLENGES_REACHED 
+        - REJEITADO_MANUALMENTE # REJECTED_MANUALLY 
+        - REJEITADO_DISPOSITIVO_INCOMPATIVEL # REJECTED_INCOMPATIBLE_DEVICE 
+        - REJEITADO_FALHA_INFRAESTRUTURA # REJECTED_INFRASTRUCTURE_FAILURE 
+        - REJEITADO_SEGURANCA_INTERNA # REJECTED_INTERNAL_SECURITY 
+        - REJEITADO_FALHA_HYBRID_FLOW # REJECTED_HYBRID_FLOW_FAILURE 
+        - REJEITADO_FALHA_FIDO # REJECTED_FIDO_FAILURE 
+        - REJEITADO_OUTRO # REJECTED_OTHER 
       type: string
     RevocationPaymentOob:
       type: object
@@ -1952,9 +1952,9 @@ components:
           $ref: "#/components/schemas/RevokedByAutomaticPaymentEnum"
     RevokedByAutomaticPaymentEnum:
       enum:
-        - INICIADORA /* INITIATOR */
-        - USUARIO /* USER */
-        - DETENTORA /* HOLDER */
+        - INICIADORA # INITIATOR 
+        - USUARIO # USER 
+        - DETENTORA # HOLDER 
       type: string
     RejectionPaymentOob:
       type: object
@@ -1970,9 +1970,9 @@ components:
           $ref: "#/components/schemas/RejectedByAutomaticPaymentEnum"
     RejectedByAutomaticPaymentEnum:
       enum:
-        - INICIADORA /* INITIATOR */
-        - USUARIO /* USER */
-        - DETENTORA /* HOLDER */
+        - INICIADORA # INITIATOR 
+        - USUARIO # USER 
+        - DETENTORA # HOLDER 
       type: string
     RecurringConsentRevocationReason:
       type: object
@@ -1990,7 +1990,7 @@ components:
         code:
           allOf:
             - $ref: "#/components/schemas/ConsentRejectionReasonCodeEnum"
-            - example: CONTAS_ORIGEM_DESTINO_IGUAIS /* ORIGIN_DESTINATION_ACCOUNTS_ARE_EQUAL */
+            - example: CONTAS_ORIGEM_DESTINO_IGUAIS # ORIGIN_DESTINATION_ACCOUNTS_ARE_EQUAL 
         detail:
           type: string
     EnrollmentRejectedReason:
@@ -2001,7 +2001,7 @@ components:
         additionalInformation:
           maxLength: 140
           type: string
-          example: Reason when code REJEITADO_OUTRO /* Reason when code REJECTED_OTHER */
+          example: Reason when code REJEITADO_OUTRO # Reason when code REJECTED_OTHER 
         code:
           allOf:
             - $ref: "#/components/schemas/EnrollmentRejectedReasonCodeEnum"
@@ -2009,29 +2009,29 @@ components:
               nullable: false
     RecurringConsentRejectedFromEnum:
       enum:
-        - INICIADORA /* INITIATOR */
-        - DETENTORA /* HOLDER */
+        - INICIADORA # INITIATOR 
+        - DETENTORA # HOLDER 
       type: string
     ConsentRevocationReasonCodeEnum:
       enum:
-        - NAO_INFORMADO /* NOT_INFORMED */
-        - REVOGADO_USUARIO /* REVOKED_USER */
-        - REVOGADO_RECEBEDOR /* REVOKED_RECEIVER */
+        - NAO_INFORMADO # NOT_INFORMED 
+        - REVOGADO_USUARIO # REVOKED_USER 
+        - REVOGADO_RECEBEDOR # REVOKED_RECEIVER 
       type: string
     ConsentRejectionReasonCodeEnum:
       enum:
-        - VALOR_INVALIDO /* INVALID_VALUE */
-        - NAO_INFORMADO /* NOT_INFORMED */
-        - FALHA_INFRAESTRUTURA /* INFRASTRUCTURE_FAILURE */
-        - TEMPO_EXPIRADO_AUTORIZACAO /* AUTHORIZATION_TIME_EXPIRED */
-        - TEMPO_EXPIRADO_CONSUMO /* CONSUMPTION_TIME_EXPIRED */
-        - REJEITADO_USUARIO /* REJECTED_USER */
-        - CONTAS_ORIGEM_DESTINO_IGUAIS /* ORIGIN_DESTINATION_ACCOUNTS_ARE_EQUAL */
-        - CONTA_NAO_PERMITE_PAGAMENTO /* ACCOUNT_DOES_NOT_ALLOW_PAYMENT */
-        - SALDO_INSUFICIENTE /* INSUFFICIENT_BALANCE */
-        - VALOR_ACIMA_LIMITE /* VALUE_ABOVE_LIMIT */
-        - QRCODE_INVALIDO /* INVALID_QRCODE */
-        - CONTA_DIVERGENTE_DA_SOLICITADA /* ACCOUNT_DIFFERENT_FROM_REQUESTED */
+        - VALOR_INVALIDO # INVALID_VALUE 
+        - NAO_INFORMADO # NOT_INFORMED 
+        - FALHA_INFRAESTRUTURA # INFRASTRUCTURE_FAILURE 
+        - TEMPO_EXPIRADO_AUTORIZACAO # AUTHORIZATION_TIME_EXPIRED 
+        - TEMPO_EXPIRADO_CONSUMO # CONSUMPTION_TIME_EXPIRED 
+        - REJEITADO_USUARIO # REJECTED_USER 
+        - CONTAS_ORIGEM_DESTINO_IGUAIS # ORIGIN_DESTINATION_ACCOUNTS_ARE_EQUAL 
+        - CONTA_NAO_PERMITE_PAGAMENTO # ACCOUNT_DOES_NOT_ALLOW_PAYMENT 
+        - SALDO_INSUFICIENTE # INSUFFICIENT_BALANCE 
+        - VALOR_ACIMA_LIMITE # VALUE_ABOVE_LIMIT 
+        - QRCODE_INVALIDO # INVALID_QRCODE 
+        - CONTA_DIVERGENTE_DA_SOLICITADA # ACCOUNT_DIFFERENT_FROM_REQUESTED 
       type: string
     PaymentStatusEnum:
       enum:
@@ -2107,29 +2107,29 @@ components:
         code:
           $ref: "#/components/schemas/PaymentRejectionReasonEnum"
         detail:
-          example: A conta selecionada não possui saldo suficiente para realizar o pagamento. /* The selected account does not have sufficient balance to make the payment. */
+          example: A conta selecionada não possui saldo suficiente para realizar o pagamento. # The selected account does not have sufficient balance to make the payment. 
           type: string
     PaymentRejectionReasonEnum:
       type: string
       enum:
-        - SALDO_INSUFICIENTE /* INSUFFICIENT_BALANCE */
-        - VALOR_ACIMA_LIMITE /* VALUE_ABOVE_LIMIT */
-        - VALOR_INVALIDO /* INVALID_VALUE */
-        - COBRANCA_INVALIDA /* INVALID_CHARGE */
-        - NAO_INFORMADO /* NOT_INFORMED */
-        - PAGAMENTO_DIVERGENTE_CONSENTIMENTO /* PAYMENT_DIVERGENT_CONSENT */
-        - DETALHE_PAGAMENTO_INVALIDO /* INVALID_PAYMENT_DETAIL */
-        - PAGAMENTO_RECUSADO_DETENTORA /* PAYMENT_REFUSED_HOLDER */
-        - PAGAMENTO_RECUSADO_SPI /* PAYMENT_REFUSED_SPI */
-        - FALHA_INFRAESTRUTURA /* INFRASTRUCTURE_FAILURE */
-        - FALHA_INFRAESTRUTURA_SPI /* INFRASTRUCTURE_FAILURE_SPI */
-        - FALHA_INFRAESTRUTURA_DICT /* INFRASTRUCTURE_FAILURE_DICT */
-        - FALHA_INFRAESTRUTURA_ICP /* INFRASTRUCTURE_FAILURE_ICP */
-        - FALHA_INFRAESTRUTURA_PSP_RECEBEDOR /* INFRASTRUCTURE_FAILURE_RECEIVING_PSP */
-        - FALHA_INFRAESTRUTURA_DETENTORA /* INFRASTRUCTURE_FAILURE_HOLDER */
-        - CONTAS_ORIGEM_DESTINO_IGUAIS /* ORIGIN_DESTINATION_ACCOUNTS_ARE_EQUAL */
-        - FALHA_AGENDAMENTO_PAGAMENTOS /* PAYMENT_SCHEDULING_FAILURE */
-        - TITULARIDADE_INCONSISTENTE /* INCONSISTENT_OWNERSHIP */
+        - SALDO_INSUFICIENTE # INSUFFICIENT_BALANCE 
+        - VALOR_ACIMA_LIMITE # VALUE_ABOVE_LIMIT 
+        - VALOR_INVALIDO # INVALID_VALUE 
+        - COBRANCA_INVALIDA # INVALID_CHARGE 
+        - NAO_INFORMADO # NOT_INFORMED 
+        - PAGAMENTO_DIVERGENTE_CONSENTIMENTO # PAYMENT_DIVERGENT_CONSENT 
+        - DETALHE_PAGAMENTO_INVALIDO # INVALID_PAYMENT_DETAIL 
+        - PAGAMENTO_RECUSADO_DETENTORA # PAYMENT_REFUSED_HOLDER 
+        - PAGAMENTO_RECUSADO_SPI # PAYMENT_REFUSED_SPI 
+        - FALHA_INFRAESTRUTURA # INFRASTRUCTURE_FAILURE 
+        - FALHA_INFRAESTRUTURA_SPI # INFRASTRUCTURE_FAILURE_SPI 
+        - FALHA_INFRAESTRUTURA_DICT # INFRASTRUCTURE_FAILURE_DICT 
+        - FALHA_INFRAESTRUTURA_ICP # INFRASTRUCTURE_FAILURE_ICP 
+        - FALHA_INFRAESTRUTURA_PSP_RECEBEDOR # INFRASTRUCTURE_FAILURE_RECEIVING_PSP 
+        - FALHA_INFRAESTRUTURA_DETENTORA # INFRASTRUCTURE_FAILURE_HOLDER 
+        - CONTAS_ORIGEM_DESTINO_IGUAIS # ORIGIN_DESTINATION_ACCOUNTS_ARE_EQUAL 
+        - FALHA_AGENDAMENTO_PAGAMENTOS # PAYMENT_SCHEDULING_FAILURE 
+        - TITULARIDADE_INCONSISTENTE # INCONSISTENT_OWNERSHIP 
     ResponseConsentListSchema:
       type: object
       properties:
@@ -2277,14 +2277,14 @@ components:
               description: Defines the day of the week planned for settlement occurrences.
               type: string
               enum:
-                - SEGUNDA_FEIRA /* MONDAY */
-                - TERCA_FEIRA /* TUESDAY */
-                - QUARTA_FEIRA /* WEDNESDAY */
-                - QUINTA_FEIRA /* THURSDAY */
-                - SEXTA_FEIRA /* FRIDAY */
-                - SABADO /* SATURDAY */
-                - DOMINGO /* SUNDAY */
-              example: QUINTA_FEIRA /* THURSDAY */
+                - SEGUNDA_FEIRA # MONDAY 
+                - TERCA_FEIRA # TUESDAY 
+                - QUARTA_FEIRA # WEDNESDAY 
+                - QUINTA_FEIRA # THURSDAY 
+                - SEXTA_FEIRA # FRIDAY 
+                - SABADO # SATURDAY 
+                - DOMINGO # SUNDAY 
+              example: QUINTA_FEIRA # THURSDAY 
             startDate:
               description: Defines the start of the recurrence validity.
               type: string
@@ -2364,7 +2364,7 @@ components:
                 The text can be used by the holder to display the transaction summary during approval by the approver/payer user.
               pattern: '[\w\W\s]*'
               maxLength: 255
-              example: Todas quintas e domingos por 6 meses /* Every Thursday and Sunday for 6 months */
+              example: Todas quintas e domingos por 6 meses # Every Thursday and Sunday for 6 months 
     StatusEnum:
       enum:
         - AUTHORISED
@@ -2418,7 +2418,7 @@ components:
         enrollmentName:
           type: string
           description: Name of the device authorized by the customer for JSR device enrollment.
-          example: Meu Celular /* My Cellphone */
+          example: Meu Celular # My Cellphone 
         dailyLimit:
           format: double
           type: number
@@ -2584,8 +2584,8 @@ components:
     EnumEnrollmentCancelledFrom:
       type: string
       enum:
-        - INICIADORA /* INITIATOR */
-        - DETENTORA /* HOLDER */
+        - INICIADORA # INITIATOR 
+        - DETENTORA # HOLDER 
       description: |
         Field used to inform the means by which the account enrollment cancellation was performed. Possible values:
 

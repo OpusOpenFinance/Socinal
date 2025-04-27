@@ -15,9 +15,9 @@ info:
     |---------------------------------------|-------------------------|-----------------------|
     | Transaction Type                      | Obligation Date         | Immutability Date     |
     |---------------------------------------|-------------------------|-----------------------|
-    | TED /* (Wire Transfer)  */            | D0                      | D0                    |
+    | TED    (Wire Transfer)                | D0                      | D0                    |
     |---------------------------------------|-------------------------|-----------------------|
-    | PIX  /* (Pix Instant Payment) */      | D0                      | D0                    |
+    | PIX    (Pix Instant Payment)          | D0                      | D0                    |
     |---------------------------------------|-------------------------|-----------------------|
     | SAME INSTITUTION TRANSFER (TEF)       | D0                      | D0                    |
     |---------------------------------------|-------------------------|-----------------------|
@@ -1023,8 +1023,8 @@ components:
       type: string
       enum:
         - INDIVIDUAL
-        - CONJUNTA_SIMPLES           /* Joint Simple Account */
-        - CONJUNTA_SOLIDARIA         /* Joint And Account */
+        - CONJUNTA_SIMPLES           # Joint Simple Account 
+        - CONJUNTA_SOLIDARIA         # Joint And Account 
       description: |
         Account Subtype (see Enum):
         Individual account - has a single holder
@@ -1034,9 +1034,9 @@ components:
     EnumAccountType:
       type: string
       enum:
-        - CONTA_DEPOSITO_A_VISTA   /* Demand Deposit Account */
-        - CONTA_POUPANCA           /* Savings Account */
-        - CONTA_PAGAMENTO_PRE_PAGA /* Prepaid Payment Account */
+        - CONTA_DEPOSITO_A_VISTA   # Demand Deposit Account 
+        - CONTA_POUPANCA           # Savings Account 
+        - CONTA_PAGAMENTO_PRE_PAGA # Prepaid Payment Account 
       description: |
         Account types. Traditional modalities provided for by Resolution 4,753, not including linked accounts, accounts of persons domiciled abroad, accounts in foreign currency and correspondent electronic currency account. See Enum
         Demand deposit account or Current account - is the most common type. In it, the money is at your disposal to be withdrawn at any time. This account does not generate income for the depositor
@@ -1051,9 +1051,9 @@ components:
           - Future entry: the transaction will be completed in the future, that is, the `transactionId` may change;
           - Transaction processing: the transaction is in processing, that is, the `transactionId` may change.
       enum:
-        - TRANSACAO_EFETIVADA    /* Transaction Completed */
-        - LANCAMENTO_FUTURO      /* Future Entry */
-        - TRANSACAO_PROCESSANDO  /* Transaction Processing */
+        - TRANSACAO_EFETIVADA    # Transaction Completed 
+        - LANCAMENTO_FUTURO      # Future Entry 
+        - TRANSACAO_PROCESSANDO  # Transaction Processing 
       example: TRANSACAO_EFETIVADA
     EnumCreditDebitIndicator:
       type: string
@@ -1062,14 +1062,14 @@ components:
         Debit (in the statement) In a bank statement, debits, marked with the letter "D" next to the registered amount, inform about money outflows in the current account.
         Credit (in the statement) In a bank statement, credits, marked with the letter "C" next to the registered amount, inform about money inflows in the current account.
       enum:
-        - CREDITO /* Credit */
-        - DEBITO  /* Debit */
+        - CREDITO # Credit 
+        - DEBITO  # Debit 
       example: DEBITO
     EnumPartiePersonType:
       type: string
       enum:
-        - PESSOA_NATURAL  /* Individual */
-        - PESSOA_JURIDICA /* Legal Entity */
+        - PESSOA_NATURAL  # Individual 
+        - PESSOA_JURIDICA # Legal Entity 
       example: PESSOA_NATURAL
       description: |
         Identification of the Person Type of the person involved in the transaction.
@@ -1086,21 +1086,21 @@ components:
         - TED
         - DOC
         - PIX
-        - TRANSFERENCIA_MESMA_INSTITUICAO /* SAME_INSTITUTION_TRANSFER */
-        - BOLETO                          /* BOLETO */
-        - CONVENIO_ARRECADACAO            /* COLLECTION_AGREEMENT */
-        - PACOTE_TARIFA_SERVICOS          /* SERVICE_FEE_PACKAGE */
-        - TARIFA_SERVICOS_AVULSOS         /* MISCELLANEOUS_SERVICE_FEE */
-        - FOLHA_PAGAMENTO                 /* PAYROLL */
-        - DEPOSITO                        /* DEPOSIT */
-        - SAQUE                           /* WITHDRAWAL */
-        - CARTAO                          /* CREDIT_CARD */
-        - ENCARGOS_JUROS_CHEQUE_ESPECIAL  /* SPECIAL_CHECK_INTEREST_CHARGES */
-        - RENDIMENTO_APLIC_FINANCEIRA     /* FINANCIAL_INVESTMENT_YIELD */
-        - PORTABILIDADE_SALARIO           /* SALARY_PORTABILITY */
-        - RESGATE_APLIC_FINANCEIRA        /* FINANCIAL_APPLICATION_REDEMPTION */
-        - OPERACAO_CREDITO                /* CREDIT_OPERATION */
-        - OUTROS                          /* OTHERS */
+        - TRANSFERENCIA_MESMA_INSTITUICAO # SAME_INSTITUTION_TRANSFER 
+        - BOLETO                          # BOLETO 
+        - CONVENIO_ARRECADACAO            # COLLECTION_AGREEMENT 
+        - PACOTE_TARIFA_SERVICOS          # SERVICE_FEE_PACKAGE 
+        - TARIFA_SERVICOS_AVULSOS         # MISCELLANEOUS_SERVICE_FEE 
+        - FOLHA_PAGAMENTO                 # PAYROLL 
+        - DEPOSITO                        # DEPOSIT 
+        - SAQUE                           # WITHDRAWAL 
+        - CARTAO                          # CREDIT_CARD 
+        - ENCARGOS_JUROS_CHEQUE_ESPECIAL  # SPECIAL_CHECK_INTEREST_CHARGES 
+        - RENDIMENTO_APLIC_FINANCEIRA     # FINANCIAL_INVESTMENT_YIELD 
+        - PORTABILIDADE_SALARIO           # SALARY_PORTABILITY 
+        - RESGATE_APLIC_FINANCEIRA        # FINANCIAL_APPLICATION_REDEMPTION 
+        - OPERACAO_CREDITO                # CREDIT_OPERATION 
+        - OUTROS                          # OTHERS 
       example: PIX
     Meta:
       type: object
