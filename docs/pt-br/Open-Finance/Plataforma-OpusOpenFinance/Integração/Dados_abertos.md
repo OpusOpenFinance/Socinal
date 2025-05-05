@@ -86,19 +86,19 @@ São apresentadas abaixo as APIs regulatórias referentes a Dados Abertos e exem
 |Previdência                       |[Link][Pension]        |[JSON][Pension-JSON]        |
 |Câmbio                            |[Link][Exchange]       |[JSON][Exchange-JSON]       |
 
-[Acquiring]: ../../../../swagger-ui/index.html?api=open-data-acquiring
-[Accounts]: ../../../../swagger-ui/index.html?api=open-data-accounts
-[Capitalization]: ../../../../swagger-ui/index.html?api=open-data-capitalization
-[Channels]: ../../../../swagger-ui/index.html?api=open-data-channels
-[CreditCard]: ../../../../swagger-ui/index.html?api=open-data-credit-cards
-[Exchange]: ../../../../swagger-ui/index.html?api=open-data-exchange
-[Financings]: ../../../../swagger-ui/index.html?api=open-data-financings
-[Insurance]: ../../../../swagger-ui/index.html?api=open-data-insurance
-[Investments]: ../../../../swagger-ui/index.html?api=open-data-investments
-[Inv-financings]: ../../../../swagger-ui/index.html?api=open-data-invoice-financings
-[Loans]: ../../../../swagger-ui/index.html?api=open-data-loans
-[Pension]: ../../../../swagger-ui/index.html?api=open-data-pension
-[Unarranged]: ../../../../swagger-ui/index.html?api=open-data-unarranged
+[Acquiring]: ../../../../swagger-ui/index.html?api=open-data-acquiring.html
+[Accounts]: ../../../../swagger-ui/index.html?api=open-data-accounts.html
+[Capitalization]: ../../../../swagger-ui/index.html?api=open-data-capitalization.html
+[Channels]: ../../../../swagger-ui/index.html?api=open-data-channels.html
+[CreditCard]: ../../../../swagger-ui/index.html?api=open-data-credit-cards.html
+[Exchange]: ../../../../swagger-ui/index.html?api=open-data-exchange.html
+[Financings]: ../../../../swagger-ui/index.html?api=open-data-financings.html
+[Insurance]: ../../../../swagger-ui/index.html?api=open-data-insurance.html
+[Investments]: ../../../../swagger-ui/index.html?api=open-data-investments.html
+[Inv-financings]: ../../../../swagger-ui/index.html?api=open-data-invoice-financings.html
+[Loans]: ../../../../swagger-ui/index.html?api=open-data-loans.html
+[Pension]: ../../../../swagger-ui/index.html?api=open-data-pension.html
+[Unarranged]: ../../../../swagger-ui/index.html?api=open-data-unarranged.html
 
 [Channels-JSON]: ../apis-dados-abertos/DadosAbertos-Channels
 [Accounts-JSON]: ../apis-dados-abertos/DadosAbertos-Accounts

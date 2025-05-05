@@ -98,18 +98,18 @@ Below are the regulatory APIs related to Open Data and examples of JSON files to
 [Pension]: ../../../../swagger-ui/index.html?api=en-open-data-pension
 [Unarranged]: ../../../../swagger-ui/index.html?api=en-open-data-unarranged
 
-[Channels-JSON]: ../apis-dados-abertos/DadosAbertos-Channels
-[Accounts-JSON]: ../apis-dados-abertos/DadosAbertos-Accounts
-[Loans-JSON]: ../apis-dados-abertos/DadosAbertos-Loans
-[Financings-JSON]: ../apis-dados-abertos/DadosAbertos-Financings
-[Unarranged-JSON]: ../apis-dados-abertos/DadosAbertos-Unarranged
-[Inv-financings-JSON]: ../apis-dados-abertos/DadosAbertos-Invoice
-[CreditCard-JSON]: ../apis-dados-abertos/DadosAbertos-CreditCard
-[Investments-JSON]: ../apis-dados-abertos/DadosAbertos-Investments
-[Insurance-JSON]: ../apis-dados-abertos/DadosAbertos-Insurance
-[Acquiring-JSON]: ../apis-dados-abertos/DadosAbertos-Acquiring
-[Capitalization-JSON]: ../apis-dados-abertos/DadosAbertos-Capitalization
-[Pension-JSON]: ../apis-dados-abertos/DadosAbertos-Pension
-[Exchange-JSON]: ../apis-dados-abertos/DadosAbertos-Exchange
+[Channels-JSON]: ../apis-dados-abertos/DadosAbertos-Channels.html
+[Accounts-JSON]: ../apis-dados-abertos/DadosAbertos-Accounts.html
+[Loans-JSON]: ../apis-dados-abertos/DadosAbertos-Loans.html
+[Financings-JSON]: ../apis-dados-abertos/DadosAbertos-Financings.html
+[Unarranged-JSON]: ../apis-dados-abertos/DadosAbertos-Unarranged.html
+[Inv-financings-JSON]: ../apis-dados-abertos/DadosAbertos-Invoice.html
+[CreditCard-JSON]: ../apis-dados-abertos/DadosAbertos-CreditCard.html
+[Investments-JSON]: ../apis-dados-abertos/DadosAbertos-Investments.html
+[Insurance-JSON]: ../apis-dados-abertos/DadosAbertos-Insurance.html
+[Acquiring-JSON]: ../apis-dados-abertos/DadosAbertos-Acquiring.html
+[Capitalization-JSON]: ../apis-dados-abertos/DadosAbertos-Capitalization.html
+[Pension-JSON]: ../apis-dados-abertos/DadosAbertos-Pension.html
+[Exchange-JSON]: ../apis-dados-abertos/DadosAbertos-Exchange.html
 
 [Perfis-Open-Finance-Brasil]: ../../Open-Finance-Brasil/PerfisOFB/Dados-abertos.html

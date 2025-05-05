@@ -22,13 +22,13 @@ Site multi-idioma
    2) Gerei o site com o Jekyll para "en"
    3) Fui no diretório _site gerado e movi o sub-diretório "en" recém gerado para o mesmo nível de "docs".
    4) Movi o "pt-br" de volta para baixo de "/docs" nos fontes
-   5) Escondi o diretório "en" em um diretório HOLD nos fontes
+   5) Escondi o diretório "en" em um diretório HOLD nos fontes e removi o diretório docs/_site
    6) Gerei o site com o Jekyll para "pt-br" 
-   7) Movi o diretório "en" gerado, que estava no mesmo nível de docs, para baixo de "_sites"
+   7) Movi o diretório "en" gerado, que estava no mesmo nível de docs, para baixo de "_site"
    8) Rodei o Jekyll apenas para servir as páginas.
 
- - A boa notícia é que o site gerado é estático. Então, fiz um  link simbólico de "_sites" para "Documentation" embaixo de "docs"
-       ln -s _sites Documentation
+ - A boa notícia é que o site gerado é estático. Então, fiz um  link simbólico de "_site" para "Documentation" embaixo de "docs"
+       ln -s _site Documentation
    Rodei um web server bem simples. Estando no diretório "docs":
        python3 -m http.server 4000
 
