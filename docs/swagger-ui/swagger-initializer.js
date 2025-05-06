@@ -39,6 +39,8 @@ window.onload = () => {
     "data-credit-fixed-incomes": "../pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/dados-investimento/oas-credit-fixed-incomes.yml",
     "data-treasury-bonds": "../pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/dados-investimento/oas-treasury-bonds.yml",
     "data-variable-incomes": "../pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/dados-investimento/oas-variable-incomes.yml",
+    "payment-integration": "../pt-br/Open-Finance/Plataforma-OpusOpenFinance/apis/payment-integration-0.1.0.yml",
+
     // -----------------
     // APIs em inglês.
     // -----------------
